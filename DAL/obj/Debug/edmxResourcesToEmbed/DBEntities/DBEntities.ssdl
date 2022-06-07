@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GarageCustomer_UAT.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuthorContact">
+    <Key>
+      <PropertyRef Name="AuthorId" />
+    </Key>
+    <Property Name="AuthorId" Type="bigint" Nullable="false" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CategoryId" Type="bigint" Nullable="false" />
+    <Property Name="PublisherId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookAuthors">
+    <Key>
+      <PropertyRef Name="BookId" />
+      <PropertyRef Name="AuthorId" />
+    </Key>
+    <Property Name="BookId" Type="bigint" Nullable="false" />
+    <Property Name="AuthorId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tittle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="PageName" Type="nvarchar" MaxLength="150" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="DisplayOrder" Type="int" />
+    <Property Name="URL" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK__AuthorCon__Autho__276EDEB3">
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
+    <End Role="AuthorContact" Type="Self.AuthorContact" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AuthorContact">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__CategoryId__2E1BDC42">
+    <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Book__PublisherI__2F10007B">
+    <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="PublisherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookAutho__Autho__32E0915F">
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
+    <End Role="BookAuthors" Type="Self.BookAuthors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookAuthors">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookAutho__BookI__31EC6D26">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BookAuthors" Type="Self.BookAuthors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookAuthors">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GarageCustomer_UATStoreContainer">
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuthorContact" EntityType="Self.AuthorContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookAuthors" EntityType="Self.BookAuthors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookCategory" EntityType="Self.BookCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AuthorCon__Autho__276EDEB3" Association="Self.FK__AuthorCon__Autho__276EDEB3">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="AuthorContact" EntitySet="AuthorContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__CategoryId__2E1BDC42" Association="Self.FK__Book__CategoryId__2E1BDC42">
+      <End Role="BookCategory" EntitySet="BookCategory" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__PublisherI__2F10007B" Association="Self.FK__Book__PublisherI__2F10007B">
+      <End Role="Publisher" EntitySet="Publisher" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookAutho__Autho__32E0915F" Association="Self.FK__BookAutho__Autho__32E0915F">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="BookAuthors" EntitySet="BookAuthors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookAutho__BookI__31EC6D26" Association="Self.FK__BookAutho__BookI__31EC6D26">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="BookAuthors" EntitySet="BookAuthors" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

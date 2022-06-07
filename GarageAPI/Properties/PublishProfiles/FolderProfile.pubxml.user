@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Publish\GarageCustomerAPI_Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Assets/Images/Almaz.JPG">
+      <publishTime>05/31/2022 19:16:50</publishTime>
+    </File>
+    <File Include="Assets/Images/ExploreServices.JPG">
+      <publishTime>05/31/2022 19:21:48</publishTime>
+    </File>
+    <File Include="Assets/Images/service.JPG">
+      <publishTime>05/31/2022 19:20:08</publishTime>
+    </File>
+    <File Include="bin/BAL.dll">
+      <publishTime>06/07/2022 16:47:08</publishTime>
+    </File>
+    <File Include="bin/BAL.dll.config">
+      <publishTime>03/30/2022 11:38:18</publishTime>
+    </File>
+    <File Include="bin/BAL.pdb">
+      <publishTime>06/07/2022 16:47:08</publishTime>
+    </File>
+    <File Include="bin/DAL.dll">
+      <publishTime>06/07/2022 16:47:08</publishTime>
+    </File>
+    <File Include="bin/DAL.dll.config">
+      <publishTime>06/07/2022 15:23:05</publishTime>
+    </File>
+    <File Include="bin/DAL.pdb">
+      <publishTime>06/07/2022 16:47:08</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>04/16/2020 20:38:42</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>04/16/2020 20:38:56</publishTime>
+    </File>
+    <File Include="bin/GarageAPI.dll">
+      <publishTime>06/07/2022 16:47:08</publishTime>
+    </File>
+    <File Include="bin/GarageAPI.pdb">
+      <publishTime>06/07/2022 16:47:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>09/05/2018 16:10:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/17/2021 20:03:36</publishTime>
+    </File>
+    <File Include="bin/System.Configuration.ConfigurationManager.dll">
+      <publishTime>10/19/2020 18:48:46</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>11/28/2018 13:00:36</publishTime>
+    </File>
+    <File Include="bin/System.Security.AccessControl.dll">
+      <publishTime>10/19/2020 18:44:38</publishTime>
+    </File>
+    <File Include="bin/System.Security.Permissions.dll">
+      <publishTime>10/19/2020 18:52:06</publishTime>
+    </File>
+    <File Include="bin/System.Security.Principal.Windows.dll">
+      <publishTime>10/19/2020 18:46:28</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>11/28/2018 13:01:00</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>11/28/2018 13:02:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>11/28/2018 12:59:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>11/28/2018 13:00:12</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Deployment.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Razor.dll">
+      <publishTime>11/28/2018 13:04:24</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>05/31/2022 12:08:50</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>05/31/2022 12:08:50</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/07/2022 16:47:09</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
