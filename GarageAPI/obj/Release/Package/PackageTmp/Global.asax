@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="GarageAPI.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="GarageCustomerAPI.Global" Language="C#" %>

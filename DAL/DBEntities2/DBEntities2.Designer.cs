@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\DBEntities2\DBEntities2.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Project\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\DAL\DBEntities2\DBEntities2.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

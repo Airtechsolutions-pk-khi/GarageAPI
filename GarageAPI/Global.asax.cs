@@ -8,7 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
 
-namespace GarageAPI
+namespace GarageCustomerAPI
 {
     public class Global : HttpApplication
     {

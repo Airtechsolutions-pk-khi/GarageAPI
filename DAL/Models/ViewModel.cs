@@ -34,7 +34,7 @@ namespace DAL.Models
     }
     public class RspDeliveryAreaList : Rsp
     {
-        public List<DeliveryAreaBLL> DeliveryArea{ get; set; }
+        public List<DeliveryAreaBLL> DeliveryArea { get; set; }
     }
     public class RspAdminLogin : Rsp
     {
@@ -152,14 +152,14 @@ namespace DAL.Models
 
     public class DeliveryAreaBLL
     {
-        public int? BrandID{ get; set; }
-        public int? DeliveryAreaID{ get; set; }
-        public string Name{ get; set; }
-        public double? Price{ get; set; }
+        public int? BrandID { get; set; }
+        public int? DeliveryAreaID { get; set; }
+        public string Name { get; set; }
+        public double? Price { get; set; }
     }
     public class AboutBLL
     {
-       
+
         public string BranchName { get; set; }
         public string BranchAddress { get; set; }
         public string BranchTiming { get; set; }
@@ -174,7 +174,7 @@ namespace DAL.Models
         public string AppDescription { get; set; }
         public string Facebook { get; set; }
         public string Twitter { get; set; }
-        public string Instagram { get; set; }        
+        public string Instagram { get; set; }
     }
     public class BrandsBLL
     {
@@ -361,7 +361,7 @@ namespace DAL.Models
     {
         public int Device { get; set; }
         public int TokenID { get; set; }
-        public int? CustomerID{ get; set; }
+        public int? CustomerID { get; set; }
         public string Token { get; set; }
         public Nullable<int> LocationID { get; set; }
         public Nullable<int> StatusID { get; set; }
@@ -474,7 +474,7 @@ namespace DAL.Models
         public string SessionID { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string LastUpdateBy { get; set; }
-        
+
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
     }
     public class OrderCustomerBLL
@@ -512,14 +512,11 @@ namespace DAL.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public string PageName { get; set; }
-        //public string Type { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
-        //public string URL { get; set; }
     }
     public class Customers
     {
         public int CustomerID { get; set; }
-        public string UserName { get; set; }
         public string FullName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
@@ -530,12 +527,11 @@ namespace DAL.Models
         public int LocationID { get; set; }
         public bool? IsEmail { get; set; }
         public bool? IsSMS { get; set; }
-        public float Points { get; set; }
-        public int CityID { get; set; }
+        public float? Points { get; set; }
     }
     public class LoginResponse
     {
-        public Customers customer { get; set; }
+        public Customers Customer { get; set; }
         public List<Cars> CarList { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
@@ -591,9 +587,49 @@ namespace DAL.Models
         public string CustomerName { get; set; }
         public string SessionID { get; set; }
         public int UserID { get; set; }
-
         public string PlateNo { get; set; }
+        public List<OrdersList> Orders = new List<OrdersList>();
+    }
 
-
+    public class OrdersList
+    {
+        public int? OrderCheckoutID { get; set; }
+        public int OrderID { get; set; }
+        public int? TransactionNo { get; set; }
+        public int? OrderNo { get; set; }
+        public int CarID { get; set; }
+        public string BayName { get; set; }
+        public int CustomerID { get; set; }
+        public Nullable<int> LocationID { get; set; }
+        public string OrderPunchDate { get; set; }
+        public string CheckoutDate { get; set; }
+        public string MechanicName { get; set; }
+        public int? Status { get; set; }
+        public int? PaymentMode { get; set; }
+        public double? AmountTotal { get; set; }
+        public double? Tax { get; set; }
+        public double? AmountDiscount { get; set; }
+        public double? RefundedAmount { get; set; }
+        public double? GrandTotal { get; set; }
+        public bool? IsPartialPaid { get; set; }
+        public string DiscountCode { get; set; }
+        public List<OItemsList> Items = new List<OItemsList>();
+    }
+    public class OItemsList
+    {
+        public int OrderDetailID { get; set; }
+        public int OrderID { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        public Nullable<int> PackageID { get; set; }
+        public string ItemName { get; set; }
+        public string AlternateName { get; set; }
+        public string ItemImage { get; set; }
+        public Nullable<double> Quantity { get; set; }
+        public Nullable<double> RefundQty { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> DiscountAmount { get; set; }
+        public Nullable<double> RefundAmount { get; set; }
+        public Nullable<double> Cost { get; set; }
+        public Nullable<int> StatusID { get; set; }
     }
 }

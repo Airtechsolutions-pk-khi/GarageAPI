@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace GarageAPI.Controllers
+namespace GarageCustomerAPI.Controllers
 {
     public class baseController : ApiController
     {

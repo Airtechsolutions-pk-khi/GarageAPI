@@ -432,7 +432,7 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataTableEntensions.cs" />
-    <Compile Include="Helpers\DBHelperLogin.cs" />
+    <Compile Include="Helpers\DBHelperPOS.cs" />
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\LINQtoDataTable.cs" />
     <Compile Include="Helpers\ListExtensions.cs" />

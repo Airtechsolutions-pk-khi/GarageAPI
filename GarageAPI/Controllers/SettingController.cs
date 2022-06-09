@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace GarageAPI.Controllers
+namespace GarageCustomerAPI.Controllers
 {
     [RoutePrefix("api")]
     public class SettingController : ApiController

@@ -9,26 +9,22 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace GarageAPI.Controllers
+namespace GarageCustomerAPI.Controllers
 {
     [RoutePrefix("api")]
     public class LoginController : ApiController
-    {
-        
-        loginRepository loginRepo;
-      
+    {        
+        loginRepository loginRepo;      
         public LoginController()
         {
-
             loginRepo = new loginRepository(new Garage_UATEntities2());
-
         }
 
         [Route("login/{Phone}")]
         [HttpGet]
         public LoginResponse Login(string Phone)
         {
-            return loginRepo.Login(Phone);
+            return loginRepo.CustomerLogin(Phone);
         }
 
     }
