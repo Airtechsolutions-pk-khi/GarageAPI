@@ -53,6 +53,18 @@
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="ServiceDescription" Type="nvarchar" MaxLength="200" />
+    <Property Name="Image" Type="nvarchar" MaxLength="500" />
+    <Property Name="DisplayOrder" Type="int" />
+    <Property Name="StatusId" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Setting">
     <Key>
       <PropertyRef Name="ID" />
@@ -60,7 +72,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Tittle" Type="nvarchar" MaxLength="50" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
-    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="500" />
     <Property Name="PageName" Type="nvarchar" MaxLength="150" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
     <Property Name="DisplayOrder" Type="int" />
@@ -126,6 +138,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="sp_GetServices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="GarageCustomer_UATStoreContainer">
     <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuthorContact" EntityType="Self.AuthorContact" Schema="dbo" store:Type="Tables" />
@@ -134,6 +147,7 @@
     <EntitySet Name="BookCategory" EntityType="Self.BookCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AuthorCon__Autho__276EDEB3" Association="Self.FK__AuthorCon__Autho__276EDEB3">
       <End Role="Author" EntitySet="Author" />

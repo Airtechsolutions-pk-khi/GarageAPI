@@ -1,13 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GarageCustomer_UAT" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GarageCustomer_UATEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_GetServices" ReturnType="Collection(GarageCustomer_UAT.sp_GetServices_Result)" />
+    <EntitySet Name="Authors" EntityType="GarageCustomer_UAT.Author" />
+    <EntitySet Name="AuthorContacts" EntityType="GarageCustomer_UAT.AuthorContact" />
+    <EntitySet Name="Books" EntityType="GarageCustomer_UAT.Book" />
+    <EntitySet Name="BookCategories" EntityType="GarageCustomer_UAT.BookCategory" />
+    <EntitySet Name="Cars" EntityType="GarageCustomer_UAT.Car" />
+    <EntitySet Name="Publishers" EntityType="GarageCustomer_UAT.Publisher" />
+    <EntitySet Name="Services" EntityType="GarageCustomer_UAT.Service" />
+    <EntitySet Name="Settings" EntityType="GarageCustomer_UAT.Setting" />
+    <AssociationSet Name="FK__AuthorCon__Autho__276EDEB3" Association="GarageCustomer_UAT.FK__AuthorCon__Autho__276EDEB3">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="AuthorContact" EntitySet="AuthorContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__CategoryId__2E1BDC42" Association="GarageCustomer_UAT.FK__Book__CategoryId__2E1BDC42">
+      <End Role="BookCategory" EntitySet="BookCategories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Book__PublisherI__2F10007B" Association="GarageCustomer_UAT.FK__Book__PublisherI__2F10007B">
+      <End Role="Publisher" EntitySet="Publishers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="BookAuthors" Association="GarageCustomer_UAT.BookAuthors">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_GetServices_Result">
+    <Property Type="Int32" Name="ServiceID" Nullable="false" />
+    <Property Type="String" Name="ServiceTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ServiceDescription" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Int32" Name="StatusId" Nullable="true" />
+  </ComplexType>
   <EntityType Name="Author">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AuthorContact" Relationship="Self.FK__AuthorCon__Autho__276EDEB3" FromRole="Author" ToRole="AuthorContact" />
-    <NavigationProperty Name="Books" Relationship="Self.BookAuthors" FromRole="Author" ToRole="Book" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AuthorContact" Relationship="GarageCustomer_UAT.FK__AuthorCon__Autho__276EDEB3" FromRole="Author" ToRole="AuthorContact" />
+    <NavigationProperty Name="Books" Relationship="GarageCustomer_UAT.BookAuthors" FromRole="Author" ToRole="Book" />
   </EntityType>
   <EntityType Name="AuthorContact">
     <Key>
@@ -16,27 +51,27 @@
     <Property Name="AuthorId" Type="Int64" Nullable="false" />
     <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Author" Relationship="Self.FK__AuthorCon__Autho__276EDEB3" FromRole="AuthorContact" ToRole="Author" />
+    <NavigationProperty Name="Author" Relationship="GarageCustomer_UAT.FK__AuthorCon__Autho__276EDEB3" FromRole="AuthorContact" ToRole="Author" />
   </EntityType>
   <EntityType Name="Book">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CategoryId" Type="Int64" Nullable="false" />
     <Property Name="PublisherId" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="BookCategory" Relationship="Self.FK__Book__CategoryId__2E1BDC42" FromRole="Book" ToRole="BookCategory" />
-    <NavigationProperty Name="Publisher" Relationship="Self.FK__Book__PublisherI__2F10007B" FromRole="Book" ToRole="Publisher" />
-    <NavigationProperty Name="Authors" Relationship="Self.BookAuthors" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="BookCategory" Relationship="GarageCustomer_UAT.FK__Book__CategoryId__2E1BDC42" FromRole="Book" ToRole="BookCategory" />
+    <NavigationProperty Name="Publisher" Relationship="GarageCustomer_UAT.FK__Book__PublisherI__2F10007B" FromRole="Book" ToRole="Publisher" />
+    <NavigationProperty Name="Authors" Relationship="GarageCustomer_UAT.BookAuthors" FromRole="Book" ToRole="Author" />
   </EntityType>
   <EntityType Name="BookCategory">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Books" Relationship="Self.FK__Book__CategoryId__2E1BDC42" FromRole="BookCategory" ToRole="Book" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="GarageCustomer_UAT.FK__Book__CategoryId__2E1BDC42" FromRole="BookCategory" ToRole="Book" />
   </EntityType>
   <EntityType Name="Car">
     <Key>
@@ -50,8 +85,20 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Books" Relationship="Self.FK__Book__PublisherI__2F10007B" FromRole="Publisher" ToRole="Book" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="GarageCustomer_UAT.FK__Book__PublisherI__2F10007B" FromRole="Publisher" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="StatusId" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Setting">
     <Key>
@@ -60,15 +107,15 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="PageName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DisplayOrder" Type="Int32" />
     <Property Name="URL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__AuthorCon__Autho__276EDEB3">
-    <End Role="Author" Type="Self.Author" Multiplicity="1" />
-    <End Role="AuthorContact" Type="Self.AuthorContact" Multiplicity="0..1" />
+    <End Type="GarageCustomer_UAT.Author" Role="Author" Multiplicity="1" />
+    <End Type="GarageCustomer_UAT.AuthorContact" Role="AuthorContact" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Author">
         <PropertyRef Name="Id" />
@@ -79,8 +126,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Book__CategoryId__2E1BDC42">
-    <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="1" />
-    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <End Type="GarageCustomer_UAT.BookCategory" Role="BookCategory" Multiplicity="1" />
+    <End Type="GarageCustomer_UAT.Book" Role="Book" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BookCategory">
         <PropertyRef Name="Id" />
@@ -91,8 +138,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Book__PublisherI__2F10007B">
-    <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
-    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <End Type="GarageCustomer_UAT.Publisher" Role="Publisher" Multiplicity="1" />
+    <End Type="GarageCustomer_UAT.Book" Role="Book" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Publisher">
         <PropertyRef Name="Id" />
@@ -103,32 +150,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="BookAuthors">
-    <End Role="Author" Type="Self.Author" Multiplicity="*" />
-    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <End Type="GarageCustomer_UAT.Author" Role="Author" Multiplicity="*" />
+    <End Type="GarageCustomer_UAT.Book" Role="Book" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="GarageCustomer_UATEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Authors" EntityType="Self.Author" />
-    <EntitySet Name="AuthorContacts" EntityType="Self.AuthorContact" />
-    <EntitySet Name="Books" EntityType="Self.Book" />
-    <EntitySet Name="BookCategories" EntityType="Self.BookCategory" />
-    <EntitySet Name="Cars" EntityType="Self.Car" />
-    <EntitySet Name="Publishers" EntityType="Self.Publisher" />
-    <EntitySet Name="Settings" EntityType="Self.Setting" />
-    <AssociationSet Name="FK__AuthorCon__Autho__276EDEB3" Association="Self.FK__AuthorCon__Autho__276EDEB3">
-      <End Role="Author" EntitySet="Authors" />
-      <End Role="AuthorContact" EntitySet="AuthorContacts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Book__CategoryId__2E1BDC42" Association="Self.FK__Book__CategoryId__2E1BDC42">
-      <End Role="BookCategory" EntitySet="BookCategories" />
-      <End Role="Book" EntitySet="Books" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Book__PublisherI__2F10007B" Association="Self.FK__Book__PublisherI__2F10007B">
-      <End Role="Publisher" EntitySet="Publishers" />
-      <End Role="Book" EntitySet="Books" />
-    </AssociationSet>
-    <AssociationSet Name="BookAuthors" Association="Self.BookAuthors">
-      <End Role="Author" EntitySet="Authors" />
-      <End Role="Book" EntitySet="Books" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

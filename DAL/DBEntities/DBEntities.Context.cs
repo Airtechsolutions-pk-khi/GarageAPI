@@ -12,6 +12,8 @@ namespace DAL.DBEntities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class GarageCustomer_UATEntities : DbContext
     {
@@ -31,6 +33,12 @@ namespace DAL.DBEntities
         public virtual DbSet<BookCategory> BookCategories { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
+        public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+    
+        public virtual ObjectResult<sp_GetServices_Result> sp_GetServices()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetServices_Result>("sp_GetServices");
+        }
     }
 }

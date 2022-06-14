@@ -227,5 +227,28 @@ namespace BAL.Repositories
                 string str = ex.Message;
             }
         }
+        public string TranslateToArabic(string words, int key)
+        {
+            string[] pn = { "۰", "۱", "۲", "۳","٤", "٥", "٦", "۷", "۸", "۹", "٫ "
+                    , " ا", " ب", " ح", " د" , " ر", " س", " ص"," ط", " ع", " ك", " ل", " م", " ن", " ه"," و"," ى" ,"","","","","","","","",""," ق"};
+            string[] en = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."
+                    , "A", "B", "J", "D", "R", "S", "X", "T", "E", "K", "L", "Z", "N","H","U","V","C","F","I","M","O","P","Q","W","Y","G" };
+            string chash = words;
+            for (int i = 0; i < 37; i++)
+                chash = chash.Replace(en[i], pn[i]);
+
+            // for reverse no plate letters
+            if (key == 1)
+            {
+                chash = ReverseString(chash);
+            }
+            return chash;
+        }
+        public static string ReverseString(string s)
+        {
+            char[] arr = s.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
     }
 }

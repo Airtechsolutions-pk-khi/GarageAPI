@@ -24,8 +24,19 @@ namespace DAL.Models
 
     public class RspSetting : Rsp
     {
-        public List<SettingBLL> settings { get; set; }
+        public List<SettingBLL> Settings { get; set; }
+        public List<ServiceBLL> Services { get; set; }
     }
+    public class ServiceBLL
+    {
+        public int ServiceID { get; set; }
+        public string ServiceTitle { get; set; }
+        public string ServiceDescription { get; set; }
+        public string Image { get; set; }
+        public int? DisplayOrder { get; set; }
+        public int? StatusId { get; set; }
+    }
+
 
     public class RspAppSetting : Rsp
     {
@@ -508,10 +519,11 @@ namespace DAL.Models
     public class SettingBLL
     {
         public int ID { get; set; }
-        public string Tittle { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
         public string PageName { get; set; }
+        public string Type{ get; set; }
         public Nullable<int> DisplayOrder { get; set; }
     }
     public class Customers
@@ -586,8 +598,12 @@ namespace DAL.Models
         public string EngineType { get; set; }
         public string CustomerName { get; set; }
         public string SessionID { get; set; }
+        public string RegistrationNoP1 { get; set; }
+        public string RegistrationNoP2 { get; set; }
+        public string RegistrationNoP3 { get; set; }
+        public string RegistrationNoP4 { get; set; }
         public int UserID { get; set; }
-        public string PlateNo { get; set; }
+
         public List<OrdersList> Orders = new List<OrdersList>();
     }
 

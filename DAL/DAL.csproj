@@ -428,7 +428,13 @@
     <Compile Include="DBEntities\Publisher.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\Service.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\Setting.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\sp_GetServices_Result.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataTableEntensions.cs" />

@@ -27,6 +27,8 @@ namespace BAL.Repositories
         }
         public RspSetting GetSettings()
         {
+            var serviceLst = new List<ServiceBLL>();
+
             var lst = new List<SettingBLL>();
             var rsp = new RspSetting();
             try
@@ -38,16 +40,29 @@ namespace BAL.Repositories
                     lst.Add(new SettingBLL
                     {
                         ID = i.ID,
-                        Tittle = i.Tittle,
+                        Title = i.Tittle,
                         Description = i.Description,
                         Image = i.Image,
                         PageName = i.PageName,
-                        //Type = i.Type,
+                        Type = i.Type,
                         DisplayOrder = i.DisplayOrder,
-                        //URL = i.URL
-                    }) ;
+                    });
                 }
-                rsp.settings = lst;
+                var serviceList = DBContext.sp_GetServices().ToList();
+                foreach (var item in serviceList)
+                {
+                    serviceLst.Add(new ServiceBLL
+                    {
+                        ServiceID = item.ServiceID,
+                        ServiceTitle = item.ServiceTitle,
+                        ServiceDescription = item.ServiceDescription,
+                        Image = item.Image,
+                        DisplayOrder = item.DisplayOrder,
+                        StatusId = item.StatusId,
+                    });
+                }
+                rsp.Services = serviceLst;
+                rsp.Settings = lst;
                 rsp.status = 1;
                 rsp.description = "Success";
 
@@ -55,12 +70,12 @@ namespace BAL.Repositories
             }
             catch (Exception ex)
             {
-                rsp.settings = lst;
+                rsp.Settings = lst;
                 rsp.status = 0;
                 rsp.description = "Failed";
                 return rsp;
             }
         }
-        
+       
     }
 }

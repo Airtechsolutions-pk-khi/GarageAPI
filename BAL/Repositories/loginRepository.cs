@@ -137,6 +137,10 @@ namespace BAL.Repositories
                 rsp.CarList = _dsCarInfo;
                 foreach (var i in rsp.CarList)
                 {
+                    try {i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
+                    try {i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
+                    try {i.RegistrationNoP3 = TranslateToArabic(i.RegistrationNoP1, 1); } catch { i.RegistrationNoP3 = ""; }
+                    try {i.RegistrationNoP4 = TranslateToArabic(i.RegistrationNoP2, 2); } catch { i.RegistrationNoP4 = ""; }
                     i.Orders = _dsOrders.Where(x => x.CarID == i.CarID).ToList();
                     foreach (var j in i.Orders)
                     {

@@ -1,77 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="GarageCustomer_UATStoreContainer" CdmEntityContainer="GarageCustomer_UATEntities">
+    <FunctionImportMapping FunctionImportName="sp_GetServices" FunctionName="GarageCustomer_UAT.Store.sp_GetServices">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UAT.sp_GetServices_Result">
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+          <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Authors">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.Author">
         <MappingFragment StoreEntitySet="Author">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AuthorContacts">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.AuthorContact">
         <MappingFragment StoreEntitySet="AuthorContact">
-          <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Books">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.Book">
         <MappingFragment StoreEntitySet="Book">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BookCategories">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.BookCategory">
         <MappingFragment StoreEntitySet="BookCategory">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cars">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.Car">
         <MappingFragment StoreEntitySet="Car">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Publishers">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.Publisher">
         <MappingFragment StoreEntitySet="Publisher">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="GarageCustomer_UAT.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+          <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Settings">
       <EntityTypeMapping TypeName="GarageCustomer_UAT.Setting">
         <MappingFragment StoreEntitySet="Setting">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Tittle" ColumnName="Tittle" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="PageName" ColumnName="PageName" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PageName" ColumnName="PageName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="BookAuthors" TypeName="GarageCustomer_UAT.BookAuthors" StoreEntitySet="BookAuthors">
-      <EndProperty Name="Author">
-        <ScalarProperty Name="Id" ColumnName="AuthorId" />
-      </EndProperty>
       <EndProperty Name="Book">
         <ScalarProperty Name="Id" ColumnName="BookId" />
+      </EndProperty>
+      <EndProperty Name="Author">
+        <ScalarProperty Name="Id" ColumnName="AuthorId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

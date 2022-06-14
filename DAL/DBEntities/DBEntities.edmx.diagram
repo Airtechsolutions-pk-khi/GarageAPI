@@ -5,17 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="269e7f35043144889e390429d79507dc" Name="Diagram1">
-        <EntityTypeShape EntityType="GarageCustomer_UAT.Author" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarageCustomer_UAT.AuthorContact" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarageCustomer_UAT.Book" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarageCustomer_UAT.BookCategory" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarageCustomer_UAT.Car" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarageCustomer_UAT.Publisher" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GarageCustomer_UAT.Setting" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="GarageCustomer_UAT.FK__AuthorCon__Autho__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="GarageCustomer_UAT.FK__Book__CategoryId__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="GarageCustomer_UAT.FK__Book__PublisherI__2F10007B" ManuallyRouted="false" />
-        <AssociationConnector Association="GarageCustomer_UAT.BookAuthors" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.Author" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.AuthorContact" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.Book" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.BookCategory" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.Car" Width="1.5" PointX="5.75" PointY="2" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.Publisher" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.Service" Width="1.5" PointX="5.75" PointY="5" />
+        <EntityTypeShape EntityType="GarageCustomer_UAT.Setting" Width="1.5" PointX="7.75" PointY="2" />
+        <AssociationConnector Association="GarageCustomer_UAT.FK__AuthorCon__Autho__276EDEB3" />
+        <AssociationConnector Association="GarageCustomer_UAT.FK__Book__CategoryId__2E1BDC42" />
+        <AssociationConnector Association="GarageCustomer_UAT.FK__Book__PublisherI__2F10007B" />
+        <AssociationConnector Association="GarageCustomer_UAT.BookAuthors" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
