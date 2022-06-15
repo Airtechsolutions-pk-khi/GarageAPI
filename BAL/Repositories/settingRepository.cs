@@ -1,13 +1,17 @@
-﻿using DAL.DBEntities;
+﻿
+using DAL.DBEntities;
 using DAL.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using WebAPICode.Helpers;
 
 namespace BAL.Repositories
 {
@@ -25,57 +29,50 @@ namespace BAL.Repositories
         {
             DBContext = contextDB;
         }
-        public RspSetting GetSettings()
+        public SettingRsp GetSettings()
         {
-            var serviceLst = new List<ServiceBLL>();
-
-            var lst = new List<SettingBLL>();
-            var rsp = new RspSetting();
+            
+            var rsp = new SettingRsp();
             try
             {
-                var list = DBContext.Settings.ToList();
+                var ds = GetInfo();
+                var _dtLocationInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
+                var _dtServiceInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
+                var _dtLocImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<LocationImage>>().ToList();
+                var _dtSettingInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<SettingBLL>>().ToList();
 
-                foreach (var i in list)
-                {
-                    lst.Add(new SettingBLL
-                    {
-                        ID = i.ID,
-                        Title = i.Tittle,
-                        Description = i.Description,
-                        Image = i.Image,
-                        PageName = i.PageName,
-                        Type = i.Type,
-                        DisplayOrder = i.DisplayOrder,
-                    });
-                }
-                var serviceList = DBContext.sp_GetServices().ToList();
-                foreach (var item in serviceList)
-                {
-                    serviceLst.Add(new ServiceBLL
-                    {
-                        ServiceID = item.ServiceID,
-                        ServiceTitle = item.ServiceTitle,
-                        ServiceDescription = item.ServiceDescription,
-                        Image = item.Image,
-                        DisplayOrder = item.DisplayOrder,
-                        StatusId = item.StatusId,
-                    });
-                }
-                rsp.Services = serviceLst;
-                rsp.Settings = lst;
-                rsp.status = 1;
-                rsp.description = "Success";
+                rsp.Location = _dtLocationInfo;
+                rsp.Services = _dtServiceInfo;
+                rsp.Settings = _dtSettingInfo;
 
-                return rsp;
+                foreach (var i in _dtLocationInfo)
+                {
+                    i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                }
+
+                rsp.Status = 1;
+                rsp.Description = "Successful";
             }
             catch (Exception ex)
             {
-                rsp.Settings = lst;
-                rsp.status = 0;
-                rsp.description = "Failed";
-                return rsp;
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+
+        }
+        public DataSet GetInfo()
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[0];                
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocationServices", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
-       
     }
 }

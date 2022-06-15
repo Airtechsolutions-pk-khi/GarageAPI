@@ -20,7 +20,7 @@ namespace GarageCustomerAPI.Controllers
         }
         
         [Route("setting/all")]
-        public RspSetting GetAll()
+        public SettingRsp GetAll()
         {
             return settingRepo.GetSettings();
         }
