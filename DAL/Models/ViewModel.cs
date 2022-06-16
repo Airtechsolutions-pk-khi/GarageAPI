@@ -1,9 +1,11 @@
 ﻿using DAL.DBEntities;
+using DAL.DBEntities2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebAPICode.Helpers;
 
 namespace DAL.Models
 {
@@ -22,9 +24,15 @@ namespace DAL.Models
         public List<BrandsBLL> brands { get; set; }
     }
 
+
+    public class CarRsp : Rsp
+    {
+       
+    }
+
     public class RspSetting : Rsp
     {
-        public List<SettingBLL> Settings { get; set; }
+        public List<LocationsBLL> Settings { get; set; }
         public List<ServiceBLL> Services { get; set; }
     }
     public class ServiceBLL
@@ -34,7 +42,8 @@ namespace DAL.Models
         public string ServiceDescription { get; set; }
         public string Image { get; set; }
         public int? DisplayOrder { get; set; }
-        public int? StatusId { get; set; }
+        public int? LocationID { get; set; }
+        
     }
 
 
@@ -221,7 +230,7 @@ namespace DAL.Models
         public string Address { get; set; }
         public string ContactNo { get; set; }
         public string Email { get; set; }
-        public int LicenseID { get; set; }
+        public int? LicenseID { get; set; }
         public Nullable<bool> DeliveryServices { get; set; }
         public Nullable<double> DeliveryCharges { get; set; }
         public string DeliveryTime { get; set; }
@@ -233,9 +242,42 @@ namespace DAL.Models
         public Nullable<int> StatusID { get; set; }
         public string ImageURL { get; set; }
         public Nullable<int> BrandID { get; set; }
-
+        public int MyProperty { get; set; }
+        public List<ServiceBLL> ServiceList { get; set; }
     }
-
+    public class Locations
+    {
+        
+        public int LocationID { get; set; }
+        
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Address { get; set; }
+        public string ContactNo { get; set; }
+        public string Email { get; set; }       
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }       
+        
+        public List<ServiceBLL> Services{ get; set; }
+        public List<LocationImage> LocationImages { get; set; }
+    }
+    public class Services
+    {
+        public int ServiceID { get; set; }
+        public string ServiceTitle { get; set; }
+        public string ServiceDescription { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
+        public Nullable<int> LocationID { get; set; }
+        public Nullable<int> StatusId { get; set; }
+        public string Type { get; set; }
+    }
+    public class LocationImage
+    {
+        public int ImageID { get; set; }
+        public string ImageURL { get; set; }
+        public int? LocationID { get; set; }
+    }
     public class CategoryBLL
     {
         public int CategoryID { get; set; }
@@ -545,6 +587,15 @@ namespace DAL.Models
     {
         public Customers Customer { get; set; }
         public List<Cars> CarList { get; set; }
+        public int Status { get; set; }
+        public string Description { get; set; }
+    }   
+    public class SettingRsp
+    {
+       
+        public List<Locations> Location { get; set; }
+        public List<ServiceBLL> Services { get; set; }
+        public List<SettingBLL> Settings { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
     }
