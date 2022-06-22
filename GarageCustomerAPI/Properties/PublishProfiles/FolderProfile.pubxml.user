@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\rafi\Desktop\35</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\rafi\Desktop\37</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
@@ -80,22 +80,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/08/2022 12:20:17</publishTime>
     </File>
     <File Include="bin/BAL.dll">
-      <publishTime>06/16/2022 12:48:02</publishTime>
+      <publishTime>06/20/2022 17:52:54</publishTime>
     </File>
     <File Include="bin/BAL.dll.config">
       <publishTime>06/08/2022 12:20:15</publishTime>
     </File>
     <File Include="bin/BAL.pdb">
-      <publishTime>06/16/2022 12:48:02</publishTime>
+      <publishTime>06/20/2022 17:52:54</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>06/16/2022 12:48:01</publishTime>
+      <publishTime>06/20/2022 17:52:53</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>06/08/2022 12:20:16</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>06/16/2022 12:48:01</publishTime>
+      <publishTime>06/20/2022 17:52:53</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/08/2022 12:20:18</publishTime>
@@ -110,10 +110,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/07/2022 16:47:08</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.dll">
-      <publishTime>06/16/2022 12:48:03</publishTime>
+      <publishTime>06/20/2022 17:52:55</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.pdb">
-      <publishTime>06/16/2022 12:48:03</publishTime>
+      <publishTime>06/20/2022 17:52:55</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/08/2022 12:20:20</publishTime>
@@ -170,7 +170,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/08/2022 12:24:53</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/16/2022 12:48:04</publishTime>
+      <publishTime>06/20/2022 17:52:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

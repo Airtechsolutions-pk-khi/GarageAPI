@@ -27,13 +27,38 @@ namespace DAL.Models
 
     public class CarRsp : Rsp
     {
-       
+
     }
 
     public class RspSetting : Rsp
     {
         public List<LocationsBLL> Settings { get; set; }
         public List<ServiceBLL> Services { get; set; }
+    }
+    public class AmenitiesBLL
+    {
+        public int? AmenitiesID{ get; set; }
+        public string Name { get; set; }
+        public int? LocationID { get; set; }
+    }
+    public class ReviewsBLL
+    {
+        public int? ReviewID { get; set; }
+        public string Name { get; set; }
+        public string Message { get; set; }
+        public string Rate { get; set; }
+        public string Date { get; set; }
+        public string Image { get; set; }
+        public int? LocationID { get; set; }
+    }
+    public class DiscountBLL
+    {
+        public string Name { get; set; }
+        public string Image { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public int? LocationID { get; set; }
+        public int? DiscountID{ get; set; }
     }
     public class ServiceBLL
     {
@@ -43,7 +68,7 @@ namespace DAL.Models
         public string Image { get; set; }
         public int? DisplayOrder { get; set; }
         public int? LocationID { get; set; }
-        
+
     }
 
 
@@ -247,19 +272,27 @@ namespace DAL.Models
     }
     public class Locations
     {
-        
+
         public int LocationID { get; set; }
-        
+        public string BrandName { get; set; }
+        public string BrandImage { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
         public string ContactNo { get; set; }
-        public string Email { get; set; }       
+        public string Email { get; set; }
         public string Longitude { get; set; }
-        public string Latitude { get; set; }       
-        
-        public List<ServiceBLL> Services{ get; set; }
+        public string Latitude { get; set; }
+        public string OpenTime { get; set; }
+        public string CloseTime { get; set; }
+        public string Rating { get; set; }
+        public string Website { get; set; }
+        public bool? IsFeatured { get; set; }
+        public List<ServiceBLL> Services { get; set; }
         public List<LocationImage> LocationImages { get; set; }
+        public List<AmenitiesBLL> Amenities { get; set; }
+        public List<ReviewsBLL> Reviews { get; set; }
+        public List<DiscountBLL> Discounts { get; set; }
     }
     public class Services
     {
@@ -565,7 +598,7 @@ namespace DAL.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public string PageName { get; set; }
-        public string Type{ get; set; }
+        public string Type { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
     }
     public class Customers
@@ -589,10 +622,10 @@ namespace DAL.Models
         public List<Cars> CarList { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
-    }   
+    }
     public class SettingRsp
     {
-       
+
         public List<Locations> Location { get; set; }
         public List<ServiceBLL> Services { get; set; }
         public List<SettingBLL> Settings { get; set; }
@@ -628,10 +661,13 @@ namespace DAL.Models
     }
     public class Cars
     {
+        public string CompanyName { get; set; }
+        public string CompanyImage { get; set; }
         public int CarID { get; set; }
         public int CustomerID { get; set; }
         public string VinNo { get; set; }
         public Nullable<int> MakeID { get; set; }
+        public string MakerImage { get; set; }
         public string MakerName { get; set; }
         public Nullable<int> ModelID { get; set; }
         public string ModelName { get; set; }

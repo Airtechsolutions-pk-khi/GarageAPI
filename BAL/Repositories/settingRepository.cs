@@ -40,6 +40,10 @@ namespace BAL.Repositories
                 var _dtServiceInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 var _dtLocImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<LocationImage>>().ToList();
                 var _dtSettingInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<SettingBLL>>().ToList();
+                var _dtAmenitiesInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<AmenitiesBLL>>().ToList();
+                var _dtReviewsInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
+                var _dtDiscountInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<DiscountBLL>>().ToList();
+                
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfo;
@@ -47,8 +51,13 @@ namespace BAL.Repositories
 
                 foreach (var i in _dtLocationInfo)
                 {
+                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    i.Discounts = _dtDiscountInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    i.Reviews = _dtReviewsInfo.Where(x => x.LocationID == i.LocationID).ToList();
                 }
 
                 rsp.Status = 1;
@@ -66,8 +75,9 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[0];                
-                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocationServices", p);
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocations_CAPI", p);
             }
             catch (Exception ex)
             {
