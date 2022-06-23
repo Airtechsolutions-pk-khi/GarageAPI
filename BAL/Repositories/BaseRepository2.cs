@@ -250,5 +250,9 @@ namespace BAL.Repositories
             Array.Reverse(arr);
             return new string(arr);
         }
+        public static string DateParse(string Date)
+        {
+            return Convert.ToDateTime(Date).ToString("dd/MM/yyyy hh:mm tt");
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace DAL.Models
     {
         public int? AmenitiesID{ get; set; }
         public string Name { get; set; }
+        public string Image { get; set; }
         public int? LocationID { get; set; }
     }
     public class ReviewsBLL
@@ -661,8 +662,7 @@ namespace DAL.Models
     }
     public class Cars
     {
-        public string CompanyName { get; set; }
-        public string CompanyImage { get; set; }
+    
         public int CarID { get; set; }
         public int CustomerID { get; set; }
         public string VinNo { get; set; }
@@ -696,6 +696,8 @@ namespace DAL.Models
 
     public class OrdersList
     {
+        public string CompanyName { get; set; }
+        public string CompanyImage { get; set; }
         public int? OrderCheckoutID { get; set; }
         public int OrderID { get; set; }
         public int? TransactionNo { get; set; }

@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using DAL.Models;
 using System.Web.Script.Serialization;
+using System.Globalization;
 
 namespace BAL.Repositories
 {
@@ -226,5 +227,10 @@ namespace BAL.Repositories
                 string str = ex.Message;
             }
         }
+
+            public static string DateParse(string Date)
+            {
+                return Convert.ToDateTime(Date).ToString("dd/MM/yyyy hh:mm tt");
+            }
     }
 }

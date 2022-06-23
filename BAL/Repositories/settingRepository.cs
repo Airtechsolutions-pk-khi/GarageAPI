@@ -51,13 +51,23 @@ namespace BAL.Repositories
 
                 foreach (var i in _dtLocationInfo)
                 {
-                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+                    i.BrandImage = "https://admin.garage.sa/assets/images/logo-garage-v2black.png";
+                        //i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
 
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Discounts = _dtDiscountInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    foreach (var j in i.Discounts)
+                    {
+                        j.FromDate = DateParse(j.FromDate);
+                        j.ToDate = DateParse(j.ToDate);
+                    }
                     i.Reviews = _dtReviewsInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    foreach (var j in i.Reviews)
+                    {
+                        j.Date = DateParse(j.Date);
+                    }
                 }
 
                 rsp.Status = 1;

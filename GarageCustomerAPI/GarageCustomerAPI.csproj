@@ -128,8 +128,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Assets\Images\Almaz.JPG" />
+    <Content Include="Assets\Images\imgdiscount1.jpg" />
+    <Content Include="Assets\Images\imgamenities4.jpg" />
+    <Content Include="Assets\Images\imgamenities3.jpg" />
+    <Content Include="Assets\Images\imgamenities2.jpg" />
+    <Content Include="Assets\Images\imgamenities1.jpg" />
+    <Content Include="Assets\Images\imglocation3.jpg" />
+    <Content Include="Assets\Images\imglocation2.jpg" />
+    <Content Include="Assets\Images\imgservice5.jpg" />
+    <Content Include="Assets\Images\imgservice4.jpg" />
+    <Content Include="Assets\Images\imgservice3.jpg" />
+    <Content Include="Assets\Images\imgservice2.jpg" />
+    <Content Include="Assets\Images\imgservice1.jpg" />
+    <Content Include="Assets\Images\imgsetting5.jpg" />
+    <Content Include="Assets\Images\imgsetting4.jpg" />
+    <Content Include="Assets\Images\imglocation1.jpg" />
     <Content Include="Assets\Images\ExploreServices.JPG" />
+    <Content Include="Assets\Images\imgsetting3.jpg" />
+    <Content Include="Assets\Images\imgsetting2.jpg" />
+    <Content Include="Assets\Images\imgsetting1.jpg" />
     <Content Include="Assets\Images\service.JPG" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

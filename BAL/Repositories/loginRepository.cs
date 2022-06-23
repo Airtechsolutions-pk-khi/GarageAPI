@@ -55,6 +55,8 @@ namespace BAL.Repositories
                     i.Orders = _dsOrders.Where(x => x.CarID == i.CarID).ToList();
                     foreach (var j in i.Orders)
                     {
+                        j.OrderPunchDate = DateParse(j.OrderPunchDate);
+                        j.CheckoutDate= DateParse(j.CheckoutDate);
                         j.Items = _dsOrderdetail.Where(x => x.OrderID == j.OrderID).ToList();
                     }
                 }
