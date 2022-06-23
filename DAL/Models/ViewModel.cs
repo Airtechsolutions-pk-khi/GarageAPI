@@ -27,7 +27,7 @@ namespace DAL.Models
 
     public class CarRsp : Rsp
     {
-
+        public Cars cars { get; set; }
     }
 
     public class RspSetting : Rsp
@@ -661,35 +661,30 @@ namespace DAL.Models
     }
     public class Cars
     {
-        public string CompanyName { get; set; }
-        public string CompanyImage { get; set; }
         public int CarID { get; set; }
-        public int CustomerID { get; set; }
-        public string VinNo { get; set; }
+        public int RowID { get; set; }
+        public int CustomerID { get; set; }       
         public Nullable<int> MakeID { get; set; }
         public string MakerImage { get; set; }
         public string MakerName { get; set; }
         public Nullable<int> ModelID { get; set; }
-        public string ModelName { get; set; }
-        public string CarName { get; set; }
-        public string CarDescription { get; set; }
+        public string ModelName { get; set; }         
+        public string Name { get; set; }
+        public string Description { get; set; }
         public Nullable<int> Year { get; set; }
-        public string Color { get; set; }
+      
         public string RegistrationNo { get; set; }
         public string ImagePath { get; set; }
         public string MakeImage { get; set; }
         public Nullable<int> LocationID { get; set; }
-        public string RecommendedAmount { get; set; }
-        public string CustomerContact { get; set; }
-        public string CheckLitre { get; set; }
-        public string EngineType { get; set; }
-        public string CustomerName { get; set; }
+      
         public string SessionID { get; set; }
         public string RegistrationNoP1 { get; set; }
         public string RegistrationNoP2 { get; set; }
         public string RegistrationNoP3 { get; set; }
         public string RegistrationNoP4 { get; set; }
         public int UserID { get; set; }
+        public int? StatusID { get; set; }
 
         public List<OrdersList> Orders = new List<OrdersList>();
     }
