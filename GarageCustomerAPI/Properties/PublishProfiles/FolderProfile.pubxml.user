@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\rafi\Desktop\28</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\rafi\Desktop\29</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
@@ -76,6 +76,21 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Assets/Images/ExploreServices.JPG">
       <publishTime>06/08/2022 12:20:17</publishTime>
     </File>
+    <File Include="Assets/Images/imgamenities1.jpg">
+      <publishTime>06/23/2022 13:02:15</publishTime>
+    </File>
+    <File Include="Assets/Images/imgamenities2.jpg">
+      <publishTime>06/23/2022 13:04:17</publishTime>
+    </File>
+    <File Include="Assets/Images/imgamenities3.jpg">
+      <publishTime>06/23/2022 13:04:48</publishTime>
+    </File>
+    <File Include="Assets/Images/imgamenities4.jpg">
+      <publishTime>06/23/2022 13:05:11</publishTime>
+    </File>
+    <File Include="Assets/Images/imgdiscount1.jpg">
+      <publishTime>06/23/2022 13:08:29</publishTime>
+    </File>
     <File Include="Assets/Images/imglocation1.jpg">
       <publishTime>06/08/2022 12:20:17</publishTime>
     </File>
@@ -119,22 +134,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/08/2022 12:20:17</publishTime>
     </File>
     <File Include="bin/BAL.dll">
-      <publishTime>06/23/2022 13:00:21</publishTime>
+      <publishTime>06/23/2022 17:10:10</publishTime>
     </File>
     <File Include="bin/BAL.dll.config">
       <publishTime>06/08/2022 12:20:15</publishTime>
     </File>
     <File Include="bin/BAL.pdb">
-      <publishTime>06/23/2022 13:00:21</publishTime>
+      <publishTime>06/23/2022 17:10:10</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>06/23/2022 13:00:21</publishTime>
+      <publishTime>06/23/2022 17:10:10</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>06/08/2022 12:20:16</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>06/23/2022 13:00:21</publishTime>
+      <publishTime>06/23/2022 17:10:10</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/08/2022 12:20:18</publishTime>
@@ -149,10 +164,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/07/2022 16:47:08</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.dll">
-      <publishTime>06/23/2022 13:00:22</publishTime>
+      <publishTime>06/23/2022 17:10:11</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.pdb">
-      <publishTime>06/23/2022 13:00:22</publishTime>
+      <publishTime>06/23/2022 17:10:11</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/08/2022 12:20:20</publishTime>

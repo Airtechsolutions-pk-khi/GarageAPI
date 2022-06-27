@@ -31,46 +31,52 @@ namespace BAL.Repositories
         public CarRsp AddCar(Cars cars)
         {
             CarRsp rsp = new CarRsp();
-
-            SqlParameter[] p = new SqlParameter[3];
-            p[0] = new SqlParameter("@RegistrationNo", cars.RegistrationNo);
-            p[1] = new SqlParameter("@StatusID", cars.StatusID);
-            p[2] = new SqlParameter("@CustomerID", cars.CustomerID);
-            var check =  (new DBHelperPOS().GetDatasetFromSP)("sp_CheckNoPlate", p);
-
-            if (check.Tables[0].Rows.Count == 0 )
+            try
             {
-                var ds = InsertCar(cars);
-                rsp.cars = cars;
-                rsp.status = 200;
-                rsp.description = "Car has been added successfully";
+                SqlParameter[] p = new SqlParameter[3];
+                p[0] = new SqlParameter("@RegistrationNo", cars.RegistrationNo);
+                p[1] = new SqlParameter("@StatusID", cars.StatusID);
+                p[2] = new SqlParameter("@CustomerID", cars.CustomerID);
+                var check = (new DBHelperPOS().GetDatasetFromSP)("sp_CheckNoPlate", p);
+
+                if (check.Tables[0].Rows.Count == 0)
+                {
+                    var ds = InsertCar(cars);
+                    rsp.cars = cars;
+                    rsp.Status = 1;
+                    rsp.Description = "Car has been added successfully";
+                }
+                else
+                {
+                    rsp.cars = cars;
+                    rsp.Status = 0;
+                    rsp.Description = "Car Already Exist";
+                }
             }
-            else
+            catch (Exception e)
             {
                 rsp.cars = cars;
-                 rsp.status = 409;
-                rsp.description = "Car Already Exist";
+                rsp.Status = 0;
+                rsp.Description = e.Message;
             }
-
-
             return rsp;
         }
         public CarRsp EditCar(Cars cars)
         {
             CarRsp rsp = new CarRsp();
             try
-            {              
+            {
                 var ds = ap_EditCar(cars);
                 rsp.cars = cars;
-                rsp.status = 200;
-                rsp.description = "Car has been Updated successfully";
+                rsp.Status = 200;
+                rsp.Description = "Car has been Updated successfully";
             }
             catch (Exception ex)
             {
                 rsp.cars = cars;
-                rsp.status = 500;
-                rsp.description = "Car can not Updated successfully";
-            }          
+                rsp.Status = 0;
+                rsp.Description = "Car can not Updated successfully";
+            }
             return rsp;
         }
 
@@ -83,7 +89,7 @@ namespace BAL.Repositories
                 p[1] = new SqlParameter("@CustomerID", cars.CustomerID);
                 p[2] = new SqlParameter("@MakeID", cars.MakeID);
                 p[3] = new SqlParameter("@Name", cars.Name);
-                p[4] = new SqlParameter("@ModelID", cars.ModelID);                  
+                p[4] = new SqlParameter("@ModelID", cars.ModelID);
                 p[5] = new SqlParameter("@Description", cars.Description);
                 p[6] = new SqlParameter("@Year", cars.Year);
                 p[7] = new SqlParameter("@RegistrationNo", cars.RegistrationNo);
@@ -92,7 +98,8 @@ namespace BAL.Repositories
                 p[10] = new SqlParameter("@UserID", cars.UserID);
                 p[11] = new SqlParameter("@StatusID", cars.StatusID);
 
-                return (new DBHelperPOS().ExecuteNonQueryReturn)("sp_AddCars", p);
+                cars.CarID = int.Parse((new DBHelperPOS().GetDatasetFromSP)("sp_AddCars", p).Tables[0].Rows[0][0].ToString());
+                return 1;
             }
             catch (Exception ex)
             {
@@ -128,5 +135,5 @@ namespace BAL.Repositories
         }
 
     }
-        
+
 }

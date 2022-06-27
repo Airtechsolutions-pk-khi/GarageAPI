@@ -19,7 +19,7 @@ namespace GarageCustomerAPI.Controllers
             carRepo = new carRepository(new Garage_UATEntities2());
         }
 
-        [Route("post/car")]
+        [Route("add/car")]
         public CarRsp AddCar(Cars cars)
         {
             return carRepo.AddCar(cars);
