@@ -25,5 +25,10 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.GetSettings();
         }
 
+        [Route("setting/carmake")]
+        public RspCarMake GetCarmake()
+        {
+            return settingRepo.GetCarMake();
+        }
     }
 }

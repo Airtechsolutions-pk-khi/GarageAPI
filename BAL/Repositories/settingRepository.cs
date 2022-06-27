@@ -31,7 +31,7 @@ namespace BAL.Repositories
         }
         public SettingRsp GetSettings()
         {
-            
+
             var rsp = new SettingRsp();
             try
             {
@@ -43,7 +43,7 @@ namespace BAL.Repositories
                 var _dtAmenitiesInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtReviewsInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
                 var _dtDiscountInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<DiscountBLL>>().ToList();
-                
+
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfo;
@@ -52,7 +52,7 @@ namespace BAL.Repositories
                 foreach (var i in _dtLocationInfo)
                 {
                     i.BrandImage = "https://admin.garage.sa/assets/images/logo-garage-v2black.png";
-                        //i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+                    //i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
 
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -81,6 +81,33 @@ namespace BAL.Repositories
             return rsp;
 
         }
+        public RspCarMake GetCarMake()
+        {
+            var rsp = new RspCarMake();
+            try
+            {
+                var ds = GetCarMakeInfo();
+                rsp.CarMake = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarMakeList>>().ToList();
+                var _dtCarModels = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarModelList>>().ToList();
+
+                foreach (var i in rsp.CarMake)
+                {
+                    i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.ImagePath;
+                    i.CarModels = _dtCarModels.Where(x => x.MakeID == i.MakeID).ToList();
+                }
+
+                rsp.Status = 1;
+                rsp.Description = "Successful";
+            }
+            catch (Exception ex)
+            {
+                rsp.CarMake = new List<CarMakeList>();
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+
+        }
         public DataSet GetInfo()
         {
             try
@@ -88,6 +115,18 @@ namespace BAL.Repositories
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
                 return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocations_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataSet GetCarMakeInfo()
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[0];
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetCarMake_CAPI", p);
             }
             catch (Exception ex)
             {

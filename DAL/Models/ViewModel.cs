@@ -735,4 +735,23 @@ namespace DAL.Models
         public Nullable<double> Cost { get; set; }
         public Nullable<int> StatusID { get; set; }
     }
+    public class RspCarMake :Rsp
+    { public List<CarMakeList> CarMake = new List<CarMakeList>(); }
+        public class CarMakeList
+    {
+        public List<CarModelList> CarModels = new List<CarModelList>();
+        public int MakeID { get; set; }
+        public string Name { get; set; }
+        public string ImagePath { get; set; }
+
+    }
+    public class CarModelList
+    {
+        public int? ModelID { get; set; }
+        public int? MakeID { get; set; }
+        public string Name { get; set; }
+        public short? Year { get; set; }
+        public string EngineNo { get; set; }
+        public string RecommendedLitres { get; set; }
+    }
 }
