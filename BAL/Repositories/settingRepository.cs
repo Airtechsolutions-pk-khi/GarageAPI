@@ -43,15 +43,15 @@ namespace BAL.Repositories
                 var _dtAmenitiesInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtReviewsInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
                 var _dtDiscountInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<DiscountBLL>>().ToList();
-
+                var _dtServiceInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<ServiceBLL>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
-                rsp.Services = _dtServiceInfo;
+                rsp.Services = _dtServiceInfoAll;
                 rsp.Settings = _dtSettingInfo;
 
                 foreach (var i in _dtLocationInfo)
                 {
-                    i.BrandImage = "https://admin.garage.sa/assets/images/logo-garage-v2black.png";
+                    i.BrandImage = "http://apicustomer-uat.garage.sa/assets/images/logo-brand.svg";
                     //i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
 
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();

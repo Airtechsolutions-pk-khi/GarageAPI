@@ -17,7 +17,8 @@ namespace GarageCustomerAPI
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);     
+            
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
         {

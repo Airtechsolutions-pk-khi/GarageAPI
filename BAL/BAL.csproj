@@ -47,6 +47,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\GarageCustomerAPI\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NReco.PdfGenerator, Version=1.2.0.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <HintPath>..\GarageCustomerAPI\packages\NReco.PdfGenerator.1.2.0\lib\net45\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -73,6 +76,7 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\GarageCustomerAPI\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -111,6 +115,7 @@
     <Compile Include="Repositories\carRepository.cs" />
     <Compile Include="Repositories\loginRepository.cs" />
     <Compile Include="Repositories\settingRepository.cs" />
+    <Compile Include="Repositories\Zatca.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

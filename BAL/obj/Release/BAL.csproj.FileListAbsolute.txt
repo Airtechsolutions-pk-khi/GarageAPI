@@ -80,3 +80,5 @@ D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\obj\Release\BAL.
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\obj\Release\BAL.csproj.CopyComplete
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\obj\Release\BAL.dll
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\obj\Release\BAL.pdb
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\bin\Release\NReco.PdfGenerator.dll
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\bin\Release\NReco.PdfGenerator.xml

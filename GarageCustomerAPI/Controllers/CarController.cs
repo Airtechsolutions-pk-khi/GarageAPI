@@ -30,5 +30,11 @@ namespace GarageCustomerAPI.Controllers
             return carRepo.EditCar(cars);
         }
 
+        [HttpGet]
+        [Route("order/receipt/{orderid}")]
+        public OrderLetterResponse PrintLetter(string orderid)
+        {
+            return carRepo.OrderPrintLetter(orderid);
+        }
     }
 }

@@ -145,3 +145,5 @@ D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.cspro
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.pdb
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\NReco.PdfGenerator.dll
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\NReco.PdfGenerator.xml

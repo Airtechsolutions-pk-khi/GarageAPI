@@ -289,7 +289,6 @@ D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Debug\System
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.xml
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Razor.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.dll
@@ -321,3 +320,4 @@ D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.dll
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.pdb
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

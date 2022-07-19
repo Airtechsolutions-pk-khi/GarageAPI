@@ -128,16 +128,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Assets\Images\EmptyNoplate.png" />
+    <Content Include="Assets\Images\imgamenities5.jpg" />
+    <Content Include="Assets\Images\imgcar1.jpg" />
+    <Content Include="Assets\Images\imgcar2.jpg" />
+    <Content Include="Assets\Images\imgcar3.jpg" />
     <Content Include="Assets\Images\imgdiscount1.jpg" />
     <Content Include="Assets\Images\imgamenities4.jpg" />
     <Content Include="Assets\Images\imgamenities3.jpg" />
     <Content Include="Assets\Images\imgamenities2.jpg" />
     <Content Include="Assets\Images\imgamenities1.jpg" />
+    <Content Include="Assets\Images\imgservice3.jpg" />
     <Content Include="Assets\Images\imglocation3.jpg" />
     <Content Include="Assets\Images\imglocation2.jpg" />
     <Content Include="Assets\Images\imgservice5.jpg" />
     <Content Include="Assets\Images\imgservice4.jpg" />
-    <Content Include="Assets\Images\imgservice3.jpg" />
     <Content Include="Assets\Images\imgservice2.jpg" />
     <Content Include="Assets\Images\imgservice1.jpg" />
     <Content Include="Assets\Images\imgsetting5.jpg" />
@@ -147,8 +152,15 @@
     <Content Include="Assets\Images\imgsetting3.jpg" />
     <Content Include="Assets\Images\imgsetting2.jpg" />
     <Content Include="Assets\Images\imgsetting1.jpg" />
+    <Content Include="Assets\Images\logo-brand.svg" />
+    <Content Include="Assets\Images\logoorder.png" />
     <Content Include="Assets\Images\service.JPG" />
     <Content Include="Global.asax" />
+    <Content Include="Template\CustomerLetterV3.txt" />
+    <Content Include="Template\email.png" />
+    <Content Include="Template\ig.png" />
+    <Content Include="Template\jquery.qrcode.min.js" />
+    <Content Include="Template\web.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +226,10 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Template\letterfont\FrutigerLTArabic-45Light.ttf" />
+    <Content Include="Template\letterfont\FrutigerLTArabic-55Roman.ttf" />
+    <Content Include="Template\letterfont\FrutigerLTArabic-65Bold.ttf" />
+    <Content Include="Template\letterfont\FrutigerLTArabic-75Black.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -224,6 +240,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Upload\Cars\" />
     <Folder Include="Views\Car\" />
   </ItemGroup>
   <ItemGroup>

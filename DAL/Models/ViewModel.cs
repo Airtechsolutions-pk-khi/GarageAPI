@@ -37,7 +37,7 @@ namespace DAL.Models
     }
     public class AmenitiesBLL
     {
-        public int? AmenitiesID{ get; set; }
+        public int? AmenitiesID { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
         public int? LocationID { get; set; }
@@ -59,7 +59,7 @@ namespace DAL.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public int? LocationID { get; set; }
-        public int? DiscountID{ get; set; }
+        public int? DiscountID { get; set; }
     }
     public class ServiceBLL
     {
@@ -611,8 +611,8 @@ namespace DAL.Models
         public string Sex { get; set; }
         public string Mobile { get; set; }
         public string ImagePath { get; set; }
-        public int UserID { get; set; }
-        public int LocationID { get; set; }
+        public int? UserID { get; set; }
+        public int? LocationID { get; set; }
         public bool? IsEmail { get; set; }
         public bool? IsSMS { get; set; }
         public float? Points { get; set; }
@@ -662,25 +662,23 @@ namespace DAL.Models
     }
     public class Cars
     {
-        public string CompanyName { get; set; }
-        public string CompanyImage { get; set; }
-        public int CarID { get; set; }
-        public int RowID { get; set; }
-        public int CustomerID { get; set; }       
+        public int? CarID { get; set; }
+        public int? RowID { get; set; }
+        public int CustomerID { get; set; }
         public Nullable<int> MakeID { get; set; }
         public string MakerImage { get; set; }
         public string MakerName { get; set; }
         public Nullable<int> ModelID { get; set; }
-        public string ModelName { get; set; }         
+        public string ModelName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> Year { get; set; }
-      
+
         public string RegistrationNo { get; set; }
         public string ImagePath { get; set; }
         public string MakeImage { get; set; }
         public Nullable<int> LocationID { get; set; }
-      
+
         public string SessionID { get; set; }
         public string RegistrationNoP1 { get; set; }
         public string RegistrationNoP2 { get; set; }
@@ -694,7 +692,10 @@ namespace DAL.Models
 
     public class OrdersList
     {
+        public string VATNo { get; set; }
         public string CompanyName { get; set; }
+        public string LocationName { get; set; }
+        public string LocationAddress { get; set; }
         public string CompanyImage { get; set; }
         public int? OrderCheckoutID { get; set; }
         public int OrderID { get; set; }
@@ -716,6 +717,14 @@ namespace DAL.Models
         public double? GrandTotal { get; set; }
         public bool? IsPartialPaid { get; set; }
         public string DiscountCode { get; set; }
+        public string Facebook { get; set; }
+        public string Instagram { get; set; }
+        public string Twitter { get; set; }
+        public string Snapchat { get; set; }
+        public string NoPlateImage { get; set; }
+        public double? CashAmount { get; set; }
+        public double? CardAmount { get; set; }
+        public string CardType { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
     }
     public class OItemsList
@@ -734,10 +743,39 @@ namespace DAL.Models
         public Nullable<double> RefundAmount { get; set; }
         public Nullable<double> Cost { get; set; }
         public Nullable<int> StatusID { get; set; }
+
+        public List<OPackageDetailList> Packages = new List<OPackageDetailList>();
     }
-    public class RspCarMake :Rsp
+    public class OPackageDetailList
+    {
+        public int OrderPkgDetailID { get; set; }
+        public int OrderDetailID { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        public Nullable<double> Quantity { get; set; }
+        public Nullable<double> Discount { get; set; }
+        public Nullable<double> Cost { get; set; }
+        public string DiscoutType { get; set; }
+        public string Name { get; set; }
+        public string ItemName { get; set; }
+        public string AlternateName { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<int> StatusID { get; set; }
+    }
+    public class CheckoutDetailsOrder
+    {
+        public int OrderCheckOutDetailID { get; set; }
+        public int OrderCheckoutID { get; set; }
+        public Nullable<int> PaymentMode { get; set; }
+        public Nullable<double> AmountPaid { get; set; }
+        public Nullable<double> AmountDiscount { get; set; }
+        public string CardNumber { get; set; }
+        public string CardHolderName { get; set; }
+        public string CardType { get; set; }
+      
+    }
+    public class RspCarMake : Rsp
     { public List<CarMakeList> CarMake = new List<CarMakeList>(); }
-        public class CarMakeList
+    public class CarMakeList
     {
         public List<CarModelList> CarModels = new List<CarModelList>();
         public int MakeID { get; set; }
@@ -753,5 +791,12 @@ namespace DAL.Models
         public short? Year { get; set; }
         public string EngineNo { get; set; }
         public string RecommendedLitres { get; set; }
+    }
+    public class OrderLetterResponse
+    {
+        public int? OrderID { get; set; }
+        public string Path { get; set; }
+        public int Status { get; set; }
+        public string Description { get; set; }
     }
 }

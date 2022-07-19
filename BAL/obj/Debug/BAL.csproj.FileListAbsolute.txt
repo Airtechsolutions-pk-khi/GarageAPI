@@ -166,3 +166,5 @@ D:\Project\GarageCustomerAPI\BAL\obj\Debug\BAL.csproj.CoreCompileInputs.cache
 D:\Project\GarageCustomerAPI\BAL\obj\Debug\BAL.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\BAL\obj\Debug\BAL.dll
 D:\Project\GarageCustomerAPI\BAL\obj\Debug\BAL.pdb
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\bin\Debug\NReco.PdfGenerator.dll
+D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\BAL\bin\Debug\NReco.PdfGenerator.xml
