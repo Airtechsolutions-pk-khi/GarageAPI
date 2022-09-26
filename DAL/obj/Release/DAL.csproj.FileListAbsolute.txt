@@ -1,243 +1,27 @@
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\DAL.dll.config
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\DAL.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\DAL.pdb
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\EntityFramework.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.Helpers.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.Mvc.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.Razor.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.WebPages.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\EntityFramework.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.Helpers.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.Mvc.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.Razor.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.WebPages.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Rafi Data\Airtech\Cafeela\API\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Rafi Data\Airtech\Cafeela\API\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Rafi Data\Airtech\Cafeela\API\DAL\obj\Release\DAL.dll
-D:\Rafi Data\Airtech\Cafeela\API\DAL\obj\Release\DAL.pdb
-D:\Rafi Data\Airtech\Cafeela\API\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\DAL.dll.config
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\DAL.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\DAL.pdb
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\EntityFramework.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.Helpers.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.Mvc.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.Razor.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.WebPages.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\EntityFramework.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.Helpers.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.Mvc.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.Razor.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.WebPages.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\obj\Release\DAL.dll
-D:\Rafi Data\Airtech\Cafeela\CafeelaAPI\DAL\obj\Release\DAL.pdb
-D:\Project\Cafeela-API\DAL\bin\Release\DAL.dll.config
-D:\Project\Cafeela-API\DAL\bin\Release\DAL.dll
-D:\Project\Cafeela-API\DAL\bin\Release\DAL.pdb
-D:\Project\Cafeela-API\DAL\bin\Release\EntityFramework.dll
-D:\Project\Cafeela-API\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Project\Cafeela-API\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Project\Cafeela-API\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.Helpers.dll
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.Mvc.dll
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.Razor.dll
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.WebPages.dll
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Project\Cafeela-API\DAL\bin\Release\EntityFramework.xml
-D:\Project\Cafeela-API\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Project\Cafeela-API\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.Helpers.xml
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.Mvc.xml
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.Razor.xml
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.WebPages.xml
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Project\Cafeela-API\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Project\Cafeela-API\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Project\Cafeela-API\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Project\Cafeela-API\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Project\Cafeela-API\DAL\obj\Release\DAL.dll
-D:\Project\Cafeela-API\DAL\obj\Release\DAL.pdb
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\DAL.dll.config
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\DAL.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\DAL.pdb
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\EntityFramework.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.Helpers.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.Mvc.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.Razor.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.WebPages.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\EntityFramework.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.Helpers.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.Mvc.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.Razor.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.WebPages.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Project\Studio7Teas\Studio7teas_API\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Project\Studio7Teas\Studio7teas_API\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Project\Studio7Teas\Studio7teas_API\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Project\Studio7Teas\Studio7teas_API\DAL\obj\Release\DAL.dll
-D:\Project\Studio7Teas\Studio7teas_API\DAL\obj\Release\DAL.pdb
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\DAL.dll.config
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\DAL.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\DAL.pdb
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\EntityFramework.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.Helpers.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.Mvc.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.Razor.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.WebPages.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\EntityFramework.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.Helpers.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.Mvc.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.Razor.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.WebPages.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\obj\Release\DAL.dll
-D:\Project\Studio7Teas\Studio7TeasAPI\DAL\obj\Release\DAL.pdb
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\DAL.dll.config
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\DAL.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\DAL.pdb
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\EntityFramework.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.Helpers.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.Mvc.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.Razor.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.WebPages.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\EntityFramework.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.Helpers.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.Mvc.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.Razor.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.WebPages.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Rafi Data\Airtech\Studio7Teas\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Rafi Data\Airtech\Studio7Teas\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Rafi Data\Airtech\Studio7Teas\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Rafi Data\Airtech\Studio7Teas\DAL\obj\Release\DAL.dll
-D:\Rafi Data\Airtech\Studio7Teas\DAL\obj\Release\DAL.pdb
-D:\Project\GarageAPI\DAL\bin\Release\DAL.dll.config
-D:\Project\GarageAPI\DAL\bin\Release\DAL.dll
-D:\Project\GarageAPI\DAL\bin\Release\DAL.pdb
-D:\Project\GarageAPI\DAL\bin\Release\EntityFramework.dll
-D:\Project\GarageAPI\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Project\GarageAPI\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Project\GarageAPI\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.Helpers.dll
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.Mvc.dll
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.Razor.dll
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.WebPages.dll
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Project\GarageAPI\DAL\bin\Release\EntityFramework.xml
-D:\Project\GarageAPI\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Project\GarageAPI\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.Helpers.xml
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.Mvc.xml
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.Razor.xml
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.WebPages.xml
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Project\GarageAPI\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Project\GarageAPI\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Project\GarageAPI\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Project\GarageAPI\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Project\GarageAPI\DAL\obj\Release\DAL.dll
-D:\Project\GarageAPI\DAL\obj\Release\DAL.pdb
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\DAL.dll.config
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\DAL.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\DAL.pdb
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\EntityFramework.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.Helpers.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.Mvc.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.Razor.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.WebPages.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\EntityFramework.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.Helpers.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.Mvc.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.Razor.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.WebPages.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\obj\Release\DAL.dll
-D:\Project\GarageAPI\GarageAPI\GarageAPI\GarageAPI\DAL\obj\Release\DAL.pdb
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\DAL.dll.config
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\DAL.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\DAL.pdb
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.SqlServer.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\Newtonsoft.Json.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Helpers.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Mvc.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Razor.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Deployment.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Razor.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.SqlServer.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\Newtonsoft.Json.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Helpers.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Mvc.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Razor.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Deployment.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Razor.xml
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.csprojAssemblyReference.cache
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.csproj.CopyComplete
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.dll
-D:\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.pdb
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\DAL.dll.config
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\DAL.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\DAL.pdb
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\Microsoft.Web.Infrastructure.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\Newtonsoft.Json.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Helpers.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Mvc.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Razor.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Deployment.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Razor.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\Newtonsoft.Json.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Helpers.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Mvc.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.Razor.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Deployment.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\bin\Release\System.Web.WebPages.Razor.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.csproj.AssemblyReference.cache
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Release\DAL.pdb

@@ -27,6 +27,7 @@ namespace DAL.DBEntities2
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AppSource> AppSources { get; set; }
         public virtual DbSet<Bay> Bays { get; set; }
         public virtual DbSet<CarInspection> CarInspections { get; set; }
         public virtual DbSet<CarInspectionDetail> CarInspectionDetails { get; set; }
@@ -46,6 +47,7 @@ namespace DAL.DBEntities2
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<DiscountItem> DiscountItems { get; set; }
+        public virtual DbSet<ImageLocation> ImageLocations { get; set; }
         public virtual DbSet<Integration> Integrations { get; set; }
         public virtual DbSet<IntegrationActivation> IntegrationActivations { get; set; }
         public virtual DbSet<inv_Bill> inv_Bill { get; set; }
@@ -63,7 +65,9 @@ namespace DAL.DBEntities2
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<License> Licenses { get; set; }
+        public virtual DbSet<LocationAmenitiesJunc> LocationAmenitiesJuncs { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<LocationServiceJunc> LocationServiceJuncs { get; set; }
         public virtual DbSet<Make> Makes { get; set; }
         public virtual DbSet<Model> Models { get; set; }
         public virtual DbSet<Modifier> Modifiers { get; set; }
@@ -294,7 +298,7 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarOrders_App_Result>("sp_GetCarOrders_App", carIDParameter, customerIDParameter);
         }
     
-        public virtual ObjectResult<sp_GetCarOrdersHistory_APP_Result> sp_GetCarOrdersHistory_APP(Nullable<int> userID, Nullable<int> carID, string status)
+        public virtual ObjectResult<sp_GetCarOrdersHistory_APP_Result> sp_GetCarOrdersHistory_APP(Nullable<int> userID, Nullable<int> carID, string status, Nullable<int> locationID)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
@@ -308,7 +312,11 @@ namespace DAL.DBEntities2
                 new ObjectParameter("Status", status) :
                 new ObjectParameter("Status", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarOrdersHistory_APP_Result>("sp_GetCarOrdersHistory_APP", userIDParameter, carIDParameter, statusParameter);
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarOrdersHistory_APP_Result>("sp_GetCarOrdersHistory_APP", userIDParameter, carIDParameter, statusParameter, locationIDParameter);
         }
     
         public virtual ObjectResult<sp_GetNotifications_Result> sp_GetNotifications(Nullable<int> locationID, Nullable<int> recordCount)

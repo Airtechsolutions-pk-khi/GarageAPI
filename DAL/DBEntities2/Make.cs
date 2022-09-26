@@ -24,6 +24,7 @@ namespace DAL.DBEntities2
         public int MakeID { get; set; }
         public Nullable<int> RowID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string ImagePath { get; set; }
         public string LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
@@ -31,7 +32,6 @@ namespace DAL.DBEntities2
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
-        public string MakeImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Cars { get; set; }

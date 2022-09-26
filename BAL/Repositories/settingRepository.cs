@@ -44,20 +44,51 @@ namespace BAL.Repositories
                 var _dtReviewsInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
                 var _dtDiscountInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<DiscountBLL>>().ToList();
                 var _dtServiceInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<ServiceBLL>>().ToList();
+                var _dtAminitiesInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<AmenitiesBLL>>().ToList();
+                var _dtLandmarks = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<LandmarkBLL>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfoAll;
                 rsp.Settings = _dtSettingInfo;
+                rsp.Amenities = _dtAminitiesInfoAll;
+                rsp.Landmarks = _dtLandmarks;
 
+                foreach (var j in rsp.Settings)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                foreach (var j in rsp.Landmarks)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                foreach (var j in rsp.Amenities)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                foreach (var j in rsp.Services)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
                 foreach (var i in _dtLocationInfo)
                 {
-                    i.BrandImage = "http://apicustomer-uat.garage.sa/assets/images/logo-brand.svg";
-                    //i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
-
+                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Discounts = _dtDiscountInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    foreach (var j in i.LocationImages)
+                    {
+                        j.ImageURL = j.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.ImageURL;
+                    }
+                    foreach (var j in i.Amenities)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    }
+                    foreach (var j in i.Services)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    }
+
                     foreach (var j in i.Discounts)
                     {
                         j.FromDate = DateParse(j.FromDate);

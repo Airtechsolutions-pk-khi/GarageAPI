@@ -24,6 +24,7 @@ namespace DAL.DBEntities2
         public Nullable<int> RowID { get; set; }
         public int MakeID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public Nullable<short> Year { get; set; }
         public string EngineNo { get; set; }
         public string RecommendedLitres { get; set; }

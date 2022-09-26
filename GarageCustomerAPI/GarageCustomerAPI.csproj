@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GarageCustomerAPI</RootNamespace>
     <AssemblyName>GarageCustomerAPI</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44359</IISExpressSSLPort>
@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,6 +58,7 @@
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -82,8 +84,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -109,13 +109,13 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -129,22 +129,31 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assets\Images\EmptyNoplate.png" />
-    <Content Include="Assets\Images\imgamenities5.jpg" />
+    <Content Include="Assets\Images\imgamenities1.png" />
+    <Content Include="Assets\Images\imgamenities2.png" />
+    <Content Include="Assets\Images\imgamenities3.png" />
+    <Content Include="Assets\Images\imgamenities4.png" />
+    <Content Include="Assets\Images\imgamenities5.png" />
     <Content Include="Assets\Images\imgcar1.jpg" />
     <Content Include="Assets\Images\imgcar2.jpg" />
     <Content Include="Assets\Images\imgcar3.jpg" />
     <Content Include="Assets\Images\imgdiscount1.jpg" />
-    <Content Include="Assets\Images\imgamenities4.jpg" />
-    <Content Include="Assets\Images\imgamenities3.jpg" />
-    <Content Include="Assets\Images\imgamenities2.jpg" />
-    <Content Include="Assets\Images\imgamenities1.jpg" />
+    <Content Include="Assets\Images\imglandmark1.svg" />
+    <Content Include="Assets\Images\imglandmark2.svg" />
+    <Content Include="Assets\Images\imglandmark3.svg" />
+    <Content Include="Assets\Images\imgservice1.svg" />
+    <Content Include="Assets\Images\imgservice2.svg" />
     <Content Include="Assets\Images\imgservice3.jpg" />
     <Content Include="Assets\Images\imglocation3.jpg" />
     <Content Include="Assets\Images\imglocation2.jpg" />
+    <Content Include="Assets\Images\imgservice3.svg" />
     <Content Include="Assets\Images\imgservice5.jpg" />
     <Content Include="Assets\Images\imgservice4.jpg" />
     <Content Include="Assets\Images\imgservice2.jpg" />
     <Content Include="Assets\Images\imgservice1.jpg" />
+    <Content Include="Assets\Images\imgservice5.svg" />
+    <Content Include="Assets\Images\imgservice6.svg" />
+    <Content Include="Assets\Images\imgsetting10.png" />
     <Content Include="Assets\Images\imgsetting5.jpg" />
     <Content Include="Assets\Images\imgsetting4.jpg" />
     <Content Include="Assets\Images\imglocation1.jpg" />
@@ -152,7 +161,14 @@
     <Content Include="Assets\Images\imgsetting3.jpg" />
     <Content Include="Assets\Images\imgsetting2.jpg" />
     <Content Include="Assets\Images\imgsetting1.jpg" />
+    <Content Include="Assets\Images\imgsetting6.png" />
+    <Content Include="Assets\Images\imgsetting9.png" />
+    <Content Include="Assets\Images\imgsettings11.png" />
+    <Content Include="Assets\Images\imgsettings11.svg" />
+    <Content Include="Assets\Images\imgsettings8.png" />
+    <Content Include="Assets\Images\logo-brand.png" />
     <Content Include="Assets\Images\logo-brand.svg" />
+    <Content Include="Assets\Images\logo-brand2.png" />
     <Content Include="Assets\Images\logoorder.png" />
     <Content Include="Assets\Images\service.JPG" />
     <Content Include="Global.asax" />

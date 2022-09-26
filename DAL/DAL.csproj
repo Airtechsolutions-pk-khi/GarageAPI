@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DAL</RootNamespace>
     <AssemblyName>DAL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DBEntities2\AppSource.cs">
+      <DependentUpon>DBEntities2.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\Bay.cs">
       <DependentUpon>DBEntities2.tt</DependentUpon>
     </Compile>
@@ -151,6 +155,9 @@
     <Compile Include="DBEntities2\DiscountItem.cs">
       <DependentUpon>DBEntities2.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities2\ImageLocation.cs">
+      <DependentUpon>DBEntities2.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\Integration.cs">
       <DependentUpon>DBEntities2.tt</DependentUpon>
     </Compile>
@@ -203,6 +210,12 @@
       <DependentUpon>DBEntities2.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\Location.cs">
+      <DependentUpon>DBEntities2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities2\LocationAmenitiesJunc.cs">
+      <DependentUpon>DBEntities2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities2\LocationServiceJunc.cs">
       <DependentUpon>DBEntities2.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\Make.cs">

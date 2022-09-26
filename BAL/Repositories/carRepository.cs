@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -99,10 +100,10 @@ namespace BAL.Repositories
                 var chkImagePath = false;
                 try
                 {
-                     chkImagePath = IsBase64Encoded(cars.ImagePath
-                        .Replace("data:image/png;base64,", "")
-                        .Replace("data:image/jpg;base64,", "")
-                        .Replace("data:image/jpeg;base64,", ""));
+                    chkImagePath = IsBase64Encoded(cars.ImagePath
+                       .Replace("data:image/png;base64,", "")
+                       .Replace("data:image/jpg;base64,", "")
+                       .Replace("data:image/jpeg;base64,", ""));
 
                     if (chkImagePath)
                     {
@@ -116,7 +117,7 @@ namespace BAL.Repositories
 
                 var ds = ap_EditCar(cars, chkImagePath);
                 rsp.cars = cars;
-                rsp.Status = 200;
+                rsp.Status = 1;
                 rsp.Description = "Car has been Updated successfully";
             }
             catch (Exception ex)
@@ -124,6 +125,40 @@ namespace BAL.Repositories
                 rsp.cars = cars;
                 rsp.Status = 0;
                 rsp.Description = "Car can not Updated successfully";
+            }
+            return rsp;
+        }
+
+        public ReviewRsp AddReview(ReviewsBLL obj)
+        {
+            ReviewRsp rsp = new ReviewRsp();
+            try
+            {
+                var dt = AddReviewADO(obj);
+
+                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                if (dt==null)
+                {
+                    rsp.Reviews = new List<ReviewsBLL>();
+                    rsp.Status = 0;
+                    rsp.Description = "Failed To Add Review";
+
+                }
+                else
+                {
+                    foreach (var item in rsp.Reviews)
+                    {
+                        item.Date = DateParse(item.Date);
+                    }
+                    rsp.Status = 1;
+                    rsp.Description = "Review Added Successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                rsp.Reviews = new List<ReviewsBLL>();
+                rsp.Status = 0;
+                rsp.Description = "Failed To Add Review";
             }
             return rsp;
         }
@@ -147,7 +182,7 @@ namespace BAL.Repositories
                 p[11] = new SqlParameter("@StatusID", cars.StatusID);
 
                 cars.CarID = int.Parse((new DBHelperPOS().GetDatasetFromSP)("sp_AddCars", p).Tables[0].Rows[0][0].ToString());
-                cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath:null;
+                cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath : null;
                 return 1;
             }
             catch (Exception ex)
@@ -156,7 +191,7 @@ namespace BAL.Repositories
             }
         }
 
-        public int ap_EditCar(Cars cars,bool iseditimage)
+        public int ap_EditCar(Cars cars, bool iseditimage)
         {
             try
             {
@@ -184,6 +219,26 @@ namespace BAL.Repositories
             catch (Exception ex)
             {
                 return 0;
+            }
+        }
+        public DataTable AddReviewADO(ReviewsBLL obj)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[7];
+                p[0] = new SqlParameter("@Name", obj.Name);
+                p[1] = new SqlParameter("@Message", obj.Message);
+                p[2] = new SqlParameter("@Rate", obj.Rate);
+                p[3] = new SqlParameter("@StatusID", 1);
+                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
+                p[5] = new SqlParameter("@LocationID", obj.LocationID);
+                p[6] = new SqlParameter("@Date", DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture));
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_InsertReview_CAPI", p).Tables[0];
+
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
         public OrderLetterResponse OrderPrintLetter(string OrderID)

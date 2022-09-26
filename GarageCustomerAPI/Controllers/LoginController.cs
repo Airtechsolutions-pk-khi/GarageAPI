@@ -27,5 +27,11 @@ namespace GarageCustomerAPI.Controllers
             return loginRepo.CustomerLogin(Phone);
         }
 
+        [Route("customer/update")]
+        public CustomerUpdateRsp PostUpdateCustomer(Customers obj)
+        {
+            return loginRepo.CustomerUpdate(obj);
+        }
+
     }
 }

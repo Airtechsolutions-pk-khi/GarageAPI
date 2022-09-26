@@ -23,8 +23,14 @@ namespace DAL.Models
     {
         public List<BrandsBLL> brands { get; set; }
     }
-
-
+    public class ReviewRsp : Rsp
+    {
+        public List<ReviewsBLL> Reviews { get; set; }
+    }
+    public class CustomerUpdateRsp : Rsp
+    {
+        public Customers Customer { get; set; }
+    }
     public class CarRsp : Rsp
     {
         public Cars cars { get; set; }
@@ -41,6 +47,13 @@ namespace DAL.Models
         public string Name { get; set; }
         public string Image { get; set; }
         public int? LocationID { get; set; }
+    }
+    public class LandmarkBLL
+    {
+        public int? LandmarkID { get; set; }
+        public string Name { get; set; }
+        public string Image{ get; set; }
+
     }
     public class ReviewsBLL
     {
@@ -69,7 +82,7 @@ namespace DAL.Models
         public string Image { get; set; }
         public int? DisplayOrder { get; set; }
         public int? LocationID { get; set; }
-
+        public bool? IsServices{ get; set; }
     }
 
 
@@ -175,7 +188,7 @@ namespace DAL.Models
     }
     public class RspCustomerLogin : Rsp
     {
-        public CustomerBLL customer { get; set; }
+        public Customers customer { get; set; }
     }
 
     public class RspOrderPunch : Rsp
@@ -288,6 +301,8 @@ namespace DAL.Models
         public string CloseTime { get; set; }
         public string Rating { get; set; }
         public string Website { get; set; }
+        public int? LandmarkID { get; set; }
+        public string GMapLink { get; set; }
         public bool? IsFeatured { get; set; }
         public List<ServiceBLL> Services { get; set; }
         public List<LocationImage> LocationImages { get; set; }
@@ -381,7 +396,7 @@ namespace DAL.Models
         public Nullable<int> BrandID { get; set; }
 
     }
-    public class CustomerBLL
+    public class CustomerBLLdelete
     {
         public float DiscountApplied { get; set; }
         public int CustomerID { get; set; }
@@ -392,6 +407,7 @@ namespace DAL.Models
         public string Password { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string LastUpdatedBy { get; set; }
+        public string Sex { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<int> LocationID { get; set; }
         public Nullable<int> BrandID { get; set; }
@@ -630,6 +646,8 @@ namespace DAL.Models
         public List<Locations> Location { get; set; }
         public List<ServiceBLL> Services { get; set; }
         public List<SettingBLL> Settings { get; set; }
+        public List<AmenitiesBLL> Amenities { get; set; }
+        public List<LandmarkBLL> Landmarks { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
     }
@@ -665,6 +683,7 @@ namespace DAL.Models
         public int? CarID { get; set; }
         public int? RowID { get; set; }
         public int CustomerID { get; set; }
+        public string VinNo { get; set; }
         public Nullable<int> MakeID { get; set; }
         public string MakerImage { get; set; }
         public string MakerName { get; set; }
@@ -771,7 +790,7 @@ namespace DAL.Models
         public string CardNumber { get; set; }
         public string CardHolderName { get; set; }
         public string CardType { get; set; }
-      
+
     }
     public class RspCarMake : Rsp
     { public List<CarMakeList> CarMake = new List<CarMakeList>(); }

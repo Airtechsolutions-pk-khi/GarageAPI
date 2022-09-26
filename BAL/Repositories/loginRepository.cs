@@ -45,8 +45,8 @@ namespace BAL.Repositories
                 var _dsOrderdetail = ds.Tables[3] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OItemsList>>();
                 var _dsOrderdetailPkg = ds.Tables[4] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<OPackageDetailList>>();
                 var _dsordercheckoutdetail = ds.Tables[5] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CheckoutDetailsOrder>>();
-                
-                
+
+
                 rsp.Customer = _dsCustomerInfo;
                 rsp.CarList = _dsCarInfo;
                 foreach (var i in rsp.CarList)
@@ -66,7 +66,7 @@ namespace BAL.Repositories
 
                         foreach (var k in j.Items)
                         {
-                           k.Packages= _dsOrderdetailPkg.Where(x => x.OrderDetailID == k.OrderDetailID).ToList();
+                            k.Packages = _dsOrderdetailPkg.Where(x => x.OrderDetailID == k.OrderDetailID).ToList();
                         }
                         //checkoutdetails
                         var checkoutDetails = _dsordercheckoutdetail.Where(x => x.OrderCheckoutID == j.OrderCheckoutID).ToList();
@@ -81,10 +81,10 @@ namespace BAL.Repositories
                             j.CardAmount = 0;
                             j.CashAmount = 0;
                             j.CardType = "";
-                        }   
+                        }
                     }
 
-                   
+
                 }
                 rsp.Status = 1;
                 rsp.Description = "Login Successfully";
@@ -110,5 +110,63 @@ namespace BAL.Repositories
                 return null;
             }
         }
+
+        public CustomerUpdateRsp CustomerUpdate(Customers obj)
+        {
+            CustomerUpdateRsp rsp = new CustomerUpdateRsp();
+            try
+            {
+                var dt = UpdateCustomer(obj);
+
+                rsp.Customer = dt == null ? new Customers() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<Customers>>().FirstOrDefault();
+                if (rsp.Customer == null)
+                {
+                    rsp.Customer = new Customers();
+                    rsp.Status = 0;
+                    rsp.Description = "Failed To Update Customer";
+                }
+                else
+                {
+                    rsp.Status = 1;
+                    rsp.Description = "Customer Updated Successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                rsp.Customer = new Customers();
+                rsp.Status = 0;
+                rsp.Description = "Failed To Update Customer";
+            }
+            return rsp;
+        }
+        public DataTable UpdateCustomer(Customers obj)
+        {
+            try
+            {
+
+                SqlParameter[] p = new SqlParameter[14];
+                p[0] = new SqlParameter("@FullName", obj.FullName);
+                p[1] = new SqlParameter("@Password", obj.Password);
+                p[2] = new SqlParameter("@Email", obj.Email);
+                p[3] = new SqlParameter("@Sex", obj.Sex);
+                p[4] = new SqlParameter("@Mobile", obj.Mobile);
+                p[5] = new SqlParameter("@LastUpdatedBy", "CustomerAPP");
+                p[6] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
+                p[7] = new SqlParameter("@Points", 0);
+                p[8] = new SqlParameter("@ImagePath", obj.ImagePath);
+                p[9] = new SqlParameter("@StatusID", 1);
+                p[10] = new SqlParameter("@UserID", obj.UserID);
+                p[11] = new SqlParameter("@CreatedOn", DateTime.UtcNow);
+                p[12] = new SqlParameter("@CreatedBy", "CustomerAPP");
+                p[13] = new SqlParameter("@CustomerID", obj.CustomerID);
+                return (new DBHelperPOS().GetTableFromSP)("sp_UpdateCustomer_CAPI", p);
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

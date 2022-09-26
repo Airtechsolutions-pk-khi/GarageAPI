@@ -26,6 +26,8 @@ namespace DAL.DBEntities2
             this.inv_Reconciliation = new HashSet<inv_Reconciliation>();
             this.inv_StockRequest = new HashSet<inv_StockRequest>();
             this.Inventories = new HashSet<Inventory>();
+            this.LocationAmenitiesJuncs = new HashSet<LocationAmenitiesJunc>();
+            this.LocationServiceJuncs = new HashSet<LocationServiceJunc>();
             this.Modifiers = new HashSet<Modifier>();
             this.OrderCheckouts = new HashSet<OrderCheckout>();
             this.Orders = new HashSet<Order>();
@@ -64,6 +66,9 @@ namespace DAL.DBEntities2
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string CompanyCode { get; set; }
+        public Nullable<int> LandmarkID { get; set; }
+        public string GMapLink { get; set; }
+        public string ImageURL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bay> Bays { get; set; }
@@ -85,9 +90,15 @@ namespace DAL.DBEntities2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventories { get; set; }
         public virtual License License { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LocationAmenitiesJunc> LocationAmenitiesJuncs { get; set; }
+        public virtual Location Locations1 { get; set; }
+        public virtual Location Location1 { get; set; }
         public virtual Status Status { get; set; }
         public virtual TimeZone TimeZone { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LocationServiceJunc> LocationServiceJuncs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Modifier> Modifiers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

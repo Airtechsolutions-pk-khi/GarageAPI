@@ -24,6 +24,7 @@ namespace GarageCustomerAPI.Controllers
         {
             return carRepo.AddCar(cars);
         }
+
         [Route("edit/car")]
         public CarRsp EditCar(Cars cars)
         {
@@ -35,6 +36,12 @@ namespace GarageCustomerAPI.Controllers
         public OrderLetterResponse PrintLetter(string orderid)
         {
             return carRepo.OrderPrintLetter(orderid);
+        }
+
+        [Route("review/customer")]
+        public ReviewRsp PostReview(ReviewsBLL obj)
+        {
+            return carRepo.AddReview(obj);
         }
     }
 }

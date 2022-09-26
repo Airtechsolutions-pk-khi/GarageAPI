@@ -54,6 +54,7 @@ namespace DAL.DBEntities2
         public Nullable<double> PartialAmountReceived { get; set; }
         public Nullable<bool> IsPartialPaid { get; set; }
         public string DiscountCode { get; set; }
+        public Nullable<int> AppSourceID { get; set; }
     
         public virtual CreditCustomer CreditCustomer { get; set; }
         public virtual Location Location { get; set; }

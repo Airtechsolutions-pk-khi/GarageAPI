@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageCustomerAPI", "GarageCustomerAPI.csproj", "{987AA2EE-C86B-4E79-A7FA-B649EA674BF5}"
 EndProject
@@ -32,6 +32,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E96C3B15-BDA7-46B1-9668-8312CFAAF0A7}
+		SolutionGuid = {E0F4A43E-BCA7-41F1-800A-952470C5C7CB}
 	EndGlobalSection
 EndGlobal

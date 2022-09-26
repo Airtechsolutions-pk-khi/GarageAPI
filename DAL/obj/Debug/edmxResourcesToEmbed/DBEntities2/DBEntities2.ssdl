@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Garage_UAT2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppSource">
+    <Key>
+      <PropertyRef Name="SourceID" />
+    </Key>
+    <Property Name="SourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="StatusID" Type="int" />
+  </EntityType>
   <EntityType Name="Bay">
     <Key>
       <PropertyRef Name="BayID" />
@@ -359,6 +367,14 @@
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
     <Property Name="StatusID" Type="int" />
   </EntityType>
+  <EntityType Name="ImageLocation">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="ImageURL" Type="nvarchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="Integration">
     <Key>
       <PropertyRef Name="IntegrationID" />
@@ -660,6 +676,14 @@
     <Property Name="LastUpdatedDate" Type="datetime" />
     <Property Name="StatusID" Type="int" />
   </EntityType>
+  <EntityType Name="LocationAmenitiesJunc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="AmenitiesID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Locations">
     <Key>
       <PropertyRef Name="LocationID" />
@@ -667,7 +691,7 @@
     <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RowID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Descripiton" Type="nvarchar" MaxLength="100" />
+    <Property Name="Descripiton" Type="nvarchar" MaxLength="500" />
     <Property Name="Address" Type="nvarchar" MaxLength="200" />
     <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="500" />
@@ -690,6 +714,17 @@
     <Property Name="LastUpdatedDate" Type="datetime" />
     <Property Name="StatusID" Type="int" />
     <Property Name="CompanyCode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LandmarkID" Type="int" />
+    <Property Name="GMapLink" Type="nvarchar" MaxLength="500" />
+    <Property Name="ImageURL" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="LocationServiceJunc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="ServiceID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Make">
     <Key>
@@ -698,6 +733,7 @@
     <Property Name="MakeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RowID" Type="int" />
     <Property Name="Name" Type="varchar" MaxLength="400" />
+    <Property Name="ArabicName" Type="nvarchar" MaxLength="400" />
     <Property Name="ImagePath" Type="varchar(max)" />
     <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="LastUpdatedDate" Type="datetime" />
@@ -705,7 +741,6 @@
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
     <Property Name="DisplayOrder" Type="int" />
-    <Property Name="MakeImage" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Model">
     <Key>
@@ -715,6 +750,7 @@
     <Property Name="RowID" Type="int" />
     <Property Name="MakeID" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="400" />
+    <Property Name="ArabicName" Type="nvarchar" MaxLength="400" />
     <Property Name="Year" Type="smallint" />
     <Property Name="EngineNo" Type="nvarchar" MaxLength="50" />
     <Property Name="RecommendedLitres" Type="nvarchar" MaxLength="50" />
@@ -784,6 +820,7 @@
     <Property Name="PartialAmountReceived" Type="float" />
     <Property Name="IsPartialPaid" Type="bit" />
     <Property Name="DiscountCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AppSourceID" Type="int" />
   </EntityType>
   <EntityType Name="OrderCheckoutDetails">
     <Key>
@@ -2016,6 +2053,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LocationAmenitiesJunc_Locations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="LocationAmenitiesJunc" Type="Self.LocationAmenitiesJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="LocationAmenitiesJunc">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Locations_Country">
     <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
     <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
@@ -2037,6 +2086,18 @@
       </Principal>
       <Dependent Role="Locations">
         <PropertyRef Name="LicenseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Locations_Locations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="Locations1" Type="Self.Locations" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="Locations1">
+        <PropertyRef Name="LocationID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2073,6 +2134,18 @@
       </Principal>
       <Dependent Role="Locations">
         <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocationServiceJunc_Locations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="LocationServiceJunc" Type="Self.LocationServiceJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="LocationServiceJunc">
+        <PropertyRef Name="LocationID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2848,6 +2921,7 @@
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="CarID" Type="int" Mode="In" />
     <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="LocationID" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_GetCarsBy_CustomerID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -3067,6 +3141,7 @@
     <Parameter Name="Phone" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="Garage_UAT2StoreContainer">
+    <EntitySet Name="AppSource" EntityType="Self.AppSource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bay" EntityType="Self.Bay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarInspection" EntityType="Self.CarInspection" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarInspectionDetails" EntityType="Self.CarInspectionDetails" Schema="dbo" store:Type="Tables" />
@@ -3086,6 +3161,7 @@
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiscountItems" EntityType="Self.DiscountItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImageLocation" EntityType="Self.ImageLocation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Integration" EntityType="Self.Integration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IntegrationActivation" EntityType="Self.IntegrationActivation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="inv_Bill" EntityType="Self.inv_Bill" Schema="dbo" store:Type="Tables" />
@@ -3103,7 +3179,9 @@
     <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationAmenitiesJunc" EntityType="Self.LocationAmenitiesJunc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationServiceJunc" EntityType="Self.LocationServiceJunc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Make" EntityType="Self.Make" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modifiers" EntityType="Self.Modifiers" Schema="dbo" store:Type="Tables" />
@@ -3371,6 +3449,10 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Licenses" EntitySet="Licenses" />
     </AssociationSet>
+    <AssociationSet Name="FK_LocationAmenitiesJunc_Locations" Association="Self.FK_LocationAmenitiesJunc_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="LocationAmenitiesJunc" EntitySet="LocationAmenitiesJunc" />
+    </AssociationSet>
     <AssociationSet Name="FK_Locations_Country" Association="Self.FK_Locations_Country">
       <End Role="Country" EntitySet="Country" />
       <End Role="Locations" EntitySet="Locations" />
@@ -3378,6 +3460,10 @@
     <AssociationSet Name="FK_Locations_Licenses" Association="Self.FK_Locations_Licenses">
       <End Role="Licenses" EntitySet="Licenses" />
       <End Role="Locations" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Locations_Locations" Association="Self.FK_Locations_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Locations1" EntitySet="Locations" />
     </AssociationSet>
     <AssociationSet Name="FK_Locations_Status" Association="Self.FK_Locations_Status">
       <End Role="Status" EntitySet="Status" />
@@ -3390,6 +3476,10 @@
     <AssociationSet Name="FK_Locations_Users" Association="Self.FK_Locations_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Locations" EntitySet="Locations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocationServiceJunc_Locations" Association="Self.FK_LocationServiceJunc_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="LocationServiceJunc" EntitySet="LocationServiceJunc" />
     </AssociationSet>
     <AssociationSet Name="FK_Model_Make" Association="Self.FK_Model_Make">
       <End Role="Make" EntitySet="Make" />
