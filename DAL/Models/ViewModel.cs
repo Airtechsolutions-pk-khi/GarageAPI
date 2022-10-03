@@ -740,14 +740,14 @@ namespace DAL.Models
         public DateTime? CreatedDate { get; set; }
         public int? UpdatedBy { get; set; }
         public string Image { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public string FeatureIds { get; set; }
+        public DateTime? UpdatedDate { get; set; }       
         public List<CarSellImage> CarSellImages { get; set; }
-        public List<Feature> CarSellFeatureList { get; set; }
-        
+        public List<Feature> CarSellFeatureList { get; set; }        
         public List<CarSellFeatureList> CarSellFeatureLists { get; set; }
 
     }
+
+    
     public class CarSellRsp
     {
         public List<CarSell> CarSellList { get; set; }
@@ -758,7 +758,7 @@ namespace DAL.Models
     }
     public class CarSellInsertRsp
     {
-        public CarSell CarSell { get; set; }      
+        //public CarSell CarSell { get; set; }      
         public int Status { get; set; }
         public string Description { get; set; }
     }

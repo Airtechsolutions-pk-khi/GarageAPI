@@ -51,3 +51,4 @@ D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.dll
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.pdb
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

@@ -146,54 +146,67 @@ namespace BAL.Repositories
                     try
                     {
                          dsc = InsertCar(carSell);
-                        foreach (var item  in carSell.CarSellImages)
+                        try
                         {
-                            string im = item.Image;
-                            var chkImagePath = IsBase64Encoded(im
-                              .Replace("data:image/png;base64,", "")
-                              .Replace("data:image/jpg;base64,", "")
-                              .Replace("data:image/jpeg;base64,", ""));
+                             
 
-                            if (chkImagePath)
+                      
+                            foreach (var item in carSell.CarSellImages)
                             {
+                                string im = item.Image;
                                 if (im != null && im != "")
                                 {
-                                    carimg.Image = uploadFiles(im, "CarSell");
+                                    var chkImagePath = IsBase64Encoded(im
+                                  .Replace("data:image/png;base64,", "")
+                                  .Replace("data:image/jpg;base64,", "")
+                                  .Replace("data:image/jpeg;base64,", ""));
 
-                                    SqlParameter[] p1 = new SqlParameter[1];
-                                    
-                                    p1[0] = new SqlParameter("@Image", carimg.Image);
-                                    (new DBHelperPOS().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
+                                    if (chkImagePath)
+                                    {
+                                        if (im != null && im != "")
+                                        {
+                                            carimg.Image = uploadFiles(im, "CarSell");
+
+                                            SqlParameter[] p1 = new SqlParameter[1];
+
+                                            p1[0] = new SqlParameter("@Image", carimg.Image);
+                                            (new DBHelperPOS().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
+                                        }
+                                    }
                                 }
-                            }
-
-                        }                        
+                                
+                            } 
+                        }
+                        catch (Exception ex)
+                        {
+                                                    
+                        }                   
                     }
                     catch(Exception ex)
                     { }                    
                     if (dsc > 0)
                     {
-                        rsp.CarSell = carSell;
+                        //rsp.CarSell = carSell;
                         rsp.Status = 1;
                         rsp.Description = "Car has been added successfully";
                     }
                     else
                     {
-                        rsp.CarSell = carSell;
+                        //rsp.CarSell = carSell;
                         rsp.Status = 0;
                         rsp.Description = "Failed to add car";
                     }
                 }
                 else
                 {
-                    rsp.CarSell = carSell;
+                    //rsp.CarSell = carSell;
                     rsp.Status = 0;
                     rsp.Description = "Car Already Exist";
                 }
             }
             catch (Exception e)
             {
-                rsp.CarSell = carSell;
+                //rsp.CarSell = carSell;
                 rsp.Status = 0;
                 rsp.Description = e.Message;
             }
