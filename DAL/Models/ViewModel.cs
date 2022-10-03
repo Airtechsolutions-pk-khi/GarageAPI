@@ -36,6 +36,7 @@ namespace DAL.Models
         public Cars cars { get; set; }
     }
 
+
     public class RspSetting : Rsp
     {
         public List<LocationsBLL> Settings { get; set; }
@@ -709,6 +710,95 @@ namespace DAL.Models
         public List<OrdersList> Orders = new List<OrdersList>();
     }
 
+    public class CarSell
+    {
+        public int CarSellID { get; set; }
+        public int? CustomerID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string RegistrationNo { get; set; }        
+        public string BodyType { get; set; }
+        public string FuelType { get; set; }
+        public string EngineType { get; set; }
+        public string Kilometer { get; set; }
+        public string Year { get; set; }
+        public int? MakeID { get; set; }
+        public int? ModelID { get; set; }
+        public string Transmition { get; set; }
+
+        public double Price { get; set; }
+        public bool IsInspected { get; set; }
+        public int? CityID { get; set; }
+        public int? CountryID { get; set; }
+
+        public string Address { get; set; }
+        public int? CarSellAddID { get; set; }
+        public string BodyColor { get; set; }
+        public string Assembly { get; set; }
+        public int? StatusID { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
+        public string Image { get; set; }
+        public DateTime? UpdatedDate { get; set; }       
+        public List<CarSellImage> CarSellImages { get; set; }
+        public List<Feature> CarSellFeatureList { get; set; }        
+        public List<CarSellFeatureList> CarSellFeatureLists { get; set; }
+
+    }
+
+    
+    public class CarSellRsp
+    {
+        public List<CarSell> CarSellList { get; set; }
+        public List<CountryList> CountryLists { get; set; }
+        public List<Feature> CarSellFeatureALL { get; set; }
+        public int Status { get; set; }
+        public string Description { get; set; }
+    }
+    public class CarSellInsertRsp
+    {
+        //public CarSell CarSell { get; set; }      
+        public int Status { get; set; }
+        public string Description { get; set; }
+    }
+    public class CarSellFeatureList
+    {
+        public int? CarSellID { get; set; }
+        public int? FeatureID { get; set; }
+    }
+    public class CountryList
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Continent { get; set; }
+        public List<CityList> CityList { get; set; }
+    }
+    public class CityList
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string CountryCode { get; set; }
+        public string District { get; set; }        
+    }
+    public class Feature
+    {
+        public int FeatureID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
+        public int? StatusID { get; set; }
+    }
+    public class CarSellImage
+    {
+        public int ID { get; set; }
+        public int? CarSellID { get; set; }
+        public string Image { get; set; }        
+        
+        public int? StatusID { get; set; }
+        public DateTime Createdon { get; set; }
+        public DateTime Updatedon { get; set; }
+    }
     public class OrdersList
     {
         public string VATNo { get; set; }

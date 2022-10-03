@@ -25,3 +25,30 @@ C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug
 C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.dll
 C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\DAL\obj\Debug\DAL.pdb
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\DAL.dll.config
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\DAL.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\DAL.pdb
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\EntityFramework.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\Newtonsoft.Json.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Helpers.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Mvc.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Razor.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\EntityFramework.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\Newtonsoft.Json.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Helpers.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Mvc.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Razor.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.dll
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.pdb
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

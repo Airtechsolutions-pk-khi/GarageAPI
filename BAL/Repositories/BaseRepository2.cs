@@ -265,7 +265,7 @@ namespace BAL.Repositories
                 // correct length was borrowed from d@anish's solution
                 return (str.Replace(" ", "").Length % 4 == 0);
             }
-            catch
+            catch (Exception ex)
             {
                 // If exception is caught, then it is not a base64 encoded string
                 return false;
