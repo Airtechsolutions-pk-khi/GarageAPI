@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace WebAPICode.Helpers
 {
@@ -14,7 +15,7 @@ namespace WebAPICode.Helpers
 
 
         //private static readonly string connectionString = "data source=85.25.214.10;initial catalog=Garage_UAT;persist security info=True;user id=garage;password=garage;";
-        private static readonly string connectionString = "data source=85.25.214.10;initial catalog=Garage_UAT;persist security info=True;user id=garage;password=garage;";
+        private static readonly string connectionString = "data source=85.25.214.10;initial catalog=Garage_Live;persist security info=True;user id=garage;password=garage;";
 
         public DataTable GetTableFromSP(string sp, Dictionary<string, object> parametersCollection)
         {
@@ -233,7 +234,33 @@ namespace WebAPICode.Helpers
                 connection.Close();
             }
         }
+        public async Task<DataSet> GetDatasetFromSPAsync(string sp, SqlParameter[] prms)
+        {
 
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                SqlCommand command = new SqlCommand(sp, connection) { CommandType = CommandType.StoredProcedure, CommandTimeout = connection.ConnectionTimeout };
+                connection.Open();
+
+                command.Parameters.AddRange(prms);
+
+                DataSet dataSet = new DataSet();
+                (new SqlDataAdapter(command)).Fill(dataSet);
+                command.Parameters.Clear();
+
+                return dataSet;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
         public DataSet GetDatasetFromSP(string sp, SqlParameter[] prms)
         {
 

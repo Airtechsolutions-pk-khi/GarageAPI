@@ -123,7 +123,7 @@ namespace BAL.Repositories
 
                 foreach (var i in rsp.CarMake)
                 {
-                    i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.ImagePath;
+                    i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.ImagePath;
                     i.CarModels = _dtCarModels.Where(x => x.MakeID == i.MakeID).ToList();
                 }
 

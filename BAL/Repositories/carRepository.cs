@@ -562,7 +562,7 @@ namespace BAL.Repositories
             var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
             var pdfBytes = htmlToPdf.GeneratePdf(htmlContent);
             var filename = orderid + "-" + DateTime.Now.Ticks.ToString();
-            string folderPath = "~/OrderLetters/";   // set folder
+            string folderPath = "~/Upload/OrderLetters/";   // set folder
 
             if (!Directory.Exists(HttpContext.Current.Server.MapPath(folderPath)))
                 Directory.CreateDirectory(HttpContext.Current.Server.MapPath(folderPath));

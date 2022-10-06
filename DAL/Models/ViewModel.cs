@@ -53,7 +53,7 @@ namespace DAL.Models
     {
         public int? LandmarkID { get; set; }
         public string Name { get; set; }
-        public string Image{ get; set; }
+        public string Image { get; set; }
 
     }
     public class ReviewsBLL
@@ -83,7 +83,7 @@ namespace DAL.Models
         public string Image { get; set; }
         public int? DisplayOrder { get; set; }
         public int? LocationID { get; set; }
-        public bool? IsServices{ get; set; }
+        public bool? IsServices { get; set; }
     }
 
 
@@ -716,45 +716,41 @@ namespace DAL.Models
         public int? CustomerID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string RegistrationNo { get; set; }        
+        public string RegistrationNo { get; set; }
         public string BodyType { get; set; }
         public string FuelType { get; set; }
         public string EngineType { get; set; }
-        public string Kilometer { get; set; }
+        public Double? Kilometer { get; set; }
         public string Year { get; set; }
+        public string MakeName { get; set; }
+        public string ModelName { get; set; }
         public int? MakeID { get; set; }
         public int? ModelID { get; set; }
         public string Transmition { get; set; }
-
         public double Price { get; set; }
         public bool IsInspected { get; set; }
         public int? CityID { get; set; }
+        public string CityName { get; set; }
         public int? CountryID { get; set; }
-
         public string Address { get; set; }
         public int? CarSellAddID { get; set; }
         public string BodyColor { get; set; }
         public string Assembly { get; set; }
         public int? StatusID { get; set; }
-        public int? CreatedBy { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public int? UpdatedBy { get; set; }
+        public string CreatedDate { get; set; }
         public string Image { get; set; }
-        public DateTime? UpdatedDate { get; set; }       
         public List<CarSellImage> CarSellImages { get; set; }
-        public List<Feature> CarSellFeatureList { get; set; }        
-        public List<CarSellFeatureList> CarSellFeatureLists { get; set; }
+        //public List<Feature> CarSellFeatures { get; set; }
+        public List<CarSellFeatureList> CarSellFeatures { get; set; }
 
     }
 
-    
-    public class CarSellRsp
+
+    public class CarSellRsp:Rsp
     {
         public List<CarSell> CarSellList { get; set; }
-        public List<CountryList> CountryLists { get; set; }
-        public List<Feature> CarSellFeatureALL { get; set; }
-        public int Status { get; set; }
-        public string Description { get; set; }
+        public List<CountryList> CountryList { get; set; }
+        public List<Feature> Features { get; set; }
     }
     public class CarSellInsertRsp
     {
@@ -766,6 +762,9 @@ namespace DAL.Models
     {
         public int? CarSellID { get; set; }
         public int? FeatureID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
     }
     public class CountryList
     {
@@ -779,7 +778,7 @@ namespace DAL.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string CountryCode { get; set; }
-        public string District { get; set; }        
+        public string District { get; set; }
     }
     public class Feature
     {
@@ -787,17 +786,14 @@ namespace DAL.Models
         public string Name { get; set; }
         public string ArabicName { get; set; }
         public string Image { get; set; }
-        public int? StatusID { get; set; }
     }
     public class CarSellImage
     {
         public int ID { get; set; }
         public int? CarSellID { get; set; }
-        public string Image { get; set; }        
-        
+        public string Image { get; set; }
+
         public int? StatusID { get; set; }
-        public DateTime Createdon { get; set; }
-        public DateTime Updatedon { get; set; }
     }
     public class OrdersList
     {
