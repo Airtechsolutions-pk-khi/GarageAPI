@@ -46,6 +46,7 @@ namespace DAL.Models
     {
         public int? AmenitiesID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Image { get; set; }
         public int? LocationID { get; set; }
     }
@@ -53,6 +54,7 @@ namespace DAL.Models
     {
         public int? LandmarkID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Image { get; set; }
 
     }
@@ -79,7 +81,9 @@ namespace DAL.Models
     {
         public int ServiceID { get; set; }
         public string ServiceTitle { get; set; }
+        public string ArabicServiceTitle { get; set; }
         public string ServiceDescription { get; set; }
+        public string ArabicServiceDescription { get; set; }
         public string Image { get; set; }
         public int? DisplayOrder { get; set; }
         public int? LocationID { get; set; }
@@ -292,7 +296,9 @@ namespace DAL.Models
         public string BrandName { get; set; }
         public string BrandImage { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Address { get; set; }
         public string ContactNo { get; set; }
         public string Email { get; set; }
@@ -467,7 +473,7 @@ namespace DAL.Models
         public int TokenID { get; set; }
         public int? CustomerID { get; set; }
         public string Token { get; set; }
-        public Nullable<int> LocationID { get; set; }
+        //public Nullable<int> LocationID { get; set; }
         public Nullable<int> StatusID { get; set; }
 
     }
@@ -613,7 +619,9 @@ namespace DAL.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        public string ArabicTitle { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public string PageName { get; set; }
         public string Type { get; set; }
@@ -638,6 +646,7 @@ namespace DAL.Models
     {
         public Customers Customer { get; set; }
         public List<Cars> CarList { get; set; }
+        public List<NotificationBLL> Notifications { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
     }
@@ -693,10 +702,9 @@ namespace DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> Year { get; set; }
-
+        public string CheckLitre { get; set; }
         public string RegistrationNo { get; set; }
         public string ImagePath { get; set; }
-        public string MakeImage { get; set; }
         public Nullable<int> LocationID { get; set; }
 
         public string SessionID { get; set; }
@@ -878,6 +886,18 @@ namespace DAL.Models
         public string CardType { get; set; }
 
     }
+    public class NotificationBLL
+    {
+        public int NotificationID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public string Image { get; set; }
+        public string Date{ get; set; }
+        public string Type { get; set; }
+        public bool? IsRead{ get; set; }
+        public Nullable<int> CustomerID { get; set; }
+    }
     public class RspCarMake : Rsp
     { public List<CarMakeList> CarMake = new List<CarMakeList>(); }
     public class CarMakeList
@@ -885,6 +905,7 @@ namespace DAL.Models
         public List<CarModelList> CarModels = new List<CarModelList>();
         public int MakeID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string ImagePath { get; set; }
 
     }
@@ -893,6 +914,7 @@ namespace DAL.Models
         public int? ModelID { get; set; }
         public int? MakeID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public short? Year { get; set; }
         public string EngineNo { get; set; }
         public string RecommendedLitres { get; set; }

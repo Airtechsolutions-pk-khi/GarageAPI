@@ -4,8 +4,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Office\Projects\GARAGEPOS\Publish\apicust03</_PublishTargetUrl>
-    <History>True|2022-10-06T09:27:40.2879089Z;True|2022-10-03T15:45:22.1044990+03:00;True|2022-10-03T15:35:38.6580011+03:00;True|2022-09-15T11:37:41.9586876+03:00;True|2022-09-14T12:31:11.4688955+03:00;True|2022-09-12T14:11:23.3143939+03:00;True|2022-08-24T14:06:34.5581946+03:00;True|2022-08-14T13:20:26.5457635+03:00;True|2022-08-14T13:14:32.3148488+03:00;True|2022-08-11T19:36:09.0309092+03:00;True|2022-08-11T19:24:55.6330145+03:00;</History>
+    <_PublishTargetUrl>C:\Office\Projects\GARAGEPOS\Publish\apicust19</_PublishTargetUrl>
+    <History>True|2022-12-11T08:53:12.3388171Z;True|2022-12-07T13:56:16.5861112+03:00;True|2022-12-04T12:23:06.3390020+03:00;True|2022-11-20T15:17:32.2084462+03:00;True|2022-10-18T12:25:15.7538946+03:00;True|2022-10-17T18:36:04.4589483+03:00;True|2022-10-17T18:24:30.8266954+03:00;True|2022-10-17T13:13:56.8849667+03:00;True|2022-10-17T13:02:36.7143014+03:00;True|2022-10-12T14:23:41.4577593+03:00;True|2022-10-12T13:39:27.4447644+03:00;True|2022-10-11T14:03:19.5776897+03:00;True|2022-10-11T13:50:10.7675171+03:00;True|2022-10-11T13:48:40.7058278+03:00;True|2022-10-06T12:27:40.2879089+03:00;True|2022-10-03T15:45:22.1044990+03:00;True|2022-10-03T15:35:38.6580011+03:00;True|2022-09-15T11:37:41.9586876+03:00;True|2022-09-14T12:31:11.4688955+03:00;True|2022-09-12T14:11:23.3143939+03:00;True|2022-08-24T14:06:34.5581946+03:00;True|2022-08-14T13:20:26.5457635+03:00;True|2022-08-14T13:14:32.3148488+03:00;True|2022-08-11T19:36:09.0309092+03:00;True|2022-08-11T19:24:55.6330145+03:00;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
@@ -75,7 +76,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/08/2022 12:20:17</publishTime>
     </File>
     <File Include="Assets/Images/EmptyNoplate.png">
-      <publishTime>07/14/2022 13:24:52</publishTime>
+      <publishTime>10/11/2022 11:51:48</publishTime>
     </File>
     <File Include="Assets/Images/ExploreServices.JPG">
       <publishTime>06/08/2022 12:20:17</publishTime>
@@ -219,22 +220,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/08/2022 12:20:17</publishTime>
     </File>
     <File Include="bin/BAL.dll">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/07/2022 13:56:11</publishTime>
     </File>
     <File Include="bin/BAL.dll.config">
       <publishTime>10/03/2022 13:44:59</publishTime>
     </File>
     <File Include="bin/BAL.pdb">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/07/2022 13:56:11</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/07/2022 13:56:10</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
-      <publishTime>10/06/2022 12:27:17</publishTime>
+      <publishTime>12/07/2022 13:54:49</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/07/2022 13:56:10</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/08/2022 12:20:18</publishTime>
@@ -249,10 +250,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/07/2022 16:47:08</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.dll">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/11/2022 11:53:10</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.pdb">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/11/2022 11:53:10</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/08/2022 12:20:20</publishTime>
@@ -265,6 +266,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/NReco.PdfGenerator.dll">
       <publishTime>06/13/2020 20:33:06</publishTime>
+    </File>
+    <File Include="bin/Swashbuckle.Core.dll">
+      <publishTime>07/08/2017 04:30:56</publishTime>
     </File>
     <File Include="bin/System.Configuration.ConfigurationManager.dll">
       <publishTime>06/08/2022 12:20:21</publishTime>
@@ -305,6 +309,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/System.Web.Webpages.Razor.dll">
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>02/08/2013 19:42:28</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>06/08/2022 12:24:55</publishTime>
     </File>
@@ -339,7 +346,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/08/2022 12:24:53</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/06/2022 12:27:39</publishTime>
+      <publishTime>12/07/2022 13:56:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

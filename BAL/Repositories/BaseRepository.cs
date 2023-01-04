@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using DAL.DBEntities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +10,7 @@ using System.Net.Mail;
 using DAL.Models;
 using System.Web.Script.Serialization;
 using System.Globalization;
+using DAL.DBEntities2;
 
 namespace BAL.Repositories
 {
@@ -18,14 +18,14 @@ namespace BAL.Repositories
     {
 
         StreamWriter _sw;
-        public GarageCustomer_UATEntities DBContext;
+        public GarageCustomer_Entities DBContext;
 
         public BaseRepository()
         {
-            DBContext = new GarageCustomer_UATEntities();
+            DBContext = new GarageCustomer_Entities();
         }
 
-        public BaseRepository(GarageCustomer_UATEntities ContextDB)
+        public BaseRepository(GarageCustomer_Entities ContextDB)
         {
             DBContext = ContextDB;
         }
@@ -93,7 +93,13 @@ namespace BAL.Repositories
             _sw.WriteLine(DateTime.UtcNow.ToLongTimeString() + " " + msg);
             _sw.Close();
         }
-
+        public  decimal TimespanToDecimal( TimeSpan span)
+        {
+            decimal spanSecs = (span.Hours * 3600) + (span.Minutes * 60) + span.Seconds;
+            decimal spanPart = spanSecs / 86400M;
+            decimal result = span.Days + spanPart;
+            return result;
+        }
         //public string CurrentDate(SessionInfo session)
         //{
         //    #region timmings

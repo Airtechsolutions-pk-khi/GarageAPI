@@ -1,5 +1,5 @@
 ﻿
-using DAL.DBEntities2;
+using DAL.DBEntities;
 using DAL.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -28,10 +28,10 @@ namespace BAL.Repositories
         public carSellRepository()
             : base()
         {
-            DBContext2 = new Garage_UATEntities2();
+            DBContext2 = new Garage_Entities();
 
         }
-        public carSellRepository(Garage_UATEntities2 contextDB2)
+        public carSellRepository(Garage_Entities contextDB2)
             : base(contextDB2)
         {
             DBContext2 = contextDB2;
@@ -59,7 +59,7 @@ namespace BAL.Repositories
 
                 foreach (var i in _dtCarSellInfo)
                 {
-                    i.CreatedDate = DateFormat(i.CreatedDate.ToString());
+                    i.CreatedDate = DateParse(i.CreatedDate.ToString());
                     i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
                     foreach (var j in i.CarSellImages)
                     {
@@ -132,68 +132,69 @@ namespace BAL.Repositories
             CarSellInsertRsp rsp = new CarSellInsertRsp();
             try
             {
-                SqlParameter[] p = new SqlParameter[3];
-                p[0] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
-                p[1] = new SqlParameter("@StatusID", carSell.StatusID);
-                p[2] = new SqlParameter("@CustomerID", carSell.CustomerID);
-                var check = (new DBHelperPOS().GetDatasetFromSP)("sp_CheckCarSellNoPlate", p);
-
-                if (check.Tables[0].Rows.Count == 0)
+                try
                 {
-                    try
+                    dsc = InsertCar(carSell);
+                    foreach (var item in carSell.CarSellImages)
                     {
-                        dsc = InsertCar(carSell);
-                        foreach (var item in carSell.CarSellImages)
+                        string im = item.Image;
+                        if (im != null && im != "")
                         {
-                            string im = item.Image;
-                            if (im != null && im != "")
+                            try
                             {
-                                try
+                                var chkImagePath = IsBase64Encoded(im
+                                               .Replace("data:image/png;base64,", "")
+                                               .Replace("data:image/jpg;base64,", "")
+                                               .Replace("data:image/jpeg;base64,", ""));
+
+                                if (chkImagePath)
                                 {
-                                    var chkImagePath = IsBase64Encoded(im
-                                                   .Replace("data:image/png;base64,", "")
-                                                   .Replace("data:image/jpg;base64,", "")
-                                                   .Replace("data:image/jpeg;base64,", ""));
-
-                                    if (chkImagePath)
+                                    if (im != null && im != "")
                                     {
-                                        if (im != null && im != "")
-                                        {
-                                            carimg.Image = uploadFiles(im, "CarSell");
+                                        carimg.Image = uploadFiles(im, "CarSell");
 
-                                            SqlParameter[] p1 = new SqlParameter[1];
+                                        SqlParameter[] p1 = new SqlParameter[1];
 
-                                            p1[0] = new SqlParameter("@Image", carimg.Image);
-                                            (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
-                                        }
+                                        p1[0] = new SqlParameter("@Image", carimg.Image);
+                                        (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
                                     }
                                 }
-                                catch { }
                             }
-
+                            catch { }
                         }
+
                     }
-                    catch (Exception ex)
-                    { }
-                    if (dsc > 0)
-                    {
-                        //rsp.CarSell = carSell;
-                        rsp.Status = 1;
-                        rsp.Description = "Car has been added successfully";
-                    }
-                    else
-                    {
-                        //rsp.CarSell = carSell;
-                        rsp.Status = 0;
-                        rsp.Description = "Failed to add car";
-                    }
+                }
+                catch (Exception ex)
+                { }
+                if (dsc > 0)
+                {
+                    //rsp.CarSell = carSell;
+                    rsp.Status = 1;
+                    rsp.Description = "Car has been added successfully";
                 }
                 else
                 {
                     //rsp.CarSell = carSell;
                     rsp.Status = 0;
-                    rsp.Description = "Car Already Listed For Selling";
+                    rsp.Description = "Failed to add car";
                 }
+                //SqlParameter[] p = new SqlParameter[3];
+                //p[0] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
+                //p[1] = new SqlParameter("@StatusID", carSell.StatusID);
+                //p[2] = new SqlParameter("@CustomerID", carSell.CustomerID);
+                //var check = (new DBHelperPOS().GetDatasetFromSP)("sp_CheckCarSellNoPlate", p);
+
+                //if (check.Tables[0].Rows.Count == 0)
+                //{
+
+                //}
+                //else
+                //{
+                //    //rsp.CarSell = carSell;
+                //    rsp.Status = 0;
+                //    rsp.Description = "Car Already Listed For Selling";
+                //}
             }
             catch (Exception e)
             {
@@ -321,7 +322,7 @@ namespace BAL.Repositories
                 p[17] = new SqlParameter("@BodyColor", carSell.BodyColor);
                 p[18] = new SqlParameter("@Assembly", carSell.Assembly);
                 p[19] = new SqlParameter("@StatusID", carSell.StatusID);
-                p[20] = new SqlParameter("@CreatedDate", carSell.CreatedDate);
+                p[20] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
                 p[21] = new SqlParameter("@CreatedBy", carSell.CustomerID);
                 p[22] = new SqlParameter("@UpdatedBy", carSell.CustomerID);
                 p[23] = new SqlParameter("@UpdatedDate", DateTime.UtcNow.AddMinutes(180));

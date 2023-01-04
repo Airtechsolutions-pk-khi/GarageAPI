@@ -10,7 +10,6 @@ using System.Net;
 using System.Net.Mail;
 using DAL.Models;
 using System.Web.Script.Serialization;
-using DAL.DBEntities2;
 using System.Web;
 
 namespace BAL.Repositories
@@ -19,14 +18,14 @@ namespace BAL.Repositories
     {
 
         StreamWriter _sw;
-        public Garage_UATEntities2 DBContext2;
+        public Garage_Entities DBContext2;
 
         public BaseRepository2()
         {
-            DBContext2 = new Garage_UATEntities2();
+            DBContext2 = new Garage_Entities();
         }
 
-        public BaseRepository2(Garage_UATEntities2 ContextDB2)
+        public BaseRepository2(Garage_Entities ContextDB2)
         {
             DBContext2 = ContextDB2;
         }

@@ -1,5 +1,5 @@
 ﻿
-using DAL.DBEntities;
+using DAL.DBEntities2;
 using DAL.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,10 +21,10 @@ namespace BAL.Repositories
         public settingRepository()
             : base()
         {
-            DBContext = new GarageCustomer_UATEntities();
+            DBContext = new GarageCustomer_Entities();
 
         }
-        public settingRepository(GarageCustomer_UATEntities contextDB)
+        public settingRepository(GarageCustomer_Entities contextDB)
             : base(contextDB)
         {
             DBContext = contextDB;
@@ -71,6 +71,20 @@ namespace BAL.Repositories
                 }
                 foreach (var i in _dtLocationInfo)
                 {
+                    var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime));
+                    var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime));
+
+                    if (opening>closing)
+                    {
+                        i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
+                        i.CloseTime = DateParse(DateTime.UtcNow.AddDays(1).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
+                    }
+                    else
+                    {
+                        i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
+                        i.CloseTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
+                    }
+                    
                     i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -95,6 +109,7 @@ namespace BAL.Repositories
                         j.ToDate = DateParse(j.ToDate);
                     }
                     i.Reviews = _dtReviewsInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                   
                     foreach (var j in i.Reviews)
                     {
                         j.Date = DateParse(j.Date);
@@ -163,6 +178,93 @@ namespace BAL.Repositories
             {
                 return null;
             }
+        }
+
+        public Rsp InsertToken(TokenBLL obj)
+        {
+            Rsp rsp;
+            try
+            {
+                PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+                token.StatusID = 1;
+                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID==1).Count();
+                if (chk == 0)
+                {
+                    PushToken data = DBContext.PushTokens.Add(token);
+                    DBContext.SaveChanges();
+                }
+
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Success;
+                rsp.Description = "Token Added";
+            }
+            catch (Exception ex)
+            {
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Exception;
+                rsp.Description = "Failed to add token";
+            }
+            return rsp;
+        }
+        public Rsp UpdateToken(TokenBLL obj)
+        {
+            Rsp rsp;
+            try
+            {
+                //PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+
+                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID==1).FirstOrDefault();
+              
+                if (chk!=null)
+                {
+                    chk.StatusID = obj.StatusID;
+                    DBContext.PushTokens.Attach(chk);
+                    DBContext.UpdateOnly<PushToken>(
+                    chk, x => x.StatusID);
+
+                    DBContext.SaveChanges();
+                }
+
+
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Success;
+                rsp.Description = "Token Updated";
+            }
+            catch (Exception ex)
+            {
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Exception;
+                rsp.Description = "Failed to update token";
+            }
+            return rsp;
+        }
+        public Rsp UpdateNotification(NotificationBLL obj)
+        {
+            Rsp rsp;
+            try
+            {
+                var chk = DBContext.Notifications.Where(x => x.NotificationID== obj.NotificationID).FirstOrDefault();
+
+                if (chk != null)
+                {
+                    chk.IsRead = obj.IsRead;
+                    DBContext.Notifications.Attach(chk);
+                    DBContext.UpdateOnly<Notification>(
+                    chk, x => x.IsRead);
+
+                    DBContext.SaveChanges();
+                }
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Success;
+                rsp.Description = "Notification Updated";
+            }
+            catch (Exception ex)
+            {
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Exception;
+                rsp.Description = "Failed to update notification";
+            }
+            return rsp;
         }
     }
 }
