@@ -47,8 +47,8 @@ D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.Razor.xml
 D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.xml
 D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Project\GarageCustomerAPI\DAL\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.dll
 D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.pdb
-D:\Project\GarageCustomerAPI\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
