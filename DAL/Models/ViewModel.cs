@@ -46,6 +46,7 @@ namespace DAL.Models
     {
         public int? AmenitiesID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Image { get; set; }
         public int? LocationID { get; set; }
     }
@@ -53,7 +54,8 @@ namespace DAL.Models
     {
         public int? LandmarkID { get; set; }
         public string Name { get; set; }
-        public string Image{ get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
 
     }
     public class ReviewsBLL
@@ -79,11 +81,13 @@ namespace DAL.Models
     {
         public int ServiceID { get; set; }
         public string ServiceTitle { get; set; }
+        public string ArabicServiceTitle { get; set; }
         public string ServiceDescription { get; set; }
+        public string ArabicServiceDescription { get; set; }
         public string Image { get; set; }
         public int? DisplayOrder { get; set; }
         public int? LocationID { get; set; }
-        public bool? IsServices{ get; set; }
+        public bool? IsServices { get; set; }
     }
 
 
@@ -292,7 +296,9 @@ namespace DAL.Models
         public string BrandName { get; set; }
         public string BrandImage { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Address { get; set; }
         public string ContactNo { get; set; }
         public string Email { get; set; }
@@ -467,7 +473,7 @@ namespace DAL.Models
         public int TokenID { get; set; }
         public int? CustomerID { get; set; }
         public string Token { get; set; }
-        public Nullable<int> LocationID { get; set; }
+        //public Nullable<int> LocationID { get; set; }
         public Nullable<int> StatusID { get; set; }
 
     }
@@ -613,7 +619,9 @@ namespace DAL.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
+        public string ArabicTitle { get; set; }
         public string Description { get; set; }
+        public string ArabicDescription { get; set; }
         public string Image { get; set; }
         public string PageName { get; set; }
         public string Type { get; set; }
@@ -638,6 +646,7 @@ namespace DAL.Models
     {
         public Customers Customer { get; set; }
         public List<Cars> CarList { get; set; }
+        public List<NotificationBLL> Notifications { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
     }
@@ -693,10 +702,9 @@ namespace DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> Year { get; set; }
-
+        public string CheckLitre { get; set; }
         public string RegistrationNo { get; set; }
         public string ImagePath { get; set; }
-        public string MakeImage { get; set; }
         public Nullable<int> LocationID { get; set; }
 
         public string SessionID { get; set; }
@@ -716,45 +724,41 @@ namespace DAL.Models
         public int? CustomerID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string RegistrationNo { get; set; }        
+        public string RegistrationNo { get; set; }
         public string BodyType { get; set; }
         public string FuelType { get; set; }
         public string EngineType { get; set; }
-        public string Kilometer { get; set; }
+        public Double? Kilometer { get; set; }
         public string Year { get; set; }
+        public string MakeName { get; set; }
+        public string ModelName { get; set; }
         public int? MakeID { get; set; }
         public int? ModelID { get; set; }
         public string Transmition { get; set; }
-
         public double Price { get; set; }
         public bool IsInspected { get; set; }
         public int? CityID { get; set; }
+        public string CityName { get; set; }
         public int? CountryID { get; set; }
-
         public string Address { get; set; }
         public int? CarSellAddID { get; set; }
         public string BodyColor { get; set; }
         public string Assembly { get; set; }
         public int? StatusID { get; set; }
-        public int? CreatedBy { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public int? UpdatedBy { get; set; }
+        public string CreatedDate { get; set; }
         public string Image { get; set; }
-        public DateTime? UpdatedDate { get; set; }       
         public List<CarSellImage> CarSellImages { get; set; }
-        public List<Feature> CarSellFeatureList { get; set; }        
-        public List<CarSellFeatureList> CarSellFeatureLists { get; set; }
+        //public List<Feature> CarSellFeatures { get; set; }
+        public List<CarSellFeatureList> CarSellFeatures { get; set; }
 
     }
 
-    
-    public class CarSellRsp
+
+    public class CarSellRsp:Rsp
     {
         public List<CarSell> CarSellList { get; set; }
-        public List<CountryList> CountryLists { get; set; }
-        public List<Feature> CarSellFeatureALL { get; set; }
-        public int Status { get; set; }
-        public string Description { get; set; }
+        public List<CountryList> CountryList { get; set; }
+        public List<Feature> Features { get; set; }
     }
     public class CarSellInsertRsp
     {
@@ -766,6 +770,9 @@ namespace DAL.Models
     {
         public int? CarSellID { get; set; }
         public int? FeatureID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
     }
     public class CountryList
     {
@@ -779,7 +786,7 @@ namespace DAL.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string CountryCode { get; set; }
-        public string District { get; set; }        
+        public string District { get; set; }
     }
     public class Feature
     {
@@ -787,17 +794,14 @@ namespace DAL.Models
         public string Name { get; set; }
         public string ArabicName { get; set; }
         public string Image { get; set; }
-        public int? StatusID { get; set; }
     }
     public class CarSellImage
     {
         public int ID { get; set; }
         public int? CarSellID { get; set; }
-        public string Image { get; set; }        
-        
+        public string Image { get; set; }
+
         public int? StatusID { get; set; }
-        public DateTime Createdon { get; set; }
-        public DateTime Updatedon { get; set; }
     }
     public class OrdersList
     {
@@ -882,6 +886,18 @@ namespace DAL.Models
         public string CardType { get; set; }
 
     }
+    public class NotificationBLL
+    {
+        public int NotificationID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public string Image { get; set; }
+        public string Date{ get; set; }
+        public string Type { get; set; }
+        public bool? IsRead{ get; set; }
+        public Nullable<int> CustomerID { get; set; }
+    }
     public class RspCarMake : Rsp
     { public List<CarMakeList> CarMake = new List<CarMakeList>(); }
     public class CarMakeList
@@ -889,6 +905,7 @@ namespace DAL.Models
         public List<CarModelList> CarModels = new List<CarModelList>();
         public int MakeID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public string ImagePath { get; set; }
 
     }
@@ -897,6 +914,7 @@ namespace DAL.Models
         public int? ModelID { get; set; }
         public int? MakeID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public short? Year { get; set; }
         public string EngineNo { get; set; }
         public string RecommendedLitres { get; set; }

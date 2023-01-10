@@ -251,3 +251,5 @@ D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\NReco.PdfGenerator.xml
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.pdb
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.Core.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\WebActivatorEx.dll

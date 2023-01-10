@@ -7,17 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 
 namespace GarageCustomerAPI.Controllers
 {
     [RoutePrefix("api")]
     public class LoginController : ApiController
-    {           
-        loginRepository loginRepo;      
+    {
+        loginRepository loginRepo;
+        settingRepository settingRepo;
         public LoginController()
         {
-            loginRepo = new loginRepository(new Garage_UATEntities2());
+            loginRepo = new loginRepository(new Garage_Entities());
+            settingRepo = new settingRepository(new GarageCustomer_Entities());
         }
 
         [Route("login/{Phone}")]
@@ -33,5 +36,25 @@ namespace GarageCustomerAPI.Controllers
             return loginRepo.CustomerUpdate(obj);
         }
 
+        [HttpPost]
+        [Route("login/insert/token")]
+        public Rsp PostInsertToken(TokenBLL obj)
+        {
+            return settingRepo.InsertToken(obj);
+        }
+
+        [HttpPost]
+        [Route("login/update/token")]
+        public Rsp PostUpdateToken(TokenBLL obj)
+        {
+            return settingRepo.UpdateToken(obj);
+        }
+
+        [HttpPost]
+        [Route("notification/update")]
+        public Rsp PostUpdateToken(NotificationBLL obj)
+        {
+            return settingRepo.UpdateNotification(obj);
+        }
     }
 }

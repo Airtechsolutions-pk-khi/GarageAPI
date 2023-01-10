@@ -251,3 +251,5 @@ D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Release\GarageCustomerAPI.csp
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Release\GarageCustomerAPI.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Release\GarageCustomerAPI.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Release\GarageCustomerAPI.pdb
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.Core.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\WebActivatorEx.dll

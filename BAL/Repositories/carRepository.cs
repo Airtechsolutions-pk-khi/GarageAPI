@@ -1,5 +1,5 @@
 ﻿
-using DAL.DBEntities2;
+using DAL.DBEntities;
 using DAL.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -23,10 +23,10 @@ namespace BAL.Repositories
         public carRepository()
             : base()
         {
-            DBContext2 = new Garage_UATEntities2();
+            DBContext2 = new Garage_Entities();
 
         }
-        public carRepository(Garage_UATEntities2 contextDB2)
+        public carRepository(Garage_Entities contextDB2)
             : base(contextDB2)
         {
             DBContext2 = contextDB2;
@@ -232,9 +232,9 @@ namespace BAL.Repositories
                 p[3] = new SqlParameter("@StatusID", 1);
                 p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
                 p[5] = new SqlParameter("@LocationID", obj.LocationID);
-                p[6] = new SqlParameter("@Date", DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture));
+                p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
                 return (new DBHelperPOS().GetDatasetFromSP)("sp_InsertReview_CAPI", p).Tables[0];
-
+                // DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture)
             }
             catch (Exception ex)
             {
@@ -562,7 +562,7 @@ namespace BAL.Repositories
             var htmlToPdf = new NReco.PdfGenerator.HtmlToPdfConverter();
             var pdfBytes = htmlToPdf.GeneratePdf(htmlContent);
             var filename = orderid + "-" + DateTime.Now.Ticks.ToString();
-            string folderPath = "~/OrderLetters/";   // set folder
+            string folderPath = "~/Upload/OrderLetters/";   // set folder
 
             if (!Directory.Exists(HttpContext.Current.Server.MapPath(folderPath)))
                 Directory.CreateDirectory(HttpContext.Current.Server.MapPath(folderPath));

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DAL</RootNamespace>
     <AssemblyName>DAL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -79,347 +79,158 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DBEntities2\AppSource.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Amenity.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Bay.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\CarSell.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Car.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CarInspection.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CarInspectionDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CarNote.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CarNotesImage.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Category.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\City.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Company.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CompanyClient.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CompanyInvoice.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CompanyInvoiceDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CompanyQuotation.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CompanyQuotationDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Country.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\CreditCustomer.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Customer.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\CarSellImage.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\DBContext2.cs" />
-    <Compile Include="DBEntities2\DBEntities2.Context.cs">
+    <Compile Include="DBEntities2\DBEntitiesCustomer.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBEntities2.Context.tt</DependentUpon>
+      <DependentUpon>DBEntitiesCustomer.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\DBEntities2.cs">
+    <Compile Include="DBEntities2\DBEntitiesCustomer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\DBEntities2.Designer.cs">
+    <Compile Include="DBEntities2\DBEntitiesCustomer.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBEntities2.edmx</DependentUpon>
+      <DependentUpon>DBEntitiesCustomer.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Discount.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Feature.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\DiscountItem.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Landmark.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\ImageLocation.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Notification.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Integration.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Offer.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\IntegrationActivation.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\PushToken.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Inventory.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Review.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_Bill.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Service.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_BillDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\Setting.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_PurchaseOrder.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_CheckCarSellNoPlate_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_PurchaseOrderDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetAmenitiesByID_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_Reconciliation.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetAmenities_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_ReconciliationDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetCarSellById_CADMIN_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_Stock.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetCarSellImages_CAdmin_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_StockIssue.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetCarSell_CADMIN_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_StockIssueDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetCarSell_CAPI_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_StockRequest.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetLandmarkByID_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_StockRequestDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetLandmark_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\inv_StockStore.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetServiceByID_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Item.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetServices_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\License.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetService_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\Location.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetSettingByID_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\LocationAmenitiesJunc.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\LocationServiceJunc.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Make.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Model.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Modifier.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Order.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrderCheckout.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrderCheckoutDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrderDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrderDetailPackage.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrderDetail_FM.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrderInspectionMapping.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\OrdersChecklist.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Package.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\PackageDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\PaymentDetail.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\PaymentMode.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Receipt.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\ReportLog.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Role_Forms.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Role_Group.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Role_GroupForms.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\SalesItem.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\SalesSetting.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\SessionInfo.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Split_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_apiGetSuperUserInfo_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCarHistory_CAPP_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCarIdByMobile_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCarOrderDetail_App_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCarOrdersHistory_APP_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCarOrders_App_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCarsBy_CustomerID_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetCar_App_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetNotifications_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetOrderHistory_App_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetOrderListCheckout_APP_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetOrderList_APP_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetOrderQR_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetPermissions_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetStockNotifications_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_GetSubCategoryDuplication_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+    <Compile Include="DBEntities2\sp_GetSetting_Result.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\sp_helpdiagrams_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_ItemsDuplication_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_rptCreditCustomer_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_rptItemSales_admin_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_rptSalesOwner_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_RptStock_App_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_SearchItems_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_SearchLocation_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\sp_StockStore_rpt_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Status.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Store.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\SubCategory.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\SubUser.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Supplier.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\sysdiagram.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities2\TimeZone.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\Unit.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\User.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\usp_Login_Result.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\ZohoChartOfAccount.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\ZohoCOAMapping.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities2\ZohoSetting.cs">
-      <DependentUpon>DBEntities2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\Author.cs">
+    <Compile Include="DBEntities\AppSource.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\AuthorContact.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\Book.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\BookCategory.cs">
+    <Compile Include="DBEntities\Bay.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Car.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CarInspection.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CarInspectionDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CarNote.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CarNotesImage.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Category.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\City.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Company.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CompanyClient.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CompanyInvoice.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CompanyInvoiceDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CompanyQuotation.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CompanyQuotationDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Country.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\CreditCustomer.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Customer.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\DBContext.cs" />
@@ -438,16 +249,181 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\Publisher.cs">
+    <Compile Include="DBEntities\Discount.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\Service.cs">
+    <Compile Include="DBEntities\DiscountItem.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\Setting.cs">
+    <Compile Include="DBEntities\ImageLocation.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBEntities\sp_GetServices_Result.cs">
+    <Compile Include="DBEntities\Integration.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\IntegrationActivation.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Inventory.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_Bill.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_BillDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_PurchaseOrder.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_PurchaseOrderDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_Reconciliation.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_ReconciliationDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_Stock.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_StockIssue.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_StockIssueDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_StockRequest.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_StockRequestDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\inv_StockStore.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Item.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\License.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Location.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\LocationAmenitiesJunc.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\LocationImage.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\LocationServiceJunc.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Make.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Model.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Modifier.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Order.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrderCheckout.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrderCheckoutDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrderDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrderDetailPackage.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrderDetail_FM.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrderInspectionMapping.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\OrdersChecklist.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Package.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\PackageDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\PaymentDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\PaymentMode.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Receipt.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ReportLog.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Role_Forms.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Role_Group.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Role_GroupForms.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\SalesItem.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\SalesSetting.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\SessionInfo.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Split_Result.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Status.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Store.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\SubCategory.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\SubUser.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Supplier.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\TimeZone.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\Unit.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\User.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ZohoChartOfAccount.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ZohoCOAMapping.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ZohoSetting.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataTableEntensions.cs" />
@@ -465,12 +441,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="DBEntities2\DBEntities2.edmx">
+    <EntityDeploy Include="DBEntities2\DBEntitiesCustomer.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBEntities2.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBEntitiesCustomer.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DBEntities2\DBEntities2.edmx.diagram">
-      <DependentUpon>DBEntities2.edmx</DependentUpon>
+    <None Include="DBEntities2\DBEntitiesCustomer.edmx.diagram">
+      <DependentUpon>DBEntitiesCustomer.edmx</DependentUpon>
     </None>
     <None Include="DBEntities\DBEntities.edmx.diagram">
       <DependentUpon>DBEntities.edmx</DependentUpon>
@@ -481,15 +457,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBEntities2\DBEntities2.Context.tt">
+    <Content Include="DBEntities2\DBEntitiesCustomer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBEntities2.edmx</DependentUpon>
-      <LastGenOutput>DBEntities2.Context.cs</LastGenOutput>
+      <DependentUpon>DBEntitiesCustomer.edmx</DependentUpon>
+      <LastGenOutput>DBEntitiesCustomer.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DBEntities2\DBEntities2.tt">
+    <Content Include="DBEntities2\DBEntitiesCustomer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBEntities2.edmx</DependentUpon>
-      <LastGenOutput>DBEntities2.cs</LastGenOutput>
+      <DependentUpon>DBEntitiesCustomer.edmx</DependentUpon>
+      <LastGenOutput>DBEntitiesCustomer.cs</LastGenOutput>
     </Content>
     <Content Include="DBEntities\DBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

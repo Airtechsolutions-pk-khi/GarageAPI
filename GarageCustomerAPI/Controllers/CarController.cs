@@ -1,5 +1,5 @@
 ﻿using BAL.Repositories;
-using DAL.DBEntities2;
+using DAL.DBEntities;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace GarageCustomerAPI.Controllers
         carRepository carRepo;
         public CarController()
         {
-            carRepo = new carRepository(new Garage_UATEntities2());
+            carRepo = new carRepository(new Garage_Entities());
         }
 
         [Route("add/car")]

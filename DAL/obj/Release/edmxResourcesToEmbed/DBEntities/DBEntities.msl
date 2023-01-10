@@ -1,102 +1,1452 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="GarageCustomer_UATStoreContainer" CdmEntityContainer="GarageCustomer_UATEntities">
-    <FunctionImportMapping FunctionImportName="sp_GetServices" FunctionName="GarageCustomer_UAT.Store.sp_GetServices">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GarageCustomer_UAT.sp_GetServices_Result">
-          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-          <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
-          <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+  <EntityContainerMapping StorageEntityContainer="Garage_UATModelStoreContainer" CdmEntityContainer="Garage_Entities">
+    <EntitySetMapping Name="AppSources">
+      <EntityTypeMapping TypeName="Garage_UATModel.AppSource">
+        <MappingFragment StoreEntitySet="AppSource">
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bays">
+      <EntityTypeMapping TypeName="Garage_UATModel.Bay">
+        <MappingFragment StoreEntitySet="Bay">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BayName" ColumnName="BayName" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="BayID" ColumnName="BayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarInspections">
+      <EntityTypeMapping TypeName="Garage_UATModel.CarInspection">
+        <MappingFragment StoreEntitySet="CarInspection">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <EntitySetMapping Name="Authors">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.Author">
-        <MappingFragment StoreEntitySet="Author">
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CarInspectionID" ColumnName="CarInspectionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AuthorContacts">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.AuthorContact">
-        <MappingFragment StoreEntitySet="AuthorContact">
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
-          <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+    <EntitySetMapping Name="CarInspectionDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.CarInspectionDetail">
+        <MappingFragment StoreEntitySet="CarInspectionDetails">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="kmother" ColumnName="kmother" />
+          <ScalarProperty Name="km15000" ColumnName="km15000" />
+          <ScalarProperty Name="km10000" ColumnName="km10000" />
+          <ScalarProperty Name="km8000" ColumnName="km8000" />
+          <ScalarProperty Name="km5000" ColumnName="km5000" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CarInspectionID" ColumnName="CarInspectionID" />
+          <ScalarProperty Name="CarInspectionDetailID" ColumnName="CarInspectionDetailID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Books">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.Book">
-        <MappingFragment StoreEntitySet="Book">
-          <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="CarNotes">
+      <EntityTypeMapping TypeName="Garage_UATModel.CarNote">
+        <MappingFragment StoreEntitySet="CarNotes">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LocaitonID" ColumnName="LocaitonID" />
+          <ScalarProperty Name="Signature" ColumnName="Signature" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="NotesStatus" ColumnName="NotesStatus" />
+          <ScalarProperty Name="NotesComment" ColumnName="NotesComment" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="CarNotesID" ColumnName="CarNotesID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BookCategories">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.BookCategory">
-        <MappingFragment StoreEntitySet="BookCategory">
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="CarNotesImages">
+      <EntityTypeMapping TypeName="Garage_UATModel.CarNotesImage">
+        <MappingFragment StoreEntitySet="CarNotesImages">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CarNotesID" ColumnName="CarNotesID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="CarNoteImagesID" ColumnName="CarNoteImagesID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cars">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.Car">
-        <MappingFragment StoreEntitySet="Car">
+      <EntityTypeMapping TypeName="Garage_UATModel.Car">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="BinaryImage" ColumnName="BinaryImage" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="RecommendedAmount" ColumnName="RecommendedAmount" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="CheckLitre" ColumnName="CheckLitre" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="VinNo" ColumnName="VinNo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Publishers">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.Publisher">
-        <MappingFragment StoreEntitySet="Publisher">
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Services">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.Service">
-        <MappingFragment StoreEntitySet="Service">
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="Garage_UATModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-          <ScalarProperty Name="Image" ColumnName="Image" />
-          <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
-          <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
-          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Settings">
-      <EntityTypeMapping TypeName="GarageCustomer_UAT.Setting">
-        <MappingFragment StoreEntitySet="Setting">
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="PageName" ColumnName="PageName" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+          <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="Garage_UATModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Population" ColumnName="Population" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="BookAuthors" TypeName="GarageCustomer_UAT.BookAuthors" StoreEntitySet="BookAuthors">
-      <EndProperty Name="Book">
-        <ScalarProperty Name="Id" ColumnName="BookId" />
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="Garage_UATModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="EmailBCC" ColumnName="EmailBCC" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyClients">
+      <EntityTypeMapping TypeName="Garage_UATModel.CompanyClient">
+        <MappingFragment StoreEntitySet="CompanyClients">
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="VATNo" ColumnName="VATNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CompanyClientID" ColumnName="CompanyClientID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyInvoices">
+      <EntityTypeMapping TypeName="Garage_UATModel.CompanyInvoice">
+        <MappingFragment StoreEntitySet="CompanyInvoice">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="TotalVAT" ColumnName="TotalVAT" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+          <ScalarProperty Name="BuyerVAT" ColumnName="BuyerVAT" />
+          <ScalarProperty Name="BuyerContact" ColumnName="BuyerContact" />
+          <ScalarProperty Name="BuyerAddress" ColumnName="BuyerAddress" />
+          <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+          <ScalarProperty Name="SellerContact" ColumnName="SellerContact" />
+          <ScalarProperty Name="SellerVAT" ColumnName="SellerVAT" />
+          <ScalarProperty Name="SellerAddress" ColumnName="SellerAddress" />
+          <ScalarProperty Name="SellerName" ColumnName="SellerName" />
+          <ScalarProperty Name="TaxNo" ColumnName="TaxNo" />
+          <ScalarProperty Name="SupplyDate" ColumnName="SupplyDate" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="CompanyInvoiceID" ColumnName="CompanyInvoiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyInvoiceDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.CompanyInvoiceDetail">
+        <MappingFragment StoreEntitySet="CompanyInvoiceDetail">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="ItemNameArabic" ColumnName="ItemNameArabic" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="CompanyInvoiceID" ColumnName="CompanyInvoiceID" />
+          <ScalarProperty Name="CInvoiceDetailID" ColumnName="CInvoiceDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyQuotations">
+      <EntityTypeMapping TypeName="Garage_UATModel.CompanyQuotation">
+        <MappingFragment StoreEntitySet="CompanyQuotation">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="TotalVAT" ColumnName="TotalVAT" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+          <ScalarProperty Name="BuyerVAT" ColumnName="BuyerVAT" />
+          <ScalarProperty Name="BuyerContact" ColumnName="BuyerContact" />
+          <ScalarProperty Name="BuyerAddress" ColumnName="BuyerAddress" />
+          <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+          <ScalarProperty Name="SellerContact" ColumnName="SellerContact" />
+          <ScalarProperty Name="SellerVAT" ColumnName="SellerVAT" />
+          <ScalarProperty Name="SellerAddress" ColumnName="SellerAddress" />
+          <ScalarProperty Name="SellerName" ColumnName="SellerName" />
+          <ScalarProperty Name="TaxNo" ColumnName="TaxNo" />
+          <ScalarProperty Name="SupplyDate" ColumnName="SupplyDate" />
+          <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+          <ScalarProperty Name="QuotationNo" ColumnName="QuotationNo" />
+          <ScalarProperty Name="CompanyQuotationID" ColumnName="CompanyQuotationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyQuotationDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.CompanyQuotationDetail">
+        <MappingFragment StoreEntitySet="CompanyQuotationDetail">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="ItemNameArabic" ColumnName="ItemNameArabic" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="CompanyQuotationID" ColumnName="CompanyQuotationID" />
+          <ScalarProperty Name="CQuotationDetailID" ColumnName="CQuotationDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="Garage_UATModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Curr_Code" ColumnName="Curr_Code" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="PhonePrefix" ColumnName="PhonePrefix" />
+          <ScalarProperty Name="Code2" ColumnName="Code2" />
+          <ScalarProperty Name="Capital" ColumnName="Capital" />
+          <ScalarProperty Name="HeadOfState" ColumnName="HeadOfState" />
+          <ScalarProperty Name="GovernmentForm" ColumnName="GovernmentForm" />
+          <ScalarProperty Name="LocalName" ColumnName="LocalName" />
+          <ScalarProperty Name="GNPOld" ColumnName="GNPOld" />
+          <ScalarProperty Name="GNP" ColumnName="GNP" />
+          <ScalarProperty Name="LifeExpectancy" ColumnName="LifeExpectancy" />
+          <ScalarProperty Name="Population" ColumnName="Population" />
+          <ScalarProperty Name="IndepYear" ColumnName="IndepYear" />
+          <ScalarProperty Name="SurfaceArea" ColumnName="SurfaceArea" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Continent" ColumnName="Continent" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditCustomers">
+      <EntityTypeMapping TypeName="Garage_UATModel.CreditCustomer">
+        <MappingFragment StoreEntitySet="CreditCustomer">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreditCustomerID" ColumnName="CreditCustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="Garage_UATModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="IsSignUp" ColumnName="IsSignUp" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsSMS" ColumnName="IsSMS" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+          <ScalarProperty Name="Redem" ColumnName="Redem" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Discounts">
+      <EntityTypeMapping TypeName="Garage_UATModel.Discount">
+        <MappingFragment StoreEntitySet="Discount">
+          <ScalarProperty Name="NoOfRedemption" ColumnName="NoOfRedemption" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="IsCouponCode" ColumnName="IsCouponCode" />
+          <ScalarProperty Name="DiscountBy" ColumnName="DiscountBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+          <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiscountItems">
+      <EntityTypeMapping TypeName="Garage_UATModel.DiscountItem">
+        <MappingFragment StoreEntitySet="DiscountItems">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ItemDiscountID" ColumnName="ItemDiscountID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageLocations">
+      <EntityTypeMapping TypeName="Garage_UATModel.ImageLocation">
+        <MappingFragment StoreEntitySet="ImageLocation">
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Integrations">
+      <EntityTypeMapping TypeName="Garage_UATModel.Integration">
+        <MappingFragment StoreEntitySet="Integration">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="IntegrationKey" ColumnName="IntegrationKey" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IntegrationID" ColumnName="IntegrationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntegrationActivations">
+      <EntityTypeMapping TypeName="Garage_UATModel.IntegrationActivation">
+        <MappingFragment StoreEntitySet="IntegrationActivation">
+          <ScalarProperty Name="IsActivateUser" ColumnName="IsActivateUser" />
+          <ScalarProperty Name="IsActivateAdmin" ColumnName="IsActivateAdmin" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IntegrationActivationID" ColumnName="IntegrationActivationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_Bill">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_Bill">
+        <MappingFragment StoreEntitySet="inv_Bill">
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="BillID" ColumnName="BillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_BillDetail">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_BillDetail">
+        <MappingFragment StoreEntitySet="inv_BillDetail">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="BillID" ColumnName="BillID" />
+          <ScalarProperty Name="BillDetailID" ColumnName="BillDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_PurchaseOrder">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_PurchaseOrder">
+        <MappingFragment StoreEntitySet="inv_PurchaseOrder">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_PurchaseOrderDetail">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_PurchaseOrderDetail">
+        <MappingFragment StoreEntitySet="inv_PurchaseOrderDetail">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="PurchaseOrderDetailID" ColumnName="PurchaseOrderDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_Reconciliation">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_Reconciliation">
+        <MappingFragment StoreEntitySet="inv_Reconciliation">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="ReconciliationID" ColumnName="ReconciliationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_ReconciliationDetail">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_ReconciliationDetail">
+        <MappingFragment StoreEntitySet="inv_ReconciliationDetail">
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ReconciliationID" ColumnName="ReconciliationID" />
+          <ScalarProperty Name="ReconciliationDetailID" ColumnName="ReconciliationDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_Stock">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_Stock">
+        <MappingFragment StoreEntitySet="inv_Stock">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="StockOut" ColumnName="StockOut" />
+          <ScalarProperty Name="StockIn" ColumnName="StockIn" />
+          <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+          <ScalarProperty Name="PurhaseOrderNo" ColumnName="PurhaseOrderNo" />
+          <ScalarProperty Name="StockID" ColumnName="StockID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_StockIssue">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_StockIssue">
+        <MappingFragment StoreEntitySet="inv_StockIssue">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="ToStoreID" ColumnName="ToStoreID" />
+          <ScalarProperty Name="FromStoreID" ColumnName="FromStoreID" />
+          <ScalarProperty Name="StockRequestID" ColumnName="StockRequestID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="StockIssueID" ColumnName="StockIssueID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_StockIssueDetail">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_StockIssueDetail">
+        <MappingFragment StoreEntitySet="inv_StockIssueDetail">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="ReceiveQty" ColumnName="ReceiveQty" />
+          <ScalarProperty Name="RequestQty" ColumnName="RequestQty" />
+          <ScalarProperty Name="IssueQty" ColumnName="IssueQty" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="StockIssueID" ColumnName="StockIssueID" />
+          <ScalarProperty Name="StockIssueDetailID" ColumnName="StockIssueDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_StockRequest">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_StockRequest">
+        <MappingFragment StoreEntitySet="inv_StockRequest">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ToStoreID" ColumnName="ToStoreID" />
+          <ScalarProperty Name="FromStoreID" ColumnName="FromStoreID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="StockRequestID" ColumnName="StockRequestID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_StockRequestDetail">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_StockRequestDetail">
+        <MappingFragment StoreEntitySet="inv_StockRequestDetail">
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="IssueQty" ColumnName="IssueQty" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="StockRequestID" ColumnName="StockRequestID" />
+          <ScalarProperty Name="StockRequestDetailID" ColumnName="StockRequestDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="inv_StockStore">
+      <EntityTypeMapping TypeName="Garage_UATModel.inv_StockStore">
+        <MappingFragment StoreEntitySet="inv_StockStore">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StockSold" ColumnName="StockSold" />
+          <ScalarProperty Name="OpeningStock" ColumnName="OpeningStock" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="MinimumStock" ColumnName="MinimumStock" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+          <ScalarProperty Name="StockStoreID" ColumnName="StockStoreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventories">
+      <EntityTypeMapping TypeName="Garage_UATModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="SellingQty" ColumnName="SellingQty" />
+          <ScalarProperty Name="PurchasingUnitID" ColumnName="PurchasingUnitID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="Garage_UATModel.Item">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="MinOpenPrice" ColumnName="MinOpenPrice" />
+          <ScalarProperty Name="IsOpenItem" ColumnName="IsOpenItem" />
+          <ScalarProperty Name="IsInventoryItem" ColumnName="IsInventoryItem" />
+          <ScalarProperty Name="ItemTypeValue" ColumnName="ItemTypeValue" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="FeaturedItem" ColumnName="FeaturedItem" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SubCatID" ColumnName="SubCatID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Licenses">
+      <EntityTypeMapping TypeName="Garage_UATModel.License">
+        <MappingFragment StoreEntitySet="Licenses">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="Maped" ColumnName="Maped" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+          <ScalarProperty Name="PriceOffered" ColumnName="PriceOffered" />
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="LicenseID" ColumnName="LicenseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationAmenitiesJuncs">
+      <EntityTypeMapping TypeName="Garage_UATModel.LocationAmenitiesJunc">
+        <MappingFragment StoreEntitySet="LocationAmenitiesJunc">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="AmenitiesID" ColumnName="AmenitiesID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationImages">
+      <EntityTypeMapping TypeName="Garage_UATModel.LocationImage">
+        <MappingFragment StoreEntitySet="LocationImages">
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="LocationImageID" ColumnName="LocationImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="Garage_UATModel.Location">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="Gmaplink" ColumnName="Gmaplink" />
+          <ScalarProperty Name="LandmarkID" ColumnName="LandmarkID" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="MinOrderAmount" ColumnName="MinOrderAmount" />
+          <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+          <ScalarProperty Name="DeliveryCharges" ColumnName="DeliveryCharges" />
+          <ScalarProperty Name="DeliveryServices" ColumnName="DeliveryServices" />
+          <ScalarProperty Name="LicenseID" ColumnName="LicenseID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Close_Time" ColumnName="Close_Time" />
+          <ScalarProperty Name="Open_Time" ColumnName="Open_Time" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Descripiton" ColumnName="Descripiton" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LocationServiceJuncs">
+      <EntityTypeMapping TypeName="Garage_UATModel.LocationServiceJunc">
+        <MappingFragment StoreEntitySet="LocationServiceJunc">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Makes">
+      <EntityTypeMapping TypeName="Garage_UATModel.Make">
+        <MappingFragment StoreEntitySet="Make">
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="Garage_UATModel.Model">
+        <MappingFragment StoreEntitySet="Model">
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="RecommendedLitres" ColumnName="RecommendedLitres" />
+          <ScalarProperty Name="EngineNo" ColumnName="EngineNo" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modifiers">
+      <EntityTypeMapping TypeName="Garage_UATModel.Modifier">
+        <MappingFragment StoreEntitySet="Modifiers">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NameOnReceipt" ColumnName="NameOnReceipt" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ModifierID" ColumnName="ModifierID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderCheckouts">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrderCheckout">
+        <MappingFragment StoreEntitySet="OrderCheckout">
+          <ScalarProperty Name="AppSourceID" ColumnName="AppSourceID" />
+          <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+          <ScalarProperty Name="IsPartialPaid" ColumnName="IsPartialPaid" />
+          <ScalarProperty Name="PartialAmountReceived" ColumnName="PartialAmountReceived" />
+          <ScalarProperty Name="CreditCustomerID" ColumnName="CreditCustomerID" />
+          <ScalarProperty Name="TaxPercent" ColumnName="TaxPercent" />
+          <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+          <ScalarProperty Name="ServiceCharges" ColumnName="ServiceCharges" />
+          <ScalarProperty Name="Gratuity" ColumnName="Gratuity" />
+          <ScalarProperty Name="IsReady" ColumnName="IsReady" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="CardReturn" ColumnName="CardReturn" />
+          <ScalarProperty Name="CashReturn" ColumnName="CashReturn" />
+          <ScalarProperty Name="RefundedAmount" ColumnName="RefundedAmount" />
+          <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="AssistantID" ColumnName="AssistantID" />
+          <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="AmountComplementary" ColumnName="AmountComplementary" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="LastUpdateDT" ColumnName="LastUpdateDT" />
+          <ScalarProperty Name="lastUpdateBy" ColumnName="lastUpdateBy" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="AmountDiscount" ColumnName="AmountDiscount" />
+          <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
+          <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderCheckOutID" ColumnName="OrderCheckOutID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderCheckoutDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrderCheckoutDetail">
+        <MappingFragment StoreEntitySet="OrderCheckoutDetails">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+          <ScalarProperty Name="CardType" ColumnName="CardType" />
+          <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="AmountDiscount" ColumnName="AmountDiscount" />
+          <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="OrderCheckoutID" ColumnName="OrderCheckoutID" />
+          <ScalarProperty Name="OrderCheckOutDetailID" ColumnName="OrderCheckOutDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="RefundAmount" ColumnName="RefundAmount" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdateDT" ColumnName="LastUpdateDT" />
+          <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="OrderMode" ColumnName="OrderMode" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="isComplementory" ColumnName="isComplementory" />
+          <ScalarProperty Name="LOYALTYPoints" ColumnName="LOYALTYPoints" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="RefundQty" ColumnName="RefundQty" />
+          <ScalarProperty Name="ItemCost" ColumnName="ItemCost" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetail_FM">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrderDetail_FM">
+        <MappingFragment StoreEntitySet="OrderDetail_FM">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdateDT" ColumnName="LastUpdateDT" />
+          <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="FMItemID" ColumnName="FMItemID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="OrderDetailFMID" ColumnName="OrderDetailFMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetailPackages">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrderDetailPackage">
+        <MappingFragment StoreEntitySet="OrderDetailPackage">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="OrderPkgDetailID" ColumnName="OrderPkgDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderInspectionMappings">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrderInspectionMapping">
+        <MappingFragment StoreEntitySet="OrderInspectionMapping">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="IsInspectionWithoutReplace" ColumnName="IsInspectionWithoutReplace" />
+          <ScalarProperty Name="IsReplace" ColumnName="IsReplace" />
+          <ScalarProperty Name="IsInspection" ColumnName="IsInspection" />
+          <ScalarProperty Name="Kilometers" ColumnName="Kilometers" />
+          <ScalarProperty Name="CarInspectionDetailID" ColumnName="CarInspectionDetailID" />
+          <ScalarProperty Name="CarInspectionMapID" ColumnName="CarInspectionMapID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="Garage_UATModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="NextKM" ColumnName="NextKM" />
+          <ScalarProperty Name="CheckLiters" ColumnName="CheckLiters" />
+          <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LastUpdateDT" ColumnName="LastUpdateDT" />
+          <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="OrderCreatedDT" ColumnName="OrderCreatedDT" />
+          <ScalarProperty Name="OrderPunchDt" ColumnName="OrderPunchDt" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="OrderMode" ColumnName="OrderMode" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="BayID" ColumnName="BayID" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="OrderTakerID" ColumnName="OrderTakerID" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersChecklists">
+      <EntityTypeMapping TypeName="Garage_UATModel.OrdersChecklist">
+        <MappingFragment StoreEntitySet="OrdersChecklist">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="KM" ColumnName="KM" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SubOrderChecklistID" ColumnName="SubOrderChecklistID" />
+          <ScalarProperty Name="InspectionDetailID" ColumnName="InspectionDetailID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderChecklistID" ColumnName="OrderChecklistID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackageDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.PackageDetail">
+        <MappingFragment StoreEntitySet="PackageDetails">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="DiscoutType" ColumnName="DiscoutType" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+          <ScalarProperty Name="PackageDetailID" ColumnName="PackageDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="Garage_UATModel.Package">
+        <MappingFragment StoreEntitySet="Packages">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="SKU" ColumnName="SKU" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentDetails">
+      <EntityTypeMapping TypeName="Garage_UATModel.PaymentDetail">
+        <MappingFragment StoreEntitySet="PaymentDetail">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="PayBy" ColumnName="PayBy" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="ReceiveAmount" ColumnName="ReceiveAmount" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PartialPaymentID" ColumnName="PartialPaymentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentModes">
+      <EntityTypeMapping TypeName="Garage_UATModel.PaymentMode">
+        <MappingFragment StoreEntitySet="PaymentModes">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="PaymentMode1" ColumnName="PaymentMode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipts">
+      <EntityTypeMapping TypeName="Garage_UATModel.Receipt">
+        <MappingFragment StoreEntitySet="Receipt">
+          <ScalarProperty Name="IsA4Spacing" ColumnName="IsA4Spacing" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="IsCompanyTagline" ColumnName="IsCompanyTagline" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="Snapchat" ColumnName="Snapchat" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Footer" ColumnName="Footer" />
+          <ScalarProperty Name="CompanyLogoURL" ColumnName="CompanyLogoURL" />
+          <ScalarProperty Name="Companytagline" ColumnName="Companytagline" />
+          <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+          <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+          <ScalarProperty Name="CompanyPhones" ColumnName="CompanyPhones" />
+          <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+          <ScalarProperty Name="CompanyTitle" ColumnName="CompanyTitle" />
+          <ScalarProperty Name="ReceiptName" ColumnName="ReceiptName" />
+          <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportLogs">
+      <EntityTypeMapping TypeName="Garage_UATModel.ReportLog">
+        <MappingFragment StoreEntitySet="ReportLogs">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedeBy" ColumnName="LastUpdatedeBy" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ExpenseAmount" ColumnName="ExpenseAmount" />
+          <ScalarProperty Name="ExcessAmount" ColumnName="ExcessAmount" />
+          <ScalarProperty Name="ShortAmount" ColumnName="ShortAmount" />
+          <ScalarProperty Name="CouponAmount" ColumnName="CouponAmount" />
+          <ScalarProperty Name="CardAmount" ColumnName="CardAmount" />
+          <ScalarProperty Name="CashAmount" ColumnName="CashAmount" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role_Forms">
+      <EntityTypeMapping TypeName="Garage_UATModel.Role_Forms">
+        <MappingFragment StoreEntitySet="Role_Forms">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="FrontEnd" ColumnName="FrontEnd" />
+          <ScalarProperty Name="IsMenuItem" ColumnName="IsMenuItem" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="CssClass" ColumnName="CssClass" />
+          <ScalarProperty Name="SubFormID" ColumnName="SubFormID" />
+          <ScalarProperty Name="FormType" ColumnName="FormType" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="RoutePath" ColumnName="RoutePath" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="FormID" ColumnName="FormID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role_Group">
+      <EntityTypeMapping TypeName="Garage_UATModel.Role_Group">
+        <MappingFragment StoreEntitySet="Role_Group">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role_GroupForms">
+      <EntityTypeMapping TypeName="Garage_UATModel.Role_GroupForms">
+        <MappingFragment StoreEntitySet="Role_GroupForms">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Access" ColumnName="Access" />
+          <ScalarProperty Name="Remove" ColumnName="Remove" />
+          <ScalarProperty Name="Edit" ColumnName="Edit" />
+          <ScalarProperty Name="New" ColumnName="New" />
+          <ScalarProperty Name="FormID" ColumnName="FormID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="GroupFormID" ColumnName="GroupFormID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesItems">
+      <EntityTypeMapping TypeName="Garage_UATModel.SalesItem">
+        <MappingFragment StoreEntitySet="SalesItems">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="SalesItemID" ColumnName="SalesItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesSettings">
+      <EntityTypeMapping TypeName="Garage_UATModel.SalesSetting">
+        <MappingFragment StoreEntitySet="SalesSetting">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CarsDailyTarget" ColumnName="CarsDailyTarget" />
+          <ScalarProperty Name="SalesDailyTarget" ColumnName="SalesDailyTarget" />
+          <ScalarProperty Name="CarsMonthlyTarget" ColumnName="CarsMonthlyTarget" />
+          <ScalarProperty Name="SalesMonthlyTarget" ColumnName="SalesMonthlyTarget" />
+          <ScalarProperty Name="SalesSettingID" ColumnName="SalesSettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SessionInfoes">
+      <EntityTypeMapping TypeName="Garage_UATModel.SessionInfo">
+        <MappingFragment StoreEntitySet="SessionInfo">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LoginDT" ColumnName="LoginDT" />
+          <ScalarProperty Name="LogoutDT" ColumnName="LogoutDT" />
+          <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+          <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
+          <ScalarProperty Name="EndDT" ColumnName="EndDT" />
+          <ScalarProperty Name="StartDT" ColumnName="StartDT" />
+          <ScalarProperty Name="UTC" ColumnName="UTC" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="SubUserId" ColumnName="SubUserId" />
+          <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+          <ScalarProperty Name="RowId" ColumnName="RowId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="Garage_UATModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="Status1" ColumnName="Status" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stores">
+      <EntityTypeMapping TypeName="Garage_UATModel.Store">
+        <MappingFragment StoreEntitySet="Stores">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StoreLocationID" ColumnName="StoreLocationID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubCategories">
+      <EntityTypeMapping TypeName="Garage_UATModel.SubCategory">
+        <MappingFragment StoreEntitySet="SubCategory">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="SortByAlpha" ColumnName="SortByAlpha" />
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="SubImage" ColumnName="SubImage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AlternateName" ColumnName="AlternateName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubUsers">
+      <EntityTypeMapping TypeName="Garage_UATModel.SubUser">
+        <MappingFragment StoreEntitySet="SubUsers">
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="States" ColumnName="States" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+          <ScalarProperty Name="Passcode" ColumnName="Passcode" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="Subscribe" ColumnName="Subscribe" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="Garage_UATModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeZones">
+      <EntityTypeMapping TypeName="Garage_UATModel.TimeZone">
+        <MappingFragment StoreEntitySet="TimeZone">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="BaseUtc" ColumnName="BaseUtc" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="Garage_UATModel.Unit">
+        <MappingFragment StoreEntitySet="Units">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Unit1" ColumnName="Unit" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Garage_UATModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="AllowNegativeInventory" ColumnName="AllowNegativeInventory" />
+          <ScalarProperty Name="IsSMSCheckoutAddOn" ColumnName="IsSMSCheckoutAddOn" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="VATNO" ColumnName="VATNO" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="States" ColumnName="States" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Subscribe" ColumnName="Subscribe" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZohoChartOfAccounts">
+      <EntityTypeMapping TypeName="Garage_UATModel.ZohoChartOfAccount">
+        <MappingFragment StoreEntitySet="ZohoChartOfAccounts">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="account_type" ColumnName="account_type" />
+          <ScalarProperty Name="account_name" ColumnName="account_name" />
+          <ScalarProperty Name="account_id" ColumnName="account_id" />
+          <ScalarProperty Name="ChartOfAccountsID" ColumnName="ChartOfAccountsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZohoCOAMappings">
+      <EntityTypeMapping TypeName="Garage_UATModel.ZohoCOAMapping">
+        <MappingFragment StoreEntitySet="ZohoCOAMapping">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="COACardSales" ColumnName="COACardSales" />
+          <ScalarProperty Name="COACashSales" ColumnName="COACashSales" />
+          <ScalarProperty Name="COAVAT" ColumnName="COAVAT" />
+          <ScalarProperty Name="COAReturn" ColumnName="COAReturn" />
+          <ScalarProperty Name="COADiscount" ColumnName="COADiscount" />
+          <ScalarProperty Name="COATotalSales" ColumnName="COATotalSales" />
+          <ScalarProperty Name="COAMappingID" ColumnName="COAMappingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZohoSettings">
+      <EntityTypeMapping TypeName="Garage_UATModel.ZohoSetting">
+        <MappingFragment StoreEntitySet="ZohoSettings">
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsActivateAdmin" ColumnName="IsActivateAdmin" />
+          <ScalarProperty Name="IsAuthorize" ColumnName="IsAuthorize" />
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+          <ScalarProperty Name="authToken" ColumnName="authToken" />
+          <ScalarProperty Name="Permisions" ColumnName="Permisions" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="client_secret" ColumnName="client_secret" />
+          <ScalarProperty Name="ZohoSettingID" ColumnName="ZohoSettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SubUserLocations" TypeName="Garage_UATModel.SubUserLocations" StoreEntitySet="SubUserLocations">
+      <EndProperty Name="SubUser">
+        <ScalarProperty Name="SubUserID" ColumnName="SubUserID" />
       </EndProperty>
-      <EndProperty Name="Author">
-        <ScalarProperty Name="Id" ColumnName="AuthorId" />
+      <EndProperty Name="Location">
+        <ScalarProperty Name="LocationID" ColumnName="LocationID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

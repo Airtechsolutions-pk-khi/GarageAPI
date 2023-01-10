@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GarageCustomer_UATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GarageCustomer_Entities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CheckCarSellNoPlate" ReturnType="Collection(GarageCustomer_UATModel.sp_CheckCarSellNoPlate_Result)">
+      <Parameter Name="RegistrationNo" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteAmenities">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteLandmark">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteService">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteSetting">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetAmenities" ReturnType="Collection(GarageCustomer_UATModel.sp_GetAmenities_Result)" />
+    <FunctionImport Name="sp_GetAmenitiesByID" ReturnType="Collection(GarageCustomer_UATModel.sp_GetAmenitiesByID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCarSell_CADMIN" ReturnType="Collection(GarageCustomer_UATModel.sp_GetCarSell_CADMIN_Result)">
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCarSell_CAPI" ReturnType="Collection(GarageCustomer_UATModel.sp_GetCarSell_CAPI_Result)" />
+    <FunctionImport Name="sp_GetCarSellById_CADMIN" ReturnType="Collection(GarageCustomer_UATModel.sp_GetCarSellById_CADMIN_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCarSellImages_CAdmin" ReturnType="Collection(GarageCustomer_UATModel.sp_GetCarSellImages_CAdmin_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetLandmark" ReturnType="Collection(GarageCustomer_UATModel.sp_GetLandmark_Result)" />
+    <FunctionImport Name="sp_GetLandmarkByID" ReturnType="Collection(GarageCustomer_UATModel.sp_GetLandmarkByID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetLocationServices" />
+    <FunctionImport Name="sp_GetService" ReturnType="Collection(GarageCustomer_UATModel.sp_GetService_Result)" />
+    <FunctionImport Name="sp_GetServiceByID" ReturnType="Collection(GarageCustomer_UATModel.sp_GetServiceByID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetServices" ReturnType="Collection(GarageCustomer_UATModel.sp_GetServices_Result)" />
+    <FunctionImport Name="sp_GetSetting" ReturnType="Collection(GarageCustomer_UATModel.sp_GetSetting_Result)" />
+    <FunctionImport Name="sp_GetSettingByID" ReturnType="Collection(GarageCustomer_UATModel.sp_GetSettingByID_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(GarageCustomer_UATModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(GarageCustomer_UATModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertAmenities">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertCarSell" ReturnType="Collection(Decimal)">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="RegistrationNo" Mode="In" Type="String" />
+      <Parameter Name="BodyType" Mode="In" Type="String" />
+      <Parameter Name="FuelType" Mode="In" Type="String" />
+      <Parameter Name="EngineType" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="MakeID" Mode="In" Type="Int32" />
+      <Parameter Name="ModelID" Mode="In" Type="Int32" />
+      <Parameter Name="Transmition" Mode="In" Type="String" />
+      <Parameter Name="Kilometer" Mode="In" Type="String" />
+      <Parameter Name="Price" Mode="In" Type="Double" />
+      <Parameter Name="IsInspected" Mode="In" Type="Boolean" />
+      <Parameter Name="CityID" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="CarSellAddID" Mode="In" Type="Int32" />
+      <Parameter Name="BodyColor" Mode="In" Type="String" />
+      <Parameter Name="Assembly" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insertCarSellFeature_CAPI">
+      <Parameter Name="CarSellID" Mode="In" Type="Int32" />
+      <Parameter Name="FeatureId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insertCarSellImages_CAPI">
+      <Parameter Name="Image" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertLandmark">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertService">
+      <Parameter Name="ServiceTitle" Mode="In" Type="String" />
+      <Parameter Name="ServiceDescription" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertSetting">
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="PageName" Mode="In" Type="String" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_updateAmenities_Admin">
+      <Parameter Name="AmenitiesID" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_updateLandmark_Admin">
+      <Parameter Name="LandmarkID" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_updateService_Admin">
+      <Parameter Name="ServiceID" Mode="In" Type="Int32" />
+      <Parameter Name="ServiceTitle" Mode="In" Type="String" />
+      <Parameter Name="ServiceDescription" Mode="In" Type="String" />
+      <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_updateSetting_Admin">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="PageName" Mode="In" Type="String" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Amenities" EntityType="GarageCustomer_UATModel.Amenity" />
+    <EntitySet Name="CarSells" EntityType="GarageCustomer_UATModel.CarSell" />
+    <EntitySet Name="CarSellImages" EntityType="GarageCustomer_UATModel.CarSellImage" />
+    <EntitySet Name="Features" EntityType="GarageCustomer_UATModel.Feature" />
+    <EntitySet Name="Landmarks" EntityType="GarageCustomer_UATModel.Landmark" />
+    <EntitySet Name="Notifications" EntityType="GarageCustomer_UATModel.Notification" />
+    <EntitySet Name="Offers" EntityType="GarageCustomer_UATModel.Offer" />
+    <EntitySet Name="PushTokens" EntityType="GarageCustomer_UATModel.PushToken" />
+    <EntitySet Name="Reviews" EntityType="GarageCustomer_UATModel.Review" />
+    <EntitySet Name="Services" EntityType="GarageCustomer_UATModel.Service" />
+    <EntitySet Name="Settings" EntityType="GarageCustomer_UATModel.Setting" />
+    <EntitySet Name="sysdiagrams" EntityType="GarageCustomer_UATModel.sysdiagram" />
+    <AssociationSet Name="FK_CarSellImage_CarSell" Association="GarageCustomer_UATModel.FK_CarSellImage_CarSell">
+      <End Role="CarSell" EntitySet="CarSells" />
+      <End Role="CarSellImage" EntitySet="CarSellImages" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_CheckCarSellNoPlate_Result">
+    <Property Type="Int32" Name="CarSellID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BodyType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FuelType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EngineType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CustomerID" Nullable="true" />
+    <Property Type="Int32" Name="MakeID" Nullable="true" />
+    <Property Type="Int32" Name="ModelID" Nullable="true" />
+    <Property Type="String" Name="Transmition" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Kilometer" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Boolean" Name="IsInspected" Nullable="true" />
+    <Property Type="Int32" Name="CityID" Nullable="true" />
+    <Property Type="Int32" Name="CountryID" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="CarSellAddID" Nullable="true" />
+    <Property Type="String" Name="BodyColor" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Assembly" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_GetAmenities_Result">
+    <Property Type="Int32" Name="AmenitiesID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="String" Name="Image" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetAmenitiesByID_Result">
+    <Property Type="Int32" Name="AmenitiesID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="String" Name="Image" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCarSell_CADMIN_Result">
+    <Property Type="Int32" Name="CarSellID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BodyType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FuelType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EngineType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CustomerID" Nullable="true" />
+    <Property Type="Int32" Name="MakeID" Nullable="true" />
+    <Property Type="Int32" Name="ModelID" Nullable="true" />
+    <Property Type="String" Name="Transmition" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Kilometer" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Boolean" Name="IsInspected" Nullable="true" />
+    <Property Type="Int32" Name="CityID" Nullable="true" />
+    <Property Type="Int32" Name="CountryID" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="CarSellAddID" Nullable="true" />
+    <Property Type="String" Name="BodyColor" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Assembly" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="MakeName" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="ModelName" Nullable="true" MaxLength="400" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCarSell_CAPI_Result">
+    <Property Type="Int32" Name="CarSellID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BodyType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FuelType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EngineType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CustomerID" Nullable="true" />
+    <Property Type="Int32" Name="MakeID" Nullable="true" />
+    <Property Type="Int32" Name="ModelID" Nullable="true" />
+    <Property Type="String" Name="Transmition" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Kilometer" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Boolean" Name="IsInspected" Nullable="true" />
+    <Property Type="Int32" Name="CityID" Nullable="true" />
+    <Property Type="Int32" Name="CountryID" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="CarSellAddID" Nullable="true" />
+    <Property Type="String" Name="BodyColor" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Assembly" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="MakeName" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="ModelName" Nullable="true" MaxLength="400" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCarSellById_CADMIN_Result">
+    <Property Type="Int32" Name="CarSellID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BodyType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FuelType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EngineType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CustomerID" Nullable="true" />
+    <Property Type="Int32" Name="MakeID" Nullable="true" />
+    <Property Type="Int32" Name="ModelID" Nullable="true" />
+    <Property Type="String" Name="Transmition" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Kilometer" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Boolean" Name="IsInspected" Nullable="true" />
+    <Property Type="Int32" Name="CityID" Nullable="true" />
+    <Property Type="Int32" Name="CountryID" Nullable="true" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="CarSellAddID" Nullable="true" />
+    <Property Type="String" Name="BodyColor" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Assembly" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Features" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="MakeName" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="ModelName" Nullable="true" MaxLength="400" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCarSellImages_CAdmin_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="CarSellID" Nullable="true" />
+    <Property Type="String" Name="Image" Nullable="true" />
+    <Property Type="DateTime" Name="Createdon" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="Updatedon" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_GetLandmark_Result">
+    <Property Type="Int32" Name="LandmarkID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Image" Nullable="true" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetLandmarkByID_Result">
+    <Property Type="Int32" Name="LandmarkID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Image" Nullable="true" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetService_Result">
+    <Property Type="Int32" Name="ServiceID" Nullable="false" />
+    <Property Type="String" Name="ServiceTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ServiceDescription" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Int32" Name="StatusId" Nullable="true" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_GetServiceByID_Result">
+    <Property Type="Int32" Name="ServiceID" Nullable="false" />
+    <Property Type="String" Name="ServiceTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ServiceDescription" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Int32" Name="StatusId" Nullable="true" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_GetServices_Result">
+    <Property Type="Int32" Name="ServiceID" Nullable="false" />
+    <Property Type="String" Name="ServiceTitle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ServiceDescription" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Int32" Name="StatusId" Nullable="true" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_GetSetting_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PageName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetSettingByID_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Image" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PageName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="DisplayOrder" Nullable="true" />
+    <Property Type="Int32" Name="StatusID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Amenity">
+    <Key>
+      <PropertyRef Name="AmenitiesID" />
+    </Key>
+    <Property Name="AmenitiesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CarSell">
+    <Key>
+      <PropertyRef Name="CarSellID" />
+    </Key>
+    <Property Name="CarSellID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BodyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EngineType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="MakeID" Type="Int32" />
+    <Property Name="ModelID" Type="Int32" />
+    <Property Name="Transmition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Kilometer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="IsInspected" Type="Boolean" />
+    <Property Name="CityID" Type="Int32" />
+    <Property Name="CountryCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="CarSellAddID" Type="Int32" />
+    <Property Name="BodyColor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Assembly" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CarSellImages" Relationship="GarageCustomer_UATModel.FK_CarSellImage_CarSell" FromRole="CarSell" ToRole="CarSellImage" />
+  </EntityType>
+  <EntityType Name="CarSellImage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarSellID" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Createdon" Type="DateTime" Precision="3" />
+    <Property Name="Updatedon" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CarSell" Relationship="GarageCustomer_UATModel.FK_CarSellImage_CarSell" FromRole="CarSellImage" ToRole="CarSell" />
+  </EntityType>
+  <EntityType Name="Feature">
+    <Key>
+      <PropertyRef Name="FeatureID" />
+    </Key>
+    <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Landmark">
+    <Key>
+      <PropertyRef Name="LandmarkID" />
+    </Key>
+    <Property Name="LandmarkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="IsRead" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Offer">
+    <Key>
+      <PropertyRef Name="OfferID" />
+    </Key>
+    <Property Name="OfferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TaxPercent" Type="Int32" />
+    <Property Name="FromDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ToDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Createdon" Type="DateTime" Precision="3" />
+    <Property Name="Createdby" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PushToken">
+    <Key>
+      <PropertyRef Name="TokenID" />
+    </Key>
+    <Property Name="TokenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Device" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="ReviewID" />
+    </Key>
+    <Property Name="ReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicServiceTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicServiceDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="StatusId" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PageName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_CarSellImage_CarSell">
+    <End Type="GarageCustomer_UATModel.CarSell" Role="CarSell" Multiplicity="0..1" />
+    <End Type="GarageCustomer_UATModel.CarSellImage" Role="CarSellImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarSell">
+        <PropertyRef Name="CarSellID" />
+      </Principal>
+      <Dependent Role="CarSellImage">
+        <PropertyRef Name="CarSellID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

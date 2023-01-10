@@ -1,4 +1,5 @@
 ﻿
+using DAL.DBEntities;
 using DAL.DBEntities2;
 using DAL.Models;
 using Newtonsoft.Json;
@@ -23,10 +24,10 @@ namespace BAL.Repositories
         public loginRepository()
             : base()
         {
-            DBContext2 = new Garage_UATEntities2();
+            DBContext2 = new Garage_Entities();
 
         }
-        public loginRepository(Garage_UATEntities2 contextDB2)
+        public loginRepository(Garage_Entities contextDB2)
             : base(contextDB2)
         {
             DBContext2 = contextDB2;
@@ -45,12 +46,22 @@ namespace BAL.Repositories
                 var _dsOrderdetail = ds.Tables[3] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OItemsList>>();
                 var _dsOrderdetailPkg = ds.Tables[4] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<OPackageDetailList>>();
                 var _dsordercheckoutdetail = ds.Tables[5] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CheckoutDetailsOrder>>();
+                var _dsNotifications = ds.Tables[6] == null ? new List<NotificationBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<NotificationBLL>>();
 
-
+                rsp.Notifications = _dsNotifications;
                 rsp.Customer = _dsCustomerInfo;
                 rsp.CarList = _dsCarInfo;
+                foreach (var j in rsp.Notifications)
+                {
+                    j.IsRead = j.IsRead ?? true;
+                    j.Type = "Orders";
+                    j.Date = DateParse(j.Date);
+                    j.Image = (j.Image == null || j.Image == "") ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.Image;
+                }
                 foreach (var i in rsp.CarList)
                 {
+                    i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
+
                     i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.ImagePath;
                     try { i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
                     try { i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
@@ -59,7 +70,8 @@ namespace BAL.Repositories
                     i.Orders = _dsOrders.Where(x => x.CarID == i.CarID).ToList();
                     foreach (var j in i.Orders)
                     {
-                        j.NoPlateImage = "http://apicustomer-uat.garage.sa/assets/images/EmptyNoplate.png";
+                        j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;
+                        j.NoPlateImage = ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/EmptyNoplate.png";
                         j.OrderPunchDate = DateParse(j.OrderPunchDate);
                         j.CheckoutDate = DateParse(j.CheckoutDate);
                         j.Items = _dsOrderdetail.Where(x => x.OrderID == j.OrderID).ToList();
@@ -167,6 +179,7 @@ namespace BAL.Repositories
                 return null;
             }
         }
+
 
     }
 }
