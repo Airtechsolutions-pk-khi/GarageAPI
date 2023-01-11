@@ -837,6 +837,7 @@ namespace DAL.Models
         public string NoPlateImage { get; set; }
         public double? CashAmount { get; set; }
         public double? CardAmount { get; set; }
+        public float? NextKM { get; set; }
         public string CardType { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
     }

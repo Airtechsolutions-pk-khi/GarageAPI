@@ -301,7 +301,7 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[24];
+                SqlParameter[] p = new SqlParameter[22];
                 p[0] = new SqlParameter("@Name", carSell.Name);
                 p[1] = new SqlParameter("@Description", carSell.Description);
                 p[2] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
@@ -324,8 +324,8 @@ namespace BAL.Repositories
                 p[19] = new SqlParameter("@StatusID", carSell.StatusID);
                 p[20] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
                 p[21] = new SqlParameter("@CreatedBy", carSell.CustomerID);
-                p[22] = new SqlParameter("@UpdatedBy", carSell.CustomerID);
-                p[23] = new SqlParameter("@UpdatedDate", DateTime.UtcNow.AddMinutes(180));
+                //p[22] = new SqlParameter("@UpdatedBy", carSell.CustomerID);
+                //p[23] = new SqlParameter("@UpdatedDate", DateTime.UtcNow.AddMinutes(180));
 
                 carSell.CarSellID = int.Parse((new DBHelper().GetDatasetFromSP)("sp_InsertCarSell", p).Tables[0].Rows[0][0].ToString());
                 //carSell.Image = carSell.Image != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + carSell.Image : null;
