@@ -200,8 +200,8 @@ C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustome
 C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CopyComplete
 C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.dll
 C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.pdb
-D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csprojAssemblyReference.cache
-D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CoreCompileInputs.cache
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.Core.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\WebActivatorEx.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\GarageCustomerAPI.dll.config
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\GarageCustomerAPI.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\GarageCustomerAPI.pdb
@@ -212,6 +212,7 @@ D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\EntityFramework.SqlServer.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Web.Infrastructure.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\Newtonsoft.Json.dll
+D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.Core.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Configuration.ConfigurationManager.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Net.Http.Formatting.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Security.AccessControl.dll
@@ -225,6 +226,7 @@ D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.Razor.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.WebPages.Deployment.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.WebPages.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.WebPages.Razor.dll
+D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\WebActivatorEx.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\NReco.PdfGenerator.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\BAL.pdb
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\BAL.dll.config
@@ -248,8 +250,8 @@ D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.WebPages.Deploymen
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.WebPages.Razor.xml
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\bin\NReco.PdfGenerator.xml
+D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csprojAssemblyReference.cache
+D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CoreCompileInputs.cache
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CopyComplete
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.dll
 D:\Project\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.pdb
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.Core.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\WebActivatorEx.dll

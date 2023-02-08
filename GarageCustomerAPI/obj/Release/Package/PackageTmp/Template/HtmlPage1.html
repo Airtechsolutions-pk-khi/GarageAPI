@@ -1,0 +1,343 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api-live.garage.sa/Template/jquery.qrcode.min.js"></script>
+    <script>
+        jQuery(function () {
+            jQuery('#qroutput').qrcode("#qrlink#");
+        })
+    </script>
+    <style>
+        table {
+            page-break-inside: auto
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+
+        @page {
+            @bottom-right {
+                content: counter(page) " of " counter(pages);
+            }
+        }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #qroutput canvas {
+            border: 2px solid #ffb509;
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        #qroutput canvas {
+            width: 160px;
+            height: 160px;
+        }
+
+        .qr-code-generator {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+            .qr-code-generator * {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+        #qrcode {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+            #qrcode a {
+                font-size: 0.8em;
+            }
+
+        .qr-url, .qr-size {
+            padding: 0.5em;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .qr-url {
+            width: 79%;
+        }
+
+        .qr-size {
+            width: 20%;
+        }
+
+        .generate-qr-code {
+            display: block;
+            width: 100%;
+            margin: 0.5em 0 0;
+            padding: 0.25em;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            background-color: #e5554e;
+            color: #fff;
+        }
+
+        .imageNotes {
+            transform: rotate(90deg) !important;
+        }
+
+        @font-face {
+            font-family: myFirstFont;
+            src: url(letterfont/FrutigerLTArabic-55Roman.ttf);
+            font-weight: bold;
+        }
+
+        .body {
+            font-family: myFirstFont;
+        }
+
+        .table-bordered td, .table-bordered th {
+            border: 0px solid #ffffff;
+        }
+
+        .sec2-row {
+            border-bottom: 1px solid #d1d1d1;
+            margin: 0 0px 0 25px;
+            padding: 10px 0 10px 0;
+        }
+
+        .sec2-row2 {
+            border-bottom: 1px solid #d1d1d1;
+            margin: 0 15px 0 0;
+            padding: 20px 0 20px 0;
+        }
+
+        .table td, .table th {
+            border: 0px solid #ffffff;
+        }
+
+        .table1 td, .table1 th {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .table {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .table-padd td, .table-padd th {
+            padding: 0.1rem .75rem;
+        }
+
+        .h2, h2 {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" style="page-break-after: always;width:1350px;padding:25px 0 0 0;">
+        #logo#
+        <br>
+
+        #refundbar#
+        <div class="row" style="padding:30px 0 20px 0;">
+            <div class="col-4 text-right" dir="rtl">
+                <div class="row mb-2">
+
+                    <div class="col-5"><h4> <strong> عداد الكيلو متر</strong>    :</h4></div>
+                    <div class="col-7"><h4>#checkliters#</h4></div>
+                </div>
+
+                <div class="row mb-2">
+
+                    <div class="col-5">  <h4><strong>رقم اللوحة</strong>    :</h4></div>
+                    <div class="col-7">  <h4>#noplate#</h4></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><h4> <strong>اسم الفني</strong>    :</h4></div>
+                    <div class="col-7"><h4>#worker#</h4></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><h4><strong>رقم الهيكل</strong>    :</h4></div>
+                    <div class="col-7"> <h4>#vinno#</h4></div>
+                </div>
+            </div>
+            <div class="col-4 text-right" dir="rtl">
+                <div class="row mb-2">
+                    <div class="col-5">  <h4><strong>ماركة المركبة</strong>    :</h4></div>
+                    <div class="col-7">  <h4>#carmake#</h4></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><h4> <strong>طراز المركبة</strong>    :</h4></div>
+                    <div class="col-7"><h4>#carmodel#</h4></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><h4><strong>سنة الصنع</strong>    :</h4> </div>
+                    <div class="col-7"><h4>#year#</h4> </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-5"><h4> <strong>رقم الجوال</strong>   :</h4></div>
+                    <div class="col-7" dir="rtl"><h4>#mobile#</h4></div>
+                </div>
+
+            </div>
+            <div class="col-4 text-right" dir="rtl">
+                <div class="row mb-1">
+
+                    <div class="col-5"><h4> <strong> رقم الفاتورة</strong>    :</h4></div>
+                    <div class="col-7"><h4>#transactionno#</h4></div>
+                </div>
+                <div class="row mb-2">
+
+                    <div class="col-5"><h4> <strong>تاريخ الفاتورة</strong>   :</h4></div>
+                    <div class="col-7"><h4>#orderdate#</h4></div>
+                </div>
+                <div class="row mb-2">
+
+                    <div class="col-5"><h4> <strong>الفرع</strong>   :</h4></div>
+                    <div class="col-7"><h4>#locationname#</h4></div>
+                </div>
+                <div class="row mb-2">
+
+                    <div class="col-5"><h4> <strong>اسم العميل</strong>   :</h4></div>
+                    <div class="col-7"><h4>#customername#</h4></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:#showchecklist#">
+            <div class="row" style="background:#eaeaea;margin-bottom:5px;">
+                <div class="col-6 text-left"><h4 style="padding:10px">I = فحص | R = تغيير | I/R = فحص / تغيير</h4></div>
+                <div class="col-6 text-right"><h2 style="padding:10px 0 10px 0;">قائمة الفحوصات</h2></div>
+            </div>
+
+            <table class="table table-padd" dir="rtl" style="padding:30px 0 20px 0;">
+
+                <tbody style="padding:10px">
+                    #checklist#
+                </tbody>
+            </table>
+        </div>
+        <table class="table " dir="rtl" style="padding:30px 0 15px 0;">
+            <thead style="background-color:#eaeaea !important;">
+                <tr>
+                    <td><h2 style="margin:0px">الصنف</h2></td>
+                    <td><h2 class="text-center" style="margin:0px">الكمية</h2></td>
+                    <td><h2 class="text-left" style="margin:0px">السعر</h2></td>
+                </tr>
+            </thead>
+            <tbody style="background:#f9f9f9; padding:10px">
+                #items#
+            </tbody>
+        </table>
+        <div class="row" style="padding:10px 0;">
+            <div class="col-5">
+                <div class="row " dir="ltr" style="padding:0 20px;">
+                    <div class="col-4" style="padding:10px 0;">
+                        <h4> <strong>#total# SR</strong></h4>
+                    </div>
+                    <div class="col-8  text-right" style="padding:10px 0;">
+                        <h4>(Sub Total) المجموع</h4>
+                    </div>
+
+                </div>
+                <div class="row" style=" padding:0 20px;">
+
+                    <div class="col-4" style="padding:10px 0;">
+                        <h4> <strong>#discount# SR</strong></h4>
+                    </div>
+                    <div class="col-8 text-right" style="padding:10px 0;">
+                        <h4>(Discount) خصم</h4>
+                    </div>
+                </div>
+                <div class="row" style="padding:0 20px;">
+
+                    <div class="col-4" style="padding:10px 0;">
+                        <h4>  <strong>#tax# SR</strong></h4>
+                    </div>
+                    <div class="col-8 text-right" style="padding:10px 0;">
+                        <h4>(VAT) ضريبة القيمة المضافة</h4>
+                    </div>
+                </div>
+
+                <div class="row" style="background-color:#ffb509; padding:0 20px;">
+
+                    <div class="col-4" style="padding:10px 0;">
+                        <h4> <strong>#subtotal# SR</strong></h4>
+                    </div>
+                    <div class="col-8 text-right" style="padding:10px 0;">
+                        <h4>(Grand Total)  الاجمالي</h4>
+                    </div>
+                </div>
+                <div class="row d-flex" style=" padding:0 20px;display:#ispartialreceived#">
+                    <div class="col-4" style="padding:10px 0;">
+                        <h4> <strong>#partialreceived# SR</strong></h4>
+                    </div>
+                    <div class="col-8 text-right" style="padding:10px 0;">
+                        <h4>(Partial Received) <br /> تم استلام المبلغ الجزئي</h4>
+                    </div>
+                </div>
+                #refundtotal#
+
+                <div class="row d-flex justify-content-center align-items-center" style=" padding:0 20px;align-items: center;">
+
+                    <div class="col-4 text-center" style="padding:10px 0;">
+                        <div id="qroutput"></div>
+                    </div>
+                    <div class="col-8 text-right">
+                        <h4>Scan for E-Reciept</h4>
+                        <h4>(مسح للفاتورة الالكترونية)</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 text-right">
+                <h4><strong>توقيع العميل</strong></h4>
+                <img width="400px" style="margin:auto; padding: 20px 0 10px 50px" src="#signature#" />
+            </div>
+            <div class="col-3 text-right">
+                <h4><strong>الرقم الضريبي</strong></h4>
+                <h4>VAT: #vatno#</h4>
+                <h4><strong>ملاحظة</strong></h4>
+                <h4>
+                    نتمني لكم قيادة امنة
+                </h4>
+
+                <h4>: <strong>العنوان</strong></h4>
+                <h4>#locationaddress# </h4>
+                <h4>: <strong>رقم التواصل</strong></h4>
+                <h4>#locationcontact#</h4>
+            </div>
+
+        </div>
+        <div class="text-right">
+            #carimages#
+
+        </div>
+        <div id="footer">
+            <div class="row p-2 mt-4" style="background:#ddd">
+                <div class="col-12 text-center">
+                    <h4>#socialmedia#</h4>
+                </div>
+            </div>
+            <div class="row p-2 mt-2">
+                <div class="col-12">
+                    <h4 style="text-align:center">#footernotes#</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GarageCustomerAPI</RootNamespace>
     <AssemblyName>GarageCustomerAPI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44359</IISExpressSSLPort>
@@ -180,6 +180,7 @@
     <Content Include="Global.asax" />
     <Content Include="Template\CustomerLetterV3.txt" />
     <Content Include="Template\email.png" />
+    <Content Include="Template\HtmlPage1.html" />
     <Content Include="Template\ig.png" />
     <Content Include="Template\jquery.qrcode.min.js" />
     <Content Include="Template\web.png" />
@@ -254,6 +255,7 @@
     <Content Include="Template\letterfont\FrutigerLTArabic-55Roman.ttf" />
     <Content Include="Template\letterfont\FrutigerLTArabic-65Bold.ttf" />
     <Content Include="Template\letterfont\FrutigerLTArabic-75Black.ttf" />
+    <Content Include="Upload\OrderLetters\314732-638006574128486119.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
