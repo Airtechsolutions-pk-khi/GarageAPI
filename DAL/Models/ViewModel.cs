@@ -640,15 +640,25 @@ namespace DAL.Models
         public int? LocationID { get; set; }
         public bool? IsEmail { get; set; }
         public bool? IsSMS { get; set; }
-        public float? Points { get; set; }
+        public string City { get; set; }
     }
     public class LoginResponse
     {
         public Customers Customer { get; set; }
         public List<Cars> CarList { get; set; }
+        public List<CarSellList> CarFavourites { get; set; }
         public List<NotificationBLL> Notifications { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
+    }
+    public class CarFavouriteList
+    {
+        public int CarFavouriteID { get; set; }
+        public Nullable<int> CarSellID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<System.DateTime> LastUpdatedDate { get; set; }
+        public string LastUpdatedBy { get; set; }
     }
     public class SettingRsp
     {
@@ -714,11 +724,12 @@ namespace DAL.Models
         public string RegistrationNoP4 { get; set; }
         public int UserID { get; set; }
         public int? StatusID { get; set; }
+        public bool? IsFavourite { get; set; }
 
         public List<OrdersList> Orders = new List<OrdersList>();
     }
 
-    public class CarSell
+    public class CarSellList
     {
         public int CarSellID { get; set; }
         public int? CustomerID { get; set; }
@@ -747,7 +758,7 @@ namespace DAL.Models
         public int? StatusID { get; set; }
         public string CreatedDate { get; set; }
         public string Image { get; set; }
-        public List<CarSellImage> CarSellImages { get; set; }
+        public List<CarSellImageList> CarSellImages { get; set; }
         //public List<Feature> CarSellFeatures { get; set; }
         public List<CarSellFeatureList> CarSellFeatures { get; set; }
 
@@ -756,9 +767,9 @@ namespace DAL.Models
 
     public class CarSellRsp:Rsp
     {
-        public List<CarSell> CarSellList { get; set; }
+        public List<CarSellList> CarSellList { get; set; }
         public List<CountryList> CountryList { get; set; }
-        public List<Feature> Features { get; set; }
+        public List<FeatureList> Features { get; set; }
     }
     public class CarSellInsertRsp
     {
@@ -788,14 +799,14 @@ namespace DAL.Models
         public string CountryCode { get; set; }
         public string District { get; set; }
     }
-    public class Feature
+    public class FeatureList
     {
         public int FeatureID { get; set; }
         public string Name { get; set; }
         public string ArabicName { get; set; }
         public string Image { get; set; }
     }
-    public class CarSellImage
+    public class CarSellImageList
     {
         public int ID { get; set; }
         public int? CarSellID { get; set; }

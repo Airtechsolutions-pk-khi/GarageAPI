@@ -16,9 +16,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using WebAPICode.Helpers;
-
-using System.Net.Http.Formatting;
-
+using DAL.DBEntities2;
+using System.Security.Cryptography;
 
 namespace BAL.Repositories
 {
@@ -43,11 +42,11 @@ namespace BAL.Repositories
             try
             {
                 var ds = await GetInfo();
-                var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSell>>().ToList();
+                var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
 
                 var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
 
-                var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImage>>().ToList();
+                var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
 
                 var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
 
@@ -55,7 +54,7 @@ namespace BAL.Repositories
 
                 //var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
 
-                var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
+                var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
 
                 foreach (var i in _dtCarSellInfo)
                 {
@@ -125,7 +124,7 @@ namespace BAL.Repositories
             }
             return result;
         }
-        public CarSellInsertRsp InsertCarSell(CarSell carSell)
+        public CarSellInsertRsp InsertCarSell(CarSellList carSell)
         {
             var dsc = 0;
             CarSellImage carimg = new CarSellImage();
@@ -204,7 +203,28 @@ namespace BAL.Repositories
             }
             return rsp;
         }
+        public Rsp InsertCarFavourite(CarFavouriteList obj)
+        {
+            var rsp = new Rsp();
+            try
+            {
+              var  dsc = InsertCarFav(obj);
+                return new Rsp
+                {
+                    Status = 1,
+                    Description = "Success"
+                };
 
+            }
+            catch { }
+
+            return  new Rsp
+            {
+                Status = 0,
+                Description="Failed"
+            };
+
+        }
         public string UploadImage(string image, string folderName)
         {
             try
@@ -297,7 +317,7 @@ namespace BAL.Repositories
             return rsp;
         }
 
-        public int InsertCar(CarSell carSell)
+        public int InsertCar(CarSellList carSell)
         {
             try
             {
@@ -346,7 +366,26 @@ namespace BAL.Repositories
                 return 0;
             }
         }
+        public int InsertCarFav(CarFavouriteList obj)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[5];
+                p[0] = new SqlParameter("@CarSellID", obj.CarSellID);
+                p[1] = new SqlParameter("@CustomerID", obj.CustomerID);
+                p[2] = new SqlParameter("@StatusID", obj.StatusID);
+                p[3] = new SqlParameter("@LastUpdatedBy", "Admin");
+                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow.AddMinutes(180));
 
+                (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarFav_CAPI", p);
+               
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         public int ap_EditCar(Cars cars, bool iseditimage)
         {
             try

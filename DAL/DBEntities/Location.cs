@@ -72,6 +72,8 @@ namespace DAL.DBEntities
         public string Gmaplink { get; set; }
         public string ImageURL { get; set; }
         public Nullable<bool> IsFeatured { get; set; }
+        public string ArabicName { get; set; }
+        public string Currency { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bay> Bays { get; set; }

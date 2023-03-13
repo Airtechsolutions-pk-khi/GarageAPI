@@ -82,6 +82,9 @@
     <Compile Include="DBEntities2\Amenity.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities2\CarFavourite.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\CarSell.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
@@ -222,6 +225,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\CompanyQuotationDetail.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ComplianceDevice.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Country.cs">
@@ -408,6 +414,9 @@
     <Compile Include="DBEntities\Supplier.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sysdiagram.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\TimeZone.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -415,6 +424,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\User.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\ZatcaAuthentication.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\ZohoChartOfAccount.cs">

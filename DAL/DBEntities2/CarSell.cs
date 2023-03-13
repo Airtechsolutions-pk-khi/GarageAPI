@@ -17,6 +17,7 @@ namespace DAL.DBEntities2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarSell()
         {
+            this.CarFavourites = new HashSet<CarFavourite>();
             this.CarSellImages = new HashSet<CarSellImage>();
         }
     
@@ -48,6 +49,8 @@ namespace DAL.DBEntities2
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarFavourite> CarFavourites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarSellImage> CarSellImages { get; set; }
     }

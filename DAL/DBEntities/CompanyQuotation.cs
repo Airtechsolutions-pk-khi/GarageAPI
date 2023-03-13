@@ -42,6 +42,7 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
         public string Notes { get; set; }
+        public string Terms { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

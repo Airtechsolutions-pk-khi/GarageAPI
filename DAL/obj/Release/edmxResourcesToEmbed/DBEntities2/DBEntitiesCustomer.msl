@@ -305,6 +305,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CarFavourites">
+      <EntityTypeMapping TypeName="GarageCustomer_UATModel.CarFavourite">
+        <MappingFragment StoreEntitySet="CarFavourite">
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
+          <ScalarProperty Name="CarFavouriteID" ColumnName="CarFavouriteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CarSells">
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.CarSell">
         <MappingFragment StoreEntitySet="CarSell">

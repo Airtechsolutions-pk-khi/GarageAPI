@@ -75,6 +75,7 @@
       <Parameter Name="Name" Mode="In" Type="String" />
       <Parameter Name="Image" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="ArabicName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_InsertCarSell" ReturnType="Collection(Decimal)">
       <Parameter Name="Name" Mode="In" Type="String" />
@@ -109,6 +110,7 @@
     </FunctionImport>
     <FunctionImport Name="sp_InsertLandmark">
       <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="ArabicName" Mode="In" Type="String" />
       <Parameter Name="Image" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -119,6 +121,8 @@
       <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
       <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="ArabicServiceTitle" Mode="In" Type="String" />
+      <Parameter Name="ArabicServiceDescription" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_InsertSetting">
       <Parameter Name="Title" Mode="In" Type="String" />
@@ -128,6 +132,8 @@
       <Parameter Name="Type" Mode="In" Type="String" />
       <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="ArabicTitle" Mode="In" Type="String" />
+      <Parameter Name="ArabicDescription" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_renamediagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -139,10 +145,12 @@
       <Parameter Name="Name" Mode="In" Type="String" />
       <Parameter Name="Image" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="ArabicName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_updateLandmark_Admin">
       <Parameter Name="LandmarkID" Mode="In" Type="Int32" />
       <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="ArabicName" Mode="In" Type="String" />
       <Parameter Name="Image" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -150,6 +158,8 @@
       <Parameter Name="ServiceID" Mode="In" Type="Int32" />
       <Parameter Name="ServiceTitle" Mode="In" Type="String" />
       <Parameter Name="ServiceDescription" Mode="In" Type="String" />
+      <Parameter Name="ArabicServiceTitle" Mode="In" Type="String" />
+      <Parameter Name="ArabicServiceDescription" Mode="In" Type="String" />
       <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
       <Parameter Name="Image" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
@@ -164,9 +174,12 @@
       <Parameter Name="Type" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
       <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
+      <Parameter Name="ArabicTitle" Mode="In" Type="String" />
+      <Parameter Name="ArabicDescription" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="Amenities" EntityType="GarageCustomer_UATModel.Amenity" />
+    <EntitySet Name="CarFavourites" EntityType="GarageCustomer_UATModel.CarFavourite" />
     <EntitySet Name="CarSells" EntityType="GarageCustomer_UATModel.CarSell" />
     <EntitySet Name="CarSellImages" EntityType="GarageCustomer_UATModel.CarSellImage" />
     <EntitySet Name="Features" EntityType="GarageCustomer_UATModel.Feature" />
@@ -178,6 +191,10 @@
     <EntitySet Name="Services" EntityType="GarageCustomer_UATModel.Service" />
     <EntitySet Name="Settings" EntityType="GarageCustomer_UATModel.Setting" />
     <EntitySet Name="sysdiagrams" EntityType="GarageCustomer_UATModel.sysdiagram" />
+    <AssociationSet Name="FK_CarFavourite_CarSell" Association="GarageCustomer_UATModel.FK_CarFavourite_CarSell">
+      <End Role="CarSell" EntitySet="CarSells" />
+      <End Role="CarFavourite" EntitySet="CarFavourites" />
+    </AssociationSet>
     <AssociationSet Name="FK_CarSellImage_CarSell" Association="GarageCustomer_UATModel.FK_CarSellImage_CarSell">
       <End Role="CarSell" EntitySet="CarSells" />
       <End Role="CarSellImage" EntitySet="CarSellImages" />
@@ -401,6 +418,18 @@
     <Property Name="StatusID" Type="Int32" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="CarFavourite">
+    <Key>
+      <PropertyRef Name="CarFavouriteID" />
+    </Key>
+    <Property Name="CarFavouriteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarSellID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarSell" Relationship="GarageCustomer_UATModel.FK_CarFavourite_CarSell" FromRole="CarFavourite" ToRole="CarSell" />
+  </EntityType>
   <EntityType Name="CarSell">
     <Key>
       <PropertyRef Name="CarSellID" />
@@ -432,6 +461,7 @@
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CarFavourites" Relationship="GarageCustomer_UATModel.FK_CarFavourite_CarSell" FromRole="CarSell" ToRole="CarFavourite" />
     <NavigationProperty Name="CarSellImages" Relationship="GarageCustomer_UATModel.FK_CarSellImage_CarSell" FromRole="CarSell" ToRole="CarSellImage" />
   </EntityType>
   <EntityType Name="CarSellImage">
@@ -556,6 +586,18 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
+  <Association Name="FK_CarFavourite_CarSell">
+    <End Type="GarageCustomer_UATModel.CarSell" Role="CarSell" Multiplicity="0..1" />
+    <End Type="GarageCustomer_UATModel.CarFavourite" Role="CarFavourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarSell">
+        <PropertyRef Name="CarSellID" />
+      </Principal>
+      <Dependent Role="CarFavourite">
+        <PropertyRef Name="CarSellID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CarSellImage_CarSell">
     <End Type="GarageCustomer_UATModel.CarSell" Role="CarSell" Multiplicity="0..1" />
     <End Type="GarageCustomer_UATModel.CarSellImage" Role="CarSellImage" Multiplicity="*" />

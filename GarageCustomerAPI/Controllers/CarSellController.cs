@@ -1,5 +1,6 @@
 ﻿using BAL.Repositories;
 using DAL.DBEntities;
+using DAL.DBEntities2;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,16 @@ namespace GarageCustomerAPI.Controllers
         }
 
         [Route("sell/car")]
-        public CarSellInsertRsp AddCar(CarSell carSell)
+        public CarSellInsertRsp AddCar(CarSellList carSell)
         {
             return carSellRepo.InsertCarSell(carSell);
         }
 
+        [Route("favourite/car")]
+        public Rsp FavouriteCar(CarFavouriteList obj)
+        {
+            return carSellRepo.InsertCarFavourite(obj);
+        }
 
     }
 }

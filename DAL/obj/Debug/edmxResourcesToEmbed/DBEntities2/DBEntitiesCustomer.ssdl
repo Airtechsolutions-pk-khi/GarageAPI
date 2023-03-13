@@ -10,6 +10,17 @@
     <Property Name="StatusID" Type="int" />
     <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="CarFavourite">
+    <Key>
+      <PropertyRef Name="CarFavouriteID" />
+    </Key>
+    <Property Name="CarFavouriteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarSellID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="LastUpdatedDate" Type="datetime" />
+    <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="CarSell">
     <Key>
       <PropertyRef Name="CarSellID" />
@@ -169,6 +180,18 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_CarFavourite_CarSell">
+    <End Role="CarSell" Type="Self.CarSell" Multiplicity="0..1" />
+    <End Role="CarFavourite" Type="Self.CarFavourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarSell">
+        <PropertyRef Name="CarSellID" />
+      </Principal>
+      <Dependent Role="CarFavourite">
+        <PropertyRef Name="CarSellID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CarSellImage_CarSell">
     <End Role="CarSell" Type="Self.CarSell" Multiplicity="0..1" />
     <End Role="CarSellImage" Type="Self.CarSellImage" Multiplicity="*" />
@@ -256,6 +279,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
     <Parameter Name="Image" Type="varchar(max)" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="ArabicName" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_InsertCarSell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
@@ -290,6 +314,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
   </Function>
   <Function Name="sp_InsertLandmark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicName" Type="nvarchar" Mode="In" />
     <Parameter Name="Image" Type="varchar(max)" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
   </Function>
@@ -300,6 +325,8 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="DisplayOrder" Type="int" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicServiceTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicServiceDescription" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_InsertSetting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Title" Type="nvarchar" Mode="In" />
@@ -309,6 +336,8 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
     <Parameter Name="DisplayOrder" Type="int" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="ArabicTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicDescription" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -320,10 +349,12 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
     <Parameter Name="Image" Type="varchar(max)" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="ArabicName" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_updateLandmark_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LandmarkID" Type="int" Mode="In" />
     <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicName" Type="nvarchar" Mode="In" />
     <Parameter Name="Image" Type="varchar(max)" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
   </Function>
@@ -331,6 +362,8 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="ServiceID" Type="int" Mode="In" />
     <Parameter Name="ServiceTitle" Type="nvarchar" Mode="In" />
     <Parameter Name="ServiceDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ArabicServiceTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicServiceDescription" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="DisplayOrder" Type="int" Mode="In" />
     <Parameter Name="Image" Type="varchar(max)" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
@@ -345,10 +378,13 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
     <Parameter Name="DisplayOrder" Type="int" Mode="In" />
+    <Parameter Name="ArabicTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="ArabicDescription" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="GarageCustomer_UATModelStoreContainer">
     <EntitySet Name="Amenities" EntityType="Self.Amenities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarFavourite" EntityType="Self.CarFavourite" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarSell" EntityType="Self.CarSell" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarSellImage" EntityType="Self.CarSellImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
@@ -360,6 +396,10 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CarFavourite_CarSell" Association="Self.FK_CarFavourite_CarSell">
+      <End Role="CarSell" EntitySet="CarSell" />
+      <End Role="CarFavourite" EntitySet="CarFavourite" />
+    </AssociationSet>
     <AssociationSet Name="FK_CarSellImage_CarSell" Association="Self.FK_CarSellImage_CarSell">
       <End Role="CarSell" EntitySet="CarSell" />
       <End Role="CarSellImage" EntitySet="CarSellImage" />

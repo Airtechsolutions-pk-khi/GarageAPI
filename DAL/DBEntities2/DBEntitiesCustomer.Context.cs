@@ -28,6 +28,7 @@ namespace DAL.DBEntities2
         }
     
         public virtual DbSet<Amenity> Amenities { get; set; }
+        public virtual DbSet<CarFavourite> CarFavourites { get; set; }
         public virtual DbSet<CarSell> CarSells { get; set; }
         public virtual DbSet<CarSellImage> CarSellImages { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
@@ -276,7 +277,7 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual int sp_InsertAmenities(string name, string image, Nullable<int> statusID)
+        public virtual int sp_InsertAmenities(string name, string image, Nullable<int> statusID, string arabicName)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
@@ -290,7 +291,11 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", statusID) :
                 new ObjectParameter("StatusID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAmenities", nameParameter, imageParameter, statusIDParameter);
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAmenities", nameParameter, imageParameter, statusIDParameter, arabicNameParameter);
         }
     
         public virtual ObjectResult<Nullable<decimal>> sp_InsertCarSell(string name, string description, string registrationNo, string bodyType, string fuelType, string engineType, string year, Nullable<int> customerID, Nullable<int> makeID, Nullable<int> modelID, string transmition, string kilometer, Nullable<double> price, Nullable<bool> isInspected, Nullable<int> cityID, string address, Nullable<int> carSellAddID, string bodyColor, string assembly, Nullable<int> statusID, Nullable<System.DateTime> createdDate, Nullable<int> createdBy)
@@ -408,11 +413,15 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertCarSellImages_CAPI", imageParameter);
         }
     
-        public virtual int sp_InsertLandmark(string name, string image, Nullable<int> statusID)
+        public virtual int sp_InsertLandmark(string name, string arabicName, string image, Nullable<int> statusID)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
                 new ObjectParameter("Name", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
     
             var imageParameter = image != null ?
                 new ObjectParameter("Image", image) :
@@ -422,10 +431,10 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", statusID) :
                 new ObjectParameter("StatusID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertLandmark", nameParameter, imageParameter, statusIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertLandmark", nameParameter, arabicNameParameter, imageParameter, statusIDParameter);
         }
     
-        public virtual int sp_InsertService(string serviceTitle, string serviceDescription, string image, Nullable<int> displayOrder, Nullable<int> statusID, string type)
+        public virtual int sp_InsertService(string serviceTitle, string serviceDescription, string image, Nullable<int> displayOrder, Nullable<int> statusID, string type, string arabicServiceTitle, string arabicServiceDescription)
         {
             var serviceTitleParameter = serviceTitle != null ?
                 new ObjectParameter("ServiceTitle", serviceTitle) :
@@ -451,10 +460,18 @@ namespace DAL.DBEntities2
                 new ObjectParameter("Type", type) :
                 new ObjectParameter("Type", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertService", serviceTitleParameter, serviceDescriptionParameter, imageParameter, displayOrderParameter, statusIDParameter, typeParameter);
+            var arabicServiceTitleParameter = arabicServiceTitle != null ?
+                new ObjectParameter("ArabicServiceTitle", arabicServiceTitle) :
+                new ObjectParameter("ArabicServiceTitle", typeof(string));
+    
+            var arabicServiceDescriptionParameter = arabicServiceDescription != null ?
+                new ObjectParameter("ArabicServiceDescription", arabicServiceDescription) :
+                new ObjectParameter("ArabicServiceDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertService", serviceTitleParameter, serviceDescriptionParameter, imageParameter, displayOrderParameter, statusIDParameter, typeParameter, arabicServiceTitleParameter, arabicServiceDescriptionParameter);
         }
     
-        public virtual int sp_InsertSetting(string title, string description, string image, string pageName, string type, Nullable<int> displayOrder, Nullable<int> statusID)
+        public virtual int sp_InsertSetting(string title, string description, string image, string pageName, string type, Nullable<int> displayOrder, Nullable<int> statusID, string arabicTitle, string arabicDescription)
         {
             var titleParameter = title != null ?
                 new ObjectParameter("Title", title) :
@@ -484,7 +501,15 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", statusID) :
                 new ObjectParameter("StatusID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertSetting", titleParameter, descriptionParameter, imageParameter, pageNameParameter, typeParameter, displayOrderParameter, statusIDParameter);
+            var arabicTitleParameter = arabicTitle != null ?
+                new ObjectParameter("ArabicTitle", arabicTitle) :
+                new ObjectParameter("ArabicTitle", typeof(string));
+    
+            var arabicDescriptionParameter = arabicDescription != null ?
+                new ObjectParameter("ArabicDescription", arabicDescription) :
+                new ObjectParameter("ArabicDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertSetting", titleParameter, descriptionParameter, imageParameter, pageNameParameter, typeParameter, displayOrderParameter, statusIDParameter, arabicTitleParameter, arabicDescriptionParameter);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
@@ -504,7 +529,7 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
         }
     
-        public virtual int sp_updateAmenities_Admin(Nullable<int> amenitiesID, string name, string image, Nullable<int> statusID)
+        public virtual int sp_updateAmenities_Admin(Nullable<int> amenitiesID, string name, string image, Nullable<int> statusID, string arabicName)
         {
             var amenitiesIDParameter = amenitiesID.HasValue ?
                 new ObjectParameter("AmenitiesID", amenitiesID) :
@@ -522,10 +547,14 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", statusID) :
                 new ObjectParameter("StatusID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateAmenities_Admin", amenitiesIDParameter, nameParameter, imageParameter, statusIDParameter);
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateAmenities_Admin", amenitiesIDParameter, nameParameter, imageParameter, statusIDParameter, arabicNameParameter);
         }
     
-        public virtual int sp_updateLandmark_Admin(Nullable<int> landmarkID, string name, string image, Nullable<int> statusID)
+        public virtual int sp_updateLandmark_Admin(Nullable<int> landmarkID, string name, string arabicName, string image, Nullable<int> statusID)
         {
             var landmarkIDParameter = landmarkID.HasValue ?
                 new ObjectParameter("LandmarkID", landmarkID) :
@@ -535,6 +564,10 @@ namespace DAL.DBEntities2
                 new ObjectParameter("Name", name) :
                 new ObjectParameter("Name", typeof(string));
     
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
             var imageParameter = image != null ?
                 new ObjectParameter("Image", image) :
                 new ObjectParameter("Image", typeof(string));
@@ -543,10 +576,10 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", statusID) :
                 new ObjectParameter("StatusID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateLandmark_Admin", landmarkIDParameter, nameParameter, imageParameter, statusIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateLandmark_Admin", landmarkIDParameter, nameParameter, arabicNameParameter, imageParameter, statusIDParameter);
         }
     
-        public virtual int sp_updateService_Admin(Nullable<int> serviceID, string serviceTitle, string serviceDescription, Nullable<int> displayOrder, string image, Nullable<int> statusID, string type)
+        public virtual int sp_updateService_Admin(Nullable<int> serviceID, string serviceTitle, string serviceDescription, string arabicServiceTitle, string arabicServiceDescription, Nullable<int> displayOrder, string image, Nullable<int> statusID, string type)
         {
             var serviceIDParameter = serviceID.HasValue ?
                 new ObjectParameter("ServiceID", serviceID) :
@@ -559,6 +592,14 @@ namespace DAL.DBEntities2
             var serviceDescriptionParameter = serviceDescription != null ?
                 new ObjectParameter("ServiceDescription", serviceDescription) :
                 new ObjectParameter("ServiceDescription", typeof(string));
+    
+            var arabicServiceTitleParameter = arabicServiceTitle != null ?
+                new ObjectParameter("ArabicServiceTitle", arabicServiceTitle) :
+                new ObjectParameter("ArabicServiceTitle", typeof(string));
+    
+            var arabicServiceDescriptionParameter = arabicServiceDescription != null ?
+                new ObjectParameter("ArabicServiceDescription", arabicServiceDescription) :
+                new ObjectParameter("ArabicServiceDescription", typeof(string));
     
             var displayOrderParameter = displayOrder.HasValue ?
                 new ObjectParameter("DisplayOrder", displayOrder) :
@@ -576,10 +617,10 @@ namespace DAL.DBEntities2
                 new ObjectParameter("Type", type) :
                 new ObjectParameter("Type", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateService_Admin", serviceIDParameter, serviceTitleParameter, serviceDescriptionParameter, displayOrderParameter, imageParameter, statusIDParameter, typeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateService_Admin", serviceIDParameter, serviceTitleParameter, serviceDescriptionParameter, arabicServiceTitleParameter, arabicServiceDescriptionParameter, displayOrderParameter, imageParameter, statusIDParameter, typeParameter);
         }
     
-        public virtual int sp_updateSetting_Admin(Nullable<int> iD, string title, string description, string image, string pageName, string type, Nullable<int> statusID, Nullable<int> displayOrder)
+        public virtual int sp_updateSetting_Admin(Nullable<int> iD, string title, string description, string image, string pageName, string type, Nullable<int> statusID, Nullable<int> displayOrder, string arabicTitle, string arabicDescription)
         {
             var iDParameter = iD.HasValue ?
                 new ObjectParameter("ID", iD) :
@@ -613,7 +654,15 @@ namespace DAL.DBEntities2
                 new ObjectParameter("DisplayOrder", displayOrder) :
                 new ObjectParameter("DisplayOrder", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateSetting_Admin", iDParameter, titleParameter, descriptionParameter, imageParameter, pageNameParameter, typeParameter, statusIDParameter, displayOrderParameter);
+            var arabicTitleParameter = arabicTitle != null ?
+                new ObjectParameter("ArabicTitle", arabicTitle) :
+                new ObjectParameter("ArabicTitle", typeof(string));
+    
+            var arabicDescriptionParameter = arabicDescription != null ?
+                new ObjectParameter("ArabicDescription", arabicDescription) :
+                new ObjectParameter("ArabicDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateSetting_Admin", iDParameter, titleParameter, descriptionParameter, imageParameter, pageNameParameter, typeParameter, statusIDParameter, displayOrderParameter, arabicTitleParameter, arabicDescriptionParameter);
         }
     
         public virtual int sp_upgraddiagrams()

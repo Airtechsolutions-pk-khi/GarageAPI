@@ -42,6 +42,7 @@ namespace DAL.DBEntities
         public virtual DbSet<CompanyInvoiceDetail> CompanyInvoiceDetails { get; set; }
         public virtual DbSet<CompanyQuotation> CompanyQuotations { get; set; }
         public virtual DbSet<CompanyQuotationDetail> CompanyQuotationDetails { get; set; }
+        public virtual DbSet<ComplianceDevice> ComplianceDevices { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<CreditCustomer> CreditCustomers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -97,9 +98,11 @@ namespace DAL.DBEntities
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<SubUser> SubUsers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TimeZone> TimeZones { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ZatcaAuthentication> ZatcaAuthentications { get; set; }
         public virtual DbSet<ZohoChartOfAccount> ZohoChartOfAccounts { get; set; }
         public virtual DbSet<ZohoCOAMapping> ZohoCOAMappings { get; set; }
         public virtual DbSet<ZohoSetting> ZohoSettings { get; set; }

@@ -7,23 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.DBEntities
+namespace DAL.DBEntities2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ZohoChartOfAccount
+    public partial class CarFavourite
     {
-        public int ChartOfAccountsID { get; set; }
-        public string account_id { get; set; }
-        public string account_name { get; set; }
-        public string account_type { get; set; }
-        public string AccountTypeZoho { get; set; }
-        public string is_active { get; set; }
-        public int UserID { get; set; }
-        public string LastUpdatedBy { get; set; }
+        public int CarFavouriteID { get; set; }
+        public Nullable<int> CarSellID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
+        public Nullable<int> StatusID { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
+        public string LastUpdatedBy { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual CarSell CarSell { get; set; }
     }
 }

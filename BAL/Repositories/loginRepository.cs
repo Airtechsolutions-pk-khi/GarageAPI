@@ -40,13 +40,16 @@ namespace BAL.Repositories
             {
                 Phone = Phone.StartsWith("966") ? "+" + Phone : Phone;
                 var ds = GetLoginInfo(Phone);
-                var _dsCustomerInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Customers>>().FirstOrDefault();
+                var _dsCustomerInfo = ds.Tables[0] == null ? new Customers() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Customers>>().FirstOrDefault();
                 var _dsCarInfo = ds.Tables[1] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<Cars>>();
                 var _dsOrders = ds.Tables[2] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OrdersList>>();
                 var _dsOrderdetail = ds.Tables[3] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OItemsList>>();
                 var _dsOrderdetailPkg = ds.Tables[4] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<OPackageDetailList>>();
                 var _dsordercheckoutdetail = ds.Tables[5] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CheckoutDetailsOrder>>();
                 var _dsNotifications = ds.Tables[6] == null ? new List<NotificationBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<NotificationBLL>>();
+                var _dtCarSellInfo = ds.Tables[7] == null ? new List<CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<CarSellList>>().ToList();
+                var _dtCSImageInfo = ds.Tables[8] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<CarSellImageList>>().ToList();
+                var _dtFeatureInfo = ds.Tables[9] == null ? new List<DAL.Models.CarSellFeatureList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<CarSellFeatureList>>().ToList();
 
                 rsp.Notifications = _dsNotifications;
                 rsp.Customer = _dsCustomerInfo;
@@ -95,9 +98,23 @@ namespace BAL.Repositories
                             j.CardType = "";
                         }
                     }
-
-
                 }
+                foreach (var i in _dtCarSellInfo)
+                {
+                    i.CreatedDate = DateParse(i.CreatedDate.ToString());
+                    i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellImages)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
+                    }
+                    i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
+                    i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellFeatures)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    }
+                }
+                rsp.CarFavourites = _dtCarSellInfo;
                 rsp.Status = 1;
                 rsp.Description = "Login Successfully";
             }
@@ -156,7 +173,7 @@ namespace BAL.Repositories
             try
             {
 
-                SqlParameter[] p = new SqlParameter[14];
+                SqlParameter[] p = new SqlParameter[15];
                 p[0] = new SqlParameter("@FullName", obj.FullName);
                 p[1] = new SqlParameter("@Password", obj.Password);
                 p[2] = new SqlParameter("@Email", obj.Email);
@@ -171,6 +188,7 @@ namespace BAL.Repositories
                 p[11] = new SqlParameter("@CreatedOn", DateTime.UtcNow);
                 p[12] = new SqlParameter("@CreatedBy", "CustomerAPP");
                 p[13] = new SqlParameter("@CustomerID", obj.CustomerID);
+                p[14] = new SqlParameter("@City", obj.City);
                 return (new DBHelperPOS().GetTableFromSP)("sp_UpdateCustomer_CAPI", p);
 
             }
