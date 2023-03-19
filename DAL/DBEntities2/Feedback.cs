@@ -7,17 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.DBEntities
+namespace DAL.DBEntities2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Feedback
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int FeedbackID { get; set; }
+        public string About { get; set; }
+        public string Topic { get; set; }
+        public string Details { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> CustomerID { get; set; }
     }
 }

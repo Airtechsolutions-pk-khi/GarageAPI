@@ -110,7 +110,13 @@
     <Compile Include="DBEntities2\Feature.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities2\Feedback.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\Landmark.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities2\LocationJunc.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\Notification.cs">
@@ -412,9 +418,6 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Supplier.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\sysdiagram.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\TimeZone.cs">

@@ -28,6 +28,7 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public int LocationID { get; set; }
+        public string Currency { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual SubUser SubUser { get; set; }

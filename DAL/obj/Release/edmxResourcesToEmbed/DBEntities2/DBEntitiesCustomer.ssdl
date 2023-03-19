@@ -79,6 +79,19 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="StatusID" Type="int" />
   </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="FeedbackID" />
+    </Key>
+    <Property Name="FeedbackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="About" Type="nvarchar" MaxLength="100" />
+    <Property Name="Topic" Type="nvarchar" MaxLength="100" />
+    <Property Name="Details" Type="nvarchar" MaxLength="500" />
+    <Property Name="StatusID" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CustomerID" Type="int" />
+  </EntityType>
   <EntityType Name="Landmark">
     <Key>
       <PropertyRef Name="LandmarkID" />
@@ -88,6 +101,15 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Property Name="ArabicName" Type="nvarchar" MaxLength="100" />
     <Property Name="Image" Type="nvarchar(max)" />
     <Property Name="StatusID" Type="int" />
+  </EntityType>
+  <EntityType Name="LocationJunc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SettingID" Type="int" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="LastUpdatedDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Notifications">
     <Key>
@@ -140,6 +162,9 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Property Name="LastUpdatedDate" Type="datetime" />
     <Property Name="LocationID" Type="int" />
     <Property Name="Date" Type="datetime" />
+    <Property Name="LikeCount" Type="int" />
+    <Property Name="DislikeCount" Type="int" />
+    <Property Name="ReportAbuse" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Service">
     <Key>
@@ -164,7 +189,8 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Property Name="ArabicTitle" Type="nvarchar" MaxLength="150" />
     <Property Name="Description" Type="nvarchar" MaxLength="500" />
     <Property Name="ArabicDescription" Type="nvarchar" MaxLength="500" />
-    <Property Name="Image" Type="nvarchar" MaxLength="500" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="AlternateImage" Type="nvarchar(max)" />
     <Property Name="PageName" Type="nvarchar" MaxLength="150" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
     <Property Name="DisplayOrder" Type="int" />
@@ -201,6 +227,18 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
       </Principal>
       <Dependent Role="CarSellImage">
         <PropertyRef Name="CarSellID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocationJunc_Setting1">
+    <End Role="Setting" Type="Self.Setting" Multiplicity="0..1" />
+    <End Role="LocationJunc" Type="Self.LocationJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Setting">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LocationJunc">
+        <PropertyRef Name="SettingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -331,7 +369,8 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
   <Function Name="sp_InsertSetting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Title" Type="nvarchar" Mode="In" />
     <Parameter Name="Description" Type="nvarchar" Mode="In" />
-    <Parameter Name="Image" Type="nvarchar" Mode="In" />
+    <Parameter Name="Image" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="AlternateImage" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="PageName" Type="nvarchar" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
     <Parameter Name="DisplayOrder" Type="int" Mode="In" />
@@ -373,8 +412,9 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="Title" Type="nvarchar" Mode="In" />
     <Parameter Name="Description" Type="nvarchar" Mode="In" />
-    <Parameter Name="Image" Type="nvarchar" Mode="In" />
-    <Parameter Name="PageName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Image" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="AlternateImage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PageName" Type="nvarchar" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
     <Parameter Name="DisplayOrder" Type="int" Mode="In" />
@@ -388,7 +428,9 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <EntitySet Name="CarSell" EntityType="Self.CarSell" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarSellImage" EntityType="Self.CarSellImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Landmark" EntityType="Self.Landmark" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationJunc" EntityType="Self.LocationJunc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Offer" EntityType="Self.Offer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PushToken" EntityType="Self.PushToken" Schema="dbo" store:Type="Tables" />
@@ -403,6 +445,10 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
     <AssociationSet Name="FK_CarSellImage_CarSell" Association="Self.FK_CarSellImage_CarSell">
       <End Role="CarSell" EntitySet="CarSell" />
       <End Role="CarSellImage" EntitySet="CarSellImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocationJunc_Setting1" Association="Self.FK_LocationJunc_Setting1">
+      <End Role="Setting" EntitySet="Setting" />
+      <End Role="LocationJunc" EntitySet="LocationJunc" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

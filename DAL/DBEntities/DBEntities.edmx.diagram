@@ -4,86 +4,85 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5d86852bb2514c12aef618fabb905f7c" Name="Diagram1">
-        <EntityTypeShape EntityType="Garage_UATModel.AppSource" Width="1.5" PointX="8.25" PointY="120.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.Bay" Width="1.5" PointX="15.5" PointY="167.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.CarInspection" Width="1.5" PointX="8.25" PointY="108.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.CarInspectionDetail" Width="1.5" PointX="10.5" PointY="108.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.CarNote" Width="1.5" PointX="23" PointY="130.125" />
-        <EntityTypeShape EntityType="Garage_UATModel.CarNotesImage" Width="1.5" PointX="25.25" PointY="133.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.Car" Width="1.5" PointX="16.25" PointY="114" />
-        <EntityTypeShape EntityType="Garage_UATModel.Category" Width="1.5" PointX="3" PointY="110.25" />
+      <Diagram DiagramId="5d86852bb2514c12aef618fabb905f7c" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Garage_UATModel.AppSource" Width="1.5" PointX="11.25" PointY="119.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.Bay" Width="1.5" PointX="16.5" PointY="146" />
+        <EntityTypeShape EntityType="Garage_UATModel.CarInspection" Width="1.5" PointX="11.25" PointY="100.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.CarInspectionDetail" Width="1.5" PointX="13.5" PointY="100.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.CarNote" Width="1.5" PointX="27.75" PointY="119.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.CarNotesImage" Width="1.5" PointX="30" PointY="127.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.Car" Width="1.5" PointX="17.25" PointY="114" />
+        <EntityTypeShape EntityType="Garage_UATModel.Category" Width="1.5" PointX="3" PointY="115.25" />
         <EntityTypeShape EntityType="Garage_UATModel.City" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Garage_UATModel.Company" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.CompanyClient" Width="1.5" PointX="8.25" PointY="127.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.CompanyInvoice" Width="1.5" PointX="8.25" PointY="144.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.CompanyInvoiceDetail" Width="1.5" PointX="10.5" PointY="145.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.CompanyQuotation" Width="1.5" PointX="8.25" PointY="98" />
-        <EntityTypeShape EntityType="Garage_UATModel.CompanyQuotationDetail" Width="1.5" PointX="10.5" PointY="99" />
+        <EntityTypeShape EntityType="Garage_UATModel.CompanyClient" Width="1.5" PointX="11.25" PointY="140.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.CompanyInvoice" Width="1.5" PointX="11.25" PointY="144.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.CompanyInvoiceDetail" Width="1.5" PointX="13.5" PointY="145.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.CompanyQuotation" Width="1.5" PointX="11.25" PointY="123" />
+        <EntityTypeShape EntityType="Garage_UATModel.CompanyQuotationDetail" Width="1.5" PointX="13.5" PointY="124.125" />
         <EntityTypeShape EntityType="Garage_UATModel.ComplianceDevice" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.Country" Width="1.5" PointX="11" PointY="130.125" />
-        <EntityTypeShape EntityType="Garage_UATModel.CreditCustomer" Width="1.5" PointX="8.25" PointY="104.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.Customer" Width="1.5" PointX="14" PointY="140.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.Discount" Width="1.5" PointX="15.5" PointY="171.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.DiscountItem" Width="1.5" PointX="10.5" PointY="113.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.Country" Width="1.5" PointX="12" PointY="109.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.CreditCustomer" Width="1.5" PointX="11.25" PointY="115.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.Customer" Width="1.5" PointX="15" PointY="91.5" />
+        <EntityTypeShape EntityType="Garage_UATModel.Discount" Width="1.5" PointX="16.5" PointY="170.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.DiscountItem" Width="1.5" PointX="5.25" PointY="110.75" />
         <EntityTypeShape EntityType="Garage_UATModel.ImageLocation" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.Integration" Width="1.5" PointX="8.25" PointY="131.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.IntegrationActivation" Width="1.5" PointX="8.25" PointY="91.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_Bill" Width="1.5" PointX="17.75" PointY="126.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_BillDetail" Width="1.5" PointX="23" PointY="125.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_PurchaseOrder" Width="1.5" PointX="15.5" PointY="127.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_PurchaseOrderDetail" Width="1.5" PointX="20.75" PointY="127.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_Reconciliation" Width="1.5" PointX="20.75" PointY="112.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_ReconciliationDetail" Width="1.5" PointX="26" PointY="117.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_Stock" Width="1.5" PointX="26.75" PointY="111.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_StockIssue" Width="1.5" PointX="29" PointY="116.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_StockIssueDetail" Width="1.5" PointX="12.75" PointY="125.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_StockRequest" Width="1.5" PointX="20.75" PointY="117.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_StockRequestDetail" Width="1.5" PointX="23" PointY="120" />
-        <EntityTypeShape EntityType="Garage_UATModel.inv_StockStore" Width="1.5" PointX="28.75" PointY="132.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.Inventory" Width="1.5" PointX="18.5" PointY="133.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.Item" Width="1.5" PointX="10.5" PointY="118" />
-        <EntityTypeShape EntityType="Garage_UATModel.License" Width="1.5" PointX="3" PointY="115.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.LocationAmenitiesJunc" Width="1.5" PointX="15.5" PointY="152.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.LocationImage" Width="1.5" PointX="15.5" PointY="109" />
-        <EntityTypeShape EntityType="Garage_UATModel.Location" Width="1.5" PointX="13.25" PointY="110.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.LocationServiceJunc" Width="1.5" PointX="15.5" PointY="158.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.Make" Width="1.5" PointX="14" PointY="98.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.Model" Width="1.5" PointX="14" PointY="103.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.Modifier" Width="1.5" PointX="18.5" PointY="121" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrderCheckout" Width="1.5" PointX="29" PointY="122.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrderCheckoutDetail" Width="1.5" PointX="31.25" PointY="127.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrderDetail" Width="1.5" PointX="26" PointY="126" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrderDetail_FM" Width="1.5" PointX="20.75" PointY="122.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrderDetailPackage" Width="1.5" PointX="31.25" PointY="118.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrderInspectionMapping" Width="1.5" PointX="32" PointY="123.125" />
-        <EntityTypeShape EntityType="Garage_UATModel.Order" Width="1.5" PointX="20.75" PointY="134.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.OrdersChecklist" Width="1.5" PointX="23" PointY="152.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.PackageDetail" Width="1.5" PointX="25.75" PointY="121.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.Package" Width="1.5" PointX="18.5" PointY="114.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.PaymentDetail" Width="1.5" PointX="23" PointY="157.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.Integration" Width="1.5" PointX="11.25" PointY="129.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.IntegrationActivation" Width="1.5" PointX="11.25" PointY="97.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_Bill" Width="1.5" PointX="18.75" PointY="124.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_BillDetail" Width="1.5" PointX="24" PointY="126.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_PurchaseOrder" Width="1.5" PointX="16.5" PointY="104.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_PurchaseOrderDetail" Width="1.5" PointX="24.75" PointY="119.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_Reconciliation" Width="1.5" PointX="21.75" PointY="136.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_ReconciliationDetail" Width="1.5" PointX="27" PointY="131.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_Stock" Width="1.5" PointX="18.75" PointY="139.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_StockIssue" Width="1.5" PointX="24" PointY="136.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_StockIssueDetail" Width="1.5" PointX="13.75" PointY="129.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_StockRequest" Width="1.5" PointX="18.75" PointY="134.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_StockRequestDetail" Width="1.5" PointX="24" PointY="131.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.inv_StockStore" Width="1.5" PointX="26.75" PointY="136.5" />
+        <EntityTypeShape EntityType="Garage_UATModel.Inventory" Width="1.5" PointX="19.5" PointY="104.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.Item" Width="1.5" PointX="7.5" PointY="124.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.License" Width="1.5" PointX="6" PointY="115.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.LocationAmenitiesJunc" Width="1.5" PointX="16.5" PointY="121.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.LocationImage" Width="1.5" PointX="16.5" PointY="98.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.Location" Width="1.5" PointX="14.25" PointY="109.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.LocationServiceJunc" Width="1.5" PointX="16.5" PointY="156.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.Make" Width="1.5" PointX="15" PointY="86.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.Model" Width="1.5" PointX="15" PointY="80.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.Modifier" Width="1.5" PointX="22.5" PointY="114.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrderCheckout" Width="1.5" PointX="30.75" PointY="117.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrderCheckoutDetail" Width="1.5" PointX="33" PointY="119.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrderDetail" Width="1.5" PointX="26.75" PointY="124.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrderDetail_FM" Width="1.5" PointX="24.75" PointY="114.5" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrderDetailPackage" Width="1.5" PointX="33" PointY="126.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrderInspectionMapping" Width="1.5" PointX="24.75" PointY="110.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.Order" Width="1.5" PointX="21.5" PointY="124.875" />
+        <EntityTypeShape EntityType="Garage_UATModel.OrdersChecklist" Width="1.5" PointX="23.75" PointY="147.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.PackageDetail" Width="1.5" PointX="21.75" PointY="120.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.Package" Width="1.5" PointX="19.5" PointY="115.625" />
+        <EntityTypeShape EntityType="Garage_UATModel.PaymentDetail" Width="1.5" PointX="23.75" PointY="143.375" />
         <EntityTypeShape EntityType="Garage_UATModel.PaymentMode" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.Receipt" Width="1.5" PointX="15.5" PointY="161.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.Receipt" Width="1.5" PointX="16.5" PointY="164.75" />
         <EntityTypeShape EntityType="Garage_UATModel.ReportLog" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.Role_Forms" Width="1.5" PointX="8.25" PointY="86" />
-        <EntityTypeShape EntityType="Garage_UATModel.Role_Group" Width="1.5" PointX="8.25" PointY="94.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.Role_GroupForms" Width="1.5" PointX="10.5" PointY="94.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.SalesItem" Width="1.5" PointX="15.5" PointY="137" />
-        <EntityTypeShape EntityType="Garage_UATModel.SalesSetting" Width="1.5" PointX="15.5" PointY="155" />
-        <EntityTypeShape EntityType="Garage_UATModel.SessionInfo" Width="1.5" PointX="23.75" PointY="112.25" />
-        <EntityTypeShape EntityType="Garage_UATModel.Status" Width="1.5" PointX="0.75" PointY="115.625" />
-        <EntityTypeShape EntityType="Garage_UATModel.Store" Width="1.5" PointX="15.5" PointY="121.5" />
-        <EntityTypeShape EntityType="Garage_UATModel.SubCategory" Width="1.5" PointX="8.25" PointY="113.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.SubUser" Width="1.5" PointX="18.5" PointY="104.875" />
-        <EntityTypeShape EntityType="Garage_UATModel.Supplier" Width="1.5" PointX="8.25" PointY="139.125" />
-        <EntityTypeShape EntityType="Garage_UATModel.sysdiagram" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.TimeZone" Width="1.5" PointX="3.75" PointY="120.125" />
-        <EntityTypeShape EntityType="Garage_UATModel.Unit" Width="1.5" PointX="8.25" PointY="151.375" />
-        <EntityTypeShape EntityType="Garage_UATModel.User" Width="1.5" PointX="6" PointY="111.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.Role_Forms" Width="1.5" PointX="11.25" PointY="151.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.Role_Group" Width="1.5" PointX="11.25" PointY="137.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.Role_GroupForms" Width="1.5" PointX="13.5" PointY="137.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.SalesItem" Width="1.5" PointX="16.5" PointY="150" />
+        <EntityTypeShape EntityType="Garage_UATModel.SalesSetting" Width="1.5" PointX="16.5" PointY="153" />
+        <EntityTypeShape EntityType="Garage_UATModel.SessionInfo" Width="1.5" PointX="19.5" PointY="110.25" />
+        <EntityTypeShape EntityType="Garage_UATModel.Status" Width="1.5" PointX="0.75" PointY="115.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.Store" Width="1.5" PointX="16.5" PointY="159.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.SubCategory" Width="1.5" PointX="5.25" PointY="120.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.SubUser" Width="1.5" PointX="16.5" PointY="125.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.Supplier" Width="1.5" PointX="11.25" PointY="91.5" />
+        <EntityTypeShape EntityType="Garage_UATModel.TimeZone" Width="1.5" PointX="6.75" PointY="107.125" />
+        <EntityTypeShape EntityType="Garage_UATModel.Unit" Width="1.5" PointX="5.25" PointY="126.375" />
+        <EntityTypeShape EntityType="Garage_UATModel.User" Width="1.5" PointX="9" PointY="111.875" />
         <EntityTypeShape EntityType="Garage_UATModel.ZatcaAuthentication" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.ZohoChartOfAccount" Width="1.5" PointX="8.25" PointY="123.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.ZohoChartOfAccount" Width="1.5" PointX="11.25" PointY="104.875" />
         <EntityTypeShape EntityType="Garage_UATModel.ZohoCOAMapping" Width="1.5" PointX="6.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Garage_UATModel.ZohoSetting" Width="1.5" PointX="8.25" PointY="134.75" />
+        <EntityTypeShape EntityType="Garage_UATModel.ZohoSetting" Width="1.5" PointX="11.25" PointY="133" />
         <AssociationConnector Association="Garage_UATModel.FK_AppSource_Users" />
         <AssociationConnector Association="Garage_UATModel.FK_Bay_Locations" />
         <AssociationConnector Association="Garage_UATModel.FK_Orders_Bay" />

@@ -128,6 +128,7 @@
       <Parameter Name="Title" Mode="In" Type="String" />
       <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="AlternateImage" Mode="In" Type="String" />
       <Parameter Name="PageName" Mode="In" Type="String" />
       <Parameter Name="Type" Mode="In" Type="String" />
       <Parameter Name="DisplayOrder" Mode="In" Type="Int32" />
@@ -170,6 +171,7 @@
       <Parameter Name="Title" Mode="In" Type="String" />
       <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="Image" Mode="In" Type="String" />
+      <Parameter Name="AlternateImage" Mode="In" Type="String" />
       <Parameter Name="PageName" Mode="In" Type="String" />
       <Parameter Name="Type" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
@@ -178,19 +180,21 @@
       <Parameter Name="ArabicDescription" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="sysdiagrams" EntityType="GarageCustomer_UATModel.sysdiagram" />
     <EntitySet Name="Amenities" EntityType="GarageCustomer_UATModel.Amenity" />
     <EntitySet Name="CarFavourites" EntityType="GarageCustomer_UATModel.CarFavourite" />
     <EntitySet Name="CarSells" EntityType="GarageCustomer_UATModel.CarSell" />
     <EntitySet Name="CarSellImages" EntityType="GarageCustomer_UATModel.CarSellImage" />
     <EntitySet Name="Features" EntityType="GarageCustomer_UATModel.Feature" />
+    <EntitySet Name="Feedbacks" EntityType="GarageCustomer_UATModel.Feedback" />
     <EntitySet Name="Landmarks" EntityType="GarageCustomer_UATModel.Landmark" />
+    <EntitySet Name="LocationJuncs" EntityType="GarageCustomer_UATModel.LocationJunc" />
     <EntitySet Name="Notifications" EntityType="GarageCustomer_UATModel.Notification" />
     <EntitySet Name="Offers" EntityType="GarageCustomer_UATModel.Offer" />
     <EntitySet Name="PushTokens" EntityType="GarageCustomer_UATModel.PushToken" />
     <EntitySet Name="Reviews" EntityType="GarageCustomer_UATModel.Review" />
     <EntitySet Name="Services" EntityType="GarageCustomer_UATModel.Service" />
     <EntitySet Name="Settings" EntityType="GarageCustomer_UATModel.Setting" />
-    <EntitySet Name="sysdiagrams" EntityType="GarageCustomer_UATModel.sysdiagram" />
     <AssociationSet Name="FK_CarFavourite_CarSell" Association="GarageCustomer_UATModel.FK_CarFavourite_CarSell">
       <End Role="CarSell" EntitySet="CarSells" />
       <End Role="CarFavourite" EntitySet="CarFavourites" />
@@ -198,6 +202,10 @@
     <AssociationSet Name="FK_CarSellImage_CarSell" Association="GarageCustomer_UATModel.FK_CarSellImage_CarSell">
       <End Role="CarSell" EntitySet="CarSells" />
       <End Role="CarSellImage" EntitySet="CarSellImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LocationJunc_Setting1" Association="GarageCustomer_UATModel.FK_LocationJunc_Setting1">
+      <End Role="Setting" EntitySet="Settings" />
+      <End Role="LocationJunc" EntitySet="LocationJuncs" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_CheckCarSellNoPlate_Result">
@@ -408,6 +416,16 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="Amenity">
     <Key>
       <PropertyRef Name="AmenitiesID" />
@@ -485,6 +503,19 @@
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
   </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="FeedbackID" />
+    </Key>
+    <Property Name="FeedbackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="About" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CustomerID" Type="Int32" />
+  </EntityType>
   <EntityType Name="Landmark">
     <Key>
       <PropertyRef Name="LandmarkID" />
@@ -494,6 +525,16 @@
     <Property Name="ArabicName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="LocationJunc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SettingID" Type="Int32" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Setting" Relationship="GarageCustomer_UATModel.FK_LocationJunc_Setting1" FromRole="LocationJunc" ToRole="Setting" />
   </EntityType>
   <EntityType Name="Notification">
     <Key>
@@ -546,6 +587,9 @@
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="LocationID" Type="Int32" />
     <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="LikeCount" Type="Int32" />
+    <Property Name="DislikeCount" Type="Int32" />
+    <Property Name="ReportAbuse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Service">
     <Key>
@@ -570,21 +614,13 @@
     <Property Name="ArabicTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AlternateImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="PageName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DisplayOrder" Type="Int32" />
     <Property Name="StatusID" Type="Int32" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="LocationJuncs" Relationship="GarageCustomer_UATModel.FK_LocationJunc_Setting1" FromRole="Setting" ToRole="LocationJunc" />
   </EntityType>
   <Association Name="FK_CarFavourite_CarSell">
     <End Type="GarageCustomer_UATModel.CarSell" Role="CarSell" Multiplicity="0..1" />
@@ -607,6 +643,18 @@
       </Principal>
       <Dependent Role="CarSellImage">
         <PropertyRef Name="CarSellID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LocationJunc_Setting1">
+    <End Type="GarageCustomer_UATModel.Setting" Role="Setting" Multiplicity="0..1" />
+    <End Type="GarageCustomer_UATModel.LocationJunc" Role="LocationJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Setting">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LocationJunc">
+        <PropertyRef Name="SettingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

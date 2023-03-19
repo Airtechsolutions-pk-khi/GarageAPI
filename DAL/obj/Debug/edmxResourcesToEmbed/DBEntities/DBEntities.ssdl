@@ -722,7 +722,9 @@
     <Property Name="RowID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Descripiton" Type="nvarchar" MaxLength="500" />
-    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="ArabicDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="ArabicAddress" Type="nvarchar" MaxLength="500" />
     <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="500" />
     <Property Name="TimeZoneID" Type="int" />
@@ -750,6 +752,9 @@
     <Property Name="IsFeatured" Type="bit" />
     <Property Name="ArabicName" Type="nvarchar" MaxLength="250" />
     <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+    <Property Name="VATNO" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tax" Type="float" />
+    <Property Name="AllowNegativeInventory" Type="bit" />
   </EntityType>
   <EntityType Name="LocationServiceJunc">
     <Key>
@@ -1182,6 +1187,7 @@
     <Property Name="CreatedOn" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
     <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Status">
     <Key>
@@ -1287,16 +1293,6 @@
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
     <Property Name="UserID" Type="int" />
     <Property Name="Type" Type="nvarchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TimeZone">
     <Key>
@@ -3035,7 +3031,6 @@
     <EntitySet Name="SubUserLocations" EntityType="Self.SubUserLocations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubUsers" EntityType="Self.SubUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TimeZone" EntityType="Self.TimeZone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />

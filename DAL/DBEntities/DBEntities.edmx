@@ -727,7 +727,9 @@
           <Property Name="RowID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Descripiton" Type="nvarchar" MaxLength="500" />
-          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="ArabicDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="ArabicAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="500" />
           <Property Name="TimeZoneID" Type="int" />
@@ -755,6 +757,9 @@
           <Property Name="IsFeatured" Type="bit" />
           <Property Name="ArabicName" Type="nvarchar" MaxLength="250" />
           <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+          <Property Name="VATNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tax" Type="float" />
+          <Property Name="AllowNegativeInventory" Type="bit" />
         </EntityType>
         <EntityType Name="LocationServiceJunc">
           <Key>
@@ -1187,6 +1192,7 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -1292,16 +1298,6 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="UserID" Type="int" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TimeZone">
           <Key>
@@ -3040,7 +3036,6 @@
           <EntitySet Name="SubUserLocations" EntityType="Self.SubUserLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubUsers" EntityType="Self.SubUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeZone" EntityType="Self.TimeZone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -3648,7 +3643,6 @@
           <EntitySet Name="SubCategories" EntityType="Garage_UATModel.SubCategory" />
           <EntitySet Name="SubUsers" EntityType="Garage_UATModel.SubUser" />
           <EntitySet Name="Suppliers" EntityType="Garage_UATModel.Supplier" />
-          <EntitySet Name="sysdiagrams" EntityType="Garage_UATModel.sysdiagram" />
           <EntitySet Name="TimeZones" EntityType="Garage_UATModel.TimeZone" />
           <EntitySet Name="Units" EntityType="Garage_UATModel.Unit" />
           <EntitySet Name="Users" EntityType="Garage_UATModel.User" />
@@ -4995,7 +4989,9 @@
           <Property Name="RowID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Descripiton" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TimeZoneID" Type="Int32" />
@@ -5023,6 +5019,9 @@
           <Property Name="IsFeatured" Type="Boolean" />
           <Property Name="ArabicName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VATNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tax" Type="Double" />
+          <Property Name="AllowNegativeInventory" Type="Boolean" />
           <NavigationProperty Name="Bays" Relationship="Garage_UATModel.FK_Bay_Locations" FromRole="Location" ToRole="Bay" />
           <NavigationProperty Name="CarNotes" Relationship="Garage_UATModel.FK_CarNotes_Locations" FromRole="Location" ToRole="CarNote" />
           <NavigationProperty Name="Categories" Relationship="Garage_UATModel.FK_Category_Locations" FromRole="Location" ToRole="Category" />
@@ -5538,6 +5537,7 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Location" Relationship="Garage_UATModel.FK_SessionInfo_Locations" FromRole="SessionInfo" ToRole="Location" />
           <NavigationProperty Name="SubUser" Relationship="Garage_UATModel.FK_SessionInfo_SubUsers" FromRole="SessionInfo" ToRole="SubUser" />
         </EntityType>
@@ -5673,16 +5673,6 @@
           <NavigationProperty Name="inv_PurchaseOrder" Relationship="Garage_UATModel.FK_PurchaseOrder_Supplier" FromRole="Supplier" ToRole="inv_PurchaseOrder" />
           <NavigationProperty Name="Inventories" Relationship="Garage_UATModel.FK_Inventory_Supplier" FromRole="Supplier" ToRole="Inventory" />
           <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_Supplier_Users" FromRole="Supplier" ToRole="User" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TimeZone">
           <Key>
@@ -8122,6 +8112,9 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="Garage_UATModel.Location">
               <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="AllowNegativeInventory" ColumnName="AllowNegativeInventory" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="VATNO" ColumnName="VATNO" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
                 <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
@@ -8149,7 +8142,9 @@
                 <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="ArabicAddress" ColumnName="ArabicAddress" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
                 <ScalarProperty Name="Descripiton" ColumnName="Descripiton" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="RowID" ColumnName="RowID" />
@@ -8596,6 +8591,7 @@
           <EntitySetMapping Name="SessionInfoes">
             <EntityTypeMapping TypeName="Garage_UATModel.SessionInfo">
               <MappingFragment StoreEntitySet="SessionInfo">
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -8712,17 +8708,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Garage_UATModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -27,19 +27,21 @@ namespace DAL.DBEntities2
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Amenity> Amenities { get; set; }
         public virtual DbSet<CarFavourite> CarFavourites { get; set; }
         public virtual DbSet<CarSell> CarSells { get; set; }
         public virtual DbSet<CarSellImage> CarSellImages { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Landmark> Landmarks { get; set; }
+        public virtual DbSet<LocationJunc> LocationJuncs { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
         public virtual DbSet<PushToken> PushTokens { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -471,7 +473,7 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertService", serviceTitleParameter, serviceDescriptionParameter, imageParameter, displayOrderParameter, statusIDParameter, typeParameter, arabicServiceTitleParameter, arabicServiceDescriptionParameter);
         }
     
-        public virtual int sp_InsertSetting(string title, string description, string image, string pageName, string type, Nullable<int> displayOrder, Nullable<int> statusID, string arabicTitle, string arabicDescription)
+        public virtual int sp_InsertSetting(string title, string description, string image, string alternateImage, string pageName, string type, Nullable<int> displayOrder, Nullable<int> statusID, string arabicTitle, string arabicDescription)
         {
             var titleParameter = title != null ?
                 new ObjectParameter("Title", title) :
@@ -484,6 +486,10 @@ namespace DAL.DBEntities2
             var imageParameter = image != null ?
                 new ObjectParameter("Image", image) :
                 new ObjectParameter("Image", typeof(string));
+    
+            var alternateImageParameter = alternateImage != null ?
+                new ObjectParameter("AlternateImage", alternateImage) :
+                new ObjectParameter("AlternateImage", typeof(string));
     
             var pageNameParameter = pageName != null ?
                 new ObjectParameter("PageName", pageName) :
@@ -509,7 +515,7 @@ namespace DAL.DBEntities2
                 new ObjectParameter("ArabicDescription", arabicDescription) :
                 new ObjectParameter("ArabicDescription", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertSetting", titleParameter, descriptionParameter, imageParameter, pageNameParameter, typeParameter, displayOrderParameter, statusIDParameter, arabicTitleParameter, arabicDescriptionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertSetting", titleParameter, descriptionParameter, imageParameter, alternateImageParameter, pageNameParameter, typeParameter, displayOrderParameter, statusIDParameter, arabicTitleParameter, arabicDescriptionParameter);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
@@ -620,7 +626,7 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateService_Admin", serviceIDParameter, serviceTitleParameter, serviceDescriptionParameter, arabicServiceTitleParameter, arabicServiceDescriptionParameter, displayOrderParameter, imageParameter, statusIDParameter, typeParameter);
         }
     
-        public virtual int sp_updateSetting_Admin(Nullable<int> iD, string title, string description, string image, string pageName, string type, Nullable<int> statusID, Nullable<int> displayOrder, string arabicTitle, string arabicDescription)
+        public virtual int sp_updateSetting_Admin(Nullable<int> iD, string title, string description, string image, string alternateImage, string pageName, string type, Nullable<int> statusID, Nullable<int> displayOrder, string arabicTitle, string arabicDescription)
         {
             var iDParameter = iD.HasValue ?
                 new ObjectParameter("ID", iD) :
@@ -637,6 +643,10 @@ namespace DAL.DBEntities2
             var imageParameter = image != null ?
                 new ObjectParameter("Image", image) :
                 new ObjectParameter("Image", typeof(string));
+    
+            var alternateImageParameter = alternateImage != null ?
+                new ObjectParameter("AlternateImage", alternateImage) :
+                new ObjectParameter("AlternateImage", typeof(string));
     
             var pageNameParameter = pageName != null ?
                 new ObjectParameter("PageName", pageName) :
@@ -662,7 +672,7 @@ namespace DAL.DBEntities2
                 new ObjectParameter("ArabicDescription", arabicDescription) :
                 new ObjectParameter("ArabicDescription", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateSetting_Admin", iDParameter, titleParameter, descriptionParameter, imageParameter, pageNameParameter, typeParameter, statusIDParameter, displayOrderParameter, arabicTitleParameter, arabicDescriptionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateSetting_Admin", iDParameter, titleParameter, descriptionParameter, imageParameter, alternateImageParameter, pageNameParameter, typeParameter, statusIDParameter, displayOrderParameter, arabicTitleParameter, arabicDescriptionParameter);
         }
     
         public virtual int sp_upgraddiagrams()

@@ -1,4 +1,5 @@
 ﻿
+using DAL.DBEntities;
 using DAL.DBEntities2;
 using DAL.Models;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
@@ -29,16 +31,16 @@ namespace BAL.Repositories
         {
             DBContext = contextDB;
         }
-        public SettingRsp GetSettings()
+        public SettingRsp GetSettings(int LocationID)
         {
 
             var rsp = new SettingRsp();
             try
             {
-                var ds = GetInfo();
+                var ds = GetInfo(LocationID);
                 var _dtLocationInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
                 var _dtServiceInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
-                var _dtLocImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<LocationImage>>().ToList();
+                var _dtLocImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<LocationImages>>().ToList();
                 var _dtSettingInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<SettingBLL>>().ToList();
                 var _dtAmenitiesInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtReviewsInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
@@ -46,6 +48,7 @@ namespace BAL.Repositories
                 var _dtServiceInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<ServiceBLL>>().ToList();
                 var _dtAminitiesInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtLandmarks = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<LandmarkBLL>>().ToList();
+                var _dtSettingLocation = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<LocationJunc>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfoAll;
@@ -55,6 +58,7 @@ namespace BAL.Repositories
 
                 foreach (var j in rsp.Settings)
                 {
+                    j.Locations = _dtSettingLocation.Where(x => x.SettingID == j.ID).ToList();
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                 }
                 foreach (var j in rsp.Landmarks)
@@ -74,7 +78,7 @@ namespace BAL.Repositories
                     var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime));
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime));
 
-                    if (opening>closing)
+                    if (opening > closing)
                     {
                         i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
                         i.CloseTime = DateParse(DateTime.UtcNow.AddDays(1).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
@@ -84,7 +88,7 @@ namespace BAL.Repositories
                         i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
                         i.CloseTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
                     }
-                    
+
                     i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -109,7 +113,13 @@ namespace BAL.Repositories
                         j.ToDate = DateParse(j.ToDate);
                     }
                     i.Reviews = _dtReviewsInfo.Where(x => x.LocationID == i.LocationID).ToList();
-                   
+
+                    var rating1 = i.Reviews.Where(x => x.RateVal >= 4 && x.RateVal < 5).Count();
+                    var rating2 = i.Reviews.Where(x => x.RateVal >= 3 && x.RateVal < 4).Count();
+                    var rating3 = i.Reviews.Where(x => x.RateVal >= 2 && x.RateVal < 3).Count();
+                    var rating4 = i.Reviews.Where(x => x.RateVal >= 1 && x.RateVal < 2).Count();
+                    var rating5 = i.Reviews.Where(x => x.RateVal >= 0 && x.RateVal < 1).Count();
+                    i.ReviewCountDetails = new int[5] { rating1, rating2, rating3, rating4, rating5 };
                     foreach (var j in i.Reviews)
                     {
                         j.Date = DateParse(j.Date);
@@ -154,13 +164,14 @@ namespace BAL.Repositories
             return rsp;
 
         }
-        public DataSet GetInfo()
+        public DataSet GetInfo(int LocationID)
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[1];
-                p[0] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
-                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocations_CAPI", p);
+                SqlParameter[] p = new SqlParameter[2];
+                p[0] = new SqlParameter("@LocationID", LocationID == 0 ? null : LocationID.ToString());
+                p[1] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocationsV2_CAPI", p);
             }
             catch (Exception ex)
             {
@@ -187,7 +198,7 @@ namespace BAL.Repositories
             {
                 PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
                 token.StatusID = 1;
-                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID==1).Count();
+                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).Count();
                 if (chk == 0)
                 {
                     PushToken data = DBContext.PushTokens.Add(token);
@@ -213,9 +224,9 @@ namespace BAL.Repositories
             {
                 //PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
 
-                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID==1).FirstOrDefault();
-              
-                if (chk!=null)
+                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).FirstOrDefault();
+
+                if (chk != null)
                 {
                     chk.StatusID = obj.StatusID;
                     DBContext.PushTokens.Attach(chk);
@@ -243,7 +254,7 @@ namespace BAL.Repositories
             Rsp rsp;
             try
             {
-                var chk = DBContext.Notifications.Where(x => x.NotificationID== obj.NotificationID).FirstOrDefault();
+                var chk = DBContext.Notifications.Where(x => x.NotificationID == obj.NotificationID).FirstOrDefault();
 
                 if (chk != null)
                 {
@@ -265,6 +276,71 @@ namespace BAL.Repositories
                 rsp.Description = "Failed to update notification";
             }
             return rsp;
+        }
+        public Rsp AddFeedback(Feedback obj)
+        {
+            Rsp rsp;
+            try
+            {
+                //var chk = DBContext.Feedbacks.Where(x => x.FeedbackID == obj.FeedbackID).FirstOrDefault();
+
+                DBContext.Feedbacks.AddOrUpdate(obj);
+                DBContext.SaveChanges();
+
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Success;
+                rsp.Description = "Feedback Added";
+            }
+            catch (Exception ex)
+            {
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Exception;
+                rsp.Description = "Failed to add Feedback";
+            }
+            return rsp;
+        }
+
+        public Rsp AddReportReview(ReportReviewsBLL obj)
+        {
+            Rsp rsp = new Rsp();
+            try
+            {
+                var dt = AddReportReviewADO(obj);
+
+                if (dt == null)
+                {
+                    rsp.Status = 0;
+                    rsp.Description = "Failed To Report Review";
+                }
+                else
+                {
+                    rsp.Status = 1;
+                    rsp.Description = "Review Reported Successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed To Report Review";
+            }
+            return rsp;
+        }
+        public DataTable AddReportReviewADO(ReportReviewsBLL obj)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[5];
+                p[0] = new SqlParameter("@ReviewID", obj.ReviewID);
+                p[1] = new SqlParameter("@CustomerID", obj.CustomerID);
+                p[2] = new SqlParameter("@Reason", obj.Reason);
+                p[3] = new SqlParameter("@StatusID", 1);
+                p[4] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
+                return (new DBHelper().GetDatasetFromSP)("sp_InsertReportReview", p).Tables[0];
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

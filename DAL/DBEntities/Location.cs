@@ -46,7 +46,9 @@ namespace DAL.DBEntities
         public int RowID { get; set; }
         public string Name { get; set; }
         public string Descripiton { get; set; }
+        public string ArabicDescription { get; set; }
         public string Address { get; set; }
+        public string ArabicAddress { get; set; }
         public string ContactNo { get; set; }
         public string Email { get; set; }
         public Nullable<int> TimeZoneID { get; set; }
@@ -74,6 +76,9 @@ namespace DAL.DBEntities
         public Nullable<bool> IsFeatured { get; set; }
         public string ArabicName { get; set; }
         public string Currency { get; set; }
+        public string VATNO { get; set; }
+        public Nullable<double> Tax { get; set; }
+        public Nullable<bool> AllowNegativeInventory { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bay> Bays { get; set; }

@@ -1,5 +1,6 @@
 ﻿using DAL.DBEntities;
 using DAL.DBEntities2;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,6 @@ namespace DAL.Models
         public Cars cars { get; set; }
     }
 
-
     public class RspSetting : Rsp
     {
         public List<LocationsBLL> Settings { get; set; }
@@ -58,15 +58,32 @@ namespace DAL.Models
         public string Image { get; set; }
 
     }
+    public class ReviewsUpdateBLL
+    { }
+    public class ReportReviewsBLL
+    {
+        public int? ReviewID { get; set; }
+        public int? CustomerID { get; set; }
+        public int? @StatusID { get; set; }
+        public string Reason { get; set; }
+        public DateTime? Date { get; set; }
+    }
     public class ReviewsBLL
     {
         public int? ReviewID { get; set; }
         public string Name { get; set; }
         public string Message { get; set; }
         public string Rate { get; set; }
+
+        public double RateVal { get; set; }
         public string Date { get; set; }
         public string Image { get; set; }
         public int? LocationID { get; set; }
+        public int? StatusID { get; set; }
+        public int? LikeCount { get; set; }
+        public int? DislikeCount { get; set; }
+        public string ReportAbuse { get; set; }
+        public int? CustomerID { get; set; }
     }
     public class DiscountBLL
     {
@@ -291,7 +308,6 @@ namespace DAL.Models
     }
     public class Locations
     {
-
         public int LocationID { get; set; }
         public string BrandName { get; set; }
         public string BrandImage { get; set; }
@@ -300,6 +316,7 @@ namespace DAL.Models
         public string Description { get; set; }
         public string ArabicDescription { get; set; }
         public string Address { get; set; }
+        public string ArabicAddress { get; set; }
         public string ContactNo { get; set; }
         public string Email { get; set; }
         public string Longitude { get; set; }
@@ -311,8 +328,11 @@ namespace DAL.Models
         public int? LandmarkID { get; set; }
         public string GMapLink { get; set; }
         public bool? IsFeatured { get; set; }
+        //public float? ReviewAvgRating { get; set; }
+        public int ReviewCount { get; set; }
+        public int[] ReviewCountDetails { get; set; }
         public List<ServiceBLL> Services { get; set; }
-        public List<LocationImage> LocationImages { get; set; }
+        public List<LocationImages> LocationImages { get; set; }
         public List<AmenitiesBLL> Amenities { get; set; }
         public List<ReviewsBLL> Reviews { get; set; }
         public List<DiscountBLL> Discounts { get; set; }
@@ -328,7 +348,7 @@ namespace DAL.Models
         public Nullable<int> StatusId { get; set; }
         public string Type { get; set; }
     }
-    public class LocationImage
+    public class LocationImages
     {
         public int ImageID { get; set; }
         public string ImageURL { get; set; }
@@ -623,9 +643,11 @@ namespace DAL.Models
         public string Description { get; set; }
         public string ArabicDescription { get; set; }
         public string Image { get; set; }
+        public string AlternateImage { get; set; }
         public string PageName { get; set; }
         public string Type { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
+        public List<LocationJunc> Locations { get; set; }
     }
     public class Customers
     {
@@ -765,7 +787,7 @@ namespace DAL.Models
     }
 
 
-    public class CarSellRsp:Rsp
+    public class CarSellRsp : Rsp
     {
         public List<CarSellList> CarSellList { get; set; }
         public List<CountryList> CountryList { get; set; }
@@ -905,9 +927,9 @@ namespace DAL.Models
         public string Description { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string Image { get; set; }
-        public string Date{ get; set; }
+        public string Date { get; set; }
         public string Type { get; set; }
-        public bool? IsRead{ get; set; }
+        public bool? IsRead { get; set; }
         public Nullable<int> CustomerID { get; set; }
     }
     public class RspCarMake : Rsp

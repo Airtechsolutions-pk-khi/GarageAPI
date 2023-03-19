@@ -15,24 +15,58 @@ namespace GarageCustomerAPI.Controllers
 {
     [RoutePrefix("api")]
     public class SettingController : ApiController
-    {        
-        settingRepository settingRepo;      
+    {
+        /// <summary>
+        /// Settings
+        /// </summary>
+        settingRepository settingRepo;
+        /// <summary>
+        /// Settings
+        /// </summary>
         public SettingController()
-        {            
+        {
             settingRepo = new settingRepository(new GarageCustomer_Entities());
         }
-        
+
+        /// <summary>
+        /// - List Of Locations
+        /// - List Of Amenities
+        /// - List Of Services
+        /// - List Of Landmarks
+        /// </summary>
+        /// <returns></returns>
         [Route("setting/all")]
         public SettingRsp GetAll()
         {
-            return settingRepo.GetSettings();
+            return settingRepo.GetSettings(0);
         }
 
+        /// <summary>
+        /// - List Of Locations
+        /// - List Of Amenities
+        /// - List Of Services
+        /// - List Of Landmarks
+        /// </summary>
+        /// <returns></returns>
+        [Route("setting/all/{LocationID}")]
+        public SettingRsp GetLocation(int LocationID)
+        {
+            return settingRepo.GetSettings(LocationID);
+        }
+
+        /// <summary>
+        /// List of CarMake
+        /// </summary>
+        /// <returns></returns>
         [Route("setting/carmake")]
         public RspCarMake GetCarmake()
         {
             return settingRepo.GetCarMake();
         }
+
+        /// <summary>
+        /// Test Push Notification API
+        /// </summary>
         [HttpGet]
         [Route("push/android")]
         public void PushNotification()
@@ -83,6 +117,18 @@ namespace GarageCustomerAPI.Controllers
             {
                 string str = ex.Message;
             }
+        }
+
+        /// <summary>
+        /// FeedBack Add
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("setting/feedback/add")]
+        public Rsp PostFeedback(Feedback obj)
+        {
+            return settingRepo.AddFeedback(obj);
         }
     }
 }

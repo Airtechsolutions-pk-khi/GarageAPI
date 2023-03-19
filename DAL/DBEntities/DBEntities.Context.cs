@@ -98,7 +98,6 @@ namespace DAL.DBEntities
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<SubUser> SubUsers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TimeZone> TimeZones { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
