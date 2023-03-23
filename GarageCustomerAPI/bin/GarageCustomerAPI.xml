@@ -566,13 +566,6 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.LoginController.PostReportReview(DAL.Models.ReportReviewsBLL)">
-            <summary>
-            Report Review
-            </summary>
-            <param name="obj">(Status 1 for Active,3 for Delete)</param>
-            <returns></returns>
-        </member>
         <member name="F:GarageCustomerAPI.Controllers.CarController.carRepo">
             <summary>
             Cars
@@ -603,20 +596,6 @@
             </summary>
             <param name="orderid">Mandatory</param>
             <returns>A4 receipt</returns>
-        </member>
-        <member name="M:GarageCustomerAPI.Controllers.CarController.PostReview(DAL.Models.ReviewsBLL)">
-            <summary>
-            Add Review to Locations
-            </summary>
-            <param name="obj">(Status 1 for Active,3 for Delete)</param>
-            <returns></returns>
-        </member>
-        <member name="M:GarageCustomerAPI.Controllers.CarController.PostReviewUpdate(DAL.Models.ReviewsBLL)">
-            <summary>
-            Update Review to Locations
-            </summary>
-            <param name="obj">(Status 1 for Active,3 for Delete) \n Add Like/Dislike Count to existing value</param>
-            <returns></returns>
         </member>
         <member name="F:GarageCustomerAPI.Controllers.SettingController.settingRepo">
             <summary>
@@ -652,7 +631,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.PushNotification">
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.PushNotification(System.String)">
             <summary>
             Test Push Notification API
             </summary>
@@ -662,6 +641,27 @@
             FeedBack Add
             </summary>
             <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostReview(DAL.Models.ReviewsBLL)">
+            <summary>
+            Add Review to Locations
+            </summary>
+            <param name="obj">(Status 1 for Active,3 for Delete)</param>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostReviewUpdate(DAL.Models.ReviewsBLL)">
+            <summary>
+            Update Review to Locations
+            </summary>
+            <param name="obj">- Status 1 for Active,3 for Delete \n Add Like/Dislike Count to existing value</param>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostReportReview(DAL.Models.ReportReviewsBLL)">
+            <summary>
+            Report Review
+            </summary>
+            <param name="obj">- Status 1 for Active,3 for Delete \n - LikeValue\DisLikeValue (0 for no action, 1 new action and -1 for update action) on like dislike action </param>
             <returns></returns>
         </member>
     </members>

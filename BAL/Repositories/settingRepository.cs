@@ -49,6 +49,7 @@ namespace BAL.Repositories
                 var _dtAminitiesInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtLandmarks = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<LandmarkBLL>>().ToList();
                 var _dtSettingLocation = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<LocationJunc>>().ToList();
+                var _dtReviewCustomer = ds.Tables[11] == null?new List<ReportReviewsBLL>(): JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<ReportReviewsBLL>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfoAll;
@@ -122,6 +123,7 @@ namespace BAL.Repositories
                     i.ReviewCountDetails = new int[5] { rating1, rating2, rating3, rating4, rating5 };
                     foreach (var j in i.Reviews)
                     {
+                        j.Customers =_dtReviewCustomer.Where(x => x.ReviewID == j.ReviewID).ToList();
                         j.Date = DateParse(j.Date);
                     }
                 }
@@ -329,18 +331,132 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[5];
+                SqlParameter[] p = new SqlParameter[9];
                 p[0] = new SqlParameter("@ReviewID", obj.ReviewID);
                 p[1] = new SqlParameter("@CustomerID", obj.CustomerID);
                 p[2] = new SqlParameter("@Reason", obj.Reason);
-                p[3] = new SqlParameter("@StatusID", 1);
-                p[4] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
+                p[3] = new SqlParameter("@LikeStatus", obj.LikeStatus);
+                p[4] = new SqlParameter("@StatusID", 1);
+                p[5] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
+                p[6] = new SqlParameter("@ReportReveiwID", obj.ReportReveiwID);
+                p[7] = new SqlParameter("@LikeValue", obj.LikeValue);
+                p[8] = new SqlParameter("@DisLikeValue", obj.DislikeValue);
+
                 return (new DBHelper().GetDatasetFromSP)("sp_InsertReportReview", p).Tables[0];
             }
             catch (Exception ex)
             {
                 return null;
             }
+        }
+        public DataTable AddReviewADO(ReviewsBLL obj)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[8];
+                p[0] = new SqlParameter("@Name", obj.Name);
+                p[1] = new SqlParameter("@Message", obj.Message);
+                p[2] = new SqlParameter("@Rate", obj.Rate);
+                p[3] = new SqlParameter("@StatusID", 1);
+                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
+                p[5] = new SqlParameter("@LocationID", obj.LocationID);
+                p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
+                p[7] = new SqlParameter("@CustomerID", obj.CustomerID);
+
+                return (new DBHelper().GetDatasetFromSP)("sp_InsertReview_CAPI", p).Tables[0];
+                // DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture)
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataTable UpdateReviewADO(ReviewsBLL obj)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[11];
+                p[0] = new SqlParameter("@Name", obj.Name);
+                p[1] = new SqlParameter("@Message", obj.Message);
+                p[2] = new SqlParameter("@Rate", obj.Rate);
+                p[3] = new SqlParameter("@StatusID", obj.StatusID);
+                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
+                p[5] = new SqlParameter("@LocationID", obj.LocationID);
+                p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
+                p[7] = new SqlParameter("@LikeCount", obj.LikeCount);
+                p[8] = new SqlParameter("@DislikeCount", obj.DislikeCount);
+                p[9] = new SqlParameter("@ReportAbuse", obj.ReportAbuse);
+                p[10] = new SqlParameter("@ReviewID", obj.ReviewID);
+                return (new DBHelper().GetDatasetFromSP)("sp_UpdateReview_CAPI", p).Tables[0];
+                // DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture)
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public ReviewRsp AddReview(ReviewsBLL obj)
+        {
+            ReviewRsp rsp = new ReviewRsp();
+            try
+            {
+                var dt = AddReviewADO(obj);
+
+                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                if (dt == null)
+                {
+                    rsp.Reviews = new List<ReviewsBLL>();
+                    rsp.Status = 0;
+                    rsp.Description = "Failed To Add Review";
+                }
+                else
+                {
+                    foreach (var item in rsp.Reviews)
+                    {
+                        item.Date = DateParse(item.Date);
+                    }
+                    rsp.Status = 1;
+                    rsp.Description = "Review Added Successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                rsp.Reviews = new List<ReviewsBLL>();
+                rsp.Status = 0;
+                rsp.Description = "Failed To Add Review";
+            }
+            return rsp;
+        }
+        public ReviewRsp UpdateReview(ReviewsBLL obj)
+        {
+            ReviewRsp rsp = new ReviewRsp();
+            try
+            {
+                var dt = UpdateReviewADO(obj);
+                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                if (dt == null)
+                {
+                    rsp.Reviews = new List<ReviewsBLL>();
+                    rsp.Status = 0;
+                    rsp.Description = "Failed To Add Review";
+                }
+                else
+                {
+                    foreach (var item in rsp.Reviews)
+                    {
+                        item.Date = DateParse(item.Date);
+                    }
+                    rsp.Status = 1;
+                    rsp.Description = "Review Updated Successfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                rsp.Reviews = new List<ReviewsBLL>();
+                rsp.Status = 0;
+                rsp.Description = "Failed To Update Review";
+            }
+            return rsp;
         }
     }
 }

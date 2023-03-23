@@ -59,26 +59,6 @@ namespace GarageCustomerAPI.Controllers
             return carRepo.OrderPrintLetter(orderid);
         }
 
-        /// <summary>
-        /// Add Review to Locations
-        /// </summary>
-        /// <param name="obj">(Status 1 for Active,3 for Delete)</param>
-        /// <returns></returns>
-        [Route("review/customer")]
-        public ReviewRsp PostReview(ReviewsBLL obj)
-        {
-            return carRepo.AddReview(obj);
-        }
-
-        /// <summary>
-        /// Update Review to Locations
-        /// </summary>
-        /// <param name="obj">(Status 1 for Active,3 for Delete) \n Add Like/Dislike Count to existing value</param>
-        /// <returns></returns>
-        [Route("review/customer/update")]
-        public ReviewRsp PostReviewUpdate(ReviewsBLL obj)
-        {
-            return carRepo.UpdateReview(obj);
-        }
+      
     }
 }

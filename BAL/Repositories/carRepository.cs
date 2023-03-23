@@ -129,69 +129,7 @@ namespace BAL.Repositories
             return rsp;
         }
 
-        public ReviewRsp AddReview(ReviewsBLL obj)
-        {
-            ReviewRsp rsp = new ReviewRsp();
-            try
-            {
-                var dt = AddReviewADO(obj);
-
-                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
-                if (dt==null)
-                {
-                    rsp.Reviews = new List<ReviewsBLL>();
-                    rsp.Status = 0;
-                    rsp.Description = "Failed To Add Review";
-                }
-                else
-                {
-                    foreach (var item in rsp.Reviews)
-                    {
-                        item.Date = DateParse(item.Date);
-                    }
-                    rsp.Status = 1;
-                    rsp.Description = "Review Added Successfully";
-                }
-            }
-            catch (Exception ex)
-            {
-                rsp.Reviews = new List<ReviewsBLL>();
-                rsp.Status = 0;
-                rsp.Description = "Failed To Add Review";
-            }
-            return rsp;
-        }
-        public ReviewRsp UpdateReview(ReviewsBLL obj)
-        {
-            ReviewRsp rsp = new ReviewRsp();
-            try
-            {
-                var dt = UpdateReviewADO(obj);
-                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
-                if (dt == null)
-                {
-                    rsp.Reviews = new List<ReviewsBLL>();
-                    rsp.Status = 0;
-                    rsp.Description = "Failed To Add Review";
-                }
-                else
-                {
-                    foreach (var item in rsp.Reviews)
-                    {
-                        item.Date = DateParse(item.Date);
-                    }
-                    rsp.Status = 1;
-                    rsp.Description = "Review Updated Successfully";
-                }
-            }
-            catch (Exception ex)
-            {
-                rsp.Reviews = new List<ReviewsBLL>();
-                rsp.Status = 0;
-                rsp.Description = "Failed To Update Review";
-            }
-            return rsp;
-        }
+      
 
         public int InsertCar(Cars cars)
         {
@@ -251,50 +189,7 @@ namespace BAL.Repositories
                 return 0;
             }
         }
-        public DataTable AddReviewADO(ReviewsBLL obj)
-        {
-            try
-            {
-                SqlParameter[] p = new SqlParameter[7];
-                p[0] = new SqlParameter("@Name", obj.Name);
-                p[1] = new SqlParameter("@Message", obj.Message);
-                p[2] = new SqlParameter("@Rate", obj.Rate);
-                p[3] = new SqlParameter("@StatusID", 1);
-                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
-                p[5] = new SqlParameter("@LocationID", obj.LocationID);
-                p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
-                return (new DBHelper().GetDatasetFromSP)("sp_InsertReview_CAPI", p).Tables[0];
-                // DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture)
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-        public DataTable UpdateReviewADO(ReviewsBLL obj)
-        {
-            try
-            {
-                SqlParameter[] p = new SqlParameter[11];
-                p[0] = new SqlParameter("@Name", obj.Name);
-                p[1] = new SqlParameter("@Message", obj.Message);
-                p[2] = new SqlParameter("@Rate", obj.Rate);
-                p[3] = new SqlParameter("@StatusID", obj.StatusID);
-                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
-                p[5] = new SqlParameter("@LocationID", obj.LocationID);
-                p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
-                p[7] = new SqlParameter("@LikeCount", obj.LikeCount);
-                p[8] = new SqlParameter("@DislikeCount", obj.DislikeCount);
-                p[9] = new SqlParameter("@ReportAbuse", obj.ReportAbuse);
-                p[10] = new SqlParameter("@ReviewID", obj.ReviewID);
-                return (new DBHelper().GetDatasetFromSP)("sp_UpdateReview_CAPI", p).Tables[0];
-                // DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture)
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
+        
         public OrderLetterResponse OrderPrintLetter(string OrderID)
         {
 

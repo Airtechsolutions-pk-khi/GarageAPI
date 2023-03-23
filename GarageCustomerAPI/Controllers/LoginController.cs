@@ -91,15 +91,6 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.UpdateNotification(obj);
         }
 
-        /// <summary>
-        /// Report Review
-        /// </summary>
-        /// <param name="obj">(Status 1 for Active,3 for Delete)</param>
-        /// <returns></returns>
-        [Route("review/report")]
-        public Rsp PostReportReview(ReportReviewsBLL obj)
-        {
-            return settingRepo.AddReportReview(obj);
-        }
+     
     }
 }

@@ -69,13 +69,13 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         [HttpGet]
         [Route("push/android")]
-        public void PushNotification()
+        public void PushNotification(string deviceid)
         {
             try
             {
                 var applicationID = "AAAAxl51rZs:APA91bHiGrGKga3ZYLPrzQmzYClRynk3448-mKPg-3IL8q6RJ3fE35OeV4yM2ohv6wjbsfe6LyolpwMD4kq1sp_jc7Swybi0f7jRshFdJj_5-DItwg9zGRpXK1JImoStU3mAO25CXZNG";
                 var senderId = "851988295067";
-                string deviceId = "cwb3TAzRgUVRoWGFrw4ubR:APA91bER9bKB-cO32ab792isUsiJO-xdc21ltPxonb9BP_TH00Fa6dOUWi74X7ikst97L60gtE5WuBxT7YKHUTnBlhuzh8IY8JCbGkxT2nfnUx4j7UHkqkWNaYRnX_s5jEYACehZt74G";
+                string deviceId = deviceid;// "cwb3TAzRgUVRoWGFrw4ubR:APA91bER9bKB-cO32ab792isUsiJO-xdc21ltPxonb9BP_TH00Fa6dOUWi74X7ikst97L60gtE5WuBxT7YKHUTnBlhuzh8IY8JCbGkxT2nfnUx4j7UHkqkWNaYRnX_s5jEYACehZt74G";
                 WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
                 tRequest.Method = "post";
                 tRequest.ContentType = "application/json";
@@ -129,6 +129,39 @@ namespace GarageCustomerAPI.Controllers
         public Rsp PostFeedback(Feedback obj)
         {
             return settingRepo.AddFeedback(obj);
+        }
+
+        /// <summary>
+        /// Add Review to Locations
+        /// </summary>
+        /// <param name="obj">(Status 1 for Active,3 for Delete)</param>
+        /// <returns></returns>
+        [Route("review/customer")]
+        public ReviewRsp PostReview(ReviewsBLL obj)
+        {
+            return settingRepo.AddReview(obj);
+        }
+
+        /// <summary>
+        /// Update Review to Locations
+        /// </summary>
+        /// <param name="obj">- Status 1 for Active,3 for Delete \n Add Like/Dislike Count to existing value</param>
+        /// <returns></returns>
+        [Route("review/customer/update")]
+        public ReviewRsp PostReviewUpdate(ReviewsBLL obj)
+        {
+            return settingRepo.UpdateReview(obj);
+        }
+
+        /// <summary>
+        /// Report Review
+        /// </summary>
+        /// <param name="obj">- Status 1 for Active,3 for Delete \n - LikeValue\DisLikeValue (0 for no action, 1 new action and -1 for update action) on like dislike action </param>
+        /// <returns></returns>
+        [Route("review/customer/action")]
+        public Rsp PostReportReview(ReportReviewsBLL obj)
+        {
+            return settingRepo.AddReportReview(obj);
         }
     }
 }
