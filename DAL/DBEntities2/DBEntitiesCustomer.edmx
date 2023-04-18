@@ -15,6 +15,18 @@
           <Property Name="StatusID" Type="int" />
           <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="BodyType">
+          <Key>
+            <PropertyRef Name="BodyTypeID" />
+          </Key>
+          <Property Name="BodyTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ArabicName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="LastUpdatedDate" Type="date" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CarFavourite">
           <Key>
             <PropertyRef Name="CarFavouriteID" />
@@ -35,6 +47,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="RegistrationNo" Type="nvarchar" MaxLength="20" />
           <Property Name="BodyType" Type="nvarchar" MaxLength="50" />
+          <Property Name="BodyTypeID" Type="int" />
           <Property Name="FuelType" Type="nvarchar" MaxLength="50" />
           <Property Name="EngineType" Type="nvarchar" MaxLength="50" />
           <Property Name="Year" Type="nvarchar" MaxLength="50" />
@@ -53,6 +66,7 @@
           <Property Name="Assembly" Type="nvarchar" MaxLength="50" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="StatusID" Type="int" />
+          <Property Name="Reason" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="int" />
@@ -73,6 +87,32 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="Createdon" Type="datetime" />
           <Property Name="Updatedon" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DiscLocationJunc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiscountID" Type="int" />
+          <Property Name="LocationID" Type="int" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" />
+          <Property Name="ArabicName" Type="nvarchar" MaxLength="300" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ArabicDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="FromDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="ToDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="ToTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="ArabicImage" Type="nvarchar(max)" />
+          <Property Name="StatusID" Type="int" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
@@ -145,6 +185,22 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="Createdon" Type="datetime" />
           <Property Name="Createdby" Type="int" />
         </EntityType>
+        <EntityType Name="PackagesInfo">
+          <Key>
+            <PropertyRef Name="PackageInfoID" />
+          </Key>
+          <Property Name="PackageInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageName" Type="nvarchar" MaxLength="200" />
+          <Property Name="PackagePrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PackageDescription" Type="nvarchar(max)" />
+          <Property Name="DeviceCount" Type="int" />
+          <Property Name="LocationsLimit" Type="int" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="IsInventory" Type="bit" />
+          <Property Name="IsGarageGo" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="PushToken">
           <Key>
             <PropertyRef Name="TokenID" />
@@ -154,6 +210,20 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="CustomerID" Type="int" />
           <Property Name="StatusID" Type="int" />
           <Property Name="Device" Type="int" />
+        </EntityType>
+        <EntityType Name="ReportReview">
+          <Key>
+            <PropertyRef Name="ReportReveiwID" />
+          </Key>
+          <Property Name="ReportReveiwID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReviewID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="LikeStatus" Type="int" />
+          <Property Name="LikeValue" Type="int" />
+          <Property Name="DisLikeValue" Type="int" />
         </EntityType>
         <EntityType Name="Reviews">
           <Key>
@@ -170,6 +240,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="LikeCount" Type="int" />
           <Property Name="DislikeCount" Type="int" />
           <Property Name="ReportAbuse" Type="nvarchar(max)" />
+          <Property Name="CustomerID" Type="int" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -232,6 +303,18 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
             </Principal>
             <Dependent Role="CarSellImage">
               <PropertyRef Name="CarSellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiscLocationJunc_Discount">
+          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="DiscLocationJunc" Type="Self.DiscLocationJunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="DiscountID" />
+            </Principal>
+            <Dependent Role="DiscLocationJunc">
+              <PropertyRef Name="DiscountID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -429,16 +512,21 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GarageCustomer_UATModelStoreContainer">
           <EntitySet Name="Amenities" EntityType="Self.Amenities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BodyType" EntityType="Self.BodyType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarFavourite" EntityType="Self.CarFavourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarSell" EntityType="Self.CarSell" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarSellImage" EntityType="Self.CarSellImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiscLocationJunc" EntityType="Self.DiscLocationJunc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Landmark" EntityType="Self.Landmark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationJunc" EntityType="Self.LocationJunc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offer" EntityType="Self.Offer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackagesInfo" EntityType="Self.PackagesInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PushToken" EntityType="Self.PushToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportReview" EntityType="Self.ReportReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
@@ -450,6 +538,10 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <AssociationSet Name="FK_CarSellImage_CarSell" Association="Self.FK_CarSellImage_CarSell">
             <End Role="CarSell" EntitySet="CarSell" />
             <End Role="CarSellImage" EntitySet="CarSellImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiscLocationJunc_Discount" Association="Self.FK_DiscLocationJunc_Discount">
+            <End Role="Discount" EntitySet="Discount" />
+            <End Role="DiscLocationJunc" EntitySet="DiscLocationJunc" />
           </AssociationSet>
           <AssociationSet Name="FK_LocationJunc_Setting1" Association="Self.FK_LocationJunc_Setting1">
             <End Role="Setting" EntitySet="Setting" />
@@ -642,16 +734,21 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="sysdiagrams" EntityType="GarageCustomer_UATModel.sysdiagram" />
           <EntitySet Name="Amenities" EntityType="GarageCustomer_UATModel.Amenity" />
+          <EntitySet Name="BodyTypes" EntityType="GarageCustomer_UATModel.BodyType" />
           <EntitySet Name="CarFavourites" EntityType="GarageCustomer_UATModel.CarFavourite" />
           <EntitySet Name="CarSells" EntityType="GarageCustomer_UATModel.CarSell" />
           <EntitySet Name="CarSellImages" EntityType="GarageCustomer_UATModel.CarSellImage" />
+          <EntitySet Name="DiscLocationJuncs" EntityType="GarageCustomer_UATModel.DiscLocationJunc" />
+          <EntitySet Name="Discounts" EntityType="GarageCustomer_UATModel.Discount" />
           <EntitySet Name="Features" EntityType="GarageCustomer_UATModel.Feature" />
           <EntitySet Name="Feedbacks" EntityType="GarageCustomer_UATModel.Feedback" />
           <EntitySet Name="Landmarks" EntityType="GarageCustomer_UATModel.Landmark" />
           <EntitySet Name="LocationJuncs" EntityType="GarageCustomer_UATModel.LocationJunc" />
           <EntitySet Name="Notifications" EntityType="GarageCustomer_UATModel.Notification" />
           <EntitySet Name="Offers" EntityType="GarageCustomer_UATModel.Offer" />
+          <EntitySet Name="PackagesInfoes" EntityType="GarageCustomer_UATModel.PackagesInfo" />
           <EntitySet Name="PushTokens" EntityType="GarageCustomer_UATModel.PushToken" />
+          <EntitySet Name="ReportReviews" EntityType="GarageCustomer_UATModel.ReportReview" />
           <EntitySet Name="Reviews" EntityType="GarageCustomer_UATModel.Review" />
           <EntitySet Name="Services" EntityType="GarageCustomer_UATModel.Service" />
           <EntitySet Name="Settings" EntityType="GarageCustomer_UATModel.Setting" />
@@ -662,6 +759,10 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <AssociationSet Name="FK_CarSellImage_CarSell" Association="GarageCustomer_UATModel.FK_CarSellImage_CarSell">
             <End Role="CarSell" EntitySet="CarSells" />
             <End Role="CarSellImage" EntitySet="CarSellImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiscLocationJunc_Discount" Association="GarageCustomer_UATModel.FK_DiscLocationJunc_Discount">
+            <End Role="Discount" EntitySet="Discounts" />
+            <End Role="DiscLocationJunc" EntitySet="DiscLocationJuncs" />
           </AssociationSet>
           <AssociationSet Name="FK_LocationJunc_Setting1" Association="GarageCustomer_UATModel.FK_LocationJunc_Setting1">
             <End Role="Setting" EntitySet="Settings" />
@@ -896,6 +997,18 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="StatusID" Type="Int32" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BodyType">
+          <Key>
+            <PropertyRef Name="BodyTypeID" />
+          </Key>
+          <Property Name="BodyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="0" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="CarFavourite">
           <Key>
             <PropertyRef Name="CarFavouriteID" />
@@ -917,6 +1030,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="BodyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BodyTypeID" Type="Int32" />
           <Property Name="FuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EngineType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -935,6 +1049,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="Assembly" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int32" />
@@ -952,6 +1067,34 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="Createdon" Type="DateTime" Precision="3" />
           <Property Name="Updatedon" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CarSell" Relationship="GarageCustomer_UATModel.FK_CarSellImage_CarSell" FromRole="CarSellImage" ToRole="CarSell" />
+        </EntityType>
+        <EntityType Name="DiscLocationJunc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiscountID" Type="Int32" />
+          <Property Name="LocationID" Type="Int32" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Discount" Relationship="GarageCustomer_UATModel.FK_DiscLocationJunc_Discount" FromRole="DiscLocationJunc" ToRole="Discount" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArabicImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int32" />
+          <NavigationProperty Name="DiscLocationJuncs" Relationship="GarageCustomer_UATModel.FK_DiscLocationJunc_Discount" FromRole="Discount" ToRole="DiscLocationJunc" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
@@ -1025,6 +1168,22 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="Createdon" Type="DateTime" Precision="3" />
           <Property Name="Createdby" Type="Int32" />
         </EntityType>
+        <EntityType Name="PackagesInfo">
+          <Key>
+            <PropertyRef Name="PackageInfoID" />
+          </Key>
+          <Property Name="PackageInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PackagePrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PackageDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceCount" Type="Int32" />
+          <Property Name="LocationsLimit" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="IsInventory" Type="Boolean" />
+          <Property Name="IsGarageGo" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="PushToken">
           <Key>
             <PropertyRef Name="TokenID" />
@@ -1034,6 +1193,20 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="CustomerID" Type="Int32" />
           <Property Name="StatusID" Type="Int32" />
           <Property Name="Device" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReportReview">
+          <Key>
+            <PropertyRef Name="ReportReveiwID" />
+          </Key>
+          <Property Name="ReportReveiwID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="LikeStatus" Type="Int32" />
+          <Property Name="LikeValue" Type="Int32" />
+          <Property Name="DisLikeValue" Type="Int32" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -1050,6 +1223,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
           <Property Name="LikeCount" Type="Int32" />
           <Property Name="DislikeCount" Type="Int32" />
           <Property Name="ReportAbuse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -1103,6 +1277,18 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
             </Principal>
             <Dependent Role="CarSellImage">
               <PropertyRef Name="CarSellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiscLocationJunc_Discount">
+          <End Type="GarageCustomer_UATModel.Discount" Role="Discount" Multiplicity="0..1" />
+          <End Type="GarageCustomer_UATModel.DiscLocationJunc" Role="DiscLocationJunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="DiscountID" />
+            </Principal>
+            <Dependent Role="DiscLocationJunc">
+              <PropertyRef Name="DiscountID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1439,6 +1625,19 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BodyTypes">
+            <EntityTypeMapping TypeName="GarageCustomer_UATModel.BodyType">
+              <MappingFragment StoreEntitySet="BodyType">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CarFavourites">
             <EntityTypeMapping TypeName="GarageCustomer_UATModel.CarFavourite">
               <MappingFragment StoreEntitySet="CarFavourite">
@@ -1458,6 +1657,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Assembly" ColumnName="Assembly" />
@@ -1476,6 +1676,7 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="EngineType" ColumnName="EngineType" />
                 <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+                <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
                 <ScalarProperty Name="BodyType" ColumnName="BodyType" />
                 <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1492,6 +1693,34 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscLocationJuncs">
+            <EntityTypeMapping TypeName="GarageCustomer_UATModel.DiscLocationJunc">
+              <MappingFragment StoreEntitySet="DiscLocationJunc">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="GarageCustomer_UATModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="ArabicImage" ColumnName="ArabicImage" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+                <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1572,6 +1801,23 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PackagesInfoes">
+            <EntityTypeMapping TypeName="GarageCustomer_UATModel.PackagesInfo">
+              <MappingFragment StoreEntitySet="PackagesInfo">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsGarageGo" ColumnName="IsGarageGo" />
+                <ScalarProperty Name="IsInventory" ColumnName="IsInventory" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="LocationsLimit" ColumnName="LocationsLimit" />
+                <ScalarProperty Name="DeviceCount" ColumnName="DeviceCount" />
+                <ScalarProperty Name="PackageDescription" ColumnName="PackageDescription" />
+                <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="PackageInfoID" ColumnName="PackageInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PushTokens">
             <EntityTypeMapping TypeName="GarageCustomer_UATModel.PushToken">
               <MappingFragment StoreEntitySet="PushToken">
@@ -1583,9 +1829,25 @@ warning 6013: The table/view 'GarageCustomer_UAT.dbo.CarSellFeature_Junc' does n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ReportReviews">
+            <EntityTypeMapping TypeName="GarageCustomer_UATModel.ReportReview">
+              <MappingFragment StoreEntitySet="ReportReview">
+                <ScalarProperty Name="DisLikeValue" ColumnName="DisLikeValue" />
+                <ScalarProperty Name="LikeValue" ColumnName="LikeValue" />
+                <ScalarProperty Name="LikeStatus" ColumnName="LikeStatus" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+                <ScalarProperty Name="ReportReveiwID" ColumnName="ReportReveiwID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Reviews">
             <EntityTypeMapping TypeName="GarageCustomer_UATModel.Review">
               <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="ReportAbuse" ColumnName="ReportAbuse" />
                 <ScalarProperty Name="DislikeCount" ColumnName="DislikeCount" />
                 <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />

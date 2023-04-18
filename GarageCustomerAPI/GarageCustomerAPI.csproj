@@ -34,7 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\GarageCustomerAPI.xml</DocumentationFile>
+    <DocumentationFile>assets\GarageCustomerAPI.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Assets\Images\defaultdiscount.svg" />
     <Content Include="Assets\Images\EmptyNoplate.png" />
     <Content Include="Assets\Images\imgamenities1.png" />
     <Content Include="Assets\Images\imgamenities2.png" />

@@ -53,7 +53,14 @@ namespace BAL.Repositories
 
                 rsp.Notifications = _dsNotifications;
                 rsp.Customer = _dsCustomerInfo;
-                rsp.CarList = _dsCarInfo;
+
+                rsp.CarList = rsp.CarList ?? new List<Cars>();
+                foreach (var i in _dsCarInfo)
+                {
+                    if (rsp.CarList.Where(x => x.RegistrationNo == i.RegistrationNo).Count() == 0)
+                        rsp.CarList.Add(i);
+                }
+                //rsp.CarList = _dsCarInfo;
                 foreach (var j in rsp.Notifications)
                 {
                     j.IsRead = j.IsRead ?? true;
@@ -70,7 +77,7 @@ namespace BAL.Repositories
                     try { i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
                     try { i.RegistrationNoP3 = TranslateToArabic(i.RegistrationNoP1, 1); } catch { i.RegistrationNoP3 = ""; }
                     try { i.RegistrationNoP4 = TranslateToArabic(i.RegistrationNoP2, 2); } catch { i.RegistrationNoP4 = ""; }
-                    i.Orders = _dsOrders.Where(x => x.CarID == i.CarID).ToList();
+                    i.Orders = _dsOrders.Where(x => x.RegistrationNo == i.RegistrationNo).ToList();
                     foreach (var j in i.Orders)
                     {
                         j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;

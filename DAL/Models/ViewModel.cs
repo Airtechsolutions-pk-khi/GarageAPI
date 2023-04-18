@@ -745,10 +745,10 @@ namespace DAL.Models
         public Nullable<int> LocationID { get; set; }
 
         public string SessionID { get; set; }
-        public string RegistrationNoP1 { get; set; }
-        public string RegistrationNoP2 { get; set; }
-        public string RegistrationNoP3 { get; set; }
-        public string RegistrationNoP4 { get; set; }
+        public string RegistrationNoP1 { get; set; } = "";
+        public string RegistrationNoP2 { get; set; } = "";
+        public string RegistrationNoP3 { get; set; } = "";
+        public string RegistrationNoP4 { get; set; } = "";
         public int UserID { get; set; }
         public int? StatusID { get; set; }
         public bool? IsFavourite { get; set; }
@@ -760,6 +760,7 @@ namespace DAL.Models
     {
         public int CarSellID { get; set; }
         public int? CustomerID { get; set; }
+        public int? BodyTypeID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string RegistrationNo { get; set; }
@@ -777,6 +778,7 @@ namespace DAL.Models
         public bool IsInspected { get; set; }
         public int? CityID { get; set; }
         public string CityName { get; set; }
+        public string Reason { get; set; }
         public int? CountryID { get; set; }
         public string Address { get; set; }
         public int? CarSellAddID { get; set; }
@@ -797,12 +799,21 @@ namespace DAL.Models
         public List<CarSellList> CarSellList { get; set; }
         public List<CountryList> CountryList { get; set; }
         public List<FeatureList> Features { get; set; }
+        public List<BodyTypeList> BodyTypes { get; set; }
     }
     public class CarSellInsertRsp
     {
         //public CarSell CarSell { get; set; }      
         public int Status { get; set; }
         public string Description { get; set; }
+    }
+    public  class BodyTypeList
+    {
+        public int BodyTypeID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> StatusID { get; set; }
     }
     public class CarSellFeatureList
     {
@@ -854,6 +865,7 @@ namespace DAL.Models
         public int? OrderNo { get; set; }
         public int CarID { get; set; }
         public string BayName { get; set; }
+        public string RegistrationNo { get; set; }
         public int CustomerID { get; set; }
         public Nullable<int> LocationID { get; set; }
         public string OrderPunchDate { get; set; }

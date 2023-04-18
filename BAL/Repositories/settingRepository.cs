@@ -115,11 +115,11 @@ namespace BAL.Repositories
                     }
                     i.Reviews = _dtReviewsInfo.Where(x => x.LocationID == i.LocationID).ToList();
 
-                    var rating1 = i.Reviews.Where(x => x.RateVal >= 4 && x.RateVal < 5).Count();
-                    var rating2 = i.Reviews.Where(x => x.RateVal >= 3 && x.RateVal < 4).Count();
-                    var rating3 = i.Reviews.Where(x => x.RateVal >= 2 && x.RateVal < 3).Count();
-                    var rating4 = i.Reviews.Where(x => x.RateVal >= 1 && x.RateVal < 2).Count();
-                    var rating5 = i.Reviews.Where(x => x.RateVal >= 0 && x.RateVal < 1).Count();
+                    var rating1 = i.Reviews.Where(x => x.RateVal > 4 && x.RateVal <= 5).Count();
+                    var rating2 = i.Reviews.Where(x => x.RateVal > 3 && x.RateVal <= 4).Count();
+                    var rating3 = i.Reviews.Where(x => x.RateVal > 2 && x.RateVal <= 3).Count();
+                    var rating4 = i.Reviews.Where(x => x.RateVal > 1 && x.RateVal <= 2).Count();
+                    var rating5 = i.Reviews.Where(x => x.RateVal >= 0 && x.RateVal <= 1).Count();
                     i.ReviewCountDetails = new int[5] { rating1, rating2, rating3, rating4, rating5 };
                     foreach (var j in i.Reviews)
                     {
@@ -358,7 +358,7 @@ namespace BAL.Repositories
                 p[1] = new SqlParameter("@Message", obj.Message);
                 p[2] = new SqlParameter("@Rate", obj.Rate);
                 p[3] = new SqlParameter("@StatusID", 1);
-                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
+                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow.AddMinutes(180));
                 p[5] = new SqlParameter("@LocationID", obj.LocationID);
                 p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
                 p[7] = new SqlParameter("@CustomerID", obj.CustomerID);
@@ -380,7 +380,7 @@ namespace BAL.Repositories
                 p[1] = new SqlParameter("@Message", obj.Message);
                 p[2] = new SqlParameter("@Rate", obj.Rate);
                 p[3] = new SqlParameter("@StatusID", obj.StatusID);
-                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
+                p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow.AddMinutes(180));
                 p[5] = new SqlParameter("@LocationID", obj.LocationID);
                 p[6] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180));
                 p[7] = new SqlParameter("@LikeCount", obj.LikeCount);

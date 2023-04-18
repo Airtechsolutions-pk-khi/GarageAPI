@@ -12,19 +12,18 @@ namespace DAL.DBEntities2
     using System;
     using System.Collections.Generic;
     
-    public partial class Review
+    public partial class PackagesInfo
     {
-        public int ReviewID { get; set; }
-        public string Name { get; set; }
-        public string Message { get; set; }
-        public string Rate { get; set; }
+        public int PackageInfoID { get; set; }
+        public string PackageName { get; set; }
+        public Nullable<decimal> PackagePrice { get; set; }
+        public string PackageDescription { get; set; }
+        public Nullable<int> DeviceCount { get; set; }
+        public Nullable<int> LocationsLimit { get; set; }
         public Nullable<int> StatusID { get; set; }
+        public Nullable<bool> IsInventory { get; set; }
+        public Nullable<bool> IsGarageGo { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
-        public Nullable<int> LocationID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> LikeCount { get; set; }
-        public Nullable<int> DislikeCount { get; set; }
-        public string ReportAbuse { get; set; }
-        public Nullable<int> CustomerID { get; set; }
     }
 }

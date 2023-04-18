@@ -29,16 +29,21 @@ namespace DAL.DBEntities2
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Amenity> Amenities { get; set; }
+        public virtual DbSet<BodyType> BodyTypes { get; set; }
         public virtual DbSet<CarFavourite> CarFavourites { get; set; }
         public virtual DbSet<CarSell> CarSells { get; set; }
         public virtual DbSet<CarSellImage> CarSellImages { get; set; }
+        public virtual DbSet<DiscLocationJunc> DiscLocationJuncs { get; set; }
+        public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Landmark> Landmarks { get; set; }
         public virtual DbSet<LocationJunc> LocationJuncs { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
+        public virtual DbSet<PackagesInfo> PackagesInfoes { get; set; }
         public virtual DbSet<PushToken> PushTokens { get; set; }
+        public virtual DbSet<ReportReview> ReportReviews { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }

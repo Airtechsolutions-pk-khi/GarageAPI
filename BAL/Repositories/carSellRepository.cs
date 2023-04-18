@@ -43,18 +43,13 @@ namespace BAL.Repositories
             {
                 var ds = await GetInfo();
                 var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
-
                 var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
-
                 var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
-
                 var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
-
                 var _dtCountryInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
-
                 //var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
-
                 var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
+                var _dtBodyType = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
 
                 foreach (var i in _dtCarSellInfo)
                 {
@@ -75,10 +70,16 @@ namespace BAL.Repositories
                 {
                     item.CityList = _dtCityInfo.Where(x => x.CountryCode == item.Code).ToList();
                 }
+                foreach (var i in _dtBodyType)
+                {
+                    i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.Image;
+                }
 
+                rsp.BodyTypes = _dtBodyType;
                 rsp.Features = _dtFeatureInfoALL;
                 rsp.CarSellList = _dtCarSellInfo;
                 rsp.CountryList = _dtCountryInfo;
+
                 rsp.Status = 1;
                 rsp.Description = "Successful";
             }
@@ -208,7 +209,7 @@ namespace BAL.Repositories
             var rsp = new Rsp();
             try
             {
-              var  dsc = InsertCarFav(obj);
+                var dsc = InsertCarFav(obj);
                 return new Rsp
                 {
                     Status = 1,
@@ -218,10 +219,10 @@ namespace BAL.Repositories
             }
             catch { }
 
-            return  new Rsp
+            return new Rsp
             {
                 Status = 0,
-                Description="Failed"
+                Description = "Failed"
             };
 
         }
@@ -378,7 +379,7 @@ namespace BAL.Repositories
                 p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow.AddMinutes(180));
 
                 (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarFav_CAPI", p);
-               
+
                 return 1;
             }
             catch (Exception ex)

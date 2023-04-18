@@ -182,16 +182,21 @@
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="sysdiagrams" EntityType="GarageCustomer_UATModel.sysdiagram" />
     <EntitySet Name="Amenities" EntityType="GarageCustomer_UATModel.Amenity" />
+    <EntitySet Name="BodyTypes" EntityType="GarageCustomer_UATModel.BodyType" />
     <EntitySet Name="CarFavourites" EntityType="GarageCustomer_UATModel.CarFavourite" />
     <EntitySet Name="CarSells" EntityType="GarageCustomer_UATModel.CarSell" />
     <EntitySet Name="CarSellImages" EntityType="GarageCustomer_UATModel.CarSellImage" />
+    <EntitySet Name="DiscLocationJuncs" EntityType="GarageCustomer_UATModel.DiscLocationJunc" />
+    <EntitySet Name="Discounts" EntityType="GarageCustomer_UATModel.Discount" />
     <EntitySet Name="Features" EntityType="GarageCustomer_UATModel.Feature" />
     <EntitySet Name="Feedbacks" EntityType="GarageCustomer_UATModel.Feedback" />
     <EntitySet Name="Landmarks" EntityType="GarageCustomer_UATModel.Landmark" />
     <EntitySet Name="LocationJuncs" EntityType="GarageCustomer_UATModel.LocationJunc" />
     <EntitySet Name="Notifications" EntityType="GarageCustomer_UATModel.Notification" />
     <EntitySet Name="Offers" EntityType="GarageCustomer_UATModel.Offer" />
+    <EntitySet Name="PackagesInfoes" EntityType="GarageCustomer_UATModel.PackagesInfo" />
     <EntitySet Name="PushTokens" EntityType="GarageCustomer_UATModel.PushToken" />
+    <EntitySet Name="ReportReviews" EntityType="GarageCustomer_UATModel.ReportReview" />
     <EntitySet Name="Reviews" EntityType="GarageCustomer_UATModel.Review" />
     <EntitySet Name="Services" EntityType="GarageCustomer_UATModel.Service" />
     <EntitySet Name="Settings" EntityType="GarageCustomer_UATModel.Setting" />
@@ -202,6 +207,10 @@
     <AssociationSet Name="FK_CarSellImage_CarSell" Association="GarageCustomer_UATModel.FK_CarSellImage_CarSell">
       <End Role="CarSell" EntitySet="CarSells" />
       <End Role="CarSellImage" EntitySet="CarSellImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiscLocationJunc_Discount" Association="GarageCustomer_UATModel.FK_DiscLocationJunc_Discount">
+      <End Role="Discount" EntitySet="Discounts" />
+      <End Role="DiscLocationJunc" EntitySet="DiscLocationJuncs" />
     </AssociationSet>
     <AssociationSet Name="FK_LocationJunc_Setting1" Association="GarageCustomer_UATModel.FK_LocationJunc_Setting1">
       <End Role="Setting" EntitySet="Settings" />
@@ -436,6 +445,18 @@
     <Property Name="StatusID" Type="Int32" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="BodyType">
+    <Key>
+      <PropertyRef Name="BodyTypeID" />
+    </Key>
+    <Property Name="BodyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="CarFavourite">
     <Key>
       <PropertyRef Name="CarFavouriteID" />
@@ -457,6 +478,7 @@
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="BodyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BodyTypeID" Type="Int32" />
     <Property Name="FuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EngineType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -475,6 +497,7 @@
     <Property Name="Assembly" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int32" />
@@ -492,6 +515,34 @@
     <Property Name="Createdon" Type="DateTime" Precision="3" />
     <Property Name="Updatedon" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CarSell" Relationship="GarageCustomer_UATModel.FK_CarSellImage_CarSell" FromRole="CarSellImage" ToRole="CarSell" />
+  </EntityType>
+  <EntityType Name="DiscLocationJunc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DiscountID" Type="Int32" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Discount" Relationship="GarageCustomer_UATModel.FK_DiscLocationJunc_Discount" FromRole="DiscLocationJunc" ToRole="Discount" />
+  </EntityType>
+  <EntityType Name="Discount">
+    <Key>
+      <PropertyRef Name="DiscountID" />
+    </Key>
+    <Property Name="DiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ToDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FromTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ToTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <NavigationProperty Name="DiscLocationJuncs" Relationship="GarageCustomer_UATModel.FK_DiscLocationJunc_Discount" FromRole="Discount" ToRole="DiscLocationJunc" />
   </EntityType>
   <EntityType Name="Feature">
     <Key>
@@ -565,6 +616,22 @@
     <Property Name="Createdon" Type="DateTime" Precision="3" />
     <Property Name="Createdby" Type="Int32" />
   </EntityType>
+  <EntityType Name="PackagesInfo">
+    <Key>
+      <PropertyRef Name="PackageInfoID" />
+    </Key>
+    <Property Name="PackageInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PackagePrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PackageDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceCount" Type="Int32" />
+    <Property Name="LocationsLimit" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="IsInventory" Type="Boolean" />
+    <Property Name="IsGarageGo" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
   <EntityType Name="PushToken">
     <Key>
       <PropertyRef Name="TokenID" />
@@ -574,6 +641,20 @@
     <Property Name="CustomerID" Type="Int32" />
     <Property Name="StatusID" Type="Int32" />
     <Property Name="Device" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ReportReview">
+    <Key>
+      <PropertyRef Name="ReportReveiwID" />
+    </Key>
+    <Property Name="ReportReveiwID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="LikeStatus" Type="Int32" />
+    <Property Name="LikeValue" Type="Int32" />
+    <Property Name="DisLikeValue" Type="Int32" />
   </EntityType>
   <EntityType Name="Review">
     <Key>
@@ -590,6 +671,7 @@
     <Property Name="LikeCount" Type="Int32" />
     <Property Name="DislikeCount" Type="Int32" />
     <Property Name="ReportAbuse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
   </EntityType>
   <EntityType Name="Service">
     <Key>
@@ -643,6 +725,18 @@
       </Principal>
       <Dependent Role="CarSellImage">
         <PropertyRef Name="CarSellID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiscLocationJunc_Discount">
+    <End Type="GarageCustomer_UATModel.Discount" Role="Discount" Multiplicity="0..1" />
+    <End Type="GarageCustomer_UATModel.DiscLocationJunc" Role="DiscLocationJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discount">
+        <PropertyRef Name="DiscountID" />
+      </Principal>
+      <Dependent Role="DiscLocationJunc">
+        <PropertyRef Name="DiscountID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

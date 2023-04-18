@@ -82,6 +82,9 @@
     <Compile Include="DBEntities2\Amenity.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities2\BodyType.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\CarFavourite.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
@@ -107,6 +110,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBEntitiesCustomer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities2\DiscLocationJunc.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities2\Discount.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\Feature.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
@@ -125,7 +134,13 @@
     <Compile Include="DBEntities2\Offer.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities2\PackagesInfo.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities2\PushToken.cs">
+      <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities2\ReportReview.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities2\Review.cs">

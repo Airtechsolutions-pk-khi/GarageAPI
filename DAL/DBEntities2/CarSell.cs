@@ -26,6 +26,7 @@ namespace DAL.DBEntities2
         public string Description { get; set; }
         public string RegistrationNo { get; set; }
         public string BodyType { get; set; }
+        public Nullable<int> BodyTypeID { get; set; }
         public string FuelType { get; set; }
         public string EngineType { get; set; }
         public string Year { get; set; }
@@ -44,6 +45,7 @@ namespace DAL.DBEntities2
         public string Assembly { get; set; }
         public string Image { get; set; }
         public Nullable<int> StatusID { get; set; }
+        public string Reason { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
