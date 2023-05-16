@@ -18,6 +18,7 @@ using System.Web;
 using WebAPICode.Helpers;
 using DAL.DBEntities2;
 using System.Security.Cryptography;
+using System.Data.Entity;
 
 namespace BAL.Repositories
 {
@@ -35,13 +36,12 @@ namespace BAL.Repositories
         {
             DBContext2 = contextDB2;
         }
-        public async Task<CarSellRsp> GetCarSellList()
+        public async Task<CarSellRsp> GetCarSellList(int? CarSellID)
         {
-
             var rsp = new CarSellRsp();
             try
             {
-                var ds = await GetInfo();
+                var ds = await GetInfo(CarSellID);
                 var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
                 var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
                 var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
@@ -91,17 +91,60 @@ namespace BAL.Repositories
             return rsp;
 
         }
-        public async Task<DataSet> GetInfo()
+        public async Task<CarSellRsp> GetCarSellAdsList(CarSellAds obj)
         {
+            var rsp = new CarSellRsp();
             try
             {
-                SqlParameter[] p = new SqlParameter[0];
-                return (new DBHelper().GetDatasetFromSP)("sp_GetCarSell_CAPI", p);
+                var ds = await GetCSAdsInfo(obj);
+                var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
+                var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
+                var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
+                //var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
+                //var _dtCountryInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
+                //var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
+                //var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
+                // var _dtBodyType = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
+
+                foreach (var i in _dtCarSellInfo)
+                {
+                    i.CreatedDate = DateParse(i.CreatedDate.ToString());
+                    i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellImages)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
+                    }
+                    i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
+                    i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellFeatures)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    }
+                }
+                //foreach (var item in _dtCountryInfo)
+                //{
+                //    item.CityList = _dtCityInfo.Where(x => x.CountryCode == item.Code).ToList();
+                //}
+                //foreach (var i in _dtBodyType)
+                //{
+                //    i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.Image;
+                //}
+
+                rsp.BodyTypes = new List<BodyTypeList>();
+                rsp.Features = new List<FeatureList>();
+                rsp.CarSellList = _dtCarSellInfo;
+                rsp.CountryList = new List<CountryList>();
+
+                rsp.Status = 1;
+                rsp.Description = "Successful";
             }
             catch (Exception ex)
             {
-                return null;
+                rsp.Status = 0;
+                rsp.Description = "Failed";
             }
+            return rsp;
+
         }
         public HttpResponseMessage Post()
         {
@@ -134,7 +177,7 @@ namespace BAL.Repositories
             {
                 try
                 {
-                    dsc = InsertCar(carSell);
+                    dsc = carSell.CarSellID > 0 ? EditCar(carSell) : InsertCar(carSell);
                     foreach (var item in carSell.CarSellImages)
                     {
                         string im = item.Image;
@@ -167,38 +210,20 @@ namespace BAL.Repositories
                 }
                 catch (Exception ex)
                 { }
+
                 if (dsc > 0)
                 {
-                    //rsp.CarSell = carSell;
                     rsp.Status = 1;
                     rsp.Description = "Car has been added successfully";
                 }
                 else
                 {
-                    //rsp.CarSell = carSell;
                     rsp.Status = 0;
                     rsp.Description = "Failed to add car";
                 }
-                //SqlParameter[] p = new SqlParameter[3];
-                //p[0] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
-                //p[1] = new SqlParameter("@StatusID", carSell.StatusID);
-                //p[2] = new SqlParameter("@CustomerID", carSell.CustomerID);
-                //var check = (new DBHelperPOS().GetDatasetFromSP)("sp_CheckCarSellNoPlate", p);
-
-                //if (check.Tables[0].Rows.Count == 0)
-                //{
-
-                //}
-                //else
-                //{
-                //    //rsp.CarSell = carSell;
-                //    rsp.Status = 0;
-                //    rsp.Description = "Car Already Listed For Selling";
-                //}
             }
             catch (Exception e)
             {
-                //rsp.CarSell = carSell;
                 rsp.Status = 0;
                 rsp.Description = e.Message;
             }
@@ -283,7 +308,6 @@ namespace BAL.Repositories
             }
             return rsp;
         }
-
         public ReviewRsp AddReview(ReviewsBLL obj)
         {
             ReviewRsp rsp = new ReviewRsp();
@@ -317,12 +341,11 @@ namespace BAL.Repositories
             }
             return rsp;
         }
-
         public int InsertCar(CarSellList carSell)
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[22];
+                SqlParameter[] p = new SqlParameter[24];
                 p[0] = new SqlParameter("@Name", carSell.Name);
                 p[1] = new SqlParameter("@Description", carSell.Description);
                 p[2] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
@@ -345,21 +368,103 @@ namespace BAL.Repositories
                 p[19] = new SqlParameter("@StatusID", carSell.StatusID);
                 p[20] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
                 p[21] = new SqlParameter("@CreatedBy", carSell.CustomerID);
+                p[22] = new SqlParameter("@EngineSize", carSell.EngineSize);
                 //p[22] = new SqlParameter("@UpdatedBy", carSell.CustomerID);
                 //p[23] = new SqlParameter("@UpdatedDate", DateTime.UtcNow.AddMinutes(180));
-
+                p[23] = new SqlParameter("@BodyTypeID", carSell.BodyTypeID);
                 carSell.CarSellID = int.Parse((new DBHelper().GetDatasetFromSP)("sp_InsertCarSell", p).Tables[0].Rows[0][0].ToString());
                 //carSell.Image = carSell.Image != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + carSell.Image : null;
-
-                foreach (var i in carSell.CarSellFeatures)
+                carSell.CarSellFeatures = carSell.CarSellFeatures ?? new List<CarSellFeatureList>();
+                try
                 {
-                    i.FeatureID = i.FeatureID;
-                    i.CarSellID = carSell.CarSellID;
+                    var FeatureIDs = carSell.CarSellFeatures.Count > 0 ? String.Join(",", carSell.CarSellFeatures.Select(x => x.FeatureID)) : "";
                     SqlParameter[] p1 = new SqlParameter[2];
-                    p1[0] = new SqlParameter("@CarSellID", i.CarSellID);
-                    p1[1] = new SqlParameter("@FeatureID", i.FeatureID);
-                    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeature_CAPI", p1);
+                    p1[0] = new SqlParameter("@CarSellID", carSell.CarSellID);
+                    p1[1] = new SqlParameter("@FeatureIds", FeatureIDs);
+                    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeatureV2_CAPI", p1);
                 }
+                catch (Exception)
+                { }
+                //foreach (var i in carSell.CarSellFeatures)
+                //{
+                //    i.FeatureID = i.FeatureID;
+                //    i.CarSellID = carSell.CarSellID;
+                //    SqlParameter[] p1 = new SqlParameter[2];
+                //    p1[0] = new SqlParameter("@CarSellID", i.CarSellID);
+                //    p1[1] = new SqlParameter("@FeatureID", i.FeatureID);
+                //    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeature_CAPI", p1);
+                //}
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int EditCar(CarSellList carSell)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[25];
+                p[0] = new SqlParameter("@Name", carSell.Name);
+                p[1] = new SqlParameter("@Description", carSell.Description);
+                p[2] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
+                p[3] = new SqlParameter("@BodyType", carSell.BodyType);
+                p[4] = new SqlParameter("@FuelType", carSell.FuelType);
+                p[5] = new SqlParameter("@EngineType", carSell.EngineType);
+                p[6] = new SqlParameter("@Year", carSell.Year);
+                p[7] = new SqlParameter("@CustomerID", carSell.CustomerID);
+                p[8] = new SqlParameter("@MakeID", carSell.MakeID);
+                p[9] = new SqlParameter("@ModelID", carSell.ModelID);
+                p[10] = new SqlParameter("@Transmition", carSell.Transmition);
+                p[11] = new SqlParameter("@Kilometer", carSell.Kilometer);
+                p[12] = new SqlParameter("@Price", carSell.Price);
+                p[13] = new SqlParameter("@IsInspected", carSell.IsInspected);
+                p[14] = new SqlParameter("@CityID", carSell.CityID);
+                p[15] = new SqlParameter("@Address", carSell.Address);
+                p[16] = new SqlParameter("@CarSellAddID", carSell.CarSellAddID);
+                p[17] = new SqlParameter("@BodyColor", carSell.BodyColor);
+                p[18] = new SqlParameter("@Assembly", carSell.Assembly);
+                p[19] = new SqlParameter("@StatusID", carSell.StatusID);
+                p[20] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
+                p[21] = new SqlParameter("@CreatedBy", carSell.CustomerID);
+                p[22] = new SqlParameter("@EngineSize", carSell.EngineSize);
+                p[23] = new SqlParameter("@BodyTypeID", carSell.BodyTypeID);
+                p[24] = new SqlParameter("@CarSellID", carSell.CarSellID);
+                carSell.CarSellID = int.Parse((new DBHelper().GetDatasetFromSP)("sp_EditCarSell", p).Tables[0].Rows[0][0].ToString());
+
+                try
+                {
+                    var FeatureIDs = carSell.CarSellFeatures.Count > 0 ? String.Join(",", carSell.CarSellFeatures.Select(x => x.FeatureID)) : "";
+                    SqlParameter[] p1 = new SqlParameter[2];
+                    p1[0] = new SqlParameter("@CarSellID", carSell.CarSellID);
+                    p1[1] = new SqlParameter("@FeatureIds", FeatureIDs);
+                    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeatureV2_CAPI", p1);
+                }
+                catch (Exception)
+                { }
+
+                try
+                {
+                    var DelImages = carSell.CarSellImages.Where(x => x.StatusID == 3).ToList();
+                    var ImageIDs = DelImages.Count > 0 ? String.Join(",", DelImages.Select(x => x.ID)) : "";
+                    SqlParameter[] p1 = new SqlParameter[2];
+                    p1[0] = new SqlParameter("@CarSellID", carSell.CarSellID);
+                    p1[1] = new SqlParameter("@ImageIDs", ImageIDs);
+                    (new DBHelper().ExecuteNonQueryReturn)("sp_deleteCarsellImages_CAPI", p1);
+                }
+                catch (Exception)
+                { }
+
+                //foreach (var i in carSell.CarSellFeatures)
+                //{
+                //    i.FeatureID = i.FeatureID;
+                //    i.CarSellID = carSell.CarSellID;
+                //    SqlParameter[] p1 = new SqlParameter[2];
+                //    p1[0] = new SqlParameter("@CarSellID", i.CarSellID);
+                //    p1[1] = new SqlParameter("@FeatureID", i.FeatureID);
+                //    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeatureV2_CAPI", p1);
+                //}
                 return 1;
             }
             catch (Exception ex)
@@ -770,6 +875,34 @@ namespace BAL.Repositories
 
 
             return folderPath + filename + ".pdf";
+        }
+        public async Task<DataSet> GetInfo(int? CarSellID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@CarSellID", CarSellID);
+                return (new DBHelper().GetDatasetFromSP)("sp_GetCarSellV2_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<DataSet> GetCSAdsInfo(CarSellAds obj)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[3];
+                p[0] = new SqlParameter("@MakeID", obj.MakeID == 0 ? null : obj.MakeID);
+                p[1] = new SqlParameter("@ModelID", obj.ModelID == 0 ? null : obj.ModelID);
+                p[2] = new SqlParameter("@BodyTypeID", obj.BodyTypeID == 0 ? null : obj.BodyTypeID);
+                return (new DBHelper().GetDatasetFromSP)("sp_GetCarSellAds_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 

@@ -88,7 +88,7 @@ namespace DAL.Models
         public int? DislikeCount { get; set; }
         public string ReportAbuse { get; set; }
         public int? CustomerID { get; set; }
-        public List<ReportReviewsBLL> Customers{ get; set; }
+        public List<ReportReviewsBLL> Customers { get; set; }
     }
     public class DiscountBLL
     {
@@ -675,6 +675,7 @@ namespace DAL.Models
         public List<Cars> CarList { get; set; }
         public List<CarSellList> CarFavourites { get; set; }
         public List<NotificationBLL> Notifications { get; set; }
+        public List<CarSellList> MyAds { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
     }
@@ -761,19 +762,19 @@ namespace DAL.Models
         public int CarSellID { get; set; }
         public int? CustomerID { get; set; }
         public int? BodyTypeID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string RegistrationNo { get; set; }
-        public string BodyType { get; set; }
-        public string FuelType { get; set; }
-        public string EngineType { get; set; }
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string RegistrationNo { get; set; } = "";
+        public string BodyType { get; set; } = "";
+        public string FuelType { get; set; } = "";
+        public string EngineType { get; set; } = "";
         public Double? Kilometer { get; set; }
-        public string Year { get; set; }
-        public string MakeName { get; set; }
-        public string ModelName { get; set; }
+        public string Year { get; set; } = "";
+        public string MakeName { get; set; } = "";
+        public string ModelName { get; set; } = "";
         public int? MakeID { get; set; }
         public int? ModelID { get; set; }
-        public string Transmition { get; set; }
+        public string Transmition { get; set; } = "";
         public double Price { get; set; }
         public bool IsInspected { get; set; }
         public int? CityID { get; set; }
@@ -782,17 +783,22 @@ namespace DAL.Models
         public int? CountryID { get; set; }
         public string Address { get; set; }
         public int? CarSellAddID { get; set; }
-        public string BodyColor { get; set; }
-        public string Assembly { get; set; }
+        public string BodyColor { get; set; } = "";
+        public string Assembly { get; set; } = "";
         public int? StatusID { get; set; }
-        public string CreatedDate { get; set; }
-        public string Image { get; set; }
+        public string EngineSize { get; set; } = "";
+        public string CreatedDate { get; set; } = "";
+        public string Image { get; set; } = "";
         public List<CarSellImageList> CarSellImages { get; set; }
-        //public List<Feature> CarSellFeatures { get; set; }
         public List<CarSellFeatureList> CarSellFeatures { get; set; }
 
     }
-
+    public class CarSellAds
+    {
+        public int? MakeID { get; set; }
+        public int? ModelID { get; set; }
+        public int? BodyTypeID { get; set; }
+    }
 
     public class CarSellRsp : Rsp
     {
@@ -803,17 +809,17 @@ namespace DAL.Models
     }
     public class CarSellInsertRsp
     {
-        //public CarSell CarSell { get; set; }      
+        public CarSellList CarSell { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
     }
-    public  class BodyTypeList
+    public class BodyTypeList
     {
-        public int BodyTypeID { get; set; }
-        public string Name { get; set; }
-        public string ArabicName { get; set; }
-        public string Image { get; set; }
-        public Nullable<int> StatusID { get; set; }
+        public int BodyTypeID { get; set; } = 0;
+        public string Name { get; set; } = "";
+        public string ArabicName { get; set; } = "";
+        public string Image { get; set; } = "";
+        public Nullable<int> StatusID { get; set; } = 0;
     }
     public class CarSellFeatureList
     {
@@ -866,7 +872,7 @@ namespace DAL.Models
         public int CarID { get; set; }
         public string BayName { get; set; }
         public string RegistrationNo { get; set; }
-        public int CustomerID { get; set; }
+        public int? CustomerID { get; set; } = 0;
         public Nullable<int> LocationID { get; set; }
         public string OrderPunchDate { get; set; }
         public string CheckoutDate { get; set; }

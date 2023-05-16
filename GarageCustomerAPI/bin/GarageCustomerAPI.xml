@@ -502,9 +502,16 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.CarSellController.AddCar(DAL.Models.CarSellList)">
+        <member name="M:GarageCustomerAPI.Controllers.CarSellController.AddCarSell(DAL.Models.CarSellList)">
             <summary>
             Add Car Sell
+            </summary>
+            <param name="carSell"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.CarSellController.EditCarSell(DAL.Models.CarSellList)">
+            <summary>
+            Edit Car Sell || Images: Delete Images will be sent with Status ID 2, and for new Images Base64 Image object is required
             </summary>
             <param name="carSell"></param>
             <returns></returns>
@@ -514,6 +521,13 @@
             Add Car to Favourite
             </summary>
             <param name="obj">CarSellID for the Identity || Status Id (1 Add and 2 for Remove)</param>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.CarSellController.AdsCarSell(DAL.Models.CarSellAds)">
+            <summary>
+            Ads Car Sell
+            </summary>
+            <param name="carSell"></param>
             <returns></returns>
         </member>
         <member name="T:GarageCustomerAPI.Controllers.LoginController">

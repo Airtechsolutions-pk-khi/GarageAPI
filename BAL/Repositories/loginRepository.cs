@@ -50,6 +50,8 @@ namespace BAL.Repositories
                 var _dtCarSellInfo = ds.Tables[7] == null ? new List<CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<CarSellList>>().ToList();
                 var _dtCSImageInfo = ds.Tables[8] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<CarSellImageList>>().ToList();
                 var _dtFeatureInfo = ds.Tables[9] == null ? new List<DAL.Models.CarSellFeatureList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<CarSellFeatureList>>().ToList();
+                var _dtMyAds = ds.Tables[10] == null ? new List<DAL.Models.CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<CarSellList>>().ToList();
+                var _dtCSMyAdsImageInfo = ds.Tables[11] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<CarSellImageList>>().ToList();
 
                 rsp.Notifications = _dsNotifications;
                 rsp.Customer = _dsCustomerInfo;
@@ -71,7 +73,6 @@ namespace BAL.Repositories
                 foreach (var i in rsp.CarList)
                 {
                     i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
-
                     i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.ImagePath;
                     try { i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
                     try { i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
@@ -121,7 +122,23 @@ namespace BAL.Repositories
                         j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                     }
                 }
+                foreach (var i in _dtMyAds)
+                {
+                    i.CreatedDate = DateParse(i.CreatedDate.ToString());
+                    i.CarSellImages = _dtCSMyAdsImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellImages)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
+                    }
+                    i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
+                    i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellFeatures)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    }
+                }
                 rsp.CarFavourites = _dtCarSellInfo;
+                rsp.MyAds = _dtMyAds;
                 rsp.Status = 1;
                 rsp.Description = "Login Successfully";
             }

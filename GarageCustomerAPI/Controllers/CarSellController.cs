@@ -38,7 +38,7 @@ namespace GarageCustomerAPI.Controllers
         [Route("carsellsetting/all")]
         public async Task<CarSellRsp> CarSellList()
         {
-            return await carSellRepo.GetCarSellList();
+            return await carSellRepo.GetCarSellList(null);
         }
 
         /// <summary>
@@ -47,9 +47,27 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="carSell"></param>
         /// <returns></returns>
         [Route("sell/car")]
-        public CarSellInsertRsp AddCar(CarSellList carSell)
+        public async Task<CarSellInsertRsp> AddCarSell(CarSellList carSell)
         {
-            return carSellRepo.InsertCarSell(carSell);
+            var rsp = carSellRepo.InsertCarSell(carSell);
+            var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID);
+            rsp.CarSell = rspcarsell.CarSellList.FirstOrDefault();
+            return rsp;
+        }
+
+        /// <summary>
+        /// Edit Car Sell || Images: Delete Images will be sent with Status ID 2, and for new Images Base64 Image object is required
+        /// </summary>
+        /// <param name="carSell"></param>
+        /// <returns></returns>
+        [Route("sell/car/edit")]
+        [HttpPut]
+        public async Task<CarSellInsertRsp> EditCarSell(CarSellList carSell)
+        {
+            var rsp = carSellRepo.InsertCarSell(carSell);
+            var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID);
+            rsp.CarSell = rspcarsell.CarSellList.FirstOrDefault();
+            return rsp;
         }
 
         /// <summary>
@@ -63,5 +81,15 @@ namespace GarageCustomerAPI.Controllers
             return carSellRepo.InsertCarFavourite(obj);
         }
 
+        /// <summary>
+        /// Ads Car Sell
+        /// </summary>
+        /// <param name="carSell"></param>
+        /// <returns></returns>
+        [Route("sell/car/ads")]
+        public async Task<CarSellRsp> AdsCarSell(CarSellAds carSell)
+        {
+            return await carSellRepo.GetCarSellAdsList(carSell);
+        }
     }
 }
