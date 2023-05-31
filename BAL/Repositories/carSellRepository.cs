@@ -57,6 +57,7 @@ namespace BAL.Repositories
                     i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
                     foreach (var j in i.CarSellImages)
                     {
+                        j.StatusID = 1;
                         j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
                     }
                     i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
@@ -112,6 +113,7 @@ namespace BAL.Repositories
                     i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
                     foreach (var j in i.CarSellImages)
                     {
+                        j.StatusID = 1;
                         j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
                     }
                     i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
@@ -171,46 +173,10 @@ namespace BAL.Repositories
         public CarSellInsertRsp InsertCarSell(CarSellList carSell)
         {
             var dsc = 0;
-            CarSellImage carimg = new CarSellImage();
             CarSellInsertRsp rsp = new CarSellInsertRsp();
             try
             {
-                try
-                {
-                    dsc = carSell.CarSellID > 0 ? EditCar(carSell) : InsertCar(carSell);
-                    foreach (var item in carSell.CarSellImages)
-                    {
-                        string im = item.Image;
-                        if (im != null && im != "")
-                        {
-                            try
-                            {
-                                var chkImagePath = IsBase64Encoded(im
-                                               .Replace("data:image/png;base64,", "")
-                                               .Replace("data:image/jpg;base64,", "")
-                                               .Replace("data:image/jpeg;base64,", ""));
-
-                                if (chkImagePath)
-                                {
-                                    if (im != null && im != "")
-                                    {
-                                        carimg.Image = uploadFiles(im, "CarSell");
-
-                                        SqlParameter[] p1 = new SqlParameter[1];
-
-                                        p1[0] = new SqlParameter("@Image", carimg.Image);
-                                        (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
-
-                    }
-                }
-                catch (Exception ex)
-                { }
-
+                dsc = carSell.CarSellID > 0 ? EditCar(carSell) : InsertCar(carSell);
                 if (dsc > 0)
                 {
                     rsp.Status = 1;
@@ -385,15 +351,37 @@ namespace BAL.Repositories
                 }
                 catch (Exception)
                 { }
-                //foreach (var i in carSell.CarSellFeatures)
-                //{
-                //    i.FeatureID = i.FeatureID;
-                //    i.CarSellID = carSell.CarSellID;
-                //    SqlParameter[] p1 = new SqlParameter[2];
-                //    p1[0] = new SqlParameter("@CarSellID", i.CarSellID);
-                //    p1[1] = new SqlParameter("@FeatureID", i.FeatureID);
-                //    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeature_CAPI", p1);
-                //}
+
+                foreach (var item in carSell.CarSellImages)
+                {
+                    string im = item.Image;
+                    if (im != null && im != "")
+                    {
+                        try
+                        {
+                            var chkImagePath = IsBase64Encoded(im
+                                           .Replace("data:image/png;base64,", "")
+                                           .Replace("data:image/jpg;base64,", "")
+                                           .Replace("data:image/jpeg;base64,", ""));
+
+                            if (chkImagePath)
+                            {
+                                if (im != null && im != "")
+                                {
+                                    var Image = uploadFiles(im, "CarSell");
+
+                                    SqlParameter[] p1 = new SqlParameter[2];
+
+                                    p1[0] = new SqlParameter("@Image", Image);
+                                    p1[1] = new SqlParameter("@CarsellID", carSell.CarSellID);
+                                    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
+                                }
+                            }
+                        }
+                        catch { }
+                    }   
+                }
+
                 return 1;
             }
             catch (Exception ex)
@@ -446,7 +434,7 @@ namespace BAL.Repositories
 
                 try
                 {
-                    var DelImages = carSell.CarSellImages.Where(x => x.StatusID == 3).ToList();
+                    var DelImages = carSell.CarSellImages.Where(x => x.StatusID == 2).ToList();
                     var ImageIDs = DelImages.Count > 0 ? String.Join(",", DelImages.Select(x => x.ID)) : "";
                     SqlParameter[] p1 = new SqlParameter[2];
                     p1[0] = new SqlParameter("@CarSellID", carSell.CarSellID);
@@ -456,15 +444,35 @@ namespace BAL.Repositories
                 catch (Exception)
                 { }
 
-                //foreach (var i in carSell.CarSellFeatures)
-                //{
-                //    i.FeatureID = i.FeatureID;
-                //    i.CarSellID = carSell.CarSellID;
-                //    SqlParameter[] p1 = new SqlParameter[2];
-                //    p1[0] = new SqlParameter("@CarSellID", i.CarSellID);
-                //    p1[1] = new SqlParameter("@FeatureID", i.FeatureID);
-                //    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellFeatureV2_CAPI", p1);
-                //}
+                foreach (var item in carSell.CarSellImages.Where(x=>x.StatusID==1).ToList())
+                {
+                    string im = item.Image;
+                    if (im != null && im != "")
+                    {
+                        try
+                        {
+                            var chkImagePath = IsBase64Encoded(im
+                                           .Replace("data:image/png;base64,", "")
+                                           .Replace("data:image/jpg;base64,", "")
+                                           .Replace("data:image/jpeg;base64,", ""));
+
+                            if (chkImagePath)
+                            {
+                                if (im != null && im != "")
+                                {
+                                    var Image = uploadFiles(im, "CarSell");
+
+                                    SqlParameter[] p1 = new SqlParameter[2];
+
+                                    p1[0] = new SqlParameter("@Image", Image);
+                                    p1[1] = new SqlParameter("@CarsellID", carSell.CarSellID);
+                                    (new DBHelper().ExecuteNonQueryReturn)("sp_insertCarSellImages_CAPI", p1);
+                                }
+                            }
+                        }
+                        catch { }
+                    }
+                }
                 return 1;
             }
             catch (Exception ex)

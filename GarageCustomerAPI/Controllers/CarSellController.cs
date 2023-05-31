@@ -56,9 +56,9 @@ namespace GarageCustomerAPI.Controllers
         }
 
         /// <summary>
-        /// Edit Car Sell || Images: Delete Images will be sent with Status ID 2, and for new Images Base64 Image object is required
+        /// Edit Car Sell 
         /// </summary>
-        /// <param name="carSell"></param>
+        /// <param name="carSell">Images: Delete Images will be sent with Status ID 2, and for new Images Base64 Image object is required</param>
         /// <returns></returns>
         [Route("sell/car/edit")]
         [HttpPut]

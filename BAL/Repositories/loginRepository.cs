@@ -113,6 +113,7 @@ namespace BAL.Repositories
                     i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
                     foreach (var j in i.CarSellImages)
                     {
+                        j.StatusID = 1;
                         j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
                     }
                     i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
@@ -128,6 +129,7 @@ namespace BAL.Repositories
                     i.CarSellImages = _dtCSMyAdsImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
                     foreach (var j in i.CarSellImages)
                     {
+                        j.StatusID = 1;
                         j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
                     }
                     i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
