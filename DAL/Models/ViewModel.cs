@@ -678,6 +678,7 @@ namespace DAL.Models
         public List<CarSellList> MyAds { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
+        public string Token { get; set; }
     }
     public class CarFavouriteList
     {

@@ -36,7 +36,8 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("carsellsetting/all")]
-        public async Task<CarSellRsp> CarSellList()
+		[Authorize]
+		public async Task<CarSellRsp> CarSellList()
         {
             return await carSellRepo.GetCarSellList(null);
         }
@@ -47,7 +48,8 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="carSell"></param>
         /// <returns></returns>
         [Route("sell/car")]
-        public async Task<CarSellInsertRsp> AddCarSell(CarSellList carSell)
+		[Authorize]
+		public async Task<CarSellInsertRsp> AddCarSell(CarSellList carSell)
         {
             var rsp = carSellRepo.InsertCarSell(carSell);
             var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID);
@@ -62,7 +64,8 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [Route("sell/car/edit")]
         [HttpPut]
-        public async Task<CarSellInsertRsp> EditCarSell(CarSellList carSell)
+		[Authorize]
+		public async Task<CarSellInsertRsp> EditCarSell(CarSellList carSell)
         {
             var rsp = carSellRepo.InsertCarSell(carSell);
             var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID);
@@ -76,7 +79,8 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj">CarSellID for the Identity || Status Id (1 Add and 2 for Remove)</param>
         /// <returns></returns>
         [Route("favourite/car")]
-        public Rsp FavouriteCar(CarFavouriteList obj)
+		[Authorize]
+		public Rsp FavouriteCar(CarFavouriteList obj)
         {
             return carSellRepo.InsertCarFavourite(obj);
         }
@@ -87,7 +91,8 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="carSell"></param>
         /// <returns></returns>
         [Route("sell/car/ads")]
-        public async Task<CarSellRsp> AdsCarSell(CarSellAds carSell)
+		[Authorize]
+		public async Task<CarSellRsp> AdsCarSell(CarSellAds carSell)
         {
             return await carSellRepo.GetCarSellAdsList(carSell);
         }

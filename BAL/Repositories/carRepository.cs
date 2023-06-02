@@ -14,7 +14,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using WebAPICode.Helpers;
-
 namespace BAL.Repositories
 {
     public class carRepository : BaseRepository2

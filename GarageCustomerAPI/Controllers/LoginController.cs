@@ -2,13 +2,14 @@
 using DAL.DBEntities;
 using DAL.DBEntities2;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Web.Http;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Web.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using System;
 
 namespace GarageCustomerAPI.Controllers
 {
@@ -41,7 +42,10 @@ namespace GarageCustomerAPI.Controllers
         [HttpGet]
         public LoginResponse Login(string Phone)
         {
-            return loginRepo.CustomerLogin(Phone);
+            var result = loginRepo.CustomerLogin(Phone);
+            var token = GenerateJwtToken(result.Customer.CustomerID.ToString(), result.Customer.Mobile);
+            result.Token = token?? "";
+            return result;
         }
 
         /// <summary>
@@ -91,6 +95,29 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.UpdateNotification(obj);
         }
 
-     
-    }
+		private string GenerateJwtToken(string userId, string mobileNo)
+		{
+			var issuer = WebConfigurationManager.AppSettings["Issuer"];
+			var audience = WebConfigurationManager.AppSettings["Audience"];
+			var secretKey = WebConfigurationManager.AppSettings["SecretKey"];
+
+			var claims = new List<Claim>
+		{
+			new Claim(ClaimTypes.NameIdentifier, userId),
+			new Claim(ClaimTypes.MobilePhone, mobileNo)
+		};
+
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+			var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+			var token = new JwtSecurityToken(
+				issuer: issuer,
+				audience: audience,
+				claims: claims,
+				expires: DateTime.Now.AddHours(10), // Token expiration time
+				signingCredentials: credentials
+			);
+
+			return new JwtSecurityTokenHandler().WriteToken(token);
+		}
+	}
 }
