@@ -43,8 +43,8 @@ namespace GarageCustomerAPI.Controllers
         public LoginResponse Login(string Phone)
         {
             var result = loginRepo.CustomerLogin(Phone);
-            var token = GenerateJwtToken(result.Customer.CustomerID.ToString(), result.Customer.Mobile);
-            result.Token = token?? "";
+            var token = GenerateJwtToken(result.Customer.CustomerID.ToString(), result.Customer.Mobile?? "", result.Customer.Email?? "");
+            result.Token = token;
             return result;
         }
 
@@ -54,6 +54,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj">Mandatory</param>
         /// <returns></returns>
         [Route("customer/update")]
+        [Authorize]
         public CustomerUpdateRsp PostUpdateCustomer(Customers obj)
         {
             return loginRepo.CustomerUpdate(obj);
@@ -66,7 +67,8 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("login/insert/token")]
-        public Rsp PostInsertToken(TokenBLL obj)
+		[Authorize]
+		public Rsp PostInsertToken(TokenBLL obj)
         {
             return settingRepo.InsertToken(obj);
         }
@@ -78,7 +80,8 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("login/update/token")]
-        public Rsp PostUpdateToken(TokenBLL obj)
+		[Authorize]
+		public Rsp PostUpdateToken(TokenBLL obj)
         {
             return settingRepo.UpdateToken(obj);
         }
@@ -90,12 +93,13 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("notification/update")]
-        public Rsp PostUpdateToken(NotificationBLL obj)
+		[Authorize]
+		public Rsp PostUpdateToken(NotificationBLL obj)
         {
             return settingRepo.UpdateNotification(obj);
         }
 
-		private string GenerateJwtToken(string userId, string mobileNo)
+		internal string GenerateJwtToken(string userId, string mobileNo, string Email)
 		{
 			var issuer = WebConfigurationManager.AppSettings["Issuer"];
 			var audience = WebConfigurationManager.AppSettings["Audience"];
@@ -104,7 +108,8 @@ namespace GarageCustomerAPI.Controllers
 			var claims = new List<Claim>
 		{
 			new Claim(ClaimTypes.NameIdentifier, userId),
-			new Claim(ClaimTypes.MobilePhone, mobileNo)
+			new Claim(ClaimTypes.MobilePhone, mobileNo),
+			new Claim(ClaimTypes.Email, Email)
 		};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
