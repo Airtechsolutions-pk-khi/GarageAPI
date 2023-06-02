@@ -496,7 +496,7 @@
             Sell Car
             </summary>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.CarSellController.CarSellList">
+        <member name="M:GarageCustomerAPI.Controllers.CarSellController.CarSellList(DAL.Models.PagingParameterModel)">
             <summary>
             Settings for Carsell
             </summary>
