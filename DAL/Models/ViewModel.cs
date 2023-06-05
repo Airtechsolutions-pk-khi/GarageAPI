@@ -763,6 +763,7 @@ namespace DAL.Models
         public int? CustomerID { get; set; }
         public int? BodyTypeID { get; set; }
         public string Name { get; set; } = "";
+        public string CustomerContact { get; set; } = "";
         public string Description { get; set; } = "";
         public string RegistrationNo { get; set; } = "";
         public string BodyType { get; set; } = "";
