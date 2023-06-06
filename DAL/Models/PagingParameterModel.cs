@@ -8,7 +8,7 @@ namespace DAL.Models
 {
 	public class PagingParameterModel
 	{
-		const int MaxPageSize = 20;
+		//const int MaxPageSize = 20;
 
 		public int PageNumber { get; set; } = 1;
 
@@ -20,7 +20,8 @@ namespace DAL.Models
 			get { return _PageSize; }
 			set
 			{
-				_PageSize = (value > MaxPageSize) ? MaxPageSize : value;
+				//_PageSize = (value > MaxPageSize) ? MaxPageSize : value;
+				_PageSize = value;
 			}
 		}
 	}

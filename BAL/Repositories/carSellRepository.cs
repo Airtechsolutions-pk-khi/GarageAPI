@@ -23,76 +23,135 @@ using System.Data.Entity;
 namespace BAL.Repositories
 {
     public class carSellRepository : BaseRepository2
-    {
+    { 
+        private readonly PaginationRepository _pageRepo;
         //public Cars cars;
         public carSellRepository()
             : base()
         {
             DBContext2 = new Garage_Entities();
+            _pageRepo = new PaginationRepository(new DBHelper());
 
         }
-        public carSellRepository(Garage_Entities contextDB2)
-            : base(contextDB2)
-        {
-            DBContext2 = contextDB2;
-        }
-        public async Task<CarSellRsp> GetCarSellList(int? CarSellID)
-        {
-            var rsp = new CarSellRsp();
-            try
-            {
-                var ds = await GetInfo(CarSellID);
-                var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
-                var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
-                var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
-                var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
-                var _dtCountryInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
-                //var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
-                var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
-                var _dtBodyType = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
+		public carSellRepository(Garage_Entities contextDB2, PaginationRepository pageRepo)
+			: base(contextDB2)
+		{
+			DBContext2 = contextDB2;
+			_pageRepo = pageRepo;
+		}
+		public CarSellRsp GetCarSellListPagination(int pageNumber, int pageSize, int? CarSellID)
+		{
+			var rsp = new CarSellRsp();
+			try
+			{
+				var ds = _pageRepo.GetPaginationData<dynamic>(pageNumber, pageSize, "sp_GetCarSellV2_CAPI_V2", new { CarSellID });
+				//var ds = await GetInfo(CarSellID);
+				var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
+				var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
+				var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
+				var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
+				var _dtCountryInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
+				//var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
+				var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
+				var _dtBodyType = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
+                var _nextPage = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7]));
+				foreach (var i in _dtCarSellInfo)
+				{
+					//i.CreatedDate = DateParse(i.CreatedDate.ToString());
+					i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+					foreach (var j in i.CarSellImages)
+					{
+						j.StatusID = 1;
+						j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
+					}
+					i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
+					i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+					foreach (var j in i.CarSellFeatures)
+					{
+						j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+					}
+				}
+				foreach (var item in _dtCountryInfo)
+				{
+					item.CityList = _dtCityInfo.Where(x => x.CountryCode == item.Code).ToList();
+				}
+				foreach (var i in _dtBodyType)
+				{
+					i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.Image;
+				}
 
-                foreach (var i in _dtCarSellInfo)
-                {
-                    i.CreatedDate = DateParse(i.CreatedDate.ToString());
-                    i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
-                    foreach (var j in i.CarSellImages)
-                    {
-                        j.StatusID = 1;
-                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
-                    }
-                    i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
-                    i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
-                    foreach (var j in i.CarSellFeatures)
-                    {
-                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
-                    }
-                }
-                foreach (var item in _dtCountryInfo)
-                {
-                    item.CityList = _dtCityInfo.Where(x => x.CountryCode == item.Code).ToList();
-                }
-                foreach (var i in _dtBodyType)
-                {
-                    i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.Image;
-                }
+				rsp.BodyTypes = _dtBodyType;
+				rsp.Features = _dtFeatureInfoALL;
+				rsp.CarSellList = _dtCarSellInfo;
+				rsp.CountryList = _dtCountryInfo;
+                rsp.PageInfo = _nextPage;
+				rsp.Status = 1;
+				rsp.Description = "Successful";
+			}
+			catch (Exception ex)
+			{
+				rsp.Status = 0;
+				rsp.Description = ex.Message;
+			}
+			return rsp;
+		}
+		public async Task<CarSellRsp> GetCarSellList(int? CarSellID)
+		{
+			var rsp = new CarSellRsp();
+			try
+			{
+				var ds = await GetInfo(CarSellID);
+				var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
+				var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
+				var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
+				var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
+				var _dtCountryInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
+				//var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
+				var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
+				var _dtBodyType = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
 
-                rsp.BodyTypes = _dtBodyType;
-                rsp.Features = _dtFeatureInfoALL;
-                rsp.CarSellList = _dtCarSellInfo;
-                rsp.CountryList = _dtCountryInfo;
+				foreach (var i in _dtCarSellInfo)
+				{
+					i.CreatedDate = DateParse(i.CreatedDate.ToString());
+					i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+					foreach (var j in i.CarSellImages)
+					{
+						j.StatusID = 1;
+						j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
+					}
+					i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
+					i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+					foreach (var j in i.CarSellFeatures)
+					{
+						j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+					}
+				}
+				foreach (var item in _dtCountryInfo)
+				{
+					item.CityList = _dtCityInfo.Where(x => x.CountryCode == item.Code).ToList();
+				}
+				foreach (var i in _dtBodyType)
+				{
+					i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.Image;
+				}
 
-                rsp.Status = 1;
-                rsp.Description = "Successful";
-            }
-            catch (Exception ex)
-            {
-                rsp.Status = 0;
-                rsp.Description = "Failed";
-            }
-            return rsp;
+				rsp.BodyTypes = _dtBodyType;
+				rsp.Features = _dtFeatureInfoALL;
+				rsp.CarSellList = _dtCarSellInfo;
+				rsp.CountryList = _dtCountryInfo;
 
-        }
-        public async Task<CarSellRsp> GetCarSellAdsList(CarSellAds obj)
+				rsp.Status = 1;
+				rsp.Description = "Successful";
+			}
+			catch (Exception ex)
+			{
+				rsp.Status = 0;
+				rsp.Description = "Failed";
+			}
+			return rsp;
+
+		}
+		public async Task<CarSellRsp> GetCarSellAdsList(CarSellAds obj)
         {
             var rsp = new CarSellRsp();
             try

@@ -17,6 +17,7 @@ namespace DAL.Models
     public class Rsp
     {
         public string Description { get; set; }
+        public dynamic PageInfo { get; set; } = false;
         public int Status { get; set; }
 
     }

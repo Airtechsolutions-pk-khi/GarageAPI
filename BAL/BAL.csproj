@@ -116,6 +116,7 @@
     <Compile Include="Repositories\carSellRepository.cs" />
     <Compile Include="Repositories\carRepository.cs" />
     <Compile Include="Repositories\loginRepository.cs" />
+    <Compile Include="Repositories\PaginationRepository.cs" />
     <Compile Include="Repositories\settingRepository.cs" />
     <Compile Include="Repositories\Zatca.cs" />
   </ItemGroup>

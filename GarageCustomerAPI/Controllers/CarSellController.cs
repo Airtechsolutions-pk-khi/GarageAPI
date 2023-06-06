@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using WebAPICode.Helpers;
 
 namespace GarageCustomerAPI.Controllers
 {
@@ -23,13 +24,13 @@ namespace GarageCustomerAPI.Controllers
         /// <summary>
         /// Sell Car
         /// </summary>
-        carSellRepository carSellRepo;
+        private readonly carSellRepository carSellRepo;
         /// <summary>
         /// Sell Car
         /// </summary>
         public CarSellController()
         {
-            carSellRepo = new carSellRepository(new Garage_Entities());
+            carSellRepo = new carSellRepository(new Garage_Entities(), new PaginationRepository(new DBHelper()));
         }
 
         /// <summary>
@@ -39,49 +40,49 @@ namespace GarageCustomerAPI.Controllers
         [HttpGet]
         [Route("carsellsetting/all")]
 		[Authorize]
-		public async Task<CarSellRsp> CarSellList([FromUri] PagingParameterModel pagingparametermodel)
+		public CarSellRsp CarSellList([FromUri] PagingParameterModel pagingparametermodel)
         {
-            var result = await carSellRepo.GetCarSellList(null);
-			// Get's No of Rows Count   
-			int count = result.CountryList.Count();
+            var result = carSellRepo.GetCarSellListPagination(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, null);
+            //// Get's No of Rows Count   
+            //int count = result.CountryList[0].CityList.Count();
 
-			// Parameter is passed from Query string if it is null then it default Value will be pageNumber:1  
-			int CurrentPage = pagingparametermodel.PageNumber;
+            //// Parameter is passed from Query string if it is null then it default Value will be pageNumber:1  
+            //int CurrentPage = pagingparametermodel.PageNumber;
 
-			// Parameter is passed from Query string if it is null then it default Value will be pageSize:20  
-			int PageSize = pagingparametermodel.PageSize;
+            //// Parameter is passed from Query string if it is null then it default Value will be pageSize:20  
+            //int PageSize = pagingparametermodel.PageSize;
 
-			// Display TotalCount to Records to User  
-			int TotalCount = count;
+            //// Display TotalCount to Records to User  
+            //int TotalCount = count;
 
-			// Calculating Totalpage by Dividing (No of Records / Pagesize)  
-			int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+            //// Calculating Totalpage by Dividing (No of Records / Pagesize)  
+            //int TotalPages = (int)Math.Ceiling(count / (double)PageSize);
 
-			// Returns List of Customer after applying Paging   
-			var pagresult = result.CountryList.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
+            //// Returns List of Customer after applying Paging   
+            //var pagresult = result.CountryList[0].CityList.Skip((CurrentPage - 1) * PageSize).Take(PageSize).ToList();
 
-			// if CurrentPage is greater than 1 means it has previousPage  
-			var previousPage = CurrentPage > 1 ? "Yes" : "No";
+            //// if CurrentPage is greater than 1 means it has previousPage  
+            //var previousPage = CurrentPage > 1 ? "Yes" : "No";
 
-			// if TotalPages is greater than CurrentPage means it has nextPage  
-			var nextPage = CurrentPage < TotalPages ? "Yes" : "No";
+            //// if TotalPages is greater than CurrentPage means it has nextPage  
+            //var nextPage = CurrentPage < TotalPages ? "Yes" : "No";
 
-			// Object which we are going to send in header   
-			var paginationMetadata = new
-			{
-				totalCount = TotalCount,
-				pageSize = PageSize,
-				currentPage = CurrentPage,
-				totalPages = TotalPages,
-				previousPage,
-				nextPage
-			};
+            //// Object which we are going to send in header   
+            ////var paginationMetadata = new
+            ////{
+            ////	totalCount = TotalCount,
+            ////	pageSize = PageSize,
+            ////	currentPage = CurrentPage,
+            ////	totalPages = TotalPages,
+            ////	previousPage,
+            ////	nextPage
+            ////};
 
-			// Setting Header  
-			HttpContext.Current.Response.Headers.Add("Paging-Headers", JsonConvert.SerializeObject(paginationMetadata));
-			// Returing List of Customers Collections  
-			result.CountryList = pagresult;
-			return result;
+            //         // Setting Header  
+            //         //HttpContext.Current.Response.Headers.Add("Paging-Headers", JsonConvert.SerializeObject(paginationMetadata));
+            //         // Returing List of Customers Collections  
+            //         result.CountryList[0].CityList = pagresult;
+            return result;
         }
 
         /// <summary>
