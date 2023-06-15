@@ -621,7 +621,7 @@
             Settings
             </summary>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetAll">
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetAll(DAL.Models.PagingParameterModel)">
             <summary>
             - List Of Locations
             - List Of Amenities
@@ -630,7 +630,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetLocation(System.Int32)">
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetLocation(DAL.Models.PagingParameterModel,System.Int32)">
             <summary>
             - List Of Locations
             - List Of Amenities

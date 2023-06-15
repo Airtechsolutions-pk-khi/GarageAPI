@@ -1,15 +1,8 @@
 ﻿using BAL.Repositories;
 using DAL.DBEntities;
-using DAL.DBEntities2;
 using DAL.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using WebAPICode.Helpers;
 
@@ -30,7 +23,11 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public CarSellController()
         {
-            carSellRepo = new carSellRepository(new Garage_Entities(), new PaginationRepository(new DBHelper()));
+            carSellRepo = new carSellRepository(
+                new Garage_Entities(), 
+                new PaginationRepository(
+                    new DBHelper(), 
+                    new DBHelperPOS()));
         }
 
         /// <summary>

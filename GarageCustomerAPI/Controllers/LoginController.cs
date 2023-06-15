@@ -10,6 +10,7 @@ using System.Web.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System;
+using WebAPICode.Helpers;
 
 namespace GarageCustomerAPI.Controllers
 {
@@ -30,7 +31,11 @@ namespace GarageCustomerAPI.Controllers
         public LoginController()
         {
             loginRepo = new loginRepository(new Garage_Entities());
-            settingRepo = new settingRepository(new GarageCustomer_Entities());
+            settingRepo = new settingRepository(
+                new GarageCustomer_Entities(), 
+                new PaginationRepository(
+                    new DBHelper(), 
+                    new DBHelperPOS()));
         }
 
         /// <summary>

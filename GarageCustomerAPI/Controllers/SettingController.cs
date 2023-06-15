@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using WebAPICode.Helpers;
 
 namespace GarageCustomerAPI.Controllers
 {
@@ -22,7 +23,11 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public SettingController()
         {
-            settingRepo = new settingRepository(new GarageCustomer_Entities());
+            settingRepo = new settingRepository(
+                new GarageCustomer_Entities(), 
+                new PaginationRepository(
+                    new DBHelper(), 
+                    new DBHelperPOS()));
         }
 
         /// <summary>
@@ -34,9 +39,9 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [Route("setting/all")]
 		[Authorize]
-		public SettingRsp GetAll()
+		public SettingRsp GetAll([FromUri] PagingParameterModel pagingparametermodel)
         {
-            return settingRepo.GetSettings(0);
+            return settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, 0);
         }
 
         /// <summary>
@@ -48,9 +53,9 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [Route("setting/all/{LocationID}")]
 		[Authorize]
-		public SettingRsp GetLocation(int LocationID)
+		public SettingRsp GetLocation([FromUri] PagingParameterModel pagingparametermodel, int LocationID)
         {
-			return settingRepo.GetSettings(LocationID);
+			return settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, LocationID);
         }
 
         /// <summary>

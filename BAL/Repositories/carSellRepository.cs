@@ -19,6 +19,8 @@ using WebAPICode.Helpers;
 using DAL.DBEntities2;
 using System.Security.Cryptography;
 using System.Data.Entity;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace BAL.Repositories
 {
@@ -30,7 +32,9 @@ namespace BAL.Repositories
             : base()
         {
             DBContext2 = new Garage_Entities();
-            _pageRepo = new PaginationRepository(new DBHelper());
+            _pageRepo = new PaginationRepository(
+                new DBHelper(), 
+                new DBHelperPOS());
 
         }
 		public carSellRepository(Garage_Entities contextDB2, PaginationRepository pageRepo)
@@ -46,15 +50,15 @@ namespace BAL.Repositories
 			{
 				var ds = _pageRepo.GetPaginationData<dynamic>(pageNumber, pageSize, "sp_GetCarSellV2_CAPI_V2", new { CarSellID });
 				//var ds = await GetInfo(CarSellID);
-				var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
-				var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
-				var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
-				var _dtCityInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
-				var _dtCountryInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
+				var _dtCarSellInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
+				var _dtFeatureInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
+				var _dtCSImageInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
+				var _dtCityInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CityList>>().ToList();
+				var _dtCountryInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CountryList>>().ToList();
 				//var _dtFeatureJuncInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<Feature>>().ToList();
-				var _dtFeatureInfoALL = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
-				var _dtBodyType = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
-                var _nextPage = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7]));
+				var _dtFeatureInfoALL = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<FeatureList>>().ToList();
+				var _dtBodyType = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<BodyTypeList>>().ToList();
+                var _nextPage = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[7]));
 				foreach (var i in _dtCarSellInfo)
 				{
 					//i.CreatedDate = DateParse(i.CreatedDate.ToString());

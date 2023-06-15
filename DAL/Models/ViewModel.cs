@@ -698,6 +698,7 @@ namespace DAL.Models
         public List<SettingBLL> Settings { get; set; }
         public List<AmenitiesBLL> Amenities { get; set; }
         public List<LandmarkBLL> Landmarks { get; set; }
+        public dynamic PageInfo { get; set; } = false;
         public int Status { get; set; }
         public string Description { get; set; }
     }

@@ -1,6 +1,4 @@
-﻿
-using DAL.DBEntities;
-using DAL.DBEntities2;
+﻿using DAL.DBEntities2;
 using DAL.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,8 +9,6 @@ using System.Data;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using WebAPICode.Helpers;
 
 namespace BAL.Repositories
@@ -20,42 +16,52 @@ namespace BAL.Repositories
 
     public class settingRepository : BaseRepository
     {
-        public settingRepository()
+		private readonly PaginationRepository _pageRepo;
+		public settingRepository()
             : base()
         {
             DBContext = new GarageCustomer_Entities();
+			_pageRepo = new PaginationRepository(
+                new DBHelper(), 
+                new DBHelperPOS());
 
-        }
-        public settingRepository(GarageCustomer_Entities contextDB)
+		}
+        public settingRepository(GarageCustomer_Entities contextDB, PaginationRepository pageRepo)
             : base(contextDB)
         {
             DBContext = contextDB;
-        }
-        public SettingRsp GetSettings(int LocationID)
+            _pageRepo = pageRepo;
+
+		}
+        public SettingRsp GetSettings(int pageNumber, int pageSize, int? LocationID)
         {
 
             var rsp = new SettingRsp();
             try
             {
-                var ds = GetInfo(LocationID);
-                var _dtLocationInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
-                var _dtServiceInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
-                var _dtLocImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<LocationImages>>().ToList();
-                var _dtSettingInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<SettingBLL>>().ToList();
-                var _dtAmenitiesInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<AmenitiesBLL>>().ToList();
-                var _dtReviewsInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
-                var _dtDiscountInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<DiscountBLL>>().ToList();
-                var _dtServiceInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<ServiceBLL>>().ToList();
-                var _dtAminitiesInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<AmenitiesBLL>>().ToList();
-                var _dtLandmarks = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<LandmarkBLL>>().ToList();
-                var _dtSettingLocation = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<LocationJunc>>().ToList();
-                var _dtReviewCustomer = ds.Tables[11] == null?new List<ReportReviewsBLL>(): JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<ReportReviewsBLL>>().ToList();
+                //var ds = GetInfo(LocationID);
+                LocationID = LocationID == 0 ? null : LocationID;
+				var ds = _pageRepo.GetPaginationDataPos<dynamic>(pageNumber, pageSize, "sp_GetLocationsV3_CAPI", new { LocationID });
+				var _dtLocationInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
+                var _dtServiceInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
+                var _dtLocImageInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<LocationImages>>().ToList();
+                var _dtSettingInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<SettingBLL>>().ToList();
+                var _dtAmenitiesInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<AmenitiesBLL>>().ToList();
+                var _dtReviewsInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReviewsBLL>>().ToList();
+                var _dtDiscountInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<DiscountBLL>>().ToList();
+                var _dtServiceInfoAll = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<ServiceBLL>>().ToList();
+                var _dtAminitiesInfoAll = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<AmenitiesBLL>>().ToList();
+                var _dtLandmarks = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<LandmarkBLL>>().ToList();
+                var _dtSettingLocation = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<LocationJunc>>().ToList();
+                var _dtReviewCustomer = ds.Tables[11] == null?new List<ReportReviewsBLL>(): JArray.Parse(JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<ReportReviewsBLL>>().ToList();
+				var _nextPage = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[12]));
 
-                rsp.Location = _dtLocationInfo;
+				rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfoAll;
                 rsp.Settings = _dtSettingInfo;
                 rsp.Amenities = _dtAminitiesInfoAll;
                 rsp.Landmarks = _dtLandmarks;
+                rsp.PageInfo = _nextPage;
 
                 foreach (var j in rsp.Settings)
                 {
@@ -145,8 +151,8 @@ namespace BAL.Repositories
             try
             {
                 var ds = GetCarMakeInfo();
-                rsp.CarMake = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarMakeList>>().ToList();
-                var _dtCarModels = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarModelList>>().ToList();
+                rsp.CarMake = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarMakeList>>().ToList();
+                var _dtCarModels = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarModelList>>().ToList();
 
                 foreach (var i in rsp.CarMake)
                 {
@@ -198,7 +204,7 @@ namespace BAL.Repositories
             Rsp rsp;
             try
             {
-                PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+                PushToken token = JObject.Parse(JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
                 token.StatusID = 1;
                 var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).Count();
                 if (chk == 0)
@@ -402,7 +408,7 @@ namespace BAL.Repositories
             {
                 var dt = AddReviewADO(obj);
 
-                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
                 if (dt == null)
                 {
                     rsp.Reviews = new List<ReviewsBLL>();
@@ -433,7 +439,7 @@ namespace BAL.Repositories
             try
             {
                 var dt = UpdateReviewADO(obj);
-                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
                 if (dt == null)
                 {
                     rsp.Reviews = new List<ReviewsBLL>();
