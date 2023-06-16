@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System;
 using WebAPICode.Helpers;
+using DAL.GlobalAndCommon;
 
 namespace GarageCustomerAPI.Controllers
 {
@@ -35,7 +36,7 @@ namespace GarageCustomerAPI.Controllers
                 new GarageCustomer_Entities(), 
                 new PaginationRepository(
                     new DBHelper(), 
-                    new DBHelperPOS()));
+                    new DBHelperPOS(AppGlobal.connectionStringUAT)));
         }
 
         /// <summary>

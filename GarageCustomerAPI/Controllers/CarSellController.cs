@@ -1,5 +1,6 @@
 ﻿using BAL.Repositories;
 using DAL.DBEntities;
+using DAL.GlobalAndCommon;
 using DAL.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace GarageCustomerAPI.Controllers
                 new Garage_Entities(), 
                 new PaginationRepository(
                     new DBHelper(), 
-                    new DBHelperPOS()));
+                    new DBHelperPOS(AppGlobal.connectionStringUAT)));
         }
 
         /// <summary>
@@ -37,9 +38,14 @@ namespace GarageCustomerAPI.Controllers
         [HttpGet]
         [Route("carsellsetting/all")]
 		[Authorize]
-		public CarSellRsp CarSellList([FromUri] PagingParameterModel pagingparametermodel)
+		public async Task<CarSellRsp> CarSellList([FromUri] PagingParameterModel pagingparametermodel)
         {
-            var result = carSellRepo.GetCarSellListPagination(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, null);
+			//CarSellRsp result;
+			if (pagingparametermodel == null)
+            {
+				return await carSellRepo.GetCarSellList(null);
+            }
+            return await carSellRepo.GetCarSellList(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, null);
             //// Get's No of Rows Count   
             //int count = result.CountryList[0].CityList.Count();
 
@@ -79,7 +85,7 @@ namespace GarageCustomerAPI.Controllers
             //         //HttpContext.Current.Response.Headers.Add("Paging-Headers", JsonConvert.SerializeObject(paginationMetadata));
             //         // Returing List of Customers Collections  
             //         result.CountryList[0].CityList = pagresult;
-            return result;
+            //return result;
         }
 
         /// <summary>

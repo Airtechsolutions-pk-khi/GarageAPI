@@ -8,6 +8,8 @@ using System.Text;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using WebAPICode.Helpers;
+using DAL.GlobalAndCommon;
+using System.Threading.Tasks;
 
 namespace GarageCustomerAPI.Controllers
 {
@@ -17,7 +19,7 @@ namespace GarageCustomerAPI.Controllers
         /// <summary>
         /// Settings
         /// </summary>
-        settingRepository settingRepo;
+        private readonly settingRepository settingRepo;
         /// <summary>
         /// Settings
         /// </summary>
@@ -27,7 +29,7 @@ namespace GarageCustomerAPI.Controllers
                 new GarageCustomer_Entities(), 
                 new PaginationRepository(
                     new DBHelper(), 
-                    new DBHelperPOS()));
+                    new DBHelperPOS(AppGlobal.connectionStringUAT)));
         }
 
         /// <summary>
@@ -39,9 +41,13 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [Route("setting/all")]
 		[Authorize]
-		public SettingRsp GetAll([FromUri] PagingParameterModel pagingparametermodel)
+		public async Task<SettingRsp> GetAll([FromUri] PagingParameterModel pagingparametermodel)
         {
-            return settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, 0);
+            if (pagingparametermodel == null)
+            {
+                return await settingRepo.GetSettings(0);
+            }
+            return await settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, 0);
         }
 
         /// <summary>
@@ -53,9 +59,9 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [Route("setting/all/{LocationID}")]
 		[Authorize]
-		public SettingRsp GetLocation([FromUri] PagingParameterModel pagingparametermodel, int LocationID)
+		public async Task<SettingRsp> GetLocation([FromUri] PagingParameterModel pagingparametermodel, int LocationID)
         {
-			return settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, LocationID);
+			return await settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, LocationID);
         }
 
         /// <summary>

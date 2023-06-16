@@ -456,6 +456,7 @@
     <Compile Include="DBEntities\ZohoSetting.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="GlobalAndCommon\AppGlobal.cs" />
     <Compile Include="Helpers\DataTableEntensions.cs" />
     <Compile Include="Helpers\DBHelperPOS.cs" />
     <Compile Include="Helpers\DBHelper.cs" />

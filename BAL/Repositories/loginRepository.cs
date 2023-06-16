@@ -1,6 +1,7 @@
 ﻿
 using DAL.DBEntities;
 using DAL.DBEntities2;
+using DAL.GlobalAndCommon;
 using DAL.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -158,7 +159,7 @@ namespace BAL.Repositories
             {
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@Phone", Mobile);
-                return (new DBHelperPOS().GetDatasetFromSP)("sp_login_CAPI", p);
+                return (new DBHelperPOS(AppGlobal.connectionStringUAT).GetDatasetFromSP)("sp_login_CAPI", p);
             }
             catch (Exception ex)
             {
@@ -215,7 +216,7 @@ namespace BAL.Repositories
                 p[12] = new SqlParameter("@CreatedBy", "CustomerAPP");
                 p[13] = new SqlParameter("@CustomerID", obj.CustomerID);
                 p[14] = new SqlParameter("@City", obj.City);
-                return (new DBHelperPOS().GetTableFromSP)("sp_UpdateCustomer_CAPI", p);
+                return (new DBHelperPOS(AppGlobal.connectionStringUAT).GetTableFromSP)("sp_UpdateCustomer_CAPI", p);
 
             }
             catch (Exception ex)

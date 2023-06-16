@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using WebAPICode.Helpers;
 
 namespace BAL.Repositories
@@ -17,7 +18,7 @@ namespace BAL.Repositories
 			_dbhelperPOS = dbhelperPOS;
 		}
 
-		public DataSet GetPaginationData<U>(int pageNumber, int pageSize, string SP, U parametres)
+		public async Task<DataSet> GetPaginationData<U>(int pageNumber, int pageSize, string SP, U parametres)
 		{
 			try
 			{
@@ -25,14 +26,14 @@ namespace BAL.Repositories
 				p[0] = new SqlParameter("@PageNumber", pageNumber);
 				p[1] = new SqlParameter("@PageSize", pageSize);
 				p[2] = new SqlParameter("@ParamTable1", JsonConvert.SerializeObject(parametres));
-				return _dbhelper.GetDatasetFromSP(SP, p);
+				return await _dbhelper.GetDatasetFromSPAsync(SP, p);
 			}
 			catch (Exception ex)
 			{
 				return null;
 			}
 		}
-		public DataSet GetPaginationDataPos<U>(int pageNumber, int pageSize, string SP, U parametres)
+		public async Task<DataSet> GetPaginationDataPos<U>(int pageNumber, int pageSize, string SP, U parametres)
 		{
 			try
 			{
@@ -41,7 +42,7 @@ namespace BAL.Repositories
 				p[1] = new SqlParameter("@PageSize", pageSize);
 				p[2] = new SqlParameter("@ParamTable1", JsonConvert.SerializeObject(parametres));
 				p[3] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
-				return _dbhelperPOS.GetDatasetFromSP(SP, p);
+				return await _dbhelperPOS.GetDatasetFromSPAsync(SP, p);
 			}
 			catch (Exception ex)
 			{

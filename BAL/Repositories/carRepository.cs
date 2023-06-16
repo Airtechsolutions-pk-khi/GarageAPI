@@ -1,5 +1,6 @@
 ﻿
 using DAL.DBEntities;
+using DAL.GlobalAndCommon;
 using DAL.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -41,7 +42,7 @@ namespace BAL.Repositories
                 p[0] = new SqlParameter("@RegistrationNo", cars.RegistrationNo);
                 p[1] = new SqlParameter("@StatusID", cars.StatusID);
                 p[2] = new SqlParameter("@CustomerID", cars.CustomerID);
-                var check = (new DBHelperPOS().GetDatasetFromSP)("sp_CheckNoPlate", p);
+                var check = (new DBHelperPOS(AppGlobal.connectionStringUAT).GetDatasetFromSP)("sp_CheckNoPlate", p);
 
                 if (check.Tables[0].Rows.Count == 0)
                 {
@@ -148,7 +149,7 @@ namespace BAL.Repositories
                 p[10] = new SqlParameter("@UserID", cars.UserID);
                 p[11] = new SqlParameter("@StatusID", cars.StatusID);
 
-                cars.CarID = int.Parse((new DBHelperPOS().GetDatasetFromSP)("sp_AddCars", p).Tables[0].Rows[0][0].ToString());
+                cars.CarID = int.Parse((new DBHelperPOS(AppGlobal.connectionStringUAT).GetDatasetFromSP)("sp_AddCars", p).Tables[0].Rows[0][0].ToString());
                 cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath : null;
                 return 1;
             }
@@ -180,7 +181,7 @@ namespace BAL.Repositories
                 {
                     cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath : null;
                 }
-                return (new DBHelperPOS().ExecuteNonQueryReturn)("sp_UpdateCars", p);
+                return (new DBHelperPOS(AppGlobal.connectionStringUAT).ExecuteNonQueryReturn)("sp_UpdateCars", p);
 
             }
             catch (Exception ex)

@@ -1,5 +1,4 @@
-﻿
-using DAL.DBEntities;
+﻿using DAL.DBEntities;
 using DAL.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,15 +11,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using WebAPICode.Helpers;
-using DAL.DBEntities2;
-using System.Security.Cryptography;
-using System.Data.Entity;
-using System.Web.Helpers;
 using Newtonsoft.Json;
+using DAL.GlobalAndCommon;
 
 namespace BAL.Repositories
 {
@@ -34,7 +29,7 @@ namespace BAL.Repositories
             DBContext2 = new Garage_Entities();
             _pageRepo = new PaginationRepository(
                 new DBHelper(), 
-                new DBHelperPOS());
+                new DBHelperPOS(AppGlobal.connectionStringUAT));
 
         }
 		public carSellRepository(Garage_Entities contextDB2, PaginationRepository pageRepo)
@@ -43,12 +38,12 @@ namespace BAL.Repositories
 			DBContext2 = contextDB2;
 			_pageRepo = pageRepo;
 		}
-		public CarSellRsp GetCarSellListPagination(int pageNumber, int pageSize, int? CarSellID)
+		public async Task<CarSellRsp> GetCarSellList(int pageNumber, int pageSize, int? CarSellID)
 		{
 			var rsp = new CarSellRsp();
 			try
 			{
-				var ds = _pageRepo.GetPaginationData<dynamic>(pageNumber, pageSize, "sp_GetCarSellV2_CAPI_V2", new { CarSellID });
+				var ds = await _pageRepo.GetPaginationData<dynamic>(pageNumber, pageSize, "sp_GetCarSellV2_CAPI_V2", new { CarSellID });
 				//var ds = await GetInfo(CarSellID);
 				var _dtCarSellInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
 				var _dtFeatureInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
@@ -585,7 +580,7 @@ namespace BAL.Repositories
                 {
                     cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath : null;
                 }
-                return (new DBHelperPOS().ExecuteNonQueryReturn)("sp_UpdateCars", p);
+                return (new DBHelperPOS(AppGlobal.connectionStringUAT).ExecuteNonQueryReturn)("sp_UpdateCars", p);
 
             }
             catch (Exception ex)
@@ -605,7 +600,7 @@ namespace BAL.Repositories
                 p[4] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
                 p[5] = new SqlParameter("@LocationID", obj.LocationID);
                 p[6] = new SqlParameter("@Date", DateTime.ParseExact(obj.Date, "dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture));
-                return (new DBHelperPOS().GetDatasetFromSP)("sp_InsertReview_CAPI", p).Tables[0];
+                return (new DBHelperPOS(AppGlobal.connectionStringUAT).GetDatasetFromSP)("sp_InsertReview_CAPI", p).Tables[0];
 
             }
             catch (Exception ex)
