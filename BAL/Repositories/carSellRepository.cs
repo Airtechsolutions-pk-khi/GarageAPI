@@ -311,7 +311,7 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[24];
+                SqlParameter[] p = new SqlParameter[25];
                 p[0] = new SqlParameter("@Name", carSell.Name);
                 p[1] = new SqlParameter("@Description", carSell.Description);
                 p[2] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
@@ -327,17 +327,18 @@ namespace BAL.Repositories
                 p[12] = new SqlParameter("@Price", carSell.Price);
                 p[13] = new SqlParameter("@IsInspected", carSell.IsInspected);
                 p[14] = new SqlParameter("@CityID", carSell.CityID);
-                p[15] = new SqlParameter("@Address", carSell.Address);
-                p[16] = new SqlParameter("@CarSellAddID", carSell.CarSellAddID);
-                p[17] = new SqlParameter("@BodyColor", carSell.BodyColor);
-                p[18] = new SqlParameter("@Assembly", carSell.Assembly);
-                p[19] = new SqlParameter("@StatusID", carSell.StatusID);
-                p[20] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
-                p[21] = new SqlParameter("@CreatedBy", carSell.CustomerID);
-                p[22] = new SqlParameter("@EngineSize", carSell.EngineSize);
+                p[15] = new SqlParameter("@CountryCode", carSell.CountryCode);
+                p[16] = new SqlParameter("@Address", carSell.Address);
+                p[17] = new SqlParameter("@CarSellAddID", carSell.CarSellAddID);
+                p[18] = new SqlParameter("@BodyColor", carSell.BodyColor);
+                p[19] = new SqlParameter("@Assembly", carSell.Assembly);
+                p[20] = new SqlParameter("@StatusID", carSell.StatusID);
+                p[21] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
+                p[22] = new SqlParameter("@CreatedBy", carSell.CustomerID);
+                p[23] = new SqlParameter("@EngineSize", carSell.EngineSize);
                 //p[22] = new SqlParameter("@UpdatedBy", carSell.CustomerID);
                 //p[23] = new SqlParameter("@UpdatedDate", DateTime.UtcNow.AddMinutes(180));
-                p[23] = new SqlParameter("@BodyTypeID", carSell.BodyTypeID);
+                p[24] = new SqlParameter("@BodyTypeID", carSell.BodyTypeID);
                 carSell.CarSellID = int.Parse((new DBHelper().GetDatasetFromSP)("sp_InsertCarSell", p).Tables[0].Rows[0][0].ToString());
                 //carSell.Image = carSell.Image != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + carSell.Image : null;
                 carSell.CarSellFeatures = carSell.CarSellFeatures ?? new List<CarSellFeatureList>();
@@ -393,7 +394,7 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[25];
+                SqlParameter[] p = new SqlParameter[26];
                 p[0] = new SqlParameter("@Name", carSell.Name);
                 p[1] = new SqlParameter("@Description", carSell.Description);
                 p[2] = new SqlParameter("@RegistrationNo", carSell.RegistrationNo);
@@ -409,16 +410,17 @@ namespace BAL.Repositories
                 p[12] = new SqlParameter("@Price", carSell.Price);
                 p[13] = new SqlParameter("@IsInspected", carSell.IsInspected);
                 p[14] = new SqlParameter("@CityID", carSell.CityID);
-                p[15] = new SqlParameter("@Address", carSell.Address);
-                p[16] = new SqlParameter("@CarSellAddID", carSell.CarSellAddID);
-                p[17] = new SqlParameter("@BodyColor", carSell.BodyColor);
-                p[18] = new SqlParameter("@Assembly", carSell.Assembly);
-                p[19] = new SqlParameter("@StatusID", carSell.StatusID);
-                p[20] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
-                p[21] = new SqlParameter("@CreatedBy", carSell.CustomerID);
-                p[22] = new SqlParameter("@EngineSize", carSell.EngineSize);
-                p[23] = new SqlParameter("@BodyTypeID", carSell.BodyTypeID);
-                p[24] = new SqlParameter("@CarSellID", carSell.CarSellID);
+                p[15] = new SqlParameter("@CountryCode", carSell.CountryCode);
+                p[16] = new SqlParameter("@Address", carSell.Address);
+                p[17] = new SqlParameter("@CarSellAddID", carSell.CarSellAddID);
+                p[18] = new SqlParameter("@BodyColor", carSell.BodyColor);
+                p[19] = new SqlParameter("@Assembly", carSell.Assembly);
+                p[20] = new SqlParameter("@StatusID", carSell.StatusID);
+                p[21] = new SqlParameter("@CreatedDate", DateTime.UtcNow.AddMinutes(180));
+                p[22] = new SqlParameter("@CreatedBy", carSell.CustomerID);
+                p[23] = new SqlParameter("@EngineSize", carSell.EngineSize);
+                p[24] = new SqlParameter("@BodyTypeID", carSell.BodyTypeID);
+                p[25] = new SqlParameter("@CarSellID", carSell.CarSellID);
                 carSell.CarSellID = int.Parse((new DBHelper().GetDatasetFromSP)("sp_EditCarSell", p).Tables[0].Rows[0][0].ToString());
 
                 try

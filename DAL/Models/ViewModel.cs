@@ -790,6 +790,7 @@ namespace DAL.Models
         public string EngineSize { get; set; } = "";
         public string CreatedDate { get; set; } = "";
         public string Image { get; set; } = "";
+        public string CountryCode { get; set; } = "";
         public List<CarSellImageList> CarSellImages { get; set; }
         public List<CarSellFeatureList> CarSellFeatures { get; set; }
 
