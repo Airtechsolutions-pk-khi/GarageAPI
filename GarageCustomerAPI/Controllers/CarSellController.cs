@@ -38,14 +38,14 @@ namespace GarageCustomerAPI.Controllers
         [HttpGet]
         [Route("carsellsetting/all")]
 		[Authorize]
-		public async Task<CarSellRsp> CarSellList([FromUri] PagingParameterModel pagingparametermodel)
+		public async Task<CarSellRsp> CarSellList([FromUri] PagingParameterModel pagingparametermodel, string Search)
         {
 			//CarSellRsp result;
 			if (pagingparametermodel == null)
             {
 				return await carSellRepo.GetCarSellList(null);
             }
-            return await carSellRepo.GetCarSellList(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, null);
+            return await carSellRepo.GetCarSellList(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, null, Search);
             //// Get's No of Rows Count   
             //int count = result.CountryList[0].CityList.Count();
 

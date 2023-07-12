@@ -15,7 +15,6 @@ using WebAPICode.Helpers;
 
 namespace BAL.Repositories
 {
-
     public class settingRepository : BaseRepository
     {
 		private readonly PaginationRepository _pageRepo;
