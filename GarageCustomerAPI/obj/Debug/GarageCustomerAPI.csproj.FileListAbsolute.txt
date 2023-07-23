@@ -351,3 +351,44 @@ D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.cspr
 D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CopyComplete
 D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.dll
 D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.pdb
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Abstractions.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Logging.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.Jwt.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Owin.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Buffers.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Memory.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Numerics.Vectors.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Encodings.Web.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Json.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Threading.Tasks.Extensions.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.ValueTuple.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.Http.Owin.dll
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Abstractions.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Logging.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.Jwt.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Buffers.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Memory.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Numerics.Vectors.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Encodings.Web.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Json.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Threading.Tasks.Extensions.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.ValueTuple.xml
+C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.Http.Owin.xml
