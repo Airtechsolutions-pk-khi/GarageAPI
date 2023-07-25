@@ -163,5 +163,28 @@ namespace GarageCustomerAPI.Controllers
         {
             return settingRepo.AddReportReview(obj);
         }
+
+
+        /// <summary>
+        /// - List of AI BOT
+        /// </summary>
+        /// <returns></returns>
+        [Route("ai/chat/all/{carID}/{customerID}/{chatID}")]
+        public AIChatModelRsp GetAllListAIBOT(int carID, int customerID, int chatID)
+        {
+            return settingRepo.GetListAIBOT(carID, customerID, chatID);
+        }
+
+        /// <summary>
+        /// - Add AI CHAT
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("ai/chat/add")]
+        public Rsp PostAIChat(AIChat obj)
+        {
+            return settingRepo.AddAIChat(obj);
+        }
     }
 }

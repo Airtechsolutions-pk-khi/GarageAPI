@@ -678,5 +678,18 @@
             <param name="obj">- Status 1 for Active,3 for Delete \n - LikeValue\DisLikeValue (0 for no action, 1 new action and -1 for update action) on like dislike action </param>
             <returns></returns>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetAllListAIBOT(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            - List of AI BOT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostAIChat(DAL.Models.AIChat)">
+            <summary>
+            - Add AI CHAT
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

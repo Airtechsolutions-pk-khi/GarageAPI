@@ -985,4 +985,30 @@ namespace DAL.Models
         public int Status { get; set; }
         public string Description { get; set; }
     }
+
+    public class AIChat
+    {
+        public int? chatID { get; set; }
+        public int? carID { get; set; }
+        public int? customerID{ get; set; }
+        public string chatType { get; set; }
+        public List<AIChatHistory> chatHistory { get; set; }
+    }
+
+    public class AIChatHistory
+    {
+        public string id { get; set; }
+        public string sendImage { get; set; }
+        public string sendText { get; set; }
+        public string responseImage { get; set; }
+        public string responseText { get; set; }
+        public string likeState { get; set; }
+    }
+
+    public class AIChatModelRsp
+    {
+        public List<AIChat> chats { get; set; }
+        public string description { get; set; }
+        public int status { get; set; }
+    }
 }

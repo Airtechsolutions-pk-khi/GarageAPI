@@ -180,6 +180,7 @@
     <Content Include="Assets\Images\logoorder.png" />
     <Content Include="Assets\Images\service.JPG" />
     <Content Include="Global.asax" />
+    <Content Include="Template\aibot.txt" />
     <Content Include="Template\CustomerLetterV3.txt" />
     <Content Include="Template\email.png" />
     <Content Include="Template\HtmlPage1.html" />

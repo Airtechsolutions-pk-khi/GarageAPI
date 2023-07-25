@@ -10,9 +10,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Web.Helpers;
 using WebAPICode.Helpers;
 
 namespace BAL.Repositories
@@ -49,7 +51,7 @@ namespace BAL.Repositories
                 var _dtAminitiesInfoAll = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtLandmarks = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<LandmarkBLL>>().ToList();
                 var _dtSettingLocation = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<LocationJunc>>().ToList();
-                var _dtReviewCustomer = ds.Tables[11] == null?new List<ReportReviewsBLL>(): JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<ReportReviewsBLL>>().ToList();
+                var _dtReviewCustomer = ds.Tables[11] == null ? new List<ReportReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<ReportReviewsBLL>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = _dtServiceInfoAll;
@@ -123,7 +125,7 @@ namespace BAL.Repositories
                     i.ReviewCountDetails = new int[5] { rating1, rating2, rating3, rating4, rating5 };
                     foreach (var j in i.Reviews)
                     {
-                        j.Customers =_dtReviewCustomer.Where(x => x.ReviewID == j.ReviewID).ToList();
+                        j.Customers = _dtReviewCustomer.Where(x => x.ReviewID == j.ReviewID).ToList();
                         j.Date = DateParse(j.Date);
                     }
                 }
@@ -301,7 +303,6 @@ namespace BAL.Repositories
             }
             return rsp;
         }
-
         public Rsp AddReportReview(ReportReviewsBLL obj)
         {
             Rsp rsp = new Rsp();
@@ -326,6 +327,71 @@ namespace BAL.Repositories
                 rsp.Description = "Failed To Report Review";
             }
             return rsp;
+        }
+
+        public AIChatModelRsp GetListAIBOT(int carID, int customerID, int chatID)
+        {
+
+            var rsp = new AIChatModelRsp();
+            try
+            {
+                string content = File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template") + "\\" + "aibot.txt");
+                JObject jsonResponse = JObject.Parse(content);
+                rsp = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(jsonResponse)).ToObject<AIChatModelRsp>();
+                rsp.chats =
+                    carID > 0 ? rsp.chats.Where(x => x.carID == carID).ToList() :
+                    customerID > 0 ? rsp.chats.Where(x => x.customerID == customerID).ToList() :
+                    chatID > 0 ? rsp.chats.Where(x => x.chatID == chatID).ToList() : rsp.chats.ToList();
+                rsp.status = 1;
+                rsp.description = "Successful";
+            }
+            catch (Exception ex)
+            {
+                rsp.status = 0;
+                rsp.description = "Failed";
+            }
+            return rsp;
+
+        }
+        public Rsp AddAIChat(AIChat obj)
+        {
+            Rsp rsp;
+            try
+            {
+                //var chk = DBContext.Feedbacks.Where(x => x.FeedbackID == obj.FeedbackID).FirstOrDefault();
+                //string baseJson = "[{\"id\":\"123\",\"name\":\"carl\"}]";
+
+                string content = File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template") + "\\" + "aibot.txt");
+                JObject jsonResponse = JObject.Parse(content);
+                var jsonfile = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(jsonResponse)).ToObject<AIChatModelRsp>();
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(jsonfile.chats);
+                jsonfile.chats.Add(obj);
+                    //var baseJson = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(json)).ToObject<AIChat>();
+                //List<AIChat> personsToAdd = new List<AIChat>() { obj };
+
+                //string updatedJson = AddObjectsToJson(json, personsToAdd);
+
+               // jsonfile.chats = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<AIChat>>().ToList() JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(updatedJson)).ToObject<List<AIChat>>().ToList();
+                string jsonwrite = Newtonsoft.Json.JsonConvert.SerializeObject(jsonfile);
+
+                File.WriteAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template") + "\\" + "aibot.txt", jsonwrite);
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Success;
+                rsp.Description = "Chat Added";
+            }
+            catch (Exception ex)
+            {
+                rsp = new Rsp();
+                rsp.Status = (int)eStatus.Exception;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
+        public string AddObjectsToJson<T>(string json, List<T> objects)
+        {
+            List<T> list = JsonConvert.DeserializeObject<List<T>>(json);
+            list.AddRange(objects);
+            return JsonConvert.SerializeObject(list);
         }
         public DataTable AddReportReviewADO(ReportReviewsBLL obj)
         {

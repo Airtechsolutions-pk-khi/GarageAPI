@@ -129,8 +129,6 @@ namespace BAL.Repositories
             return rsp;
         }
 
-      
-
         public int InsertCar(Cars cars)
         {
             try
