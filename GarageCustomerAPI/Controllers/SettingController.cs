@@ -186,5 +186,15 @@ namespace GarageCustomerAPI.Controllers
         {
             return settingRepo.AddAIChat(obj);
         }
+
+        [HttpPost]
+        [Route("pushnotication")]
+        public Rsp PushNotification(PushNoticationBLL obj)
+        {
+            settingRepo.PushNotificationAndroid(obj);
+            return new Rsp { 
+            Status=1
+            };
+        }
     }
 }
