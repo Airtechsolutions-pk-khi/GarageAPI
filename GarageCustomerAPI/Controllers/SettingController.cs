@@ -40,7 +40,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("setting/all")]
-		[Authorize]
+		//[Authorize]
 		public async Task<SettingRsp> GetAll([FromUri] PagingParameterModel pagingparametermodel)
         {
             if (pagingparametermodel == null)
@@ -58,7 +58,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("setting/all/{LocationID}")]
-		[Authorize]
+		//[Authorize]
 		public async Task<SettingRsp> GetLocation([FromUri] PagingParameterModel pagingparametermodel, int LocationID)
         {
 			return await settingRepo.GetSettings(pagingparametermodel.PageNumber, pagingparametermodel.PageSize, LocationID);
@@ -69,7 +69,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("setting/carmake")]
-		[Authorize]
+		//[Authorize]
 		public RspCarMake GetCarmake()
         {
             return settingRepo.GetCarMake();
@@ -80,7 +80,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         [HttpGet]
         [Route("push/android")]
-		[Authorize]
+		//[Authorize]
 		public void PushNotification(string deviceid)
         {
             try
@@ -138,7 +138,7 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("setting/feedback/add")]
-		[Authorize]
+		//[Authorize]
 		public Rsp PostFeedback(Feedback obj)
         {
             return settingRepo.AddFeedback(obj);
@@ -150,7 +150,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj">(Status 1 for Active,3 for Delete)</param>
         /// <returns></returns>
         [Route("review/customer")]
-		[Authorize]
+		//[Authorize]
 		public ReviewRsp PostReview(ReviewsBLL obj)
         {
             return settingRepo.AddReview(obj);
@@ -162,7 +162,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj">- Status 1 for Active,3 for Delete \n Add Like/Dislike Count to existing value</param>
         /// <returns></returns>
         [Route("review/customer/update")]
-		[Authorize]
+		//[Authorize]
 		public ReviewRsp PostReviewUpdate(ReviewsBLL obj)
         {
             return settingRepo.UpdateReview(obj);
@@ -174,7 +174,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj">- Status 1 for Active,3 for Delete \n - LikeValue\DisLikeValue (0 for no action, 1 new action and -1 for update action) on like dislike action </param>
         /// <returns></returns>
         [Route("review/customer/action")]
-		[Authorize]
+		//[Authorize]
 		public Rsp PostReportReview(ReportReviewsBLL obj)
         {
             return settingRepo.AddReportReview(obj);

@@ -60,7 +60,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj">Mandatory</param>
         /// <returns></returns>
         [Route("customer/update")]
-        [Authorize]
+        //[Authorize]
         public CustomerUpdateRsp PostUpdateCustomer(Customers obj)
         {
             return loginRepo.CustomerUpdate(obj);
@@ -73,7 +73,7 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("login/insert/token")]
-		[Authorize]
+		//[Authorize]
 		public Rsp PostInsertToken(TokenBLL obj)
         {
             return settingRepo.InsertToken(obj);
@@ -86,7 +86,7 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("login/update/token")]
-		[Authorize]
+		//[Authorize]
 		public Rsp PostUpdateToken(TokenBLL obj)
         {
             return settingRepo.UpdateToken(obj);
@@ -99,7 +99,7 @@ namespace GarageCustomerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("notification/update")]
-		[Authorize]
+		//[Authorize]
 		public Rsp PostUpdateToken(NotificationBLL obj)
         {
             return settingRepo.UpdateNotification(obj);
