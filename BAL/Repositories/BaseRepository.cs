@@ -204,6 +204,10 @@ namespace BAL.Repositories
                         title = obj.Title,
                         icon = "myicon",
                         sound = "default"
+                    },
+                    data = new
+                    {
+                        link = obj.Link
                     }
                 };
                 var serializer = new JavaScriptSerializer();

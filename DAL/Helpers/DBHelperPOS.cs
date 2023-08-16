@@ -11,9 +11,6 @@ namespace WebAPICode.Helpers
 {
     public class DBHelperPOS
     {
-
-
-
         private static readonly string connectionString = "data source=85.25.214.10;initial catalog=Garage_UAT;persist security info=True;user id=garage;password=garage;";
         //private static readonly string connectionString = "data source=85.25.214.10;initial catalog=Garage_Live;persist security info=True;user id=garage;password=garage;";
 

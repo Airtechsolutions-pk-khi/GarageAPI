@@ -29,6 +29,19 @@ namespace GarageCustomerAPI.Controllers
         }
 
         /// <summary>
+        /// - List Of Amenities
+        /// - List Of Services
+        /// - List Of Landmarks
+        /// </summary>
+        /// <returns></returns>
+        [Route("setting")]
+        public Settingv2Rsp GetAllSettings()
+        {
+            return settingRepo.GetSettingsV3();
+        }
+
+        //old with all data
+        /// <summary>
         /// - List Of Locations
         /// - List Of Amenities
         /// - List Of Services
@@ -41,6 +54,7 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.GetSettings(0);
         }
 
+        //old with location list
         /// <summary>
         /// - List Of Locations
         /// - List Of Amenities
@@ -48,10 +62,24 @@ namespace GarageCustomerAPI.Controllers
         /// - List Of Landmarks
         /// </summary>
         /// <returns></returns>
-        [Route("setting/all/{LocationID}")]
-        public SettingRsp GetLocation(int LocationID)
+        [Route("setting/v2/all")]
+        public SettingRsp GetAllSettingsv2()
         {
-            return settingRepo.GetSettings(LocationID);
+            return settingRepo.GetSettingsV2(0);
+        }
+
+        /// <summary>
+        /// Get Locations by service
+        /// - List Of Locations
+        /// - List Of Amenities
+        /// - List Of Services
+        /// - List Of Landmarks
+        /// </summary>
+        /// <returns></returns>
+        [Route("locations/{ServiceID}")]
+        public SettingRsp GetLocation(int ServiceID)
+        {
+            return settingRepo.GetLocation(ServiceID);
         }
 
         /// <summary>

@@ -635,7 +635,7 @@ namespace DAL.Models
     {
         public string DeviceID { get; set; }
         public string Type { get; set; }
-
+        public string Link { get; set; }
         public string Title { get; set; }
         public string Message { get; set; }
     }
@@ -679,6 +679,10 @@ namespace DAL.Models
         public int Status { get; set; }
         public string Description { get; set; }
     }
+    public class RspCustomerOrders : Rsp
+    {
+        public List<OrdersList> Orders = new List<OrdersList>();
+    }
     public class CarFavouriteList
     {
         public int CarFavouriteID { get; set; }
@@ -687,6 +691,15 @@ namespace DAL.Models
         public Nullable<int> StatusID { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
+    }
+    public class Settingv2Rsp
+    {
+        public List<ServiceBLL> Services { get; set; }
+        public List<SettingBLL> Settings { get; set; }
+        public List<AmenitiesBLL> Amenities { get; set; }
+        public List<LandmarkBLL> Landmarks { get; set; }
+        public int Status { get; set; }
+        public string Description { get; set; }
     }
     public class SettingRsp
     {
@@ -990,7 +1003,7 @@ namespace DAL.Models
     {
         public int? chatID { get; set; }
         public int? carID { get; set; }
-        public int? customerID{ get; set; }
+        public int? customerID { get; set; }
         public string chatType { get; set; }
         public List<AIChatHistory> chatHistory { get; set; }
     }

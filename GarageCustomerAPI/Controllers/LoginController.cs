@@ -45,6 +45,18 @@ namespace GarageCustomerAPI.Controllers
         }
 
         /// <summary>
+        /// Login user API
+        /// </summary>
+        /// <param name="Phone">Mandatory</param>
+        /// <returns></returns>
+        [Route("login/v2/{Phone}")]
+        [HttpGet]
+        public LoginResponse Loginv2(string Phone)
+        {
+            return loginRepo.CustomerLoginV2(Phone);
+        }
+
+        /// <summary>
         /// Customer Profile Update
         /// </summary>
         /// <param name="obj">Mandatory</param>
