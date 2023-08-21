@@ -313,6 +313,7 @@ namespace DAL.Models
     }
     public class Locations
     {
+        public int? SettingID { get; set; } = 0;
         public int LocationID { get; set; }
         public string BrandName { get; set; }
         public string BrandImage { get; set; }
@@ -653,6 +654,7 @@ namespace DAL.Models
         public string Type { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
         public List<LocationJunc> Locations { get; set; }
+        public List<Locations> SettingLocations { get; set; }
     }
     public class Customers
     {

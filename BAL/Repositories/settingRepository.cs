@@ -141,13 +141,13 @@ namespace BAL.Repositories
             return rsp;
 
         }
-        public SettingRsp GetLocation(int ServiceID)
+        public SettingRsp GetServiceLocations(int ServiceID, int LocationID)
         {
 
             var rsp = new SettingRsp();
             try
             {
-                var ds = GetLocationADO(0, ServiceID);
+                var ds = GetLocationADO(LocationID, ServiceID);
                 var _dtLocationInfo = ds.Tables[0] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
                 //var _dtServiceInfo = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 var _dtLocImageInfo = ds.Tables[1] == null ? new List<LocationImages>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<LocationImages>>().ToList();
@@ -289,41 +289,7 @@ namespace BAL.Repositories
                     }
 
                     i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
-                    //i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
-                    //i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
-                    //i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
-                    //i.Discounts = _dtDiscountInfo.Where(x => x.LocationID == i.LocationID).ToList();
-                    //foreach (var j in i.LocationImages)
-                    //{
-                    //    j.ImageURL = j.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.ImageURL;
-                    //}
-                    //foreach (var j in i.Amenities)
-                    //{
-                    //    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
-                    //}
-                    //foreach (var j in i.Services)
-                    //{
-                    //    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
-                    //}
 
-                    //foreach (var j in i.Discounts)
-                    //{
-                    //    j.FromDate = DateParse(j.FromDate);
-                    //    j.ToDate = DateParse(j.ToDate);
-                    //}
-                    //i.Reviews = _dtReviewsInfo.Where(x => x.LocationID == i.LocationID).ToList();
-
-                    //var rating1 = i.Reviews.Where(x => x.RateVal > 4 && x.RateVal <= 5).Count();
-                    //var rating2 = i.Reviews.Where(x => x.RateVal > 3 && x.RateVal <= 4).Count();
-                    //var rating3 = i.Reviews.Where(x => x.RateVal > 2 && x.RateVal <= 3).Count();
-                    //var rating4 = i.Reviews.Where(x => x.RateVal > 1 && x.RateVal <= 2).Count();
-                    //var rating5 = i.Reviews.Where(x => x.RateVal >= 0 && x.RateVal <= 1).Count();
-                    //i.ReviewCountDetails = new int[5] { rating1, rating2, rating3, rating4, rating5 };
-                    //foreach (var j in i.Reviews)
-                    //{
-                    //    j.Customers = _dtReviewCustomer.Where(x => x.ReviewID == j.ReviewID).ToList();
-                    //    j.Date = DateParse(j.Date);
-                    //}
                 }
 
                 rsp.Status = 1;
@@ -337,7 +303,7 @@ namespace BAL.Repositories
             return rsp;
 
         }
-        public Settingv2Rsp GetSettingsV3()
+        public Settingv2Rsp GetAppSettings()
         {
             var rsp = new Settingv2Rsp();
             try
@@ -347,11 +313,18 @@ namespace BAL.Repositories
                 rsp.Services = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 rsp.Amenities = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
                 rsp.Landmarks = ds.Tables[3] == null ? new List<LandmarkBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<LandmarkBLL>>().ToList();
-                var _dtSettingLocation = ds.Tables[4] == null ? new List<LocationJunc>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<LocationJunc>>().ToList();
+                var _dtSettingLocation = ds.Tables[4] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<Locations>>().ToList();
+                var _dtSettingLocationImgs = ds.Tables[5] == null ? new List<LocationImages>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<LocationImages>>().ToList();
 
                 foreach (var j in rsp.Settings)
                 {
-                    j.Locations = _dtSettingLocation.Where(x => x.SettingID == j.ID).ToList();
+                    j.SettingLocations = _dtSettingLocation.Where(x => x.SettingID == j.ID).ToList();
+                    foreach (var k in j.SettingLocations)
+                    {
+                        k.LocationImages = _dtSettingLocationImgs.Where(x => x.LocationID == k.LocationID).ToList();
+                        foreach (var l in k.LocationImages)
+                        { l.ImageURL = l.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ImageURL; }
+                    }
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                 }
                 foreach (var j in rsp.Landmarks)

@@ -668,7 +668,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetLocation(System.Int32)">
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetService(System.Int32,System.Int32)">
             <summary>
             Get Locations by service
             - List Of Locations

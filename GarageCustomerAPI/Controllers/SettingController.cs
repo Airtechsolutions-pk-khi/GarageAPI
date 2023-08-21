@@ -37,7 +37,7 @@ namespace GarageCustomerAPI.Controllers
         [Route("setting")]
         public Settingv2Rsp GetAllSettings()
         {
-            return settingRepo.GetSettingsV3();
+            return settingRepo.GetAppSettings();
         }
 
         //old with all data
@@ -76,10 +76,10 @@ namespace GarageCustomerAPI.Controllers
         /// - List Of Landmarks
         /// </summary>
         /// <returns></returns>
-        [Route("locations/{ServiceID}")]
-        public SettingRsp GetLocation(int ServiceID)
+        [Route("locations/{ServiceID}/{LocationID}")]
+        public SettingRsp GetService(int ServiceID, int LocationID)
         {
-            return settingRepo.GetLocation(ServiceID);
+            return settingRepo.GetServiceLocations(ServiceID, LocationID);
         }
 
         /// <summary>
