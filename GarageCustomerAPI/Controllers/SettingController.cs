@@ -215,6 +215,13 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.AddAIChat(obj);
         }
 
+
+        [Route("offers")]
+        public OffersRsp GetOffers()
+        {
+            return settingRepo.GetOffers();
+        }
+
         [HttpPost]
         [Route("pushnotication")]
         public Rsp PushNotification(PushNoticationBLL obj)

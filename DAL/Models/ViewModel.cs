@@ -702,7 +702,10 @@ namespace DAL.Models
         public List<LandmarkBLL> Landmarks { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
+        public string AppstoreVersion{ get; set; }
     }
+    public class OffersRsp:Rsp
+    { public List<DiscountBLL> Offers { get; set; } }
     public class SettingRsp
     {
 

@@ -149,7 +149,7 @@ namespace BAL.Repositories
             {
                 var ds = GetLocationADO(LocationID, ServiceID);
                 var _dtLocationInfo = ds.Tables[0] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
-                //var _dtServiceInfo = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
+                var _dtServiceInfo = ds.Tables[6] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<ServiceBLL>>().ToList();
                 var _dtLocImageInfo = ds.Tables[1] == null ? new List<LocationImages>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<LocationImages>>().ToList();
                 var _dtAmenitiesInfo = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
                 var _dtReviewsInfo = ds.Tables[3] == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<ReviewsBLL>>().ToList();
@@ -166,20 +166,10 @@ namespace BAL.Repositories
                 {
                     var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime));
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime));
-
-                    if (opening > closing)
-                    {
-                        i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
-                        i.CloseTime = DateParse(DateTime.UtcNow.AddDays(1).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
-                    }
-                    else
-                    {
-                        i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
-                        i.CloseTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
-                    }
-
+                    i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
+                    i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
                     i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
-                    i.Services = new List<ServiceBLL>();//_dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    i.Services =_dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Discounts = _dtDiscountInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -276,20 +266,9 @@ namespace BAL.Repositories
                 {
                     var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime));
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime));
-
-                    if (opening > closing)
-                    {
-                        i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
-                        i.CloseTime = DateParse(DateTime.UtcNow.AddDays(1).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
-                    }
-                    else
-                    {
-                        i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
-                        i.CloseTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
-                    }
-
+                    i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
+                    i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
                     i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
-
                 }
 
                 rsp.Status = 1;
@@ -309,6 +288,7 @@ namespace BAL.Repositories
             try
             {
                 var ds = GetSettings_ADO();
+                rsp.AppstoreVersion = "1.0.6";
                 rsp.Settings = ds.Tables[0] == null ? new List<SettingBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<SettingBLL>>().ToList();
                 rsp.Services = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 rsp.Amenities = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
@@ -321,7 +301,17 @@ namespace BAL.Repositories
                     j.SettingLocations = _dtSettingLocation.Where(x => x.SettingID == j.ID).ToList();
                     foreach (var k in j.SettingLocations)
                     {
+                        var opening = TimespanToDecimal(TimeSpan.Parse(k.OpenTime));
+                        var closing = TimespanToDecimal(TimeSpan.Parse(k.CloseTime));
+                        k.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.OpenTime);
+                        k.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.CloseTime);
+                        k.BrandImage = k.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
+
                         k.LocationImages = _dtSettingLocationImgs.Where(x => x.LocationID == k.LocationID).ToList();
+                        k.Services = new List<ServiceBLL>();
+                        k.Amenities = new List<AmenitiesBLL>();
+                        k.Discounts = new List<DiscountBLL>();
+                        k.Reviews = new List<ReviewsBLL>();
                         foreach (var l in k.LocationImages)
                         { l.ImageURL = l.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ImageURL; }
                     }
@@ -772,6 +762,45 @@ namespace BAL.Repositories
                 rsp.Description = "Failed To Update Review";
             }
             return rsp;
+        }
+
+        public OffersRsp GetOffers()
+        {
+            var rsp = new OffersRsp();
+            try
+            {
+                var ds = GetOffers_ADO();
+                rsp.Offers = ds.Tables[0] == null ? new List<DiscountBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<DiscountBLL>>().ToList();
+                foreach (var j in rsp.Offers)
+                {
+                    j.FromDate = DateParse(j.FromDate);
+                    j.ToDate = DateParse(j.ToDate);
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+              
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
+        public DataSet GetOffers_ADO()
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[2];
+                p[0] = new SqlParameter("@LocationID", null );
+                p[1] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetOffers_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
