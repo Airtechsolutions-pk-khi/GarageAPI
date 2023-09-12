@@ -93,6 +93,7 @@ namespace DAL.Models
     public class DiscountBLL
     {
         public string Name { get; set; }
+        public string BrandImage { get; set; }
         public string Image { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }

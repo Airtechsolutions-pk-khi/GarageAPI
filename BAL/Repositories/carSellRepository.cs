@@ -893,7 +893,7 @@ namespace BAL.Repositories
                 SqlParameter[] p = new SqlParameter[2];
                 p[0] = new SqlParameter("@CarSellID", CarSellID);
                 p[1] = new SqlParameter("@CustomerID", CustomerID);
-                return (new DBHelper().GetDatasetFromSP)("sp_GetCarSellV3_CAPI", p);
+                return (new DBHelper().GetDatasetFromSP)("sp_GetCarSellV2_CAPI", p);
             }
             catch (Exception ex)
             {

@@ -288,7 +288,7 @@ namespace BAL.Repositories
             try
             {
                 var ds = GetSettings_ADO();
-                rsp.AppstoreVersion = "1.0.6";
+                rsp.AppstoreVersion = "1.0.7";
                 rsp.Settings = ds.Tables[0] == null ? new List<SettingBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<SettingBLL>>().ToList();
                 rsp.Services = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 rsp.Amenities = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
