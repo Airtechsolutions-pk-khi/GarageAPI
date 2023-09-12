@@ -59,6 +59,19 @@ namespace GarageCustomerAPI.Controllers
             return carRepo.OrderPrintLetter(orderid);
         }
 
-      
+        /// <summary>
+        /// Customer's Car Orders
+        /// </summary>
+        /// <param name="carid">Mandatory</param>
+        /// <param name="customerid">Mandatory</param>
+        /// <returns>A4 receipt</returns>
+        [HttpGet]
+        [Route("order/{carid}/{customerid}")]
+        public RspCustomerOrders GetOrders(int? carid = 0, int? customerid = 0)
+        {
+            return carRepo.GetCustomerOrders(carid, customerid);
+        }
+
+
     }
 }

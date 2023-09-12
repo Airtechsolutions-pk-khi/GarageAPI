@@ -93,6 +93,7 @@ namespace DAL.Models
     public class DiscountBLL
     {
         public string Name { get; set; }
+        public string BrandImage { get; set; }
         public string Image { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
@@ -313,6 +314,7 @@ namespace DAL.Models
     }
     public class Locations
     {
+        public int? SettingID { get; set; } = 0;
         public int LocationID { get; set; }
         public string BrandName { get; set; }
         public string BrandImage { get; set; }
@@ -635,7 +637,7 @@ namespace DAL.Models
     {
         public string DeviceID { get; set; }
         public string Type { get; set; }
-
+        public string Link { get; set; }
         public string Title { get; set; }
         public string Message { get; set; }
     }
@@ -653,6 +655,7 @@ namespace DAL.Models
         public string Type { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
         public List<LocationJunc> Locations { get; set; }
+        public List<Locations> SettingLocations { get; set; }
     }
     public class Customers
     {
@@ -679,6 +682,10 @@ namespace DAL.Models
         public int Status { get; set; }
         public string Description { get; set; }
     }
+    public class RspCustomerOrders : Rsp
+    {
+        public List<OrdersList> Orders = new List<OrdersList>();
+    }
     public class CarFavouriteList
     {
         public int CarFavouriteID { get; set; }
@@ -688,6 +695,18 @@ namespace DAL.Models
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
     }
+    public class Settingv2Rsp
+    {
+        public List<ServiceBLL> Services { get; set; }
+        public List<SettingBLL> Settings { get; set; }
+        public List<AmenitiesBLL> Amenities { get; set; }
+        public List<LandmarkBLL> Landmarks { get; set; }
+        public int Status { get; set; }
+        public string Description { get; set; }
+        public string AppstoreVersion{ get; set; }
+    }
+    public class OffersRsp:Rsp
+    { public List<DiscountBLL> Offers { get; set; } }
     public class SettingRsp
     {
 
@@ -990,7 +1009,7 @@ namespace DAL.Models
     {
         public int? chatID { get; set; }
         public int? carID { get; set; }
-        public int? customerID{ get; set; }
+        public int? customerID { get; set; }
         public string chatType { get; set; }
         public List<AIChatHistory> chatHistory { get; set; }
     }

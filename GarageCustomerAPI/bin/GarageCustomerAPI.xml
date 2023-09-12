@@ -502,6 +502,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.CarSellController.CarSellList(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Filter for Carsell List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:GarageCustomerAPI.Controllers.CarSellController.AddCarSell(DAL.Models.CarSellList)">
             <summary>
             Add Car Sell
@@ -546,6 +552,13 @@
             </summary>
         </member>
         <member name="M:GarageCustomerAPI.Controllers.LoginController.Login(System.String)">
+            <summary>
+            Login user API
+            </summary>
+            <param name="Phone">Mandatory</param>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.LoginController.Loginv2(System.String)">
             <summary>
             Login user API
             </summary>
@@ -611,6 +624,14 @@
             <param name="orderid">Mandatory</param>
             <returns>A4 receipt</returns>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.CarController.GetOrders(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Customer's Car Orders
+            </summary>
+            <param name="carid">Mandatory</param>
+            <param name="customerid">Mandatory</param>
+            <returns>A4 receipt</returns>
+        </member>
         <member name="F:GarageCustomerAPI.Controllers.SettingController.settingRepo">
             <summary>
             Settings
@@ -621,6 +642,14 @@
             Settings
             </summary>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetAllSettings">
+            <summary>
+            - List Of Amenities
+            - List Of Services
+            - List Of Landmarks
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:GarageCustomerAPI.Controllers.SettingController.GetAll">
             <summary>
             - List Of Locations
@@ -630,8 +659,18 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetLocation(System.Int32)">
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetAllSettingsv2">
             <summary>
+            - List Of Locations
+            - List Of Amenities
+            - List Of Services
+            - List Of Landmarks
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetService(System.Int32,System.Int32)">
+            <summary>
+            Get Locations by service
             - List Of Locations
             - List Of Amenities
             - List Of Services

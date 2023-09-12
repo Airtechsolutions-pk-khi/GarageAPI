@@ -36,12 +36,12 @@ namespace BAL.Repositories
         {
             DBContext2 = contextDB2;
         }
-        public async Task<CarSellRsp> GetCarSellList(int? CarSellID)
+        public async Task<CarSellRsp> GetCarSellList(int? CarSellID,int? CustomerID)
         {
             var rsp = new CarSellRsp();
             try
             {
-                var ds = await GetInfo(CarSellID);
+                var ds = await GetInfo(CarSellID, CustomerID);
                 var _dtCarSellInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
                 var _dtFeatureInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();
                 var _dtCSImageInfo = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CarSellImageList>>().ToList();
@@ -886,12 +886,13 @@ namespace BAL.Repositories
 
             return folderPath + filename + ".pdf";
         }
-        public async Task<DataSet> GetInfo(int? CarSellID)
+        public async Task<DataSet> GetInfo(int? CarSellID,int? CustomerID)
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[1];
+                SqlParameter[] p = new SqlParameter[2];
                 p[0] = new SqlParameter("@CarSellID", CarSellID);
+                p[1] = new SqlParameter("@CustomerID", CustomerID);
                 return (new DBHelper().GetDatasetFromSP)("sp_GetCarSellV2_CAPI", p);
             }
             catch (Exception ex)

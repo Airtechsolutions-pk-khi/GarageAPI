@@ -187,7 +187,71 @@ namespace BAL.Repositories
                 return 0;
             }
         }
-        
+
+        public RspCustomerOrders GetCustomerOrders(int? CarID,int? CustomerID)
+        {
+            var rsp = new RspCustomerOrders();
+            try
+            {
+                var ds = GetCustomerOrders_ADO(CarID,CustomerID);
+                var _dsOrders = ds.Tables[0] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<OrdersList>>();
+                var _dsOrderdetail = ds.Tables[1] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<OItemsList>>();
+                var _dsOrderdetailPkg = ds.Tables[2] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OPackageDetailList>>();
+                var _dsordercheckoutdetail = ds.Tables[3] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CheckoutDetailsOrder>>();
+                foreach (var j in _dsOrders)
+                {
+                    j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;
+                    j.NoPlateImage = ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/EmptyNoplate.png";
+                    j.OrderPunchDate = DateParse(j.OrderPunchDate);
+                    j.CheckoutDate = DateParse(j.CheckoutDate);
+                    j.Items = _dsOrderdetail.Where(x => x.OrderID == j.OrderID).ToList();
+
+                    foreach (var k in j.Items)
+                    {
+                        k.Packages = _dsOrderdetailPkg.Where(x => x.OrderDetailID == k.OrderDetailID).ToList();
+                    }
+                    //checkoutdetails
+                    var checkoutDetails = _dsordercheckoutdetail.Where(x => x.OrderCheckoutID == j.OrderCheckoutID).ToList();
+                    if (checkoutDetails != null)
+                    {
+                        j.CardAmount = checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault() == null ? 0 : checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault().AmountPaid;
+                        j.CashAmount = checkoutDetails.Where(x => x.PaymentMode == 1).FirstOrDefault() == null ? 0 : checkoutDetails.Where(x => x.PaymentMode == 1).FirstOrDefault().AmountPaid;
+                        j.CardType = checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault() == null ? "" : checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault().CardType;
+                    }
+                    else
+                    {
+                        j.CardAmount = 0;
+                        j.CashAmount = 0;
+                        j.CardType = "";
+                    }
+                }
+
+                rsp.Orders = _dsOrders;
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Orders = new List<OrdersList>();
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
+        public DataSet GetCustomerOrders_ADO(int? CarID,int? CustomerID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[2];
+                p[0] = new SqlParameter("@CustomerID", CustomerID);
+                p[1] = new SqlParameter("@CarID", CarID);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_CustomerOrders_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public OrderLetterResponse OrderPrintLetter(string OrderID)
         {
 

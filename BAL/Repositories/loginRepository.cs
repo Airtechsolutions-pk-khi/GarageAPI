@@ -151,6 +151,82 @@ namespace BAL.Repositories
             }
             return rsp;
         }
+        public LoginResponse CustomerLoginV2(string Phone)
+        {
+            var rsp = new LoginResponse();
+            try
+            {
+                Phone = Phone.StartsWith("966") ? "+" + Phone : Phone;
+                var ds = GetLoginInfov2(Phone);
+                var _dsCustomerInfo = ds.Tables[0] == null ? new Customers() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Customers>>().FirstOrDefault();
+                var _dsCarInfo = ds.Tables[1] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<Cars>>();
+                //var _dsOrders = ds.Tables[2] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OrdersList>>();
+                //var _dsOrderdetail = ds.Tables[3] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OItemsList>>();
+                //var _dsOrderdetailPkg = ds.Tables[4] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<OPackageDetailList>>();
+                //var _dsordercheckoutdetail = ds.Tables[5] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CheckoutDetailsOrder>>();
+                var _dsNotifications = ds.Tables[2] == null ? new List<NotificationBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<NotificationBLL>>();
+                var _dtCarSellInfo = ds.Tables[3] == null ? new List<CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CarSellList>>().ToList();
+                var _dtCSImageInfo = ds.Tables[4] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CarSellImageList>>().ToList();
+                var _dtFeatureInfo = ds.Tables[5] == null ? new List<DAL.Models.CarSellFeatureList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CarSellFeatureList>>().ToList();
+                //var _dtMyAds = ds.Tables[10] == null ? new List<DAL.Models.CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<CarSellList>>().ToList();
+                //var _dtCSMyAdsImageInfo = ds.Tables[11] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<CarSellImageList>>().ToList();
+
+                rsp.Notifications = _dsNotifications;
+                rsp.Customer = _dsCustomerInfo;
+
+                rsp.CarList = rsp.CarList ?? new List<Cars>();
+                foreach (var i in _dsCarInfo)
+                {
+                    if (rsp.CarList.Where(x => x.RegistrationNo == i.RegistrationNo).Count() == 0)
+                        rsp.CarList.Add(i);
+                }
+                //rsp.CarList = _dsCarInfo;
+                foreach (var j in rsp.Notifications)
+                {
+                    j.IsRead = j.IsRead ?? true;
+                    j.Type = "Orders";
+                    j.Date = DateParse(j.Date);
+                    j.Image = (j.Image == null || j.Image == "") ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.Image;
+                }
+                foreach (var i in rsp.CarList)
+                {
+                    i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
+                    i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.ImagePath;
+                    try { i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
+                    try { i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
+                    try { i.RegistrationNoP3 = TranslateToArabic(i.RegistrationNoP1, 1); } catch { i.RegistrationNoP3 = ""; }
+                    try { i.RegistrationNoP4 = TranslateToArabic(i.RegistrationNoP2, 2); } catch { i.RegistrationNoP4 = ""; }
+
+                }
+                foreach (var i in _dtCarSellInfo)
+                {
+                    i.CreatedDate = DateParse(i.CreatedDate.ToString());
+                    i.CarSellImages = _dtCSImageInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellImages)
+                    {
+                        j.StatusID = 1;
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + j.Image;
+                    }
+                    i.Image = i.CarSellImages.Count > 0 ? i.CarSellImages[0].Image : null;
+                    i.CarSellFeatures = _dtFeatureInfo.Where(x => x.CarSellID == i.CarSellID).ToList();
+                    foreach (var j in i.CarSellFeatures)
+                    {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    }
+                }
+
+                rsp.CarFavourites = _dtCarSellInfo;
+                rsp.MyAds = new List<CarSellList>();
+                rsp.Status = 1;
+                rsp.Description = "Login Successfully";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
 
         public DataSet GetLoginInfo(string Mobile)
         {
@@ -159,6 +235,19 @@ namespace BAL.Repositories
                 SqlParameter[] p = new SqlParameter[1];
                 p[0] = new SqlParameter("@Phone", Mobile);
                 return (new DBHelperPOS().GetDatasetFromSP)("sp_login_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataSet GetLoginInfov2(string Mobile)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@Phone", Mobile);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_loginv2_CAPI", p);
             }
             catch (Exception ex)
             {

@@ -38,7 +38,18 @@ namespace GarageCustomerAPI.Controllers
         [Route("carsellsetting/all")]
         public async Task<CarSellRsp> CarSellList()
         {
-            return await carSellRepo.GetCarSellList(null);
+            return await carSellRepo.GetCarSellList(null,null);
+        }
+
+        /// <summary>
+        /// Filter for Carsell List
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("carsell/list/filter/{customerid}/{carid}")]
+        public async Task<CarSellRsp> CarSellList(int? customerid,int? carid)
+        {
+            return await carSellRepo.GetCarSellList(carid,customerid);
         }
 
         /// <summary>
@@ -50,7 +61,7 @@ namespace GarageCustomerAPI.Controllers
         public async Task<CarSellInsertRsp> AddCarSell(CarSellList carSell)
         {
             var rsp = carSellRepo.InsertCarSell(carSell);
-            var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID);
+            var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID,null);
             rsp.CarSell = rspcarsell.CarSellList.FirstOrDefault();
             return rsp;
         }
@@ -65,7 +76,7 @@ namespace GarageCustomerAPI.Controllers
         public async Task<CarSellInsertRsp> EditCarSell(CarSellList carSell)
         {
             var rsp = carSellRepo.InsertCarSell(carSell);
-            var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID);
+            var rspcarsell = await carSellRepo.GetCarSellList(carSell.CarSellID, null);
             rsp.CarSell = rspcarsell.CarSellList.FirstOrDefault();
             return rsp;
         }
