@@ -343,6 +343,13 @@ namespace DAL.Models
         public List<AmenitiesBLL> Amenities { get; set; }
         public List<ReviewsBLL> Reviews { get; set; }
         public List<DiscountBLL> Discounts { get; set; }
+
+        public List<WorkingHour> WorkingHours { get; set; }
+    }
+    public class  WorkingHour   {
+        public string Name { get; set; }
+        public string Time{ get; set; }
+        public int? LocationID{ get; set; }
     }
     public class Services
     {
@@ -657,6 +664,7 @@ namespace DAL.Models
         public List<LocationJunc> Locations { get; set; }
         public List<Locations> SettingLocations { get; set; }
     }
+
     public class Customers
     {
         public int CustomerID { get; set; }
@@ -672,6 +680,14 @@ namespace DAL.Models
         public bool? IsSMS { get; set; }
         public string City { get; set; }
     }
+    public class CustomerCarsResponse:Rsp
+    {
+        public List<Cars> CarList { get; set; }
+    }
+    public class CustomerNotificationResponse : Rsp
+    {
+        public List<NotificationBLL> Notifications { get; set; }
+    }
     public class LoginResponse
     {
         public Customers Customer { get; set; }
@@ -679,6 +695,7 @@ namespace DAL.Models
         public List<CarSellList> CarFavourites { get; set; }
         public List<NotificationBLL> Notifications { get; set; }
         public List<CarSellList> MyAds { get; set; }
+        public List<OrdersList> RecentOrders = new List<OrdersList>();
         public int Status { get; set; }
         public string Description { get; set; }
     }
@@ -701,11 +718,13 @@ namespace DAL.Models
         public List<SettingBLL> Settings { get; set; }
         public List<AmenitiesBLL> Amenities { get; set; }
         public List<LandmarkBLL> Landmarks { get; set; }
+        public List<UsersList> Brands { get; set; }
+        public List<CityList> Cities { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
-        public string AppstoreVersion{ get; set; }
+        public string AppstoreVersion { get; set; }
     }
-    public class OffersRsp:Rsp
+    public class OffersRsp : Rsp
     { public List<DiscountBLL> Offers { get; set; } }
     public class SettingRsp
     {
@@ -718,26 +737,20 @@ namespace DAL.Models
         public int Status { get; set; }
         public string Description { get; set; }
     }
-    public class UsersListResponse
-    {
+    //public class UsersListResponse
+    //{
 
-        public List<UsersList> users = new List<UsersList>();
+    //    public List<UsersList> users = new List<UsersList>();
 
-        public int Status { get; set; }
-        public string Description { get; set; }
-    }
+    //    public int Status { get; set; }
+    //    public string Description { get; set; }
+    //}
     public class UsersList
     {
         public int UserID { get; set; }
         public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string ImagePath { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public Nullable<int> TimeZoneID { get; set; }
         public Nullable<int> StatusID { get; set; }
-        public string CompanyCode { get; set; }
     }
     public class LoginVerificationResponse
     {
@@ -769,7 +782,7 @@ namespace DAL.Models
         public string RegistrationNoP2 { get; set; } = "";
         public string RegistrationNoP3 { get; set; } = "";
         public string RegistrationNoP4 { get; set; } = "";
-        public int UserID { get; set; }
+        public int? UserID { get; set; }
         public int? StatusID { get; set; }
         public bool? IsFavourite { get; set; }
 
@@ -881,6 +894,9 @@ namespace DAL.Models
     }
     public class OrdersList
     {
+        public string MakerName { get; set; }
+        public Nullable<int> ModelID { get; set; }
+        public string ModelName { get; set; }
         public string VATNo { get; set; }
         public string CompanyName { get; set; }
         public string LocationName { get; set; }
@@ -890,7 +906,7 @@ namespace DAL.Models
         public int OrderID { get; set; }
         public int? TransactionNo { get; set; }
         public int? OrderNo { get; set; }
-        public int CarID { get; set; }
+        public int? CarID { get; set; }
         public string BayName { get; set; }
         public string RegistrationNo { get; set; }
         public int? CustomerID { get; set; } = 0;
@@ -905,6 +921,7 @@ namespace DAL.Models
         public double? AmountDiscount { get; set; }
         public double? RefundedAmount { get; set; }
         public double? GrandTotal { get; set; }
+        public double? PartialAmountReceived { get; set; }
         public bool? IsPartialPaid { get; set; }
         public string DiscountCode { get; set; }
         public string Facebook { get; set; }
@@ -916,7 +933,34 @@ namespace DAL.Models
         public double? CardAmount { get; set; }
         public float? NextKM { get; set; }
         public string CardType { get; set; }
+        public string CustomerContact { get; set; }
+        public string CustomerName { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
+    }
+    public partial class ReceiptBLL
+    {
+        public int ReceiptID { get; set; }
+        public string ReceiptName { get; set; }
+        public string CompanyTitle { get; set; }
+        public string CompanyAddress { get; set; }
+        public string CompanyPhones { get; set; }
+        public string CompanyEmail { get; set; }
+        public string CompanyWebsite { get; set; }
+        public string Companytagline { get; set; }
+        public string CompanyLogoURL { get; set; }
+        public string Footer { get; set; }
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Instagram { get; set; }
+        public string Snapchat { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public Nullable<System.DateTime> LastUpdatedDate { get; set; }
+        public Nullable<bool> IsCompanyTagline { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public bool IsActive { get; set; }
+        public int LocationID { get; set; }
+        public Nullable<bool> IsA4Spacing { get; set; }
+
     }
     public class OItemsList
     {
@@ -963,6 +1007,25 @@ namespace DAL.Models
         public string CardHolderName { get; set; }
         public string CardType { get; set; }
 
+    }
+    public class CarNotes
+    {
+        public int NotesID { get; set; }
+        public string NotesComment { get; set; }
+        public string NotesStatus { get; set; }
+        public string Signature { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> CarID { get; set; }
+
+        public List<CarNotesImagesList> NotesImages = new List<CarNotesImagesList>();
+    }
+    
+    public class CarNotesImagesList
+    {
+        public int NotesImageID { get; set; }
+        public int NotesID { get; set; }
+        public string Name { get; set; }
+        public string ImagePath { get; set; }
     }
     public class NotificationBLL
     {

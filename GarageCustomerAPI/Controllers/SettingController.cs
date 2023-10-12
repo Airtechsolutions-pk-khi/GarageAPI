@@ -40,6 +40,19 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.GetAppSettings();
         }
 
+        /// <summary>
+        /// Version 2 : New Design
+        /// - List Of Amenities
+        /// - List Of Services
+        /// - List Of Landmarks
+        /// </summary>
+        /// <returns></returns>
+        [Route("appsetting")]
+        public Settingv2Rsp GetAllSettingsV2()
+        {
+            return settingRepo.GetAppSettingsV2();
+        }
+
         //old with all data
         /// <summary>
         /// - List Of Locations
@@ -79,9 +92,22 @@ namespace GarageCustomerAPI.Controllers
         [Route("locations/{ServiceID}/{LocationID}")]
         public SettingRsp GetService(int ServiceID, int LocationID)
         {
-            return settingRepo.GetServiceLocations(ServiceID, LocationID);
+            return settingRepo.GetServiceLocations(ServiceID, LocationID,0);
         }
 
+        /// <summary>
+        /// Get Locations by service
+        /// - List Of Locations
+        /// - List Of Amenities
+        /// - List Of Services
+        /// - List Of Landmarks
+        /// </summary>
+        /// <returns></returns>
+        [Route("locations/{ServiceID}/{LocationID}/{UserID}")]
+        public SettingRsp GetService(int ServiceID, int LocationID,int UserID)
+        {
+            return settingRepo.GetServiceLocations(ServiceID, LocationID , UserID);
+        }
         /// <summary>
         /// List of CarMake
         /// </summary>

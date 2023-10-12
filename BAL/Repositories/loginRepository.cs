@@ -160,16 +160,11 @@ namespace BAL.Repositories
                 var ds = GetLoginInfov2(Phone);
                 var _dsCustomerInfo = ds.Tables[0] == null ? new Customers() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Customers>>().FirstOrDefault();
                 var _dsCarInfo = ds.Tables[1] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<Cars>>();
-                //var _dsOrders = ds.Tables[2] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OrdersList>>();
-                //var _dsOrderdetail = ds.Tables[3] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OItemsList>>();
-                //var _dsOrderdetailPkg = ds.Tables[4] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<OPackageDetailList>>();
-                //var _dsordercheckoutdetail = ds.Tables[5] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CheckoutDetailsOrder>>();
-                var _dsNotifications = ds.Tables[2] == null ? new List<NotificationBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<NotificationBLL>>();
+               var _dsNotifications = ds.Tables[2] == null ? new List<NotificationBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<NotificationBLL>>();
                 var _dtCarSellInfo = ds.Tables[3] == null ? new List<CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<CarSellList>>().ToList();
                 var _dtCSImageInfo = ds.Tables[4] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CarSellImageList>>().ToList();
-                var _dtFeatureInfo = ds.Tables[5] == null ? new List<DAL.Models.CarSellFeatureList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CarSellFeatureList>>().ToList();
-                //var _dtMyAds = ds.Tables[10] == null ? new List<DAL.Models.CarSellList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[10])).ToObject<List<CarSellList>>().ToList();
-                //var _dtCSMyAdsImageInfo = ds.Tables[11] == null ? new List<CarSellImageList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[11])).ToObject<List<CarSellImageList>>().ToList();
+                var _dtFeatureInfo = ds.Tables[5] == null ? new List<CarSellFeatureList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CarSellFeatureList>>().ToList();
+                var _dsRecentOrders = ds.Tables[6] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<OrdersList>>();
 
                 rsp.Notifications = _dsNotifications;
                 rsp.Customer = _dsCustomerInfo;
@@ -215,6 +210,12 @@ namespace BAL.Repositories
                     }
                 }
 
+                foreach (var j in _dsRecentOrders)
+                {
+                    j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;
+
+                }
+                rsp.RecentOrders = _dsRecentOrders;
                 rsp.CarFavourites = _dtCarSellInfo;
                 rsp.MyAds = new List<CarSellList>();
                 rsp.Status = 1;
@@ -313,6 +314,6 @@ namespace BAL.Repositories
             }
         }
 
-
+       
     }
 }

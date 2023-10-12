@@ -243,7 +243,7 @@
                 #items#
             </tbody>
         </table>
-        <div class="row" style="padding:10px 0;">
+        <div class="row" style="padding:10px 0; ">
             <div class="col-5">
                 <div class="row " dir="ltr" style="padding:0 20px;">
                     <div class="col-4" style="padding:10px 0;">
