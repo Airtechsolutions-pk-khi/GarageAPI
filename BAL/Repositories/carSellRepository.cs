@@ -38,12 +38,12 @@ namespace BAL.Repositories
 			DBContext2 = contextDB2;
 			_pageRepo = pageRepo;
 		}
-		public async Task<CarSellRsp> GetCarSellList(int pageNumber, int pageSize, int? CarSellID)
+		public async Task<CarSellRsp> GetCarSellList(int pageNumber, int pageSize, int? CarSellID, string Search)
 		{
 			var rsp = new CarSellRsp();
 			try
 			{
-				var ds = await _pageRepo.GetPaginationData<dynamic>(pageNumber, pageSize, "sp_GetCarSellV2_CAPI_V2", new { CarSellID });
+				var ds = await _pageRepo.GetPaginationData<dynamic>(pageNumber, pageSize, "sp_GetCarSellV2_CAPI_V2", new { CarSellID, Search });
 				//var ds = await GetInfo(CarSellID);
 				var _dtCarSellInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarSellList>>().ToList();
 				var _dtFeatureInfo = JArray.Parse(JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<CarSellFeatureList>>().ToList();

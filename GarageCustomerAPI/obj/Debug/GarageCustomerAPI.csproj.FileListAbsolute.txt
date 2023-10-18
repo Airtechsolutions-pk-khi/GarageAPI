@@ -351,44 +351,86 @@ D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.cspr
 D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.csproj.CopyComplete
 D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.dll
 D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\obj\Debug\GarageCustomerAPI.pdb
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Abstractions.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Logging.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Tokens.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.Jwt.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.OAuth.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Owin.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Buffers.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.IdentityModel.Tokens.Jwt.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Memory.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Numerics.Vectors.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Runtime.CompilerServices.Unsafe.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Encodings.Web.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Json.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Threading.Tasks.Extensions.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.ValueTuple.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.Http.Owin.dll
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Abstractions.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.JsonWebTokens.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Logging.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.IdentityModel.Tokens.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.Jwt.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Buffers.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.IdentityModel.Tokens.Jwt.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Memory.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Numerics.Vectors.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Runtime.CompilerServices.Unsafe.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Encodings.Web.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Text.Json.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Threading.Tasks.Extensions.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.ValueTuple.xml
-C:\Office\Projects\MARN Garage\GarageCustomerAPI\GarageCustomerAPI\GarageCustomerAPI\bin\System.Web.Http.Owin.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authentication.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authentication.Core.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authorization.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authorization.Policy.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Hosting.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.Extensions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.Features.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.ApiExplorer.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.Core.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.DataAnnotations.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Routing.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.StaticFiles.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.WebUtilities.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.DotNet.PlatformAbstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.DependencyInjection.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.DependencyModel.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.FileProviders.Embedded.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Hosting.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Localization.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Localization.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Logging.Abstractions.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.ObjectPool.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Options.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Primitives.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.WebEncoders.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Net.Http.Headers.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.OpenApi.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.Swagger.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\System.ComponentModel.Annotations.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\System.Diagnostics.DiagnosticSource.dll
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authentication.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authentication.Core.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authorization.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Authorization.Policy.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Hosting.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.Extensions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Http.Features.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.ApiExplorer.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.Core.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Mvc.DataAnnotations.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.ResponseCaching.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Routing.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.StaticFiles.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.AspNetCore.WebUtilities.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Configuration.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.DependencyInjection.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.FileProviders.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.FileProviders.Embedded.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Hosting.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Localization.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Localization.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Logging.Abstractions.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.ObjectPool.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Options.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.Primitives.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Extensions.WebEncoders.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.Net.Http.Headers.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.OpenApi.pdb
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Microsoft.OpenApi.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.Swagger.pdb
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.Swagger.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.SwaggerGen.pdb
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.SwaggerGen.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.SwaggerUI.pdb
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\Swashbuckle.AspNetCore.SwaggerUI.xml
+D:\MoizWork\GarageCustomerAPI\GarageCustomerAPI\bin\System.Diagnostics.DiagnosticSource.xml

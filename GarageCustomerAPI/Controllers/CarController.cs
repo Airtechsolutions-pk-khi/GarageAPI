@@ -26,7 +26,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="cars"></param>
         /// <returns></returns>
         [Route("add/car")]
-        [Authorize]
+        //[Authorize]
         public CarRsp AddCar(Cars cars)
         {
             return carRepo.AddCar(cars);
@@ -38,7 +38,7 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="cars"></param>
         /// <returns></returns>
         [Route("edit/car")]
-		[Authorize]
+		//[Authorize]
 		public CarRsp EditCar(Cars cars)
         {
             return carRepo.EditCar(cars);
@@ -51,7 +51,7 @@ namespace GarageCustomerAPI.Controllers
         /// <returns>A4 receipt</returns>
         [HttpGet]
         [Route("order/receipt/{orderid}")]
-		[Authorize]
+		//[Authorize]
 		public OrderLetterResponse PrintLetter(string orderid = "0")
         {
             return carRepo.OrderPrintLetter(orderid);
