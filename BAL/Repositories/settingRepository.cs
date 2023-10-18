@@ -305,7 +305,7 @@ namespace BAL.Repositories
 
                 foreach (var j in rsp.Brands)
                 {
-                    j.ImagePath = j.ImagePath == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.ImagePath;
+                    j.BrandImage = j.BrandImage== null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.BrandImage;
                 }
                 foreach (var j in rsp.Landmarks)
                 {

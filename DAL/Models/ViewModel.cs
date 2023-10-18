@@ -747,9 +747,9 @@ namespace DAL.Models
     //}
     public class UsersList
     {
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string ImagePath { get; set; }
+        public int? UserID { get; set; }
+        public string BrandName { get; set; }
+        public string BrandImage { get; set; }
         public Nullable<int> StatusID { get; set; }
     }
     public class LoginVerificationResponse
@@ -935,7 +935,21 @@ namespace DAL.Models
         public string CardType { get; set; }
         public string CustomerContact { get; set; }
         public string CustomerName { get; set; }
+
+        public int? CreditCustomerID { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
+        public CreditCustomerA4 CreditCustomerInfo { get; set; }
+    }
+    public class CreditCustomerA4
+    {
+        public string SellerName { get; set; }
+        public string SellerAddress { get; set; }
+        public string SellerVAT { get; set; }
+        public string SellerContact { get; set; }
+        public string BuyerName { get; set; }
+        public string BuyerAddress { get; set; }
+        public string BuyerContact { get; set; }
+        public string BuyerVAT { get; set; }
     }
     public partial class ReceiptBLL
     {

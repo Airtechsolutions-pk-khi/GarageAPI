@@ -270,9 +270,11 @@ namespace BAL.Repositories
                 var _dsCar = ds.Tables[0] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Cars>>();
                 var _dsCompany = ds.Tables[5] == null ? null : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<User>>().FirstOrDefault();
                 var dtReceipt = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(GetReceiptADO(_dsOrders.FirstOrDefault().LocationID).Tables[0])).ToObject<List<ReceiptBLL>>();
+                var _dtCreditCustomer = ds.Tables[8] == null ? null : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<CreditCustomerA4>>().FirstOrDefault();
 
                 var carinfo = _dsCar.FirstOrDefault();
                 var ordercheckout = _dsOrders.FirstOrDefault();
+                ordercheckout.CreditCustomerInfo = _dtCreditCustomer;
                 var companyinfo = _dsCompany;
 
                 if (ds != null)
@@ -486,6 +488,47 @@ namespace BAL.Repositories
                     #endregion socialmedia
 
 
+                    var payment = "";
+                    if (_dsordercheckoutdetail != null)
+                    {
+                        var Payby = ordercheckout.PaymentMode == 3 ? "Payment Type(نوع الدفع) | Multi Payment(دفع متعدد)" : ordercheckout.PaymentMode == 4 ? "Payment Type (نوع الدفع) | CreditCustomer (عمبل آجل)" : "";
+                        if (Payby != "")
+                        {
+                            payment += "  <div class='row' style='background-color:#eaeaea; padding:0 20px;'>";
+                            payment += "     <div class='col-12 text-right' style='padding:10px 0;'>          ";
+                            payment += "         <h5>" + Payby + "</h5>                          ";
+                            payment += "     </div>                                                          ";
+                            payment += " </div>  ";
+                        }
+                        foreach (var item in _dsordercheckoutdetail)
+                        {
+                            if (item.PaymentMode == 1)
+                            {
+                                payment += " <div class='row' style=' padding:0 20px;'>                      ";
+                                payment += "                                                                 ";
+                                payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
+                                payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
+                                payment += "     </div>                                                      ";
+                                payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
+                                payment += "         <h4>Cash نقدا</h4>                                ";
+                                payment += "     </div>                                                      ";
+                                payment += " </div>";
+                            }
+                            if (item.PaymentMode == 2)
+                            {
+                                payment += " <div class='row' style=' padding:0 20px;'>                      ";
+                                payment += "                                                                 ";
+                                payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
+                                payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
+                                payment += "     </div>                                                      ";
+                                payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
+                                payment += "         <h4>Card بطاقة</h4>                                ";
+                                payment += "     </div>                                                      ";
+                                payment += " </div>";
+                            }
+
+                        }
+                    }
                     var qrlink = "";
                     try
                     {
@@ -493,8 +536,15 @@ namespace BAL.Repositories
                     }
                     catch { qrlink = ""; }
 
+                    #region HeaderText
                     isReturnBar = isReturnBar == true ? true : ordercheckout.Status == 106 ? true : false;
                     var refundAmountHTML = "";
+
+                    //initial value assigned
+                    content = content.Replace("#showcredcustsection#", "none");
+                    content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
+                                      "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية المبسطة</h2>" +
+                                      "</div></div>");
                     if (isReturnBar)
                     {
 
@@ -509,7 +559,31 @@ namespace BAL.Repositories
                         content = content.Replace("#refundbar#", "  <div class='row' style='background:#e8acac;margin-bottom:5px;'><div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>اشعار دائن للفاتورة الضريبية المبسطة</h2></div></div>");
                     }
                     else
-                        content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'><div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية</h2></div></div>");
+                    {
+                        if (ordercheckout.CreditCustomerID > 0 && ordercheckout.CreditCustomerInfo != null)
+                        {
+                            if (ordercheckout.CreditCustomerInfo.BuyerVAT != null && ordercheckout.CreditCustomerInfo.BuyerVAT != "")
+                            {
+                                content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
+                                           "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية</h2>" +
+                                           "</div></div>");
+
+                                content = content
+                                        .Replace("#buyername#", ordercheckout.CreditCustomerInfo.BuyerName)
+                                        .Replace("#buyeraddress#", ordercheckout.CreditCustomerInfo.BuyerAddress)
+                                        .Replace("#buyercontact#", ordercheckout.CreditCustomerInfo.BuyerContact)
+                                        .Replace("#buyervatno#", ordercheckout.CreditCustomerInfo.BuyerVAT)
+                                        .Replace("#sellername#", ordercheckout.CreditCustomerInfo.SellerName)
+                                        .Replace("#selleraddress#", ordercheckout.CreditCustomerInfo.SellerAddress)
+                                        .Replace("#sellercontact#", ordercheckout.CreditCustomerInfo.SellerContact)
+                                        .Replace("#sellervatno#", ordercheckout.CreditCustomerInfo.SellerVAT);
+
+                                content = content.Replace("#showcredcustsection#", "block");
+                            }
+                        }
+                    }
+                    #endregion HeaderText
+
 
                     content = content.Replace("#logo#", logoHtml);
                     content = content.Replace("#qrlink#", qrlink);
@@ -612,14 +686,14 @@ namespace BAL.Repositories
             {
                 var ds = GetCustomerCarsADO(CustomerID);
                 var _dsCarInfo = ds.Tables[0] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Cars>>();
-               
+
                 rsp.CarList = rsp.CarList ?? new List<Cars>();
                 foreach (var i in _dsCarInfo)
                 {
                     if (rsp.CarList.Where(x => x.RegistrationNo == i.RegistrationNo).Count() == 0)
                         rsp.CarList.Add(i);
                 }
-                
+
                 foreach (var i in rsp.CarList)
                 {
                     i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
@@ -630,7 +704,7 @@ namespace BAL.Repositories
                     try { i.RegistrationNoP4 = TranslateToArabic(i.RegistrationNoP2, 2); } catch { i.RegistrationNoP4 = ""; }
 
                 }
-        
+
                 rsp.Status = 1;
                 rsp.Description = "Success";
             }
@@ -655,7 +729,7 @@ namespace BAL.Repositories
             }
         }
 
-        public CustomerCarsResponse GetCarOrder(int? carid,int? orderid)
+        public CustomerCarsResponse GetCarOrder(int? carid, int? orderid)
         {
             var rsp = new CustomerCarsResponse();
             try
@@ -666,7 +740,7 @@ namespace BAL.Repositories
                 var _dsOrderdetail = ds.Tables[2] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OItemsList>>();
                 var _dsOrderdetailPkg = ds.Tables[3] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OPackageDetailList>>();
                 var _dsordercheckoutdetail = ds.Tables[4] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CheckoutDetailsOrder>>();
-                rsp.CarList=_dsCarInfo;
+                rsp.CarList = _dsCarInfo;
                 foreach (var i in rsp.CarList)
                 {
                     i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
