@@ -307,6 +307,10 @@ namespace BAL.Repositories
                 {
                     j.BrandImage = j.BrandImage== null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.BrandImage;
                 }
+                foreach (var j in rsp.Settings)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
                 foreach (var j in rsp.Landmarks)
                 {
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
