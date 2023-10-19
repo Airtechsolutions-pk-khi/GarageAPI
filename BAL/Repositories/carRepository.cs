@@ -606,7 +606,7 @@ namespace BAL.Repositories
                     content = content.Replace("#total#", ordercheckout.AmountTotal.ToString());
                     content = content.Replace("#tax#", ordercheckout.Tax.ToString());
                     content = content.Replace("#discount#", Math.Round(ordercheckout.AmountDiscount ?? 0, 2).ToString());
-                    content = content.Replace("#subtotal#", ordercheckout.GrandTotal.ToString());
+                    content = content.Replace("#subtotal#", ordercheckout.GrandTotal.ToString() + " " + ordercheckout.Currency);
                     content = content.Replace("#refundtotal#", refundAmountHTML);
                     content = content.Replace("#vatno#", companyinfo == null ? "" : companyinfo.VATNO);
                     content = content.Replace("#carimages#", carImagesHtml);

@@ -935,7 +935,7 @@ namespace DAL.Models
         public string CardType { get; set; }
         public string CustomerContact { get; set; }
         public string CustomerName { get; set; }
-
+        public string Currency { get; set; }
         public int? CreditCustomerID { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
         public CreditCustomerA4 CreditCustomerInfo { get; set; }
