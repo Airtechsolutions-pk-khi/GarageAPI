@@ -1,6 +1,4 @@
 ﻿using BAL.Repositories;
-using DAL.DBEntities;
-using DAL.DBEntities2;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +25,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public CarSellController()
         {
-            carSellRepo = new carSellRepository(new Garage_Entities());
+            carSellRepo = new carSellRepository();
         }
 
         /// <summary>

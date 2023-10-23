@@ -1,6 +1,4 @@
 ﻿
-using DAL.DBEntities;
-using DAL.DBEntities2;
 using DAL.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,15 +22,7 @@ namespace BAL.Repositories
         public loginRepository()
             : base()
         {
-            DBContext2 = new Garage_Entities();
-
         }
-        public loginRepository(Garage_Entities contextDB2)
-            : base(contextDB2)
-        {
-            DBContext2 = contextDB2;
-        }
-
         public LoginResponse CustomerLogin(string Phone)
         {
             var rsp = new LoginResponse();

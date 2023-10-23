@@ -1,5 +1,4 @@
 ﻿using BAL.Repositories;
-using DAL.DBEntities2;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public SettingController()
         {
-            settingRepo = new settingRepository(new GarageCustomer_Entities());
+            settingRepo = new settingRepository();
         }
 
         /// <summary>
@@ -179,11 +178,11 @@ namespace GarageCustomerAPI.Controllers
         /// <param name="obj"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("setting/feedback/add")]
-        public Rsp PostFeedback(Feedback obj)
-        {
-            return settingRepo.AddFeedback(obj);
-        }
+        //[Route("setting/feedback/add")]
+        //public Rsp PostFeedback(Feedback obj)
+        //{
+        //    return settingRepo.AddFeedback(obj);
+        //}
 
         /// <summary>
         /// Add Review to Locations

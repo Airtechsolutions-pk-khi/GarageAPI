@@ -588,20 +588,6 @@
             <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.LoginController.PostUpdateToken(DAL.Models.TokenBLL)">
-            <summary>
-            Update Device token
-            </summary>
-            <param name="obj">Mandatory</param>
-            <returns></returns>
-        </member>
-        <member name="M:GarageCustomerAPI.Controllers.LoginController.PostUpdateToken(DAL.Models.NotificationBLL)">
-            <summary>
-            List Of App Notifications
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
         <member name="M:GarageCustomerAPI.Controllers.LoginController.Login(System.Nullable{System.Int32})">
             <summary>
             Get Notifications API
@@ -609,16 +595,6 @@
             <param name="customerid">Mandatory</param>
             <remarks>Get List Of Notifcations</remarks>
             <returns></returns>
-        </member>
-        <member name="F:GarageCustomerAPI.Controllers.CarController.carRepo">
-            <summary>
-            Cars
-            </summary>
-        </member>
-        <member name="M:GarageCustomerAPI.Controllers.CarController.#ctor">
-            <summary>
-            Cars
-            </summary>
         </member>
         <member name="M:GarageCustomerAPI.Controllers.CarController.AddCar(DAL.Models.Cars)">
             <summary>
@@ -744,18 +720,11 @@
             Test Push Notification API
             </summary>
         </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostFeedback(DAL.DBEntities2.Feedback)">
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostReview(DAL.Models.ReviewsBLL)">
             <summary>
             FeedBack Add
             </summary>
             <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:GarageCustomerAPI.Controllers.SettingController.PostReview(DAL.Models.ReviewsBLL)">
-            <summary>
-            Add Review to Locations
-            </summary>
-            <param name="obj">(Status 1 for Active,3 for Delete)</param>
             <returns></returns>
         </member>
         <member name="M:GarageCustomerAPI.Controllers.SettingController.PostReviewUpdate(DAL.Models.ReviewsBLL)">

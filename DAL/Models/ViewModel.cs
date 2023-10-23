@@ -1,5 +1,4 @@
-﻿using DAL.DBEntities;
-using DAL.DBEntities2;
+﻿
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,8 +35,19 @@ namespace DAL.Models
     {
         public Cars cars { get; set; }
     }
-
-    public class RspSetting : Rsp
+	public class TokenRsp : Rsp
+	{
+		public TokenBLL token { get; set; }
+	}
+    public class NotificationRsp : Rsp
+    {
+        public NotificationBLL Notification { get; set; }
+    }
+	public class FeedBackRsp : Rsp
+	{
+		public Feedback FeedBack { get; set; }
+	}
+	public class RspSetting : Rsp
     {
         public List<LocationsBLL> Settings { get; set; }
         public List<ServiceBLL> Services { get; set; }
@@ -281,7 +291,6 @@ namespace DAL.Models
         public string LastUpdateBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public double? DiscountApplied { get; set; }
-        public List<LocationsBLL> Locations { get; set; }
         public List<DeliveryAreaBLL> DeliveryAreas { get; set; }
         //public List<AboutBLL> AppSettings { get; set; }
         //public List<AppInfoBLL> ApplicationInfo { get; set; }
@@ -367,6 +376,13 @@ namespace DAL.Models
         public int ImageID { get; set; }
         public string ImageURL { get; set; }
         public int? LocationID { get; set; }
+    }
+    public class LocationJunc
+    {
+        public int ID { get; set; }
+        public int? SettingID { get; set; }
+        public int? LocationID { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
     }
     public class CategoryBLL
     {
@@ -940,6 +956,53 @@ namespace DAL.Models
         public List<OItemsList> Items = new List<OItemsList>();
         public CreditCustomerA4 CreditCustomerInfo { get; set; }
     }
+
+    public class OrdersChecklist
+    {
+        public int OrderChecklistID { get; set; }
+        public int OrderID { get; set; }
+        public int? InspectionDetailID { get; set; }
+        public int? SubOrderChecklistID { get; set; }
+        public string Name { get; set; }
+        public string AlternateName { get; set; }
+        public string Value { get; set; }
+        public string KM { get; set; }
+        public int? StatusID { get; set; }
+        public int? LocationID { get; set; }
+    }
+    public class User
+    {
+        public int? UserID { get; set; }
+        public int? RowID { get; set; }
+        public int? PackageInfoID { get; set; }
+		public string UserName { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string ImagePath { get; set; }
+		public string Password { get; set; }
+		public string Company { get; set; }
+		public string BusinessType { get; set; }
+		public string Email { get; set; }
+		public string ContactNo { get; set; }
+		public string Address { get; set; }
+		public int? CityID { get; set; }
+		public string CountryID{ get; set; }
+		public string Website{ get; set; }
+		public int? RoleID { get; set; }
+		public int? TimezoneID { get; set; }
+		public int? StatusID { get; set; }
+        public string CompanyCode{ get; set; }
+        public string States{ get; set; }
+        public string ZipCode{ get; set; }
+        public string VATNO{ get; set; }
+        public float Tax{ get; set; }
+        public bool IsSMSCheckoutAddOn{ get; set; }
+        public bool AllowNegativeInventory{ get; set; }
+        public bool IsOdoo{ get; set; }
+        public bool IsAccountingAddons{ get; set; }
+        public bool IsGarageGo{ get; set; }
+        public bool IsCashier{ get; set; }
+	}
     public class CreditCustomerA4
     {
         public string SellerName { get; set; }
@@ -1106,5 +1169,16 @@ namespace DAL.Models
         public List<AIChat> chats { get; set; }
         public string description { get; set; }
         public int status { get; set; }
+    }
+    public class Feedback
+    {
+        public int FeedbackID { get; set; }
+        public string About { get; set; }
+        public string Topic { get; set; }
+        public string Details { get; set; }
+        public int StatusID { get; set; }
+        public DateTime? Date { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? CustomerID { get; set; }
     }
 }

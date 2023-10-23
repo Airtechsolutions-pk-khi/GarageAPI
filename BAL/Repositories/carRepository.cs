@@ -1,5 +1,5 @@
 ﻿
-using DAL.DBEntities;
+
 using DAL.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -23,13 +23,7 @@ namespace BAL.Repositories
         public carRepository()
             : base()
         {
-            DBContext2 = new Garage_Entities();
 
-        }
-        public carRepository(Garage_Entities contextDB2)
-            : base(contextDB2)
-        {
-            DBContext2 = contextDB2;
         }
 
         public CarRsp AddCar(Cars cars)
@@ -321,7 +315,7 @@ namespace BAL.Repositories
                             checklist += "                <tr class='sec2-row'>                                                                     ";
                             checklist += "                    <td class='text-right'><h5>" + datatChecklist[i].AlternateName + "</h5><h5>" + datatChecklist[i].Name + "</h5></td>      ";
                             checklist += "                    <td style='padding:2px;' class='text-left'>                                            ";
-                            checklist += "                        <h4><strong>" + datatChecklist[i].Value + "</strong></h4>                                   ";
+                            //checklist += "                        <h4><strong>" + datatChecklist[i].Value + "</strong></h4>                                   ";
                             checklist += "                    </td>                                                                ";
                             checklist += "                </tr>                                                                    ";
                             checklist += "            </tbody>                                                                     ";
@@ -337,7 +331,7 @@ namespace BAL.Repositories
                                     checklist += "            <tr class='sec2-row'>                                                                     ";
                                     checklist += "                <td class='text-right'><h5>" + datatChecklist[i + 1].AlternateName + "</h5><h5>" + datatChecklist[i + 1].Name + "</h5></td>      ";
                                     checklist += "                <td class='text-left'>                                            ";
-                                    checklist += "                    <h4><strong>" + datatChecklist[i + 1].Value + "</strong></h4>                                   ";
+                                    //checklist += "                    <h4><strong>" + datatChecklist[i + 1].Value + "</strong></h4>                                   ";
                                     checklist += "                </td>                                                                ";
                                     checklist += "            </tr>                                                                    ";
                                     checklist += "        </tbody>                                                                     ";

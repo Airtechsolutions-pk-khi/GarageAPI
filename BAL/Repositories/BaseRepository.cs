@@ -10,58 +10,50 @@ using System.Net.Mail;
 using DAL.Models;
 using System.Web.Script.Serialization;
 using System.Globalization;
-using DAL.DBEntities2;
 
 namespace BAL.Repositories
 {
-    public class BaseRepository : IDisposable
+    public class BaseRepository 
     {
 
         StreamWriter _sw;
-        public GarageCustomer_Entities DBContext;
 
         public BaseRepository()
         {
-            DBContext = new GarageCustomer_Entities();
         }
 
-        public BaseRepository(GarageCustomer_Entities ContextDB)
-        {
-            DBContext = ContextDB;
-        }
+        //public void SaveChanges()
+        //{
+          
+        //}
 
-        public void SaveChanges()
-        {
-            DBContext.SaveChanges();
-        }
+        //#region IDisposable Support
 
-        #region IDisposable Support
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        if (DBContext != null)
+        //        {
+        //            DBContext.Dispose();
+        //            DBContext = null;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (DBContext != null)
-                {
-                    DBContext.Dispose();
-                    DBContext = null;
+        //        }
+        //    }
+        //}
 
-                }
-            }
-        }
+        //// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        //~BaseRepository()
+        //{
+        //    Dispose();
+        //}
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        ~BaseRepository()
-        {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
+        //#endregion
 
         public void ErrorLog(Exception e, string FnName, string FileName)
         {

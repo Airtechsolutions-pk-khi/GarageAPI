@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using DAL.DBEntities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,54 +13,48 @@ using System.Web;
 
 namespace BAL.Repositories
 {
-    public class BaseRepository2 : IDisposable
+    public class BaseRepository2 
     {
 
         StreamWriter _sw;
-        public Garage_Entities DBContext2;
+
 
         public BaseRepository2()
         {
-            DBContext2 = new Garage_Entities();
+          
         }
+        //public void SaveChanges()
+        //{
+        //    DBContext2.SaveChanges();
+        //}
 
-        public BaseRepository2(Garage_Entities ContextDB2)
-        {
-            DBContext2 = ContextDB2;
-        }
+        //#region IDisposable Support
 
-        public void SaveChanges()
-        {
-            DBContext2.SaveChanges();
-        }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        if (DBContext2 != null)
+        //        {
+        //            DBContext2.Dispose();
+        //            DBContext2 = null;
 
-        #region IDisposable Support
+        //        }
+        //    }
+        //}
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (DBContext2 != null)
-                {
-                    DBContext2.Dispose();
-                    DBContext2 = null;
+        //// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        //~BaseRepository2()
+        //{
+        //    Dispose();
+        //}
 
-                }
-            }
-        }
-
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        ~BaseRepository2()
-        {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
+        //#endregion
 
         public void ErrorLog(Exception e, string FnName, string FileName)
         {

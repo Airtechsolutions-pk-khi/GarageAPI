@@ -1,5 +1,4 @@
 ﻿using BAL.Repositories;
-using DAL.DBEntities;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -13,16 +12,11 @@ namespace GarageCustomerAPI.Controllers
     [RoutePrefix("api")]
     public class CarController : ApiController
     {
-        /// <summary>
-        /// Cars
-        /// </summary>
         carRepository carRepo;
-        /// <summary>
-        /// Cars
-        /// </summary>
+
         public CarController()
         {
-            carRepo = new carRepository(new Garage_Entities());
+            carRepo = new carRepository();
         }
 
         

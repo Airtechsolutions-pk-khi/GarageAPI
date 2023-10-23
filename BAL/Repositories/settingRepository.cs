@@ -1,6 +1,4 @@
 ﻿
-using DAL.DBEntities;
-using DAL.DBEntities2;
 using DAL.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.IO;
@@ -26,13 +25,6 @@ namespace BAL.Repositories
         public settingRepository()
             : base()
         {
-            DBContext = new GarageCustomer_Entities();
-
-        }
-        public settingRepository(GarageCustomer_Entities contextDB)
-            : base(contextDB)
-        {
-            DBContext = contextDB;
         }
         public SettingRsp GetSettings(int LocationID)
         {
@@ -513,110 +505,139 @@ namespace BAL.Repositories
             }
         }
 
-        public Rsp InsertToken(TokenBLL obj)
+        public TokenRsp InsertToken(TokenBLL obj)
         {
-            Rsp rsp;
-            try
+			TokenRsp rsp = new TokenRsp();
+			try
             {
-                PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
-                token.StatusID = 1;
-                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).Count();
-                if (chk == 0)
-                {
-                    PushToken data = DBContext.PushTokens.Add(token);
-                    DBContext.SaveChanges();
-                }
+				SqlParameter[] p = new SqlParameter[3];
+				p[0] = new SqlParameter("@Token", obj.Token);
+				p[1] = new SqlParameter("@CustomerID", obj.CustomerID);
+				p[2] = new SqlParameter("@StatusID", 1);
+				p[3] = new SqlParameter("@Device", obj.Device);
 
-                rsp = new Rsp();
+				(new DBHelper().ExecuteNonQueryReturn)("sp_InsertToken_CAPI", p);
+
+				//PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
+				//token.StatusID = 1;
+				//var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).Count();
+				//if (chk == 0)
+				//{
+				//    PushToken data = DBContext.PushTokens.Add(token);
+				//    DBContext.SaveChanges();
+				//}
+
+				rsp.token = obj;
                 rsp.Status = (int)eStatus.Success;
                 rsp.Description = "Token Added";
             }
             catch (Exception ex)
             {
-                rsp = new Rsp();
-                rsp.Status = (int)eStatus.Exception;
+                rsp.token = obj;
+				rsp.Status = (int)eStatus.Exception;
                 rsp.Description = "Failed to add token";
             }
             return rsp;
         }
-        public Rsp UpdateToken(TokenBLL obj)
-        {
-            Rsp rsp;
-            try
+        public TokenRsp UpdateToken(TokenBLL obj)
+		{
+			TokenRsp rsp = new TokenRsp();
+			try
             {
-                //PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
 
-                var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).FirstOrDefault();
+				SqlParameter[] p = new SqlParameter[2];
+				p[0] = new SqlParameter("@StatusID", obj.StatusID);
+				p[1] = new SqlParameter("@TokenID", obj.TokenID);
+				(new DBHelper().ExecuteNonQueryReturn)("sp_UpdateToken_CAPI", p);
 
-                if (chk != null)
-                {
-                    chk.StatusID = obj.StatusID;
-                    DBContext.PushTokens.Attach(chk);
-                    DBContext.UpdateOnly<PushToken>(
-                    chk, x => x.StatusID);
+				//PushToken token = JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(obj)).ToObject<PushToken>();
 
-                    DBContext.SaveChanges();
-                }
+				//var chk = DBContext.PushTokens.Where(x => x.Token == obj.Token && x.StatusID == 1).FirstOrDefault();
+
+				//if (chk != null)
+				//{
+				//    chk.StatusID = obj.StatusID;
+				//    DBContext.PushTokens.Attach(chk);
+				//    DBContext.UpdateOnly<PushToken>(
+				//    chk, x => x.StatusID);
+
+				//    DBContext.SaveChanges();
+				//}
 
 
-                rsp = new Rsp();
+				rsp.token = obj;
                 rsp.Status = (int)eStatus.Success;
                 rsp.Description = "Token Updated";
             }
             catch (Exception ex)
             {
-                rsp = new Rsp();
+                rsp.token = obj;
                 rsp.Status = (int)eStatus.Exception;
                 rsp.Description = "Failed to update token";
             }
             return rsp;
         }
-        public Rsp UpdateNotification(NotificationBLL obj)
+        public NotificationRsp UpdateNotification(NotificationBLL obj)
         {
-            Rsp rsp;
+			NotificationRsp rsp = new NotificationRsp();
             try
             {
-                var chk = DBContext.Notifications.Where(x => x.NotificationID == obj.NotificationID).FirstOrDefault();
+				SqlParameter[] p = new SqlParameter[2];
+				p[0] = new SqlParameter("@IsRead", obj.IsRead);
+				p[1] = new SqlParameter("@NotificationID", obj.NotificationID);
+				(new DBHelper().ExecuteNonQueryReturn)("sp_UpdateNotification_CAPI", p);
 
-                if (chk != null)
-                {
-                    chk.IsRead = obj.IsRead;
-                    DBContext.Notifications.Attach(chk);
-                    DBContext.UpdateOnly<Notification>(
-                    chk, x => x.IsRead);
 
-                    DBContext.SaveChanges();
-                }
-                rsp = new Rsp();
+				//var chk = DBContext.Notifications.Where(x => x.NotificationID == obj.NotificationID).FirstOrDefault();
+
+				//if (chk != null)
+				//{
+				//    chk.IsRead = obj.IsRead;
+				//    DBContext.Notifications.Attach(chk);
+				//    DBContext.UpdateOnly<Notification>(
+				//    chk, x => x.IsRead);
+
+				//    DBContext.SaveChanges();
+				//}
+				rsp.Notification = obj;
                 rsp.Status = (int)eStatus.Success;
                 rsp.Description = "Notification Updated";
             }
             catch (Exception ex)
             {
-                rsp = new Rsp();
+                rsp.Notification = obj;
                 rsp.Status = (int)eStatus.Exception;
                 rsp.Description = "Failed to update notification";
             }
             return rsp;
         }
-        public Rsp AddFeedback(Feedback obj)
+        public FeedBackRsp AddFeedback(Feedback obj)
         {
-            Rsp rsp;
+            FeedBackRsp rsp = new FeedBackRsp();
             try
             {
-                //var chk = DBContext.Feedbacks.Where(x => x.FeedbackID == obj.FeedbackID).FirstOrDefault();
+				SqlParameter[] p = new SqlParameter[7];
+				p[0] = new SqlParameter("@About", obj.About);
+				p[1] = new SqlParameter("@Topic", obj.Topic);
+				p[2] = new SqlParameter("@Details", obj.Details);
+				p[3] = new SqlParameter("@StatusID", obj.StatusID);
+				p[4] = new SqlParameter("@Date", obj.Date);
+				p[5] = new SqlParameter("@CreatedDate", DateTime.Now);
+				p[6] = new SqlParameter("@CustomerID", obj.CustomerID);
+				(new DBHelper().ExecuteNonQueryReturn)("sp_AddFeedBack_CAPI", p);
 
-                DBContext.Feedbacks.AddOrUpdate(obj);
-                DBContext.SaveChanges();
+				//var chk = DBContext.Feedbacks.Where(x => x.FeedbackID == obj.FeedbackID).FirstOrDefault();
+				//DBContext.Feedbacks.AddOrUpdate(obj);
+				//DBContext.SaveChanges();
 
-                rsp = new Rsp();
+				rsp.FeedBack = obj;
                 rsp.Status = (int)eStatus.Success;
                 rsp.Description = "Feedback Added";
             }
             catch (Exception ex)
             {
-                rsp = new Rsp();
-                rsp.Status = (int)eStatus.Exception;
+				rsp.FeedBack = obj;
+				rsp.Status = (int)eStatus.Exception;
                 rsp.Description = "Failed to add Feedback";
             }
             return rsp;

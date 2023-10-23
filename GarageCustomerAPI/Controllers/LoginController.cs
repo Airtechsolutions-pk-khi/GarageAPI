@@ -1,6 +1,4 @@
 ﻿using BAL.Repositories;
-using DAL.DBEntities;
-using DAL.DBEntities2;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -28,8 +26,8 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public LoginController()
         {
-            loginRepo = new loginRepository(new Garage_Entities());
-            settingRepo = new settingRepository(new GarageCustomer_Entities());
+            loginRepo = new loginRepository();
+            settingRepo = new settingRepository();
         }
 
         /// <summary>
@@ -88,11 +86,6 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.InsertToken(obj);
         }
 
-        /// <summary>
-        /// Update Device token
-        /// </summary>
-        /// <param name="obj">Mandatory</param>
-        /// <returns></returns>
         [HttpPost]
         [Route("login/update/token")]
         public Rsp PostUpdateToken(TokenBLL obj)
@@ -100,11 +93,7 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.UpdateToken(obj);
         }
 
-        /// <summary>
-        /// List Of App Notifications
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+
         [HttpPost]
         [Route("notification/update")]
         public Rsp PostUpdateToken(NotificationBLL obj)
