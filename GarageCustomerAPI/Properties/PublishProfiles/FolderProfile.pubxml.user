@@ -4,73 +4,73 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Office\Projects\GARAGEPOS\APP-Customer\Publish\api42</_PublishTargetUrl>
-    <History>True|2023-09-12T07:24:43.0875360Z;True|2023-09-03T17:24:39.8006548+03:00;True|2023-08-30T17:35:55.3626707+03:00;True|2023-08-30T17:16:27.1975664+03:00;True|2023-08-28T15:45:00.9896475+03:00;True|2023-08-23T18:57:26.9819464+03:00;True|2023-08-23T12:14:12.3916797+03:00;True|2023-08-22T17:26:23.4600453+03:00;True|2023-08-22T16:38:17.0797056+03:00;True|2023-08-22T11:02:10.2936935+03:00;True|2023-08-21T15:32:23.9990847+03:00;True|2023-08-21T10:29:25.2827138+03:00;True|2023-08-20T13:23:35.0795064+03:00;True|2023-08-16T16:16:16.6980738+03:00;True|2023-08-15T15:30:43.7638602+03:00;True|2023-08-15T13:19:09.9280802+03:00;True|2023-08-15T11:51:04.4440442+03:00;True|2023-08-01T17:24:52.9970014+03:00;True|2023-08-01T17:09:28.7068687+03:00;True|2023-08-01T11:40:43.9438527+03:00;True|2023-08-01T11:37:35.0295264+03:00;True|2023-08-01T11:36:17.1448238+03:00;True|2023-07-25T13:04:05.8331959+03:00;True|2023-07-24T16:12:25.7802650+03:00;True|2023-07-24T16:01:00.0202396+03:00;True|2023-07-23T15:47:29.7957560+03:00;True|2023-07-04T14:43:31.4090327+03:00;True|2023-06-18T17:32:53.1907502+03:00;True|2023-06-14T13:19:43.9978962+03:00;True|2023-06-05T12:17:34.0115941+03:00;True|2023-05-30T10:37:54.7041211+03:00;True|2023-05-23T14:45:33.9939422+03:00;True|2023-05-23T13:33:47.7695631+03:00;True|2023-05-18T11:24:14.4447295+03:00;True|2023-05-11T16:06:41.4641318+03:00;True|2023-05-09T12:13:55.8033086+03:00;True|2023-05-09T12:04:26.9383489+03:00;True|2023-05-07T17:30:50.6174771+03:00;True|2023-05-04T12:21:28.2721369+03:00;True|2023-05-04T12:14:19.0787135+03:00;True|2023-04-30T11:25:17.4404161+03:00;True|2023-04-13T13:27:52.4233559+03:00;True|2023-04-11T13:30:59.6946480+03:00;True|2023-04-11T13:05:25.6466156+03:00;True|2023-04-11T12:32:23.8560380+03:00;True|2023-04-11T12:01:59.4144794+03:00;True|2023-04-09T13:28:30.0610115+03:00;True|2023-03-27T11:23:54.6643248+03:00;True|2023-03-27T11:22:34.8317955+03:00;True|2023-03-20T12:01:09.6096759+03:00;True|2023-03-19T18:46:58.6099301+03:00;True|2023-03-19T14:31:08.0661286+03:00;True|2023-03-19T14:22:11.8235072+03:00;True|2023-03-16T12:41:57.3380480+03:00;True|2023-03-16T12:09:04.9949534+03:00;True|2023-03-02T10:06:51.0032754+03:00;True|2023-02-14T17:20:15.9552796+03:00;True|2023-02-12T12:01:52.3497545+03:00;True|2023-02-09T01:57:31.3123721+03:00;True|2022-12-11T11:53:12.3388171+03:00;True|2022-12-07T13:56:16.5861112+03:00;True|2022-12-04T12:23:06.3390020+03:00;True|2022-11-20T15:17:32.2084462+03:00;True|2022-10-18T12:25:15.7538946+03:00;True|2022-10-17T18:36:04.4589483+03:00;True|2022-10-17T18:24:30.8266954+03:00;True|2022-10-17T13:13:56.8849667+03:00;True|2022-10-17T13:02:36.7143014+03:00;True|2022-10-12T14:23:41.4577593+03:00;True|2022-10-12T13:39:27.4447644+03:00;True|2022-10-11T14:03:19.5776897+03:00;True|2022-10-11T13:50:10.7675171+03:00;True|2022-10-11T13:48:40.7058278+03:00;True|2022-10-06T12:27:40.2879089+03:00;True|2022-10-03T15:45:22.1044990+03:00;True|2022-10-03T15:35:38.6580011+03:00;True|2022-09-15T11:37:41.9586876+03:00;True|2022-09-14T12:31:11.4688955+03:00;True|2022-09-12T14:11:23.3143939+03:00;True|2022-08-24T14:06:34.5581946+03:00;True|2022-08-14T13:20:26.5457635+03:00;True|2022-08-14T13:14:32.3148488+03:00;True|2022-08-11T19:36:09.0309092+03:00;True|2022-08-11T19:24:55.6330145+03:00;</History>
+    <_PublishTargetUrl>C:\Office\Projects\GARAGEPOS\APP-Customer\Publish\api44</_PublishTargetUrl>
+    <History>True|2023-10-24T07:29:57.1891445Z;True|2023-10-24T10:29:41.1978003+03:00;True|2023-09-12T10:24:43.0875360+03:00;True|2023-09-03T17:24:39.8006548+03:00;True|2023-08-30T17:35:55.3626707+03:00;True|2023-08-30T17:16:27.1975664+03:00;True|2023-08-28T15:45:00.9896475+03:00;True|2023-08-23T18:57:26.9819464+03:00;True|2023-08-23T12:14:12.3916797+03:00;True|2023-08-22T17:26:23.4600453+03:00;True|2023-08-22T16:38:17.0797056+03:00;True|2023-08-22T11:02:10.2936935+03:00;True|2023-08-21T15:32:23.9990847+03:00;True|2023-08-21T10:29:25.2827138+03:00;True|2023-08-20T13:23:35.0795064+03:00;True|2023-08-16T16:16:16.6980738+03:00;True|2023-08-15T15:30:43.7638602+03:00;True|2023-08-15T13:19:09.9280802+03:00;True|2023-08-15T11:51:04.4440442+03:00;True|2023-08-01T17:24:52.9970014+03:00;True|2023-08-01T17:09:28.7068687+03:00;True|2023-08-01T11:40:43.9438527+03:00;True|2023-08-01T11:37:35.0295264+03:00;True|2023-08-01T11:36:17.1448238+03:00;True|2023-07-25T13:04:05.8331959+03:00;True|2023-07-24T16:12:25.7802650+03:00;True|2023-07-24T16:01:00.0202396+03:00;True|2023-07-23T15:47:29.7957560+03:00;True|2023-07-04T14:43:31.4090327+03:00;True|2023-06-18T17:32:53.1907502+03:00;True|2023-06-14T13:19:43.9978962+03:00;True|2023-06-05T12:17:34.0115941+03:00;True|2023-05-30T10:37:54.7041211+03:00;True|2023-05-23T14:45:33.9939422+03:00;True|2023-05-23T13:33:47.7695631+03:00;True|2023-05-18T11:24:14.4447295+03:00;True|2023-05-11T16:06:41.4641318+03:00;True|2023-05-09T12:13:55.8033086+03:00;True|2023-05-09T12:04:26.9383489+03:00;True|2023-05-07T17:30:50.6174771+03:00;True|2023-05-04T12:21:28.2721369+03:00;True|2023-05-04T12:14:19.0787135+03:00;True|2023-04-30T11:25:17.4404161+03:00;True|2023-04-13T13:27:52.4233559+03:00;True|2023-04-11T13:30:59.6946480+03:00;True|2023-04-11T13:05:25.6466156+03:00;True|2023-04-11T12:32:23.8560380+03:00;True|2023-04-11T12:01:59.4144794+03:00;True|2023-04-09T13:28:30.0610115+03:00;True|2023-03-27T11:23:54.6643248+03:00;True|2023-03-27T11:22:34.8317955+03:00;True|2023-03-20T12:01:09.6096759+03:00;True|2023-03-19T18:46:58.6099301+03:00;True|2023-03-19T14:31:08.0661286+03:00;True|2023-03-19T14:22:11.8235072+03:00;True|2023-03-16T12:41:57.3380480+03:00;True|2023-03-16T12:09:04.9949534+03:00;True|2023-03-02T10:06:51.0032754+03:00;True|2023-02-14T17:20:15.9552796+03:00;True|2023-02-12T12:01:52.3497545+03:00;True|2023-02-09T01:57:31.3123721+03:00;True|2022-12-11T11:53:12.3388171+03:00;True|2022-12-07T13:56:16.5861112+03:00;True|2022-12-04T12:23:06.3390020+03:00;True|2022-11-20T15:17:32.2084462+03:00;True|2022-10-18T12:25:15.7538946+03:00;True|2022-10-17T18:36:04.4589483+03:00;True|2022-10-17T18:24:30.8266954+03:00;True|2022-10-17T13:13:56.8849667+03:00;True|2022-10-17T13:02:36.7143014+03:00;True|2022-10-12T14:23:41.4577593+03:00;True|2022-10-12T13:39:27.4447644+03:00;True|2022-10-11T14:03:19.5776897+03:00;True|2022-10-11T13:50:10.7675171+03:00;True|2022-10-11T13:48:40.7058278+03:00;True|2022-10-06T12:27:40.2879089+03:00;True|2022-10-03T15:45:22.1044990+03:00;True|2022-10-03T15:35:38.6580011+03:00;True|2022-09-15T11:37:41.9586876+03:00;True|2022-09-14T12:31:11.4688955+03:00;True|2022-09-12T14:11:23.3143939+03:00;True|2022-08-24T14:06:34.5581946+03:00;True|2022-08-14T13:20:26.5457635+03:00;True|2022-08-14T13:14:32.3148488+03:00;True|2022-08-11T19:36:09.0309092+03:00;True|2022-08-11T19:24:55.6330145+03:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/HelpPage/HelpPage.css">
-      <publishTime>06/08/2022 12:37:30</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Api.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ApiGroup.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/CollectionModelDescription.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ComplexTypeModelDescription.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/DictionaryModelDescription.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/EnumTypeModelDescription.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/HelpPageApiModel.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ImageSample.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/InvalidSample.cshtml">
-      <publishTime>06/08/2022 12:37:27</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/KeyValuePairModelDescription.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ModelDescriptionLink.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Parameters.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Samples.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/SimpleTypeModelDescription.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/TextSample.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/Index.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Help/ResourceModel.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Shared/_Layout.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/Web.config">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
-      <publishTime>06/08/2022 12:37:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/Almaz.JPG">
       <publishTime>06/08/2022 12:20:17</publishTime>
@@ -79,52 +79,52 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/28/2023 11:17:27</publishTime>
     </File>
     <File Include="Assets/Images/EmptyNoplate.png">
-      <publishTime>10/11/2022 11:51:48</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/ExploreServices.JPG">
-      <publishTime>06/08/2022 12:20:17</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities1.jpg">
       <publishTime>06/23/2022 15:02:15</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities1.png">
-      <publishTime>08/09/2022 10:56:15</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities2.jpg">
       <publishTime>06/23/2022 15:04:17</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities2.png">
-      <publishTime>08/09/2022 10:56:15</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities3.jpg">
       <publishTime>06/23/2022 15:05:11</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities3.png">
-      <publishTime>08/09/2022 10:56:15</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities4.jpg">
       <publishTime>06/23/2022 15:05:11</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities4.png">
-      <publishTime>08/09/2022 10:56:15</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities5.jpg">
       <publishTime>07/14/2022 09:44:34</publishTime>
     </File>
     <File Include="Assets/Images/imgamenities5.png">
-      <publishTime>08/09/2022 10:56:15</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgcar1.jpg">
-      <publishTime>07/14/2022 13:24:42</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgcar2.jpg">
-      <publishTime>07/14/2022 13:24:42</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgcar3.jpg">
-      <publishTime>07/14/2022 13:24:41</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgdiscount1.jpg">
-      <publishTime>06/23/2022 13:08:29</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imglandmark1.svg">
       <publishTime>08/16/2022 18:51:53</publishTime>
@@ -136,37 +136,37 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/16/2022 18:51:53</publishTime>
     </File>
     <File Include="Assets/Images/imglocation1.jpg">
-      <publishTime>07/14/2022 11:16:59</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imglocation2.jpg">
-      <publishTime>07/14/2022 11:16:56</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imglocation3.jpg">
-      <publishTime>07/14/2022 11:16:58</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgservice1.jpg">
-      <publishTime>07/14/2022 11:28:47</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgservice1.svg">
       <publishTime>08/16/2022 18:53:19</publishTime>
     </File>
     <File Include="Assets/Images/imgservice2.jpg">
-      <publishTime>07/14/2022 11:30:01</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgservice2.svg">
       <publishTime>08/16/2022 18:53:19</publishTime>
     </File>
     <File Include="Assets/Images/imgservice3.jpg">
-      <publishTime>07/14/2022 11:30:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgservice3.svg">
       <publishTime>08/16/2022 18:53:19</publishTime>
     </File>
     <File Include="Assets/Images/imgservice4.jpg">
-      <publishTime>07/14/2022 11:29:41</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgservice5.jpg">
-      <publishTime>07/14/2022 12:39:31</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgservice5.svg">
       <publishTime>08/16/2022 18:53:19</publishTime>
@@ -175,76 +175,76 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/16/2022 18:53:19</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting1.jpg">
-      <publishTime>06/23/2022 12:14:40</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting10.png">
-      <publishTime>08/01/2022 01:16:25</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting2.jpg">
-      <publishTime>06/23/2022 12:15:12</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting3.jpg">
-      <publishTime>06/23/2022 12:15:35</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting4.jpg">
-      <publishTime>06/23/2022 12:16:05</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting5.jpg">
-      <publishTime>06/23/2022 12:16:28</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting6.png">
-      <publishTime>08/01/2022 01:29:07</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsetting9.png">
-      <publishTime>08/01/2022 01:16:44</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsettings11.png">
-      <publishTime>08/18/2022 17:13:26</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/imgsettings11.svg">
       <publishTime>08/16/2022 18:51:37</publishTime>
     </File>
     <File Include="Assets/Images/imgsettings8.png">
-      <publishTime>08/09/2022 12:54:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/logo-brand.png">
-      <publishTime>08/09/2022 10:58:10</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/logo-brand.svg">
       <publishTime>07/14/2022 11:21:10</publishTime>
     </File>
     <File Include="Assets/Images/logo-brand2.png">
-      <publishTime>08/09/2022 10:58:10</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/logoorder.png">
-      <publishTime>07/14/2022 13:41:21</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Assets/Images/service.JPG">
-      <publishTime>06/08/2022 12:20:17</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/BAL.dll">
-      <publishTime>09/12/2023 10:24:40</publishTime>
+      <publishTime>10/24/2023 10:29:37</publishTime>
     </File>
     <File Include="bin/BAL.dll.config">
-      <publishTime>02/08/2023 11:24:59</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/BAL.pdb">
-      <publishTime>09/12/2023 10:24:40</publishTime>
+      <publishTime>10/24/2023 10:29:37</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>09/03/2023 17:24:36</publishTime>
+      <publishTime>10/24/2023 10:29:36</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
-      <publishTime>09/03/2023 17:24:00</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>09/03/2023 17:24:36</publishTime>
+      <publishTime>10/24/2023 10:29:36</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>06/08/2022 12:20:18</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>06/08/2022 12:20:18</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/GarageAPI.dll">
       <publishTime>06/07/2022 16:47:08</publishTime>
@@ -253,112 +253,112 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/07/2022 16:47:08</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.dll">
-      <publishTime>09/12/2023 10:24:41</publishTime>
+      <publishTime>10/24/2023 10:29:38</publishTime>
     </File>
     <File Include="bin/GarageCustomerAPI.pdb">
-      <publishTime>09/12/2023 10:24:41</publishTime>
+      <publishTime>10/24/2023 10:29:38</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>06/08/2022 12:20:20</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>06/08/2022 12:20:21</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>06/08/2022 12:20:21</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/NReco.PdfGenerator.dll">
-      <publishTime>06/13/2020 20:33:06</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
-      <publishTime>07/08/2017 04:30:56</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Configuration.ConfigurationManager.dll">
-      <publishTime>06/08/2022 12:20:21</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>05/27/2022 23:41:34</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Security.AccessControl.dll">
-      <publishTime>06/08/2022 12:20:21</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Security.Permissions.dll">
-      <publishTime>06/08/2022 12:20:22</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Security.Principal.Windows.dll">
-      <publishTime>06/08/2022 12:20:22</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>05/27/2022 23:41:54</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>05/27/2022 23:41:46</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>05/27/2022 23:41:54</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>05/27/2022 23:42:20</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>05/27/2022 23:42:06</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.Deployment.dll">
-      <publishTime>05/27/2022 23:42:46</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.dll">
-      <publishTime>05/27/2022 23:42:16</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.Razor.dll">
-      <publishTime>05/27/2022 23:42:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
-      <publishTime>02/08/2013 19:42:28</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>06/08/2022 12:24:55</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/aibot.txt">
-      <publishTime>07/25/2023 16:23:19</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/CustomerLetterV3.txt">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/email.png">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/HtmlPage1.html">
-      <publishTime>02/08/2023 11:24:54</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/ig.png">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/jquery.qrcode.min.js">
       <publishTime>06/30/2022 12:17:50</publishTime>
     </File>
     <File Include="Template/letterfont/FrutigerLTArabic-45Light.ttf">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/letterfont/FrutigerLTArabic-55Roman.ttf">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/letterfont/FrutigerLTArabic-65Bold.ttf">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/letterfont/FrutigerLTArabic-75Black.ttf">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Template/web.png">
-      <publishTime>06/30/2022 12:17:50</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Upload/OrderLetters/314732-638006574128486119.pdf">
-      <publishTime>10/06/2022 12:50:12</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Views/web.config">
-      <publishTime>06/08/2022 12:24:53</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/03/2023 17:24:38</publishTime>
+      <publishTime>10/24/2023 10:20:01</publishTime>
     </File>
   </ItemGroup>
 </Project>
