@@ -733,6 +733,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.SettingController.GetLocationsBySearch(System.String)">
+            <summary>
+            Get Locations by search
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:GarageCustomerAPI.Controllers.SettingController.GetCarmake">
             <summary>
             List of CarMake

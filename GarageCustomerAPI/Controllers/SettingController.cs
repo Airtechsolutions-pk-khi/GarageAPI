@@ -108,6 +108,17 @@ namespace GarageCustomerAPI.Controllers
         {
             return settingRepo.GetServiceLocations(ServiceID, LocationID , UserID);
         }
+
+        /// <summary>
+        /// Get Locations by search
+        /// </summary>
+        /// <returns></returns>
+        [Route("locations/{search}")]
+        public SettingRsp GetLocationsBySearch(string search="")
+        {
+            return settingRepo.GetSeachLocations(search);
+        }
+
         /// <summary>
         /// List of CarMake
         /// </summary>
