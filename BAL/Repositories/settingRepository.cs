@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.IO;
@@ -141,13 +142,47 @@ namespace BAL.Repositories
             return rsp;
 
         }
-        public SettingRsp GetServiceLocations(int ServiceID, int LocationID)
+        public SettingRsp GetSeachLocations(string Search)
         {
 
             var rsp = new SettingRsp();
             try
             {
-                var ds = GetLocationADO(LocationID, ServiceID);
+                var ds = SeachLocations_ADO(Search);
+                var _dtLocationInfo = ds.Tables[0] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
+                rsp.Location = _dtLocationInfo;
+                rsp.Settings = new List<SettingBLL>();
+                rsp.Amenities = new List<AmenitiesBLL>();
+                rsp.Landmarks = new List<LandmarkBLL>();
+                rsp.Services = new List<ServiceBLL>();  
+                foreach (var i in rsp.Location)
+                {
+                    var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime ?? "00:00:00"));
+                    var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime ?? "23:59:00"));
+                    i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime ?? "00:00:00");
+                    i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime ?? "23:59:00");
+                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+
+                }
+
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+
+        }
+        public SettingRsp GetServiceLocations(int ServiceID, int LocationID, int? UserID)
+        {
+
+            var rsp = new SettingRsp();
+            try
+            {
+                var ds = UserID == 0 ? GetLocationADOV1(LocationID, ServiceID) : GetLocationADO(LocationID, ServiceID, UserID);
                 var _dtLocationInfo = ds.Tables[0] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Locations>>().ToList();
                 var _dtServiceInfo = ds.Tables[6] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<ServiceBLL>>().ToList();
                 var _dtLocImageInfo = ds.Tables[1] == null ? new List<LocationImages>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<LocationImages>>().ToList();
@@ -155,6 +190,7 @@ namespace BAL.Repositories
                 var _dtReviewsInfo = ds.Tables[3] == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<ReviewsBLL>>().ToList();
                 var _dtDiscountInfo = ds.Tables[4] == null ? new List<DiscountBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<DiscountBLL>>().ToList();
                 var _dtReviewCustomer = ds.Tables[5] == null ? new List<ReportReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReportReviewsBLL>>().ToList();
+                var _dtWorkingHours = UserID == 0 ? null : ds.Tables[7] == null ? new List<WorkingHour>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<WorkingHour>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = new List<ServiceBLL>();// _dtServiceInfoAll;
@@ -164,12 +200,16 @@ namespace BAL.Repositories
 
                 foreach (var i in rsp.Location)
                 {
-                    var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime));
-                    var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime));
-                    i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
-                    i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
+                    if (i.OpenTime is null)
+                    {
+
+                    }
+                    var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime ?? "00:00:00"));
+                    var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime ?? "23:59:00"));
+                    i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime ?? "00:00:00");
+                    i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime ?? "23:59:00");
                     i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
-                    i.Services =_dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
+                    i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Discounts = _dtDiscountInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -204,6 +244,7 @@ namespace BAL.Repositories
                         j.Customers = _dtReviewCustomer.Where(x => x.ReviewID == j.ReviewID).ToList();
                         j.Date = DateParse(j.Date);
                     }
+                    i.WorkingHours = _dtWorkingHours == null ? new List<WorkingHour>() : _dtWorkingHours.Where(x => x.LocationID == i.LocationID).ToList();
                 }
 
                 rsp.Status = 1;
@@ -281,6 +322,50 @@ namespace BAL.Repositories
             }
             return rsp;
 
+        }
+        public Settingv2Rsp GetAppSettingsV2()
+        {
+            var rsp = new Settingv2Rsp();
+            try
+            {
+                var ds = GetSettings_ADO();
+                rsp.AppstoreVersion = "1.0.10";
+                rsp.Settings = ds.Tables[0] == null ? new List<SettingBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<SettingBLL>>().ToList();
+                rsp.Services = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
+                rsp.Amenities = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
+                rsp.Landmarks = ds.Tables[3] == null ? new List<LandmarkBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<LandmarkBLL>>().ToList();
+                rsp.Brands = ds.Tables[4] == null ? new List<UsersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<UsersList>>().ToList();
+                rsp.Cities = ds.Tables[5] == null ? new List<CityList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CityList>>().ToList();
+
+                foreach (var j in rsp.Brands)
+                {
+                    j.BrandImage = j.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.BrandImage;
+                }
+                foreach (var j in rsp.Settings)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                foreach (var j in rsp.Landmarks)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                foreach (var j in rsp.Amenities)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                foreach (var j in rsp.Services)
+                {
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                }
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
         }
         public Settingv2Rsp GetAppSettings()
         {
@@ -380,7 +465,22 @@ namespace BAL.Repositories
                 return null;
             }
         }
-        public DataSet GetLocationADO(int LocationID, int? ServiceID)
+
+        public DataSet SeachLocations_ADO(string Search)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@Search", Search);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_SearchLocation_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public DataSet GetLocationADOV1(int LocationID, int? ServiceID)
         {
             try
             {
@@ -389,6 +489,22 @@ namespace BAL.Repositories
                 p[1] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
                 p[2] = new SqlParameter("@ServiceID", ServiceID == 0 ? null : ServiceID.ToString());
                 return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocation_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataSet GetLocationADO(int LocationID, int? ServiceID, int? UserID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[4];
+                p[0] = new SqlParameter("@LocationID", LocationID == 0 ? null : LocationID.ToString());
+                p[1] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
+                p[2] = new SqlParameter("@ServiceID", ServiceID == 0 ? null : ServiceID.ToString());
+                p[3] = new SqlParameter("@UserID", UserID == 0 ? null : UserID.ToString());
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetLocationV2_CAPI", p);
             }
             catch (Exception ex)
             {
@@ -409,12 +525,24 @@ namespace BAL.Repositories
                 return null;
             }
         }
-        public DataSet GetSettings_ADO()
+        public DataSet GetSettings_ADOV1()
         {
             try
             {
                 SqlParameter[] p = new SqlParameter[0];
                 return (new DBHelperPOS().GetDatasetFromSP)("sp_GetSettings_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataSet GetSettings_ADO()
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[0];
+                return (new DBHelper().GetDatasetFromSP)("sp_GetSettings_CAPI", p);
             }
             catch (Exception ex)
             {
@@ -777,7 +905,7 @@ namespace BAL.Repositories
                     j.ToDate = DateParse(j.ToDate);
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                 }
-              
+
                 rsp.Status = 1;
                 rsp.Description = "Success";
             }
@@ -793,9 +921,47 @@ namespace BAL.Repositories
             try
             {
                 SqlParameter[] p = new SqlParameter[2];
-                p[0] = new SqlParameter("@LocationID", null );
+                p[0] = new SqlParameter("@LocationID", null);
                 p[1] = new SqlParameter("@Date", DateTime.UtcNow.AddMinutes(180).Date);
                 return (new DBHelperPOS().GetDatasetFromSP)("sp_GetOffers_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        public CustomerNotificationResponse GetCustomerNotifications(int? CustomerID)
+        {
+            var rsp = new CustomerNotificationResponse();
+            try
+            {
+                var ds = GetCustomerNotificationsADO(CustomerID);
+                rsp.Notifications = ds.Tables[0] == null ? new List<NotificationBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<NotificationBLL>>();
+
+                foreach (var i in rsp.Notifications)
+                {
+                    i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.Image;
+
+                }
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
+        public DataSet GetCustomerNotificationsADO(int? CustomerID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@CustomerID", CustomerID);
+                return (new DBHelper().GetDatasetFromSP)("sp_CustomerNotifications_CAPI", p);
             }
             catch (Exception ex)
             {

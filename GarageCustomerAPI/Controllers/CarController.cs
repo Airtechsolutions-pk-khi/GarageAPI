@@ -25,6 +25,8 @@ namespace GarageCustomerAPI.Controllers
             carRepo = new carRepository(new Garage_Entities());
         }
 
+        
+
         /// <summary>
         /// Add New Cars
         /// </summary>
@@ -62,6 +64,9 @@ namespace GarageCustomerAPI.Controllers
         /// <summary>
         /// Customer's Car Orders
         /// </summary>
+        /// <remarks>
+        /// - List of order against any car
+        /// </remarks>
         /// <param name="carid">Mandatory</param>
         /// <param name="customerid">Mandatory</param>
         /// <returns>A4 receipt</returns>
@@ -72,6 +77,30 @@ namespace GarageCustomerAPI.Controllers
             return carRepo.GetCustomerOrders(carid, customerid);
         }
 
+        /// <summary>
+        /// Get Cars API
+        /// </summary>
+        /// <param name="customerid">Mandatory</param>
+        /// <remarks>Get List Of Customer cars</remarks>
+        /// <returns></returns>
+        [Route("customer/cars/{customerid}")]
+        [HttpGet]
+        public CustomerCarsResponse GetCustomerCars(int? customerid = 0)
+        {
+            return carRepo.GetCustomerCars(customerid);
+        }
+        /// <summary>
+        /// Get Car Order API
+        /// </summary>
+        /// <param name="customerid">Mandatory</param>
+        /// <remarks>Get Single Car w.r.t OrderID</remarks>
+        /// <returns></returns>
+        [Route("car/order/{carid}/{orderid}")]
+        [HttpGet]
+        public CustomerCarsResponse GetCarOrder(int? carid= 0,int? orderid=0)
+        {
+            return carRepo.GetCarOrder(carid, orderid);
+        }
 
     }
 }

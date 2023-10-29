@@ -188,12 +188,12 @@ namespace BAL.Repositories
             }
         }
 
-        public RspCustomerOrders GetCustomerOrders(int? CarID,int? CustomerID)
+        public RspCustomerOrders GetCustomerOrders(int? CarID, int? CustomerID)
         {
             var rsp = new RspCustomerOrders();
             try
             {
-                var ds = GetCustomerOrders_ADO(CarID,CustomerID);
+                var ds = GetCustomerOrders_ADO(CarID, CustomerID);
                 var _dsOrders = ds.Tables[0] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<OrdersList>>();
                 var _dsOrderdetail = ds.Tables[1] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<OItemsList>>();
                 var _dsOrderdetailPkg = ds.Tables[2] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OPackageDetailList>>();
@@ -238,7 +238,7 @@ namespace BAL.Repositories
             }
             return rsp;
         }
-        public DataSet GetCustomerOrders_ADO(int? CarID,int? CustomerID)
+        public DataSet GetCustomerOrders_ADO(int? CarID, int? CustomerID)
         {
             try
             {
@@ -254,27 +254,30 @@ namespace BAL.Repositories
         }
         public OrderLetterResponse OrderPrintLetter(string OrderID)
         {
+            var rsp = new OrderLetterResponse();
 
-            OrderLetterResponse rsp = new OrderLetterResponse();
-            int orderid = 0;
-            try
-            {
-                orderid = int.Parse(OrderID);
-            }
-            catch
-            {
-                rsp.OrderID = 0;
-                rsp.Status = (int)eStatus.Failed;
-                rsp.Description = "Invalid OrderID";
-                return rsp;
-            }
             try
             {
 
-                var data = DBContext2.Orders.Where(x =>
-                  x.OrderID == orderid).FirstOrDefault();
+                var ds = GetOrderDetailADO(int.Parse(OrderID), "order", 0);
+                var _dsOrders = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<OrdersList>>();
+                var _dsorderdetail = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<OItemsList>>();
+                var _dsordercheckoutdetail = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<CheckoutDetailsOrder>>();
+                var _dsorderpkgdetail = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OPackageDetailList>>();
+                var _dsCarNotes = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<CarNotes>>().FirstOrDefault();
+                var _dsCarNotesImages = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<CarNotesImagesList>>();
+                var _dsChecklist = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<OrdersChecklist>>();
+                var _dsCar = ds.Tables[0] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Cars>>();
+                var _dsCompany = ds.Tables[5] == null ? null : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<User>>().FirstOrDefault();
+                var dtReceipt = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(GetReceiptADO(_dsOrders.FirstOrDefault().LocationID).Tables[0])).ToObject<List<ReceiptBLL>>();
+                var _dtCreditCustomer = ds.Tables[8] == null ? null : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<CreditCustomerA4>>().FirstOrDefault();
 
-                if (data != null)
+                var carinfo = _dsCar.FirstOrDefault();
+                var ordercheckout = _dsOrders.FirstOrDefault();
+                ordercheckout.CreditCustomerInfo = _dtCreditCustomer;
+                var companyinfo = _dsCompany;
+
+                if (ds != null)
                 {
                     string checklist = "";
                     string orderdetails = "";
@@ -282,11 +285,10 @@ namespace BAL.Repositories
 
                     #region CarNotes
                     var carImagesHtml = "";
-                    var CarNotes = data.CarNotes.FirstOrDefault();
-                    var NotesDesc = data.CarNotes.FirstOrDefault() != null ? data.CarNotes.FirstOrDefault().NotesComment : "";
+                    var CarNotes = _dsCarNotes;
                     if (CarNotes != null)
                     {
-                        var CarImages = CarNotes.CarNotesImages.ToList();
+                        var CarImages = _dsCarNotesImages.ToList();
                         if (CarImages.Count > 0)
                         {
                             carImagesHtml += "<h4>صور السيارة</h4>";
@@ -295,16 +297,16 @@ namespace BAL.Repositories
                                 item.ImagePath = item.ImagePath == null ? "" : ConfigurationSettings.AppSettings["ApiURL"].ToString() + item.ImagePath;
                                 carImagesHtml += "<img src='" + item.ImagePath + "' style='margin:2px;'  width='150px' />";
                             }
-                            carImagesHtml += "<h5>" + NotesDesc + "</h4>";
+                            carImagesHtml += "<h5>" + CarNotes.NotesComment + "</h4>";
                         }
                     }
-                    var signatureNotes = data.CarNotes.FirstOrDefault() != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + data.CarNotes.FirstOrDefault().Signature : "";
+                    var signatureNotes = CarNotes != null ? (CarNotes.Signature != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + CarNotes.Signature : "") : "";
 
                     #endregion CarNotes
 
                     #region checklist
 
-                    var datatChecklist = data.OrdersChecklists.Where(x => x.InspectionDetailID != 0).ToList();
+                    var datatChecklist = _dsChecklist.Where(x => x.InspectionDetailID != 0).ToList();
                     if (datatChecklist.Count > 0)
                     {
                         var _count = datatChecklist.Count % 2;
@@ -384,9 +386,9 @@ namespace BAL.Repositories
 
                     #region orderdetail
                     var isReturnBar = false;
-                    if (data.OrderDetails.Count > 0)
+                    if (_dsorderdetail.Count > 0)
                     {
-                        foreach (var item in data.OrderDetails.Where(x => x.StatusID != 203))
+                        foreach (var item in _dsorderdetail.Where(x => x.StatusID != 203))
                         {
                             //for letter refund bar
                             item.RefundQty = item.RefundQty ?? 0;
@@ -397,22 +399,22 @@ namespace BAL.Repositories
                             if (item.ItemID != 0 && item.ItemID != null)
                             {
                                 orderdetails += " <td style='padding:7px;'>" +
-                                    "<h4><strong>" + item.Item.Name + "</strong></h4>" +
-                                    "<h4><strong>" + item.Item.NameOnReceipt + "</strong></h4>" +
-                                    "<h5>" + item.Item.Description + "</h5>" +
+                                    "<h4><strong>" + item.ItemName + "</strong></h4>" +
+                                    "<h4><strong>" + item.AlternateName + "</strong></h4>" +
+                                    //"<h5>" + item.Description + "</h5>" +
                                     returnQty +
                                     "</td>";
                             }
                             else if (item.PackageID != 0 && item.PackageID != null)
                             {
                                 orderdetails += " <td style='padding:7px; 7px; 3px; 7px;'> " +
-                                    "<h4><strong>" + item.Package.Name + "</strong></h4>" +
-                                    "<h4><strong>" + item.Package.ArabicName + "</strong></h4>" +
+                                    "<h4><strong>" + item.ItemName + "</strong></h4>" +
+                                    "<h4><strong>" + item.AlternateName + "</strong></h4>" +
                                     returnQty +
                                     "<br/>";
-                                foreach (var odp in item.OrderDetailPackages.Where(x => x.StatusID == 1))
+                                foreach (var odp in _dsorderpkgdetail.Where(x => x.StatusID == 1))
                                 {
-                                    orderdetails += "<h5>--->   " + odp.Quantity + "X " + odp.Item.Name + " || " + odp.Item.NameOnReceipt + "</h5>";
+                                    orderdetails += "<h5>--->   " + odp.Quantity + "X " + odp.ItemName + " || " + odp.AlternateName + "</h5>";
                                 }
                                 orderdetails += "</td>";
                             }
@@ -437,15 +439,12 @@ namespace BAL.Repositories
                     }
                     #endregion orderdetail
 
-                    var carinfo = data.Car;
-                    var ordercheckout = data.OrderCheckouts.FirstOrDefault();
-                    var companyinfo = DBContext2.Users.Where(x => x.UserID == data.Location.UserID).FirstOrDefault();
                     #region logo
                     var logoHtml = "<div style='padding: 25px 0 40px 0; '><img src=" + ConfigurationSettings.AppSettings["AdminURL"].ToString() + companyinfo.ImagePath + " height='100px' /></div>";
                     #endregion logo
 
                     #region socialmedia
-                    var receipt = data.Location.Receipts.Where(x => x.IsActive == true).FirstOrDefault();
+                    var receipt = dtReceipt.FirstOrDefault();
                     try
                     {
                         if (receipt != null)
@@ -489,21 +488,63 @@ namespace BAL.Repositories
                     #endregion socialmedia
 
 
+                    var payment = "";
+                    if (_dsordercheckoutdetail != null)
+                    {
+                        var Payby = ordercheckout.PaymentMode == 3 ? "Payment Type(نوع الدفع) | Multi Payment(دفع متعدد)" : ordercheckout.PaymentMode == 4 ? "Payment Type (نوع الدفع) | CreditCustomer (عمبل آجل)" : "";
+                        if (Payby != "")
+                        {
+                            payment += "  <div class='row' style='background-color:#eaeaea; padding:0 20px;'>";
+                            payment += "     <div class='col-12 text-right' style='padding:10px 0;'>          ";
+                            payment += "         <h5>" + Payby + "</h5>                          ";
+                            payment += "     </div>                                                          ";
+                            payment += " </div>  ";
+                        }
+                        foreach (var item in _dsordercheckoutdetail)
+                        {
+                            if (item.PaymentMode == 1)
+                            {
+                                payment += " <div class='row' style=' padding:0 20px;'>                      ";
+                                payment += "                                                                 ";
+                                payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
+                                payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
+                                payment += "     </div>                                                      ";
+                                payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
+                                payment += "         <h4>Cash نقدا</h4>                                ";
+                                payment += "     </div>                                                      ";
+                                payment += " </div>";
+                            }
+                            if (item.PaymentMode == 2)
+                            {
+                                payment += " <div class='row' style=' padding:0 20px;'>                      ";
+                                payment += "                                                                 ";
+                                payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
+                                payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
+                                payment += "     </div>                                                      ";
+                                payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
+                                payment += "         <h4>Card بطاقة</h4>                                ";
+                                payment += "     </div>                                                      ";
+                                payment += " </div>";
+                            }
+
+                        }
+                    }
                     var qrlink = "";
                     try
                     {
-                        qrlink = new Zatca().ZatcaInvoiceQR(companyinfo.Company, companyinfo.VATNO, ordercheckout.Tax.ToString(), Convert.ToDateTime(data.OrderPunchDt).ToString("yyyy-MM-dd HH:mm:ss"), ordercheckout.GrandTotal.ToString());
+                        qrlink = new Zatca().ZatcaInvoiceQR(companyinfo.Company, companyinfo.VATNO, ordercheckout.Tax.ToString(), Convert.ToDateTime(ordercheckout.CheckoutDate).ToString("yyyy-MM-dd HH:mm:ss"), ordercheckout.GrandTotal.ToString());
                     }
                     catch { qrlink = ""; }
-                    var cname = "-";
-                    try
-                    {
-                        cname = data.Car.Customer.FullName;
-                    }
-                    catch { cname = "-"; }
 
-                    isReturnBar = isReturnBar == true ? true : data.StatusID == 106 ? true : false;
+                    #region HeaderText
+                    isReturnBar = isReturnBar == true ? true : ordercheckout.Status == 106 ? true : false;
                     var refundAmountHTML = "";
+
+                    //initial value assigned
+                    content = content.Replace("#showcredcustsection#", "none");
+                    content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
+                                      "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية المبسطة</h2>" +
+                                      "</div></div>");
                     if (isReturnBar)
                     {
 
@@ -518,53 +559,104 @@ namespace BAL.Repositories
                         content = content.Replace("#refundbar#", "  <div class='row' style='background:#e8acac;margin-bottom:5px;'><div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>اشعار دائن للفاتورة الضريبية المبسطة</h2></div></div>");
                     }
                     else
-                        content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'><div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية</h2></div></div>");
+                    {
+                        if (ordercheckout.CreditCustomerID > 0 && ordercheckout.CreditCustomerInfo != null)
+                        {
+                            if (ordercheckout.CreditCustomerInfo.BuyerVAT != null && ordercheckout.CreditCustomerInfo.BuyerVAT != "")
+                            {
+                                content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
+                                           "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية</h2>" +
+                                           "</div></div>");
+
+                                content = content
+                                        .Replace("#buyername#", ordercheckout.CreditCustomerInfo.BuyerName)
+                                        .Replace("#buyeraddress#", ordercheckout.CreditCustomerInfo.BuyerAddress)
+                                        .Replace("#buyercontact#", ordercheckout.CreditCustomerInfo.BuyerContact)
+                                        .Replace("#buyervatno#", ordercheckout.CreditCustomerInfo.BuyerVAT)
+                                        .Replace("#sellername#", ordercheckout.CreditCustomerInfo.SellerName)
+                                        .Replace("#selleraddress#", ordercheckout.CreditCustomerInfo.SellerAddress)
+                                        .Replace("#sellercontact#", ordercheckout.CreditCustomerInfo.SellerContact)
+                                        .Replace("#sellervatno#", ordercheckout.CreditCustomerInfo.SellerVAT);
+
+                                content = content.Replace("#showcredcustsection#", "block");
+                            }
+                        }
+                    }
+                    #endregion HeaderText
+
 
                     content = content.Replace("#logo#", logoHtml);
                     content = content.Replace("#qrlink#", qrlink);
-                    //ConfigurationSettings.AppSettings["AdminAPIURL"].ToString() + "/QR-Receipt/receipt.html?id=" + data.OrderID);
-                    content = content.Replace("#notes#", NotesDesc);
-                    content = content.Replace("#signature#", signatureNotes);
-                    content = content.Replace("#carmake#", carinfo.Make.Name);
-                    content = content.Replace("#carmodel#", carinfo.Model.Name);
+                    content = content.Replace("#notes#", CarNotes != null ? CarNotes.NotesComment : "");
+                    content = content.Replace("#signature#", CarNotes != null ? signatureNotes : "");
+                    content = content.Replace("#carmake#", ordercheckout.MakerName);
+                    content = content.Replace("#carmodel#", ordercheckout.ModelName);
                     content = content.Replace("#year#", carinfo.Year.ToString());
-                    content = content.Replace("#locationname#", data.Location.Name);
-                    content = content.Replace("#customername#", cname);
-                    content = content.Replace("#locationaddress#", data.Location.Address);
-                    content = content.Replace("#locationcontact#", data.Location.ContactNo);
-                    content = content.Replace("#mobile#", carinfo.Customer.Mobile.ToString().Replace("+", ""));
-                    content = content.Replace("#checkliters#", data.CheckLiters.ToString());
+                    content = content.Replace("#locationname#", receipt.CompanyTitle);
+                    content = content.Replace("#customername#", ordercheckout.CustomerName);
+                    content = content.Replace("#locationaddress#", receipt.CompanyAddress);
+                    content = content.Replace("#locationcontact#", receipt.CompanyPhones);
+                    content = content.Replace("#mobile#", ordercheckout.CustomerContact);
+                    content = content.Replace("#checkliters#", carinfo.CheckLitre ?? "0");
                     content = content.Replace("#noplate#", carinfo.RegistrationNo);
                     content = content.Replace("#vinno#", carinfo.VinNo);
-                    content = content.Replace("#transactionno#", data.TransactionNo.ToString());
-                    content = content.Replace("#orderdate#", Convert.ToDateTime(data.OrderPunchDt).ToString("dd/MM/yyyy"));
-                    content = content.Replace("#worker#", ordercheckout.SubUser.FirstName + " " + ordercheckout.SubUser.LastName);
+                    content = content.Replace("#transactionno#", ordercheckout.TransactionNo.ToString());
+                    content = content.Replace("#orderdate#", Convert.ToDateTime(ordercheckout.OrderPunchDate).ToString("dd/MM/yyyy"));
+                    content = content.Replace("#worker#", ordercheckout.MechanicName);
                     content = content.Replace("#total#", ordercheckout.AmountTotal.ToString());
                     content = content.Replace("#tax#", ordercheckout.Tax.ToString());
-                    content = content.Replace("#discount#", ordercheckout.AmountDiscount.ToString());
-                    content = content.Replace("#subtotal#", ordercheckout.GrandTotal.ToString());
+                    content = content.Replace("#discount#", Math.Round(ordercheckout.AmountDiscount ?? 0, 2).ToString());
+                    content = content.Replace("#subtotal#", ordercheckout.GrandTotal.ToString() + " " + ordercheckout.Currency.ToString());
                     content = content.Replace("#refundtotal#", refundAmountHTML);
                     content = content.Replace("#vatno#", companyinfo == null ? "" : companyinfo.VATNO);
                     content = content.Replace("#carimages#", carImagesHtml);
-                    ;
                     content = content.Replace("#footernotes#", receipt.Footer);
                     content = content.Replace("#showchecklist#", datatChecklist.Count > 0 ? "block" : "none");
                     content = content.Replace("#partialreceived#", ordercheckout.PartialAmountReceived.ToString());
                     content = content.Replace("#ispartialreceived#", ordercheckout.PartialAmountReceived > 0 ? "block" : "none");
-                    var path = ConfigurationSettings.AppSettings["ApiURL"].ToString() + GetPdf(content, orderid);
+                    var path = ConfigurationSettings.AppSettings["ApiURL"].ToString() + GetPdf(content, int.Parse(OrderID));
                     rsp.Path = path.Replace("~", "");
-                    rsp.OrderID = orderid;
+                    rsp.OrderID = int.Parse(OrderID);
                     rsp.Status = (int)eStatus.Success;
                     rsp.Description = "Success";
                 }
             }
             catch (Exception ex)
             {
-                rsp.OrderID = orderid;
+                rsp.OrderID = int.Parse(OrderID);
                 rsp.Status = (int)eStatus.Exception;
                 rsp.Description = ex.Message;
             }
             return rsp;
+        }
+
+        public DataSet GetOrderDetailADO(int id, string type, int LocationID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[3];
+                p[0] = new SqlParameter("@ID", id);//or transactionno
+                p[1] = new SqlParameter("@LocationID", LocationID);
+                p[2] = new SqlParameter("@Type", type);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetOrderDetailv2_APP", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataSet GetReceiptADO(int? LocationID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@LocationID", LocationID);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetReceiptInfo_APP", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         private string GetPdf(string html, int orderid)
         {
@@ -586,6 +678,131 @@ namespace BAL.Repositories
 
             return folderPath + filename + ".pdf";
         }
+
+        public CustomerCarsResponse GetCustomerCars(int? CustomerID)
+        {
+            var rsp = new CustomerCarsResponse();
+            try
+            {
+                var ds = GetCustomerCarsADO(CustomerID);
+                var _dsCarInfo = ds.Tables[0] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Cars>>();
+
+                rsp.CarList = rsp.CarList ?? new List<Cars>();
+                foreach (var i in _dsCarInfo)
+                {
+                    if (rsp.CarList.Where(x => x.RegistrationNo == i.RegistrationNo).Count() == 0)
+                        rsp.CarList.Add(i);
+                }
+
+                foreach (var i in rsp.CarList)
+                {
+                    i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
+                    i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.ImagePath;
+                    try { i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
+                    try { i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
+                    try { i.RegistrationNoP3 = TranslateToArabic(i.RegistrationNoP1, 1); } catch { i.RegistrationNoP3 = ""; }
+                    try { i.RegistrationNoP4 = TranslateToArabic(i.RegistrationNoP2, 2); } catch { i.RegistrationNoP4 = ""; }
+
+                }
+
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
+        public DataSet GetCustomerCarsADO(int? CustomerID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@CustomerID", CustomerID);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_CustomerCars_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public CustomerCarsResponse GetCarOrder(int? carid, int? orderid)
+        {
+            var rsp = new CustomerCarsResponse();
+            try
+            {
+                var ds = GetCarOrder_ADO(carid, orderid);
+                var _dsCarInfo = ds.Tables[0] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Cars>>();
+                var _dsOrders = ds.Tables[1] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<OrdersList>>();
+                var _dsOrderdetail = ds.Tables[2] == null ? new List<OItemsList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<OItemsList>>();
+                var _dsOrderdetailPkg = ds.Tables[3] == null ? new List<OPackageDetailList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<OPackageDetailList>>();
+                var _dsordercheckoutdetail = ds.Tables[4] == null ? new List<CheckoutDetailsOrder>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<CheckoutDetailsOrder>>();
+                rsp.CarList = _dsCarInfo;
+                foreach (var i in rsp.CarList)
+                {
+                    i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
+                    i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.ImagePath;
+                    try { i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
+                    try { i.RegistrationNoP2 = i.RegistrationNo.Split('-')[1]; } catch { i.RegistrationNoP2 = ""; }
+                    try { i.RegistrationNoP3 = TranslateToArabic(i.RegistrationNoP1, 1); } catch { i.RegistrationNoP3 = ""; }
+                    try { i.RegistrationNoP4 = TranslateToArabic(i.RegistrationNoP2, 2); } catch { i.RegistrationNoP4 = ""; }
+                    i.Orders = _dsOrders.Where(x => x.CarID == i.CarID).ToList();
+                    foreach (var j in i.Orders)
+                    {
+                        j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;
+                        j.NoPlateImage = ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/EmptyNoplate.png";
+                        j.OrderPunchDate = DateParse(j.OrderPunchDate);
+                        j.CheckoutDate = DateParse(j.CheckoutDate);
+                        j.Items = _dsOrderdetail.Where(x => x.OrderID == j.OrderID).ToList();
+
+                        foreach (var k in j.Items)
+                        {
+                            k.Packages = _dsOrderdetailPkg.Where(x => x.OrderDetailID == k.OrderDetailID).ToList();
+                        }
+                        //checkoutdetails
+                        var checkoutDetails = _dsordercheckoutdetail.Where(x => x.OrderCheckoutID == j.OrderCheckoutID).ToList();
+                        if (checkoutDetails != null)
+                        {
+                            j.CardAmount = checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault() == null ? 0 : checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault().AmountPaid;
+                            j.CashAmount = checkoutDetails.Where(x => x.PaymentMode == 1).FirstOrDefault() == null ? 0 : checkoutDetails.Where(x => x.PaymentMode == 1).FirstOrDefault().AmountPaid;
+                            j.CardType = checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault() == null ? "" : checkoutDetails.Where(x => x.PaymentMode == 2).FirstOrDefault().CardType;
+                        }
+                        else
+                        {
+                            j.CardAmount = 0;
+                            j.CashAmount = 0;
+                            j.CardType = "";
+                        }
+                    }
+                }
+                rsp.Status = 1;
+                rsp.Description = "Login Successfully";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
+        public DataSet GetCarOrder_ADO(int? CarID, int? OrderID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[2];
+                p[0] = new SqlParameter("@CarID", CarID);
+                p[1] = new SqlParameter("@OrderID", OrderID);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetCarOrder_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 
 }

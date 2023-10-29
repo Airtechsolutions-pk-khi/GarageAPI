@@ -33,6 +33,7 @@ namespace GarageCustomerAPI.Controllers
         }
 
         /// <summary>
+        /// Old API
         /// Login user API
         /// </summary>
         /// <param name="Phone">Mandatory</param>
@@ -47,8 +48,16 @@ namespace GarageCustomerAPI.Controllers
         /// <summary>
         /// Login user API
         /// </summary>
+        /// <remarks>
+        /// - Login info
+        /// - List if Notifications
+        /// - My Ads
+        /// - Favourite list
+        /// - Recent Orders for Design V2
+        /// - List Of cars (will obsolete soon)</remarks>
         /// <param name="Phone">Mandatory</param>
-        /// <returns></returns>
+        /// <returns>
+        ///</returns>
         [Route("login/v2/{Phone}")]
         [HttpGet]
         public LoginResponse Loginv2(string Phone)
@@ -103,6 +112,20 @@ namespace GarageCustomerAPI.Controllers
             return settingRepo.UpdateNotification(obj);
         }
 
-     
+
+        /// <summary>
+        /// Get Notifications API
+        /// </summary>
+        /// <param name="customerid">Mandatory</param>
+        /// <remarks>Get List Of Notifcations</remarks>
+        /// <returns></returns>
+        [Route("notifications/list/{customerid}")]
+        [HttpGet]
+        public CustomerNotificationResponse Login(int? customerid = 0)
+        {
+            return settingRepo.GetCustomerNotifications(customerid);
+        }
+
+
     }
 }
