@@ -247,7 +247,7 @@
             <div class="col-5">
                 <div class="row " dir="ltr" style="padding:0 20px;">
                     <div class="col-4" style="padding:10px 0;">
-                        <h4> <strong>#total# SR</strong></h4>
+                        <h4> <strong>#total#</strong></h4>
                     </div>
                     <div class="col-8  text-right" style="padding:10px 0;">
                         <h4>(Sub Total) المجموع</h4>
@@ -257,7 +257,7 @@
                 <div class="row" style=" padding:0 20px;">
 
                     <div class="col-4" style="padding:10px 0;">
-                        <h4> <strong>#discount# SR</strong></h4>
+                        <h4> <strong>#discount#</strong></h4>
                     </div>
                     <div class="col-8 text-right" style="padding:10px 0;">
                         <h4>(Discount) خصم</h4>
@@ -266,7 +266,7 @@
                 <div class="row" style="padding:0 20px;">
 
                     <div class="col-4" style="padding:10px 0;">
-                        <h4>  <strong>#tax# SR</strong></h4>
+                        <h4>  <strong>#tax#</strong></h4>
                     </div>
                     <div class="col-8 text-right" style="padding:10px 0;">
                         <h4>(VAT) ضريبة القيمة المضافة</h4>
@@ -276,7 +276,7 @@
                 <div class="row" style="background-color:#ffb509; padding:0 20px;">
 
                     <div class="col-4" style="padding:10px 0;">
-                        <h4> <strong>#subtotal# SR</strong></h4>
+                        <h4> <strong>#subtotal#</strong></h4>
                     </div>
                     <div class="col-8 text-right" style="padding:10px 0;">
                         <h4>(Grand Total)  الاجمالي</h4>
@@ -284,7 +284,7 @@
                 </div>
                 <div class="row d-flex" style=" padding:0 20px;display:#ispartialreceived#">
                     <div class="col-4" style="padding:10px 0;">
-                        <h4> <strong>#partialreceived# SR</strong></h4>
+                        <h4> <strong>#partialreceived#</strong></h4>
                     </div>
                     <div class="col-8 text-right" style="padding:10px 0;">
                         <h4>(Partial Received) <br /> تم استلام المبلغ الجزئي</h4>

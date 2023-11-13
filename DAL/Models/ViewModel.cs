@@ -688,6 +688,10 @@ namespace DAL.Models
     {
         public List<NotificationBLL> Notifications { get; set; }
     }
+    public class RecentOrdersResponse : Rsp
+    {
+        public List<OrdersList> RecentOrders = new List<OrdersList>();
+    }
     public class LoginResponse
     {
         public Customers Customer { get; set; }

@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using WebAPICode.Helpers;
@@ -48,6 +49,7 @@ namespace BAL.Repositories
                 {
                     try
                     {
+                        var isbase64 = IsBase64String(cars.ImagePath);
                         var chkImagePath = IsBase64Encoded(cars.ImagePath
                             .Replace("data:image/png;base64,", "")
                             .Replace("data:image/jpg;base64,", "")
@@ -92,6 +94,11 @@ namespace BAL.Repositories
             }
             return rsp;
         }
+        public bool IsBase64String(string base64)
+        {
+            base64 = base64.Trim();
+            return (base64.Length % 4 == 0) && Regex.IsMatch(base64, @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
+        }
         public CarRsp EditCar(Cars cars)
         {
             CarRsp rsp = new CarRsp();
@@ -112,6 +119,8 @@ namespace BAL.Repositories
                             cars.ImagePath = uploadFiles(cars.ImagePath, "Cars");
                         }
                     }
+                    else
+                        cars.ImagePath = null;
                 }
                 catch { }
 
@@ -128,7 +137,24 @@ namespace BAL.Repositories
             }
             return rsp;
         }
+        public  bool? IsBase64( string base64String)
+        {
+            // Credit: oybek https://stackoverflow.com/users/794764/oybek
+            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0
+               || base64String.Contains(" ") || base64String.Contains("\t") || base64String.Contains("\r") || base64String.Contains("\n"))
+                return false;
 
+            try
+            {
+                Convert.FromBase64String(base64String);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                // Handle the exception
+            }
+            return false;
+        }
         public int InsertCar(Cars cars)
         {
             try
@@ -412,7 +438,7 @@ namespace BAL.Repositories
                                     "<h4><strong>" + item.AlternateName + "</strong></h4>" +
                                     returnQty +
                                     "<br/>";
-                                foreach (var odp in _dsorderpkgdetail.Where(x => x.StatusID == 1))
+                                foreach (var odp in _dsorderpkgdetail.Where(x => x.StatusID == 1 && x.OrderDetailID == item.OrderDetailID))
                                 {
                                     orderdetails += "<h5>--->   " + odp.Quantity + "X " + odp.ItemName + " || " + odp.AlternateName + "</h5>";
                                 }
@@ -788,6 +814,31 @@ namespace BAL.Repositories
             }
             return rsp;
         }
+
+        public RecentOrdersResponse GetRecentOrders(int? customerid)
+        {
+            var rsp = new RecentOrdersResponse();
+            try
+            {
+                var ds = GetRecentOrders_ADO(customerid);
+                var _dsRecentOrders = ds.Tables[0] == null ? new List<OrdersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<OrdersList>>();
+
+                foreach (var j in _dsRecentOrders)
+                {
+                    j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;
+
+                }
+                rsp.RecentOrders = _dsRecentOrders;
+                rsp.Status = 1;
+                rsp.Description = "Success";
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = 0;
+                rsp.Description = "Failed";
+            }
+            return rsp;
+        }
         public DataSet GetCarOrder_ADO(int? CarID, int? OrderID)
         {
             try
@@ -802,7 +853,19 @@ namespace BAL.Repositories
                 return null;
             }
         }
-
+        public DataSet GetRecentOrders_ADO(int? CustomerID)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@CustomerID", CustomerID);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetRecentOrders_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 
 }

@@ -261,6 +261,25 @@ namespace BAL.Repositories
             CustomerUpdateRsp rsp = new CustomerUpdateRsp();
             try
             {
+                var chkImagePath = false;
+                try
+                {
+                    chkImagePath = IsBase64Encoded(obj.ImagePath
+                       .Replace("data:image/png;base64,", "")
+                       .Replace("data:image/jpg;base64,", "")
+                       .Replace("data:image/jpeg;base64,", ""));
+
+                    if (chkImagePath)
+                    {
+                        if (obj.ImagePath != null && obj.ImagePath != "")
+                        {
+                            obj.ImagePath = uploadFiles(obj.ImagePath, "UserProfile");
+                        }
+                    }
+                    else
+                        obj.ImagePath = null;
+                }
+                catch { }
                 var dt = UpdateCustomer(obj);
 
                 rsp.Customer = dt == null ? new Customers() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<Customers>>().FirstOrDefault();

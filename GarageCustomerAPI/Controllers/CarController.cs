@@ -89,6 +89,7 @@ namespace GarageCustomerAPI.Controllers
         {
             return carRepo.GetCustomerCars(customerid);
         }
+
         /// <summary>
         /// Get Car Order API
         /// </summary>
@@ -100,6 +101,19 @@ namespace GarageCustomerAPI.Controllers
         public CustomerCarsResponse GetCarOrder(int? carid= 0,int? orderid=0)
         {
             return carRepo.GetCarOrder(carid, orderid);
+        }
+
+        /// <summary>
+        /// Get Recent Orders API
+        /// </summary>
+        /// <param name="customerid">Mandatory</param>
+        /// <remarks>Get Last 6 Orders</remarks>
+        /// <returns></returns>
+        [Route("recent/orders/{customerid}")]
+        [HttpGet]
+        public RecentOrdersResponse GetRecentOrders(int? customerid)
+        {
+            return carRepo.GetRecentOrders(customerid);
         }
 
     }

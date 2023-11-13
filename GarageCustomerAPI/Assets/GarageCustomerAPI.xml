@@ -668,6 +668,14 @@
             <remarks>Get Single Car w.r.t OrderID</remarks>
             <returns></returns>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.CarController.GetRecentOrders(System.Nullable{System.Int32})">
+            <summary>
+            Get Recent Orders API
+            </summary>
+            <param name="customerid">Mandatory</param>
+            <remarks>Get Last 6 Orders</remarks>
+            <returns></returns>
+        </member>
         <member name="F:GarageCustomerAPI.Controllers.SettingController.settingRepo">
             <summary>
             Settings

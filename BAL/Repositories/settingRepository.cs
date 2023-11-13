@@ -336,6 +336,7 @@ namespace BAL.Repositories
                 rsp.Landmarks = ds.Tables[3] == null ? new List<LandmarkBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<LandmarkBLL>>().ToList();
                 rsp.Brands = ds.Tables[4] == null ? new List<UsersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<UsersList>>().ToList();
                 rsp.Cities = ds.Tables[5] == null ? new List<CityList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CityList>>().ToList();
+                var _dtSettingLocation = ds.Tables[6] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<Locations>>().ToList();
 
                 foreach (var j in rsp.Brands)
                 {
@@ -343,7 +344,25 @@ namespace BAL.Repositories
                 }
                 foreach (var j in rsp.Settings)
                 {
+                    j.SettingLocations = _dtSettingLocation.Where(x => x.SettingID == j.ID).ToList();
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    foreach (var k in j.SettingLocations)
+                    {
+                        var opening = TimespanToDecimal(TimeSpan.Parse(k.OpenTime));
+                        var closing = TimespanToDecimal(TimeSpan.Parse(k.CloseTime));
+                        k.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.OpenTime);
+                        k.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.CloseTime);
+                        k.BrandImage = k.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
+
+                        k.LocationImages = new List<LocationImages>();
+                        k.Services = new List<ServiceBLL>();
+                        k.Amenities = new List<AmenitiesBLL>();
+                        k.Discounts = new List<DiscountBLL>();
+                        k.Reviews = new List<ReviewsBLL>();
+                        foreach (var l in k.LocationImages)
+                        { l.ImageURL = l.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ImageURL; }
+
+                    }
                 }
                 foreach (var j in rsp.Landmarks)
                 {
