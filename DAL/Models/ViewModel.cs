@@ -316,6 +316,7 @@ namespace DAL.Models
     {
         public int? SettingID { get; set; } = 0;
         public int LocationID { get; set; }
+        public int? CityID { get; set; }
         public string BrandName { get; set; }
         public string BrandImage { get; set; }
         public string Name { get; set; }
@@ -777,6 +778,7 @@ namespace DAL.Models
         public string Description { get; set; }
         public Nullable<int> Year { get; set; }
         public string CheckLitre { get; set; }
+        public string EngineType { get; set; }
         public string RegistrationNo { get; set; }
         public string ImagePath { get; set; }
         public Nullable<int> LocationID { get; set; }
