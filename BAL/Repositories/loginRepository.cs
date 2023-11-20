@@ -168,6 +168,7 @@ namespace BAL.Repositories
 
                 rsp.Notifications = _dsNotifications;
                 rsp.Customer = _dsCustomerInfo;
+                rsp.Customer.ImagePath = rsp.Customer.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + rsp.Customer.ImagePath;
 
                 rsp.CarList = rsp.CarList ?? new List<Cars>();
                 foreach (var i in _dsCarInfo)
@@ -276,13 +277,13 @@ namespace BAL.Repositories
                             obj.ImagePath = uploadFiles(obj.ImagePath, "UserProfile");
                         }
                     }
-                    else
-                        obj.ImagePath = null;
                 }
                 catch { }
                 var dt = UpdateCustomer(obj);
 
                 rsp.Customer = dt == null ? new Customers() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<Customers>>().FirstOrDefault();
+                rsp.Customer.ImagePath = rsp.Customer.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + rsp.Customer.ImagePath;
+
                 if (rsp.Customer == null)
                 {
                     rsp.Customer = new Customers();
