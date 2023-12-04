@@ -190,7 +190,7 @@ namespace BAL.Repositories
                 var _dtReviewsInfo = ds.Tables[3] == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<ReviewsBLL>>().ToList();
                 var _dtDiscountInfo = ds.Tables[4] == null ? new List<DiscountBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<DiscountBLL>>().ToList();
                 var _dtReviewCustomer = ds.Tables[5] == null ? new List<ReportReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<ReportReviewsBLL>>().ToList();
-                var _dtWorkingHours = UserID == 0 ? null : ds.Tables[7] == null ? new List<WorkingHour>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<WorkingHour>>().ToList();
+                var _dtWorkingHours = ds.Tables[7] == null ? new List<WorkingHour>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<WorkingHour>>().ToList();
 
                 rsp.Location = _dtLocationInfo;
                 rsp.Services = new List<ServiceBLL>();// _dtServiceInfoAll;
@@ -200,15 +200,11 @@ namespace BAL.Repositories
 
                 foreach (var i in rsp.Location)
                 {
-                    if (i.OpenTime is null)
-                    {
-
-                    }
                     var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime ?? "00:00:00"));
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime ?? "23:59:00"));
                     i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime ?? "00:00:00");
                     i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime ?? "23:59:00");
-                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+                    i.BrandImage = i.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -228,6 +224,7 @@ namespace BAL.Repositories
 
                     foreach (var j in i.Discounts)
                     {
+                        j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                         j.FromDate = DateParse(j.FromDate);
                         j.ToDate = DateParse(j.ToDate);
                     }
@@ -309,7 +306,7 @@ namespace BAL.Repositories
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime));
                     i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime);
                     i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime);
-                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+                    i.BrandImage = i.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
                 }
 
                 rsp.Status = 1;
@@ -340,7 +337,7 @@ namespace BAL.Repositories
 
                 foreach (var j in rsp.Brands)
                 {
-                    j.BrandImage = j.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.BrandImage;
+                    j.BrandImage = j.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.BrandImage;
                 }
                 foreach (var j in rsp.Settings)
                 {
@@ -352,13 +349,19 @@ namespace BAL.Repositories
                         var closing = TimespanToDecimal(TimeSpan.Parse(k.CloseTime));
                         k.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.OpenTime);
                         k.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.CloseTime);
-                        k.BrandImage = k.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
+                        k.BrandImage = k.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
 
                         k.LocationImages = new List<LocationImages>();
                         k.Services = new List<ServiceBLL>();
                         k.Amenities = new List<AmenitiesBLL>();
                         k.Discounts = new List<DiscountBLL>();
                         k.Reviews = new List<ReviewsBLL>();
+                        foreach (var l in k.Discounts)
+                        {
+                            l.Image = l.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.Image;
+                            l.FromDate = DateParse(l.FromDate);
+                            l.ToDate = DateParse(l.ToDate);
+                        }
                         foreach (var l in k.LocationImages)
                         { l.ImageURL = l.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ImageURL; }
 
@@ -409,7 +412,7 @@ namespace BAL.Repositories
                         var closing = TimespanToDecimal(TimeSpan.Parse(k.CloseTime));
                         k.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.OpenTime);
                         k.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.CloseTime);
-                        k.BrandImage = k.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
+                        k.BrandImage = k.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
 
                         k.LocationImages = _dtSettingLocationImgs.Where(x => x.LocationID == k.LocationID).ToList();
                         k.Services = new List<ServiceBLL>();

@@ -159,7 +159,7 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[12];
+                SqlParameter[] p = new SqlParameter[14];
                 p[0] = new SqlParameter("@RowID", cars.RowID);
                 p[1] = new SqlParameter("@CustomerID", cars.CustomerID);
                 p[2] = new SqlParameter("@MakeID", cars.MakeID);
@@ -172,6 +172,8 @@ namespace BAL.Repositories
                 p[9] = new SqlParameter("@LocationID", cars.LocationID);
                 p[10] = new SqlParameter("@UserID", cars.UserID);
                 p[11] = new SqlParameter("@StatusID", cars.StatusID);
+                p[12] = new SqlParameter("@CheckLitre", cars.CheckLitre);
+                p[13] = new SqlParameter("@EngineType", cars.EngineType);
 
                 cars.CarID = int.Parse((new DBHelperPOS().GetDatasetFromSP)("sp_AddCars", p).Tables[0].Rows[0][0].ToString());
                 cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath : null;
@@ -187,7 +189,7 @@ namespace BAL.Repositories
         {
             try
             {
-                SqlParameter[] p = new SqlParameter[13];
+                SqlParameter[] p = new SqlParameter[15];
                 p[0] = new SqlParameter("@CarID", cars.CarID);
                 p[1] = new SqlParameter("@RowID", cars.RowID);
                 p[2] = new SqlParameter("@CustomerID", cars.CustomerID);
@@ -201,6 +203,8 @@ namespace BAL.Repositories
                 p[10] = new SqlParameter("@LocationID", cars.LocationID);
                 p[11] = new SqlParameter("@UserID", cars.UserID);
                 p[12] = new SqlParameter("@StatusID", cars.StatusID);
+                p[13] = new SqlParameter("@CheckLitre", cars.CheckLitre);
+                p[14] = new SqlParameter("@EngineType", cars.EngineType);
                 if (iseditimage)
                 {
                     cars.ImagePath = cars.ImagePath != null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + cars.ImagePath : null;
