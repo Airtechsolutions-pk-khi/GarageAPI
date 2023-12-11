@@ -95,6 +95,7 @@ namespace DAL.Models
         public string Name { get; set; }
         public string BrandImage { get; set; }
         public string Image { get; set; }
+        public string ArabicImage { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public int? LocationID { get; set; }
@@ -942,9 +943,13 @@ namespace DAL.Models
         public string CustomerContact { get; set; }
         public string CustomerName { get; set; }
         public string Currency { get; set; }
+        public string Remarks{ get; set; }
         public int? CreditCustomerID { get; set; }
+        public string ServiceType { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
         public CreditCustomerA4 CreditCustomerInfo { get; set; }
+
+        public List<CheckoutDetailsOrder> CheckoutDetails = new List<CheckoutDetailsOrder>();
     }
     public class CreditCustomerA4
     {

@@ -41,9 +41,22 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<int> LocationID { get; set; }
-        public int UserID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public string ImagePath { get; set; }
         public string Gender { get; set; }
+        public Nullable<int> CarType { get; set; }
+        public string plateText1 { get; set; }
+        public string plateText2 { get; set; }
+        public string plateText3 { get; set; }
+        public string plateNumber { get; set; }
+        public string regTypeDescAr { get; set; }
+        public string bodyTypeDescAr { get; set; }
+        public string majorColor { get; set; }
+        public string vehicleClassDescAr { get; set; }
+        public string capacity { get; set; }
+        public string weight { get; set; }
+        public string plateReturnIndex { get; set; }
+        public Nullable<bool> IsVerified { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Make Make { get; set; }

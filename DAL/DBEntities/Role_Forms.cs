@@ -33,6 +33,7 @@ namespace DAL.DBEntities
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }
         public Nullable<int> StatusID { get; set; }
+        public string DeviceType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Role_GroupForms> Role_GroupForms { get; set; }

@@ -12,17 +12,16 @@ namespace DAL.DBEntities
     using System;
     using System.Collections.Generic;
     
-    public partial class Integration
+    public partial class Activity
     {
-        public int IntegrationID { get; set; }
-        public string Name { get; set; }
-        public string IntegrationKey { get; set; }
-        public string Token { get; set; }
-        public string Value { get; set; }
+        public int ActivityID { get; set; }
+        public string Title { get; set; }
+        public string UpdateBy { get; set; }
+        public Nullable<int> UpdateByID { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> StatusID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public string URL { get; set; }
-    
-        public virtual User User { get; set; }
+        public Nullable<int> LocationID { get; set; }
+        public Nullable<int> ItemID { get; set; }
     }
 }

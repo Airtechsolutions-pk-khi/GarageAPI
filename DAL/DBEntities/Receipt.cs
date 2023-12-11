@@ -35,6 +35,8 @@ namespace DAL.DBEntities
         public bool IsActive { get; set; }
         public int LocationID { get; set; }
         public Nullable<bool> IsA4Spacing { get; set; }
+        public string QRTagline { get; set; }
+        public string QRLink { get; set; }
     
         public virtual Location Location { get; set; }
     }

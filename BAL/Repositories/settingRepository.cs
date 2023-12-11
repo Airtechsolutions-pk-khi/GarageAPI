@@ -224,6 +224,7 @@ namespace BAL.Repositories
 
                     foreach (var j in i.Discounts)
                     {
+                        j.ArabicImage = j.ArabicImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.ArabicImage;
                         j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                         j.FromDate = DateParse(j.FromDate);
                         j.ToDate = DateParse(j.ToDate);
@@ -358,6 +359,7 @@ namespace BAL.Repositories
                         k.Reviews = new List<ReviewsBLL>();
                         foreach (var l in k.Discounts)
                         {
+                            l.ArabicImage = l.ArabicImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ArabicImage;
                             l.Image = l.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.Image;
                             l.FromDate = DateParse(l.FromDate);
                             l.ToDate = DateParse(l.ToDate);
@@ -926,6 +928,7 @@ namespace BAL.Repositories
                     j.FromDate = DateParse(j.FromDate);
                     j.ToDate = DateParse(j.ToDate);
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    j.ArabicImage = j.ArabicImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.ArabicImage;
                 }
 
                 rsp.Status = 1;

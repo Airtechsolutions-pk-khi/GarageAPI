@@ -27,6 +27,7 @@ namespace DAL.DBEntities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<AppSource> AppSources { get; set; }
         public virtual DbSet<Bay> Bays { get; set; }
         public virtual DbSet<CarInspection> CarInspections { get; set; }
@@ -50,7 +51,6 @@ namespace DAL.DBEntities
         public virtual DbSet<DiscountItem> DiscountItems { get; set; }
         public virtual DbSet<ImageLocation> ImageLocations { get; set; }
         public virtual DbSet<Integration> Integrations { get; set; }
-        public virtual DbSet<IntegrationActivation> IntegrationActivations { get; set; }
         public virtual DbSet<inv_Bill> inv_Bill { get; set; }
         public virtual DbSet<inv_BillDetail> inv_BillDetail { get; set; }
         public virtual DbSet<inv_PurchaseOrder> inv_PurchaseOrder { get; set; }
@@ -83,6 +83,7 @@ namespace DAL.DBEntities
         public virtual DbSet<OrdersChecklist> OrdersChecklists { get; set; }
         public virtual DbSet<PackageDetail> PackageDetails { get; set; }
         public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<PackagesInfo> PackagesInfoes { get; set; }
         public virtual DbSet<PaymentDetail> PaymentDetails { get; set; }
         public virtual DbSet<PaymentMode> PaymentModes { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
@@ -98,8 +99,10 @@ namespace DAL.DBEntities
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<SubUser> SubUsers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TimeZone> TimeZones { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<UserPackageDetail> UserPackageDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ZatcaAuthentication> ZatcaAuthentications { get; set; }
         public virtual DbSet<ZohoChartOfAccount> ZohoChartOfAccounts { get; set; }

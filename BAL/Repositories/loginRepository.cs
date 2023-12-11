@@ -318,7 +318,7 @@ namespace BAL.Repositories
                 p[5] = new SqlParameter("@LastUpdatedBy", "CustomerAPP");
                 p[6] = new SqlParameter("@LastUpdatedDate", DateTime.UtcNow);
                 p[7] = new SqlParameter("@Points", 0);
-                p[8] = new SqlParameter("@ImagePath", obj.ImagePath);
+                p[8] = new SqlParameter("@ImagePath", obj.ImagePath.Replace(ConfigurationSettings.AppSettings["ApiURL"].ToString(),""));
                 p[9] = new SqlParameter("@StatusID", 1);
                 p[10] = new SqlParameter("@UserID", obj.UserID);
                 p[11] = new SqlParameter("@CreatedOn", DateTime.UtcNow);

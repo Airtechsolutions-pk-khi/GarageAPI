@@ -43,6 +43,7 @@ namespace DAL.DBEntities
         public string LastUpdatedBy { get; set; }
         public string Notes { get; set; }
         public string Terms { get; set; }
+        public Nullable<int> PaymentMode { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

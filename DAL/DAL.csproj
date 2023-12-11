@@ -203,6 +203,9 @@
     <Compile Include="DBEntities2\sysdiagram.cs">
       <DependentUpon>DBEntitiesCustomer.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\Activity.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\AppSource.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -286,9 +289,6 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Integration.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBEntities\IntegrationActivation.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\Inventory.cs">
@@ -387,6 +387,9 @@
     <Compile Include="DBEntities\PackageDetail.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\PackagesInfo.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\PaymentDetail.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -435,6 +438,9 @@
     <Compile Include="DBEntities\Supplier.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBEntities\sysdiagram.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBEntities\TimeZone.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -442,6 +448,9 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\User.cs">
+      <DependentUpon>DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntities\UserPackageDetail.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DBEntities\ZatcaAuthentication.cs">

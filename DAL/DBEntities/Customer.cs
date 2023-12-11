@@ -18,6 +18,7 @@ namespace DAL.DBEntities
         public Customer()
         {
             this.Cars = new HashSet<Car>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int CustomerID { get; set; }
@@ -50,5 +51,7 @@ namespace DAL.DBEntities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Car> Cars { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

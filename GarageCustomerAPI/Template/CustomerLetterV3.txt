@@ -282,12 +282,15 @@
                         <h4>(Grand Total)  الاجمالي</h4>
                     </div>
                 </div>
-                <div class="row d-flex" style=" padding:0 20px;display:#ispartialreceived#">
-                    <div class="col-4" style="padding:10px 0;">
-                        <h4> <strong>#partialreceived#</strong></h4>
-                    </div>
-                    <div class="col-8 text-right" style="padding:10px 0;">
-                        <h4>(Partial Received) <br /> تم استلام المبلغ الجزئي</h4>
+                #payment#
+                <div style="display:#ispartialreceived#">
+                    <div class="row d-flex" style=" padding:0 20px;">
+                        <div class="col-4" style="padding:10px 0;">
+                            <h4> <strong>#partialreceived# </strong></h4>
+                        </div>
+                        <div class="col-8 text-right" style="padding:10px 0;">
+                            <h4>(Partial Received) <br /> تم استلام المبلغ الجزئي</h4>
+                        </div>
                     </div>
                 </div>
                 #refundtotal#
@@ -326,17 +329,18 @@
             #carimages#
 
         </div>
-        <div id="footer">
-            <div class="row p-2 mt-4" style="background:#ddd">
-                <div class="col-12 text-center">
-                    <h4>#socialmedia#</h4>
-                </div>
-            </div>
+       <div id="footer">
             <div class="row p-2 mt-2">
                 <div class="col-12">
                     <h4 style="text-align:center">#footernotes#</h4>
                 </div>
             </div>
+            <div class="row p-2 mt-4" style="background:#ddd" id="footersm">
+                <div class="col-12 text-center">
+                    <h4>#socialmedia#</h4>
+                </div>
+            </div>
+
         </div>
     </div>
 </body>

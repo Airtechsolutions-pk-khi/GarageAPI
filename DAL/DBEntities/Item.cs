@@ -53,6 +53,7 @@ namespace DAL.DBEntities
         public Nullable<bool> IsInventoryItem { get; set; }
         public Nullable<bool> IsOpenItem { get; set; }
         public Nullable<double> MinOpenPrice { get; set; }
+        public Nullable<int> OdooProductID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DiscountItem> DiscountItems { get; set; }

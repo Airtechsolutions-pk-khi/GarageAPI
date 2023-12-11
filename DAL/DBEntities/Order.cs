@@ -46,11 +46,13 @@ namespace DAL.DBEntities
         public Nullable<int> SubUserID { get; set; }
         public Nullable<double> CheckLiters { get; set; }
         public Nullable<double> NextKM { get; set; }
+        public Nullable<int> CustomerID { get; set; }
     
         public virtual Bay Bay { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarNote> CarNotes { get; set; }
         public virtual Car Car { get; set; }
+        public virtual Customer Customer { get; set; }
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderCheckout> OrderCheckouts { get; set; }

@@ -254,6 +254,7 @@ namespace BAL.Repositories
                         j.CashAmount = 0;
                         j.CardType = "";
                     }
+                    j.CheckoutDetails = checkoutDetails;
                 }
 
                 rsp.Orders = _dsOrders;
@@ -299,8 +300,8 @@ namespace BAL.Repositories
                 var _dsChecklist = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<OrdersChecklist>>();
                 var _dsCar = ds.Tables[0] == null ? new List<Cars>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<Cars>>();
                 var _dsCompany = ds.Tables[5] == null ? null : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<User>>().FirstOrDefault();
-                var dtReceipt = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(GetReceiptADO(_dsOrders.FirstOrDefault().LocationID).Tables[0])).ToObject<List<ReceiptBLL>>();
-                var _dtCreditCustomer = ds.Tables[8] == null ? null : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<CreditCustomerA4>>().FirstOrDefault();
+                var _dtReceipt = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(GetReceiptADO(_dsOrders.FirstOrDefault().LocationID).Tables[0])).ToObject<List<ReceiptBLL>>();
+                var _dtCreditCustomer = JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[9])).ToObject<List<CreditCustomerA4>>().FirstOrDefault();
 
                 var carinfo = _dsCar.FirstOrDefault();
                 var ordercheckout = _dsOrders.FirstOrDefault();
@@ -474,7 +475,7 @@ namespace BAL.Repositories
                     #endregion logo
 
                     #region socialmedia
-                    var receipt = dtReceipt.FirstOrDefault();
+                    var receipt = _dtReceipt.FirstOrDefault();
                     try
                     {
                         if (receipt != null)
@@ -521,7 +522,19 @@ namespace BAL.Repositories
                     var payment = "";
                     if (_dsordercheckoutdetail != null)
                     {
-                        var Payby = ordercheckout.PaymentMode == 3 ? "Payment Type(نوع الدفع) | Multi Payment(دفع متعدد)" : ordercheckout.PaymentMode == 4 ? "Payment Type (نوع الدفع) | CreditCustomer (عمبل آجل)" : "";
+                        var Payby = "Payment Type(نوع الدفع) | ";
+                        switch (ordercheckout.PaymentMode)
+                        {
+                            case 3:
+                                Payby += "Multi Payment(دفع متعدد)";
+                                break;
+                            case 4:
+                                Payby += "CreditCustomer (عمبل آجل)";
+                                break;
+                            default:
+                                Payby = "";
+                                break;
+                        }
                         if (Payby != "")
                         {
                             payment += "  <div class='row' style='background-color:#eaeaea; padding:0 20px;'>";
@@ -530,33 +543,47 @@ namespace BAL.Repositories
                             payment += "     </div>                                                          ";
                             payment += " </div>  ";
                         }
+                        var PMLabel = "";
+
+
                         foreach (var item in _dsordercheckoutdetail)
                         {
-                            if (item.PaymentMode == 1)
+                            switch (item.PaymentMode)
                             {
-                                payment += " <div class='row' style=' padding:0 20px;'>                      ";
-                                payment += "                                                                 ";
-                                payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
-                                payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
-                                payment += "     </div>                                                      ";
-                                payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
-                                payment += "         <h4>Cash نقدا</h4>                                ";
-                                payment += "     </div>                                                      ";
-                                payment += " </div>";
+                                case 1:
+                                    PMLabel = "Cash نقدا";
+                                    break;
+                                case 2:
+                                    PMLabel = "Card بطاقة";
+                                    break;
+                                case 3:
+                                    PMLabel = "Credit";
+                                    break;
+                                case 5:
+                                    PMLabel = "Tabby" + (ordercheckout.Remarks != null && ordercheckout.Remarks != "" ? "(" + ordercheckout.Remarks + ")" : "");
+                                    break;
+                                case 6:
+                                    PMLabel = "Tamara" + (ordercheckout.Remarks != null && ordercheckout.Remarks != "" ? "(" + ordercheckout.Remarks + ")" : "");
+                                    break;
+                                case 7:
+                                    PMLabel = "StcPay" + (ordercheckout.Remarks != null && ordercheckout.Remarks != "" ? "(" + ordercheckout.Remarks + ")" : "");
+                                    break;
+                                case 8:
+                                    PMLabel = "Bank Transfer" + (ordercheckout.Remarks != null && ordercheckout.Remarks != "" ? "(" + ordercheckout.Remarks + ")" : "");
+                                    break;
+                                default:
+                                    PMLabel = "";
+                                    break;
                             }
-                            if (item.PaymentMode == 2)
-                            {
-                                payment += " <div class='row' style=' padding:0 20px;'>                      ";
-                                payment += "                                                                 ";
-                                payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
-                                payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
-                                payment += "     </div>                                                      ";
-                                payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
-                                payment += "         <h4>Card بطاقة</h4>                                ";
-                                payment += "     </div>                                                      ";
-                                payment += " </div>";
-                            }
-
+                            payment += " <div class='row' style=' padding:0 20px;'>                      ";
+                            payment += "                                                                 ";
+                            payment += "     <div class='col-4' style='padding:10px 0;'>                 ";
+                            payment += "         <h4> <strong>" + item.AmountPaid + "</strong></h4>                   ";
+                            payment += "     </div>                                                      ";
+                            payment += "     <div class='col-8 text-right' style='padding:10px 0;'>      ";
+                            payment += "         <h4>" + PMLabel + "</h4>                                ";
+                            payment += "     </div>                                                      ";
+                            payment += " </div>";
                         }
                     }
                     var qrlink = "";
@@ -570,23 +597,39 @@ namespace BAL.Repositories
                     isReturnBar = isReturnBar == true ? true : ordercheckout.Status == 106 ? true : false;
                     var refundAmountHTML = "";
 
-                    //initial value assigned
-                    content = content.Replace("#showcredcustsection#", "none");
-                    content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
-                                      "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية المبسطة</h2>" +
-                                      "</div></div>");
                     if (isReturnBar)
                     {
 
                         refundAmountHTML += "  <div class='row' style='background-color:#eaeaea; padding:0 20px;'>";
                         refundAmountHTML += "     <div class='col-4' style='padding:10px 0;'>                     ";
-                        refundAmountHTML += "         <h4> <strong>" + ordercheckout.RefundedAmount + " SR</strong></h4>                    ";
+                        refundAmountHTML += "         <h4> <strong>" + ordercheckout.RefundedAmount + " </strong></h4>                    ";
                         refundAmountHTML += "     </div>                                                          ";
                         refundAmountHTML += "     <div class='col-8 text-right' style='padding:10px 0;'>          ";
                         refundAmountHTML += "         <h4>(Refund Amount) القيمة المسترجعة</h4>                          ";
                         refundAmountHTML += "     </div>                                                          ";
                         refundAmountHTML += " </div>                                                              ";
                         content = content.Replace("#refundbar#", "  <div class='row' style='background:#e8acac;margin-bottom:5px;'><div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>اشعار دائن للفاتورة الضريبية المبسطة</h2></div></div>");
+                        if (ordercheckout.CreditCustomerID > 0 && ordercheckout.CreditCustomerInfo != null)
+                        {
+                            if (ordercheckout.CreditCustomerInfo.BuyerVAT != null && ordercheckout.CreditCustomerInfo.BuyerVAT != "")
+                            {
+                                content = content
+                                        .Replace("#buyername#", ordercheckout.CreditCustomerInfo.BuyerName)
+                                        .Replace("#buyeraddress#", ordercheckout.CreditCustomerInfo.BuyerAddress)
+                                        .Replace("#buyercontact#", ordercheckout.CreditCustomerInfo.BuyerContact)
+                                        .Replace("#buyervatno#", ordercheckout.CreditCustomerInfo.BuyerVAT)
+                                        .Replace("#sellername#", ordercheckout.CreditCustomerInfo.SellerName)
+                                        .Replace("#selleraddress#", ordercheckout.CreditCustomerInfo.SellerAddress)
+                                        .Replace("#sellercontact#", ordercheckout.CreditCustomerInfo.SellerContact)
+                                        .Replace("#sellervatno#", ordercheckout.CreditCustomerInfo.SellerVAT);
+
+                                content = content.Replace("#showcredcustsection#", "block");
+                            }
+                            else
+                                content = content.Replace("#showcredcustsection#", "none");
+                        }
+                        else
+                            content = content.Replace("#showcredcustsection#", "none");
                     }
                     else
                     {
@@ -610,10 +653,30 @@ namespace BAL.Repositories
 
                                 content = content.Replace("#showcredcustsection#", "block");
                             }
+                            else
+                            {
+                                content = content.Replace("#showcredcustsection#", "none");
+                                content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
+                                                  "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية المبسطة</h2>" +
+                                                  "</div></div>");
+                            }
+                        }
+                        else
+                        {
+                            content = content.Replace("#showcredcustsection#", "none");
+                            content = content.Replace("#refundbar#", "<div class='row' style='background:#eee;margin-bottom:5px;'>" +
+                                              "<div class='col-12 text-center'><h2 style='padding:10px 0 10px 0;font-size:26px'>فاتورة ضريبية المبسطة</h2>" +
+                                              "</div></div>");
                         }
                     }
                     #endregion HeaderText
-
+                    var cname = "-";
+                    try
+                    {
+                        cname = ordercheckout.CustomerName != null ? ordercheckout.CustomerName : "";
+                        cname += ordercheckout.CreditCustomerID > 0 ? " | " + ordercheckout.CreditCustomerInfo.BuyerName : "";
+                    }
+                    catch { cname = "-"; }
 
                     content = content.Replace("#logo#", logoHtml);
                     content = content.Replace("#qrlink#", qrlink);
@@ -623,7 +686,7 @@ namespace BAL.Repositories
                     content = content.Replace("#carmodel#", ordercheckout.ModelName);
                     content = content.Replace("#year#", carinfo.Year.ToString());
                     content = content.Replace("#locationname#", receipt.CompanyTitle);
-                    content = content.Replace("#customername#", ordercheckout.CustomerName);
+                    content = content.Replace("#customername#", cname);
                     content = content.Replace("#locationaddress#", receipt.CompanyAddress);
                     content = content.Replace("#locationcontact#", receipt.CompanyPhones);
                     content = content.Replace("#mobile#", ordercheckout.CustomerContact);
@@ -806,10 +869,11 @@ namespace BAL.Repositories
                             j.CashAmount = 0;
                             j.CardType = "";
                         }
+                        j.CheckoutDetails = checkoutDetails;
                     }
                 }
                 rsp.Status = 1;
-                rsp.Description = "Login Successfully";
+                rsp.Description = "Success";
             }
             catch (Exception ex)
             {

@@ -8,6 +8,7 @@
       <Parameter Name="InputString" Mode="In" Type="String" />
       <Parameter Name="Delimiter" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Activities" EntityType="Garage_UATModel.Activity" />
     <EntitySet Name="AppSources" EntityType="Garage_UATModel.AppSource" />
     <EntitySet Name="Bays" EntityType="Garage_UATModel.Bay" />
     <EntitySet Name="CarInspections" EntityType="Garage_UATModel.CarInspection" />
@@ -31,7 +32,6 @@
     <EntitySet Name="DiscountItems" EntityType="Garage_UATModel.DiscountItem" />
     <EntitySet Name="ImageLocations" EntityType="Garage_UATModel.ImageLocation" />
     <EntitySet Name="Integrations" EntityType="Garage_UATModel.Integration" />
-    <EntitySet Name="IntegrationActivations" EntityType="Garage_UATModel.IntegrationActivation" />
     <EntitySet Name="inv_Bill" EntityType="Garage_UATModel.inv_Bill" />
     <EntitySet Name="inv_BillDetail" EntityType="Garage_UATModel.inv_BillDetail" />
     <EntitySet Name="inv_PurchaseOrder" EntityType="Garage_UATModel.inv_PurchaseOrder" />
@@ -64,6 +64,7 @@
     <EntitySet Name="OrdersChecklists" EntityType="Garage_UATModel.OrdersChecklist" />
     <EntitySet Name="PackageDetails" EntityType="Garage_UATModel.PackageDetail" />
     <EntitySet Name="Packages" EntityType="Garage_UATModel.Package" />
+    <EntitySet Name="PackagesInfoes" EntityType="Garage_UATModel.PackagesInfo" />
     <EntitySet Name="PaymentDetails" EntityType="Garage_UATModel.PaymentDetail" />
     <EntitySet Name="PaymentModes" EntityType="Garage_UATModel.PaymentMode" />
     <EntitySet Name="Receipts" EntityType="Garage_UATModel.Receipt" />
@@ -79,8 +80,10 @@
     <EntitySet Name="SubCategories" EntityType="Garage_UATModel.SubCategory" />
     <EntitySet Name="SubUsers" EntityType="Garage_UATModel.SubUser" />
     <EntitySet Name="Suppliers" EntityType="Garage_UATModel.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Garage_UATModel.sysdiagram" />
     <EntitySet Name="TimeZones" EntityType="Garage_UATModel.TimeZone" />
     <EntitySet Name="Units" EntityType="Garage_UATModel.Unit" />
+    <EntitySet Name="UserPackageDetails" EntityType="Garage_UATModel.UserPackageDetail" />
     <EntitySet Name="Users" EntityType="Garage_UATModel.User" />
     <EntitySet Name="ZatcaAuthentications" EntityType="Garage_UATModel.ZatcaAuthentication" />
     <EntitySet Name="ZohoChartOfAccounts" EntityType="Garage_UATModel.ZohoChartOfAccount" />
@@ -198,6 +201,10 @@
       <End Role="CreditCustomer" EntitySet="CreditCustomers" />
       <End Role="OrderCheckout" EntitySet="OrderCheckouts" />
     </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customers" Association="Garage_UATModel.FK_Orders_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
     <AssociationSet Name="FK_Discount_Locations" Association="Garage_UATModel.FK_Discount_Locations">
       <End Role="Location" EntitySet="Locations" />
       <End Role="Discount" EntitySet="Discounts" />
@@ -217,10 +224,6 @@
     <AssociationSet Name="FK_Integration_Users" Association="Garage_UATModel.FK_Integration_Users">
       <End Role="User" EntitySet="Users" />
       <End Role="Integration" EntitySet="Integrations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_IntegrationActivation_Users" Association="Garage_UATModel.FK_IntegrationActivation_Users">
-      <End Role="User" EntitySet="Users" />
-      <End Role="IntegrationActivation" EntitySet="IntegrationActivations" />
     </AssociationSet>
     <AssociationSet Name="FK_Bill_Locations" Association="Garage_UATModel.FK_Bill_Locations">
       <End Role="Location" EntitySet="Locations" />
@@ -542,6 +545,14 @@
       <End Role="User" EntitySet="Users" />
       <End Role="Package" EntitySet="Packages" />
     </AssociationSet>
+    <AssociationSet Name="FK_UserPackageDetails_PackagesInfo" Association="Garage_UATModel.FK_UserPackageDetails_PackagesInfo">
+      <End Role="PackagesInfo" EntitySet="PackagesInfoes" />
+      <End Role="UserPackageDetail" EntitySet="UserPackageDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_PackagesInfo" Association="Garage_UATModel.FK_Users_PackagesInfo">
+      <End Role="PackagesInfo" EntitySet="PackagesInfoes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
     <AssociationSet Name="FK_Role_GroupForms_Role_Forms" Association="Garage_UATModel.FK_Role_GroupForms_Role_Forms">
       <End Role="Role_Forms" EntitySet="Role_Forms" />
       <End Role="Role_GroupForms" EntitySet="Role_GroupForms" />
@@ -586,6 +597,14 @@
       <End Role="TimeZone" EntitySet="TimeZones" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
+    <AssociationSet Name="FK_UserPackageDetails_UserPackageDetails" Association="Garage_UATModel.FK_UserPackageDetails_UserPackageDetails">
+      <End Role="UserPackageDetail" EntitySet="UserPackageDetails" />
+      <End Role="UserPackageDetail1" EntitySet="UserPackageDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackageDetails_Users" Association="Garage_UATModel.FK_UserPackageDetails_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserPackageDetail" EntitySet="UserPackageDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_ZohoChartOfAccounts_Users" Association="Garage_UATModel.FK_ZohoChartOfAccounts_Users">
       <End Role="User" EntitySet="Users" />
       <End Role="ZohoChartOfAccount" EntitySet="ZohoChartOfAccounts" />
@@ -599,6 +618,20 @@
       <End Role="SubUser" EntitySet="SubUsers" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="ActivityID" />
+    </Key>
+    <Property Name="ActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateByID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="LocationID" Type="Int32" />
+    <Property Name="ItemID" Type="Int32" />
+  </EntityType>
   <EntityType Name="AppSource">
     <Key>
       <PropertyRef Name="SourceID" />
@@ -724,9 +757,22 @@
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
     <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="LocationID" Type="Int32" />
-    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
     <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarType" Type="Int32" />
+    <Property Name="plateText1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="plateText2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="plateText3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="plateNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="regTypeDescAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bodyTypeDescAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="majorColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vehicleClassDescAr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="capacity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="weight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="plateReturnIndex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsVerified" Type="Boolean" />
     <NavigationProperty Name="Customer" Relationship="Garage_UATModel.FK_Cars_Customers" FromRole="Car" ToRole="Customer" />
     <NavigationProperty Name="Make" Relationship="Garage_UATModel.FK_Cars_Make" FromRole="Car" ToRole="Make" />
     <NavigationProperty Name="Model" Relationship="Garage_UATModel.FK_Cars_Model" FromRole="Car" ToRole="Model" />
@@ -828,6 +874,7 @@
     <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Terms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentMode" Type="Int32" />
     <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_CompanyInvoice_Users" FromRole="CompanyInvoice" ToRole="User" />
     <NavigationProperty Name="CompanyInvoiceDetails" Relationship="Garage_UATModel.FK_CompanyInvoiceDetail_CompanyInvoice" FromRole="CompanyInvoice" ToRole="CompanyInvoiceDetail" />
   </EntityType>
@@ -944,11 +991,14 @@
     <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
     <Property Name="UserID" Type="Int32" />
     <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="VATNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsVAT" Type="Boolean" />
     <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_CreditCustomer_Users" FromRole="CreditCustomer" ToRole="User" />
     <NavigationProperty Name="OrderCheckouts" Relationship="Garage_UATModel.FK_OrderCheckout_CreditCustomer" FromRole="CreditCustomer" ToRole="OrderCheckout" />
   </EntityType>
@@ -965,7 +1015,7 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DOB" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Mobile" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
@@ -984,6 +1034,7 @@
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Cars" Relationship="Garage_UATModel.FK_Cars_Customers" FromRole="Customer" ToRole="Car" />
+    <NavigationProperty Name="Orders" Relationship="Garage_UATModel.FK_Orders_Customers" FromRole="Customer" ToRole="Order" />
   </EntityType>
   <EntityType Name="Discount">
     <Key>
@@ -1030,7 +1081,7 @@
     </Key>
     <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="LocationID" Type="Int32" />
-    <Property Name="ImageURL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Integration">
     <Key>
@@ -1043,19 +1094,8 @@
     <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
     <Property Name="UserID" Type="Int32" />
+    <Property Name="URL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_Integration_Users" FromRole="Integration" ToRole="User" />
-  </EntityType>
-  <EntityType Name="IntegrationActivation">
-    <Key>
-      <PropertyRef Name="IntegrationActivationID" />
-    </Key>
-    <Property Name="IntegrationActivationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserID" Type="Int32" />
-    <Property Name="LocationID" Type="Int32" />
-    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="IsActivateAdmin" Type="Boolean" />
-    <Property Name="IsActivateUser" Type="Boolean" />
-    <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_IntegrationActivation_Users" FromRole="IntegrationActivation" ToRole="User" />
   </EntityType>
   <EntityType Name="inv_Bill">
     <Key>
@@ -1200,7 +1240,7 @@
     <Property Name="CurrentStock" Type="Int32" />
     <Property Name="ItemID" Type="Int32" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="LastUpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1361,6 +1401,7 @@
     <Property Name="IsInventoryItem" Type="Boolean" />
     <Property Name="IsOpenItem" Type="Boolean" />
     <Property Name="MinOpenPrice" Type="Double" />
+    <Property Name="OdooProductID" Type="Int32" />
     <NavigationProperty Name="DiscountItems" Relationship="Garage_UATModel.FK_DiscountItems_Items" FromRole="Item" ToRole="DiscountItem" />
     <NavigationProperty Name="inv_BillDetail" Relationship="Garage_UATModel.FK_BillDetail_Items" FromRole="Item" ToRole="inv_BillDetail" />
     <NavigationProperty Name="inv_PurchaseOrderDetail" Relationship="Garage_UATModel.FK_PurchaseOrderDetail_Items" FromRole="Item" ToRole="inv_PurchaseOrderDetail" />
@@ -1426,8 +1467,8 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Descripiton" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="ArabicDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="ArabicAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ArabicAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="TimeZoneID" Type="Int32" />
@@ -1448,6 +1489,7 @@
     <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="StatusID" Type="Int32" />
+    <Property Name="CustomerStatusID" Type="Int32" />
     <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="LandmarkID" Type="Int32" />
     <Property Name="Gmaplink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1656,6 +1698,7 @@
     <Property Name="RefundAmount" Type="Double" />
     <Property Name="DiscountAmount" Type="Double" />
     <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OdooProductID" Type="Int32" />
     <NavigationProperty Name="Item" Relationship="Garage_UATModel.FK_OrderDetail_Items" FromRole="OrderDetail" ToRole="Item" />
     <NavigationProperty Name="Order" Relationship="Garage_UATModel.FK_OrderDetail_Orders" FromRole="OrderDetail" ToRole="Order" />
     <NavigationProperty Name="Package" Relationship="Garage_UATModel.FK_OrderDetail_Packages" FromRole="OrderDetail" ToRole="Package" />
@@ -1738,9 +1781,11 @@
     <Property Name="SubUserID" Type="Int32" />
     <Property Name="CheckLiters" Type="Double" />
     <Property Name="NextKM" Type="Double" />
+    <Property Name="CustomerID" Type="Int32" />
     <NavigationProperty Name="Bay" Relationship="Garage_UATModel.FK_Orders_Bay" FromRole="Order" ToRole="Bay" />
     <NavigationProperty Name="CarNotes" Relationship="Garage_UATModel.FK_CarNotes_Orders" FromRole="Order" ToRole="CarNote" />
     <NavigationProperty Name="Car" Relationship="Garage_UATModel.FK_Orders_Cars" FromRole="Order" ToRole="Car" />
+    <NavigationProperty Name="Customer" Relationship="Garage_UATModel.FK_Orders_Customers" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="Location" Relationship="Garage_UATModel.FK_Orders_Locations" FromRole="Order" ToRole="Location" />
     <NavigationProperty Name="OrderCheckouts" Relationship="Garage_UATModel.FK_OrderCheckout_Orders" FromRole="Order" ToRole="OrderCheckout" />
     <NavigationProperty Name="OrderDetails" Relationship="Garage_UATModel.FK_OrderDetail_Orders" FromRole="Order" ToRole="OrderDetail" />
@@ -1808,6 +1853,29 @@
     <NavigationProperty Name="SubCategory" Relationship="Garage_UATModel.FK_Packages_SubCategory" FromRole="Package" ToRole="SubCategory" />
     <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_Packages_Users" FromRole="Package" ToRole="User" />
   </EntityType>
+  <EntityType Name="PackagesInfo">
+    <Key>
+      <PropertyRef Name="PackageInfoID" />
+    </Key>
+    <Property Name="PackageInfoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PackageNameAr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PackagePrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PackageDetail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PackageDetailAr" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PackageDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PackageDescriptionAr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoofDays" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeviceCount" Type="Int32" />
+    <Property Name="LocationsLimit" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="IsInventory" Type="Boolean" />
+    <Property Name="IsGarageGo" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserPackageDetails" Relationship="Garage_UATModel.FK_UserPackageDetails_PackagesInfo" FromRole="PackagesInfo" ToRole="UserPackageDetail" />
+    <NavigationProperty Name="Users" Relationship="Garage_UATModel.FK_Users_PackagesInfo" FromRole="PackagesInfo" ToRole="User" />
+  </EntityType>
   <EntityType Name="PaymentDetail">
     <Key>
       <PropertyRef Name="PartialPaymentID" />
@@ -1858,6 +1926,8 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="LocationID" Type="Int32" Nullable="false" />
     <Property Name="IsA4Spacing" Type="Boolean" />
+    <Property Name="QRTagline" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="QRLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Location" Relationship="Garage_UATModel.FK_Receipt_Locations" FromRole="Receipt" ToRole="Location" />
   </EntityType>
   <EntityType Name="ReportLog">
@@ -1898,6 +1968,7 @@
     <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="StatusID" Type="Int32" />
+    <Property Name="DeviceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Role_GroupForms" Relationship="Garage_UATModel.FK_Role_GroupForms_Role_Forms" FromRole="Role_Forms" ToRole="Role_GroupForms" />
   </EntityType>
   <EntityType Name="Role_Group">
@@ -2110,6 +2181,16 @@
     <NavigationProperty Name="Inventories" Relationship="Garage_UATModel.FK_Inventory_Supplier" FromRole="Supplier" ToRole="Inventory" />
     <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_Supplier_Users" FromRole="Supplier" ToRole="User" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="TimeZone">
     <Key>
       <PropertyRef Name="TimeZoneID" />
@@ -2140,12 +2221,29 @@
     <NavigationProperty Name="Items" Relationship="Garage_UATModel.FK_Items_Units" FromRole="Unit" ToRole="Item" />
     <NavigationProperty Name="Modifiers" Relationship="Garage_UATModel.FK_Modifiers_Units" FromRole="Unit" ToRole="Modifier" />
   </EntityType>
+  <EntityType Name="UserPackageDetail">
+    <Key>
+      <PropertyRef Name="UserPackageDetailID" />
+    </Key>
+    <Property Name="UserPackageDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageInfoID" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="StatusID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PackagesInfo" Relationship="Garage_UATModel.FK_UserPackageDetails_PackagesInfo" FromRole="UserPackageDetail" ToRole="PackagesInfo" />
+    <NavigationProperty Name="UserPackageDetails1" Relationship="Garage_UATModel.FK_UserPackageDetails_UserPackageDetails" FromRole="UserPackageDetail" ToRole="UserPackageDetail1" />
+    <NavigationProperty Name="UserPackageDetail1" Relationship="Garage_UATModel.FK_UserPackageDetails_UserPackageDetails" FromRole="UserPackageDetail1" ToRole="UserPackageDetail" />
+    <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_UserPackageDetails_Users" FromRole="UserPackageDetail" ToRole="User" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RowID" Type="Int32" Nullable="false" />
+    <Property Name="PackageInfoID" Type="Int32" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2173,6 +2271,12 @@
     <Property Name="Tax" Type="Double" />
     <Property Name="IsSMSCheckoutAddOn" Type="Boolean" />
     <Property Name="AllowNegativeInventory" Type="Boolean" />
+    <Property Name="IsOdoo" Type="Boolean" />
+    <Property Name="IsAccountingAddons" Type="Boolean" />
+    <Property Name="IsGarageGo" Type="Boolean" />
+    <Property Name="IsCashier" Type="Boolean" />
+    <Property Name="BrandThumbnailImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LoginSessionTime" Type="Int32" />
     <NavigationProperty Name="AppSources" Relationship="Garage_UATModel.FK_AppSource_Users" FromRole="User" ToRole="AppSource" />
     <NavigationProperty Name="CarInspections" Relationship="Garage_UATModel.FK_CarInspection_Users" FromRole="User" ToRole="CarInspection" />
     <NavigationProperty Name="Cars" Relationship="Garage_UATModel.FK_Cars_Users" FromRole="User" ToRole="Car" />
@@ -2182,18 +2286,19 @@
     <NavigationProperty Name="Country" Relationship="Garage_UATModel.FK_Users_Country" FromRole="User" ToRole="Country" />
     <NavigationProperty Name="CreditCustomers" Relationship="Garage_UATModel.FK_CreditCustomer_Users" FromRole="User" ToRole="CreditCustomer" />
     <NavigationProperty Name="Integrations" Relationship="Garage_UATModel.FK_Integration_Users" FromRole="User" ToRole="Integration" />
-    <NavigationProperty Name="IntegrationActivations" Relationship="Garage_UATModel.FK_IntegrationActivation_Users" FromRole="User" ToRole="IntegrationActivation" />
     <NavigationProperty Name="inv_Stock" Relationship="Garage_UATModel.FK_inv_Stock_Users" FromRole="User" ToRole="inv_Stock" />
     <NavigationProperty Name="inv_StockIssue" Relationship="Garage_UATModel.FK_inv_StockIssue_Users" FromRole="User" ToRole="inv_StockIssue" />
     <NavigationProperty Name="inv_StockStore" Relationship="Garage_UATModel.FK_inv_StockStore_Users" FromRole="User" ToRole="inv_StockStore" />
     <NavigationProperty Name="Licenses" Relationship="Garage_UATModel.FK_Licenses_Users" FromRole="User" ToRole="License" />
     <NavigationProperty Name="Locations" Relationship="Garage_UATModel.FK_Locations_Users" FromRole="User" ToRole="Location" />
     <NavigationProperty Name="Packages" Relationship="Garage_UATModel.FK_Packages_Users" FromRole="User" ToRole="Package" />
+    <NavigationProperty Name="PackagesInfo" Relationship="Garage_UATModel.FK_Users_PackagesInfo" FromRole="User" ToRole="PackagesInfo" />
     <NavigationProperty Name="Role_Group" Relationship="Garage_UATModel.FK_Role_Group_Users" FromRole="User" ToRole="Role_Group" />
     <NavigationProperty Name="Status" Relationship="Garage_UATModel.FK_Users_Status" FromRole="User" ToRole="Status" />
     <NavigationProperty Name="SubUsers" Relationship="Garage_UATModel.FK_SubUsers_Users" FromRole="User" ToRole="SubUser" />
     <NavigationProperty Name="Suppliers" Relationship="Garage_UATModel.FK_Supplier_Users" FromRole="User" ToRole="Supplier" />
     <NavigationProperty Name="TimeZone" Relationship="Garage_UATModel.FK_Users_TimeZone" FromRole="User" ToRole="TimeZone" />
+    <NavigationProperty Name="UserPackageDetails" Relationship="Garage_UATModel.FK_UserPackageDetails_Users" FromRole="User" ToRole="UserPackageDetail" />
     <NavigationProperty Name="ZohoChartOfAccounts" Relationship="Garage_UATModel.FK_ZohoChartOfAccounts_Users" FromRole="User" ToRole="ZohoChartOfAccount" />
     <NavigationProperty Name="ZohoSettings" Relationship="Garage_UATModel.FK_ZohoSettings_Users" FromRole="User" ToRole="ZohoSetting" />
   </EntityType>
@@ -2401,7 +2506,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Cars_Users">
-    <End Type="Garage_UATModel.User" Role="User" Multiplicity="1" />
+    <End Type="Garage_UATModel.User" Role="User" Multiplicity="0..1" />
     <End Type="Garage_UATModel.Car" Role="Car" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
@@ -2592,6 +2697,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Orders_Customers">
+    <End Type="Garage_UATModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="Garage_UATModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Discount_Locations">
     <End Type="Garage_UATModel.Location" Role="Location" Multiplicity="1" />
     <End Type="Garage_UATModel.Discount" Role="Discount" Multiplicity="*" />
@@ -2648,18 +2765,6 @@
         <PropertyRef Name="UserID" />
       </Principal>
       <Dependent Role="Integration">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IntegrationActivation_Users">
-    <End Type="Garage_UATModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="Garage_UATModel.IntegrationActivation" Role="IntegrationActivation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="IntegrationActivation">
         <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
@@ -3624,6 +3729,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserPackageDetails_PackagesInfo">
+    <End Type="Garage_UATModel.PackagesInfo" Role="PackagesInfo" Multiplicity="0..1" />
+    <End Type="Garage_UATModel.UserPackageDetail" Role="UserPackageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackagesInfo">
+        <PropertyRef Name="PackageInfoID" />
+      </Principal>
+      <Dependent Role="UserPackageDetail">
+        <PropertyRef Name="PackageInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_PackagesInfo">
+    <End Type="Garage_UATModel.PackagesInfo" Role="PackagesInfo" Multiplicity="0..1" />
+    <End Type="Garage_UATModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackagesInfo">
+        <PropertyRef Name="PackageInfoID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="PackageInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Role_GroupForms_Role_Forms">
     <End Type="Garage_UATModel.Role_Forms" Role="Role_Forms" Multiplicity="0..1" />
     <End Type="Garage_UATModel.Role_GroupForms" Role="Role_GroupForms" Multiplicity="*" />
@@ -3753,6 +3882,30 @@
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="TimeZoneID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackageDetails_UserPackageDetails">
+    <End Type="Garage_UATModel.UserPackageDetail" Role="UserPackageDetail" Multiplicity="1" />
+    <End Type="Garage_UATModel.UserPackageDetail" Role="UserPackageDetail1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackageDetail">
+        <PropertyRef Name="UserPackageDetailID" />
+      </Principal>
+      <Dependent Role="UserPackageDetail1">
+        <PropertyRef Name="UserPackageDetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackageDetails_Users">
+    <End Type="Garage_UATModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="Garage_UATModel.UserPackageDetail" Role="UserPackageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserPackageDetail">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

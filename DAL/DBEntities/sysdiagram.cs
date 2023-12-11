@@ -12,17 +12,12 @@ namespace DAL.DBEntities
     using System;
     using System.Collections.Generic;
     
-    public partial class Integration
+    public partial class sysdiagram
     {
-        public int IntegrationID { get; set; }
-        public string Name { get; set; }
-        public string IntegrationKey { get; set; }
-        public string Token { get; set; }
-        public string Value { get; set; }
-        public Nullable<int> StatusID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public string URL { get; set; }
-    
-        public virtual User User { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

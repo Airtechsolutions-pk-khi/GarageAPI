@@ -12,15 +12,19 @@ namespace DAL.DBEntities
     using System;
     using System.Collections.Generic;
     
-    public partial class IntegrationActivation
+    public partial class UserPackageDetail
     {
-        public int IntegrationActivationID { get; set; }
+        public int UserPackageDetailID { get; set; }
+        public Nullable<int> PackageInfoID { get; set; }
         public Nullable<int> UserID { get; set; }
-        public Nullable<int> LocationID { get; set; }
-        public string Name { get; set; }
-        public Nullable<bool> IsActivateAdmin { get; set; }
-        public Nullable<bool> IsActivateUser { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> LastUpdatedDate { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
     
+        public virtual PackagesInfo PackagesInfo { get; set; }
+        public virtual UserPackageDetail UserPackageDetails1 { get; set; }
+        public virtual UserPackageDetail UserPackageDetail1 { get; set; }
         public virtual User User { get; set; }
     }
 }

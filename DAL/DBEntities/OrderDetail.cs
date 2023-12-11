@@ -42,6 +42,7 @@ namespace DAL.DBEntities
         public Nullable<double> RefundAmount { get; set; }
         public Nullable<double> DiscountAmount { get; set; }
         public string Description { get; set; }
+        public Nullable<int> OdooProductID { get; set; }
     
         public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }
