@@ -26,6 +26,7 @@ namespace DAL.Models
     }
     public class ReviewRsp : Rsp
     {
+        public string Rating { get; set; } = "0";
         public List<ReviewsBLL> Reviews { get; set; }
     }
     public class CustomerUpdateRsp : Rsp
@@ -93,13 +94,20 @@ namespace DAL.Models
     public class DiscountBLL
     {
         public string Name { get; set; }
-        public string BrandImage { get; set; }
+        public string ArabicName { get; set; }
+        public string Description{ get; set; }
+        public string ArabicDescription { get; set; }
+        //public string BrandImage { get; set; }
         public string Image { get; set; }
         public string ArabicImage { get; set; }
+        public string ThumbnailImage{ get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public int? LocationID { get; set; }
         public int? DiscountID { get; set; }
+        public string BackgroundColor { get; set; }
+        public string FontColor{ get; set; }
+        public List<Locations> DiscountLocations { get; set; }
     }
     public class ServiceBLL
     {
@@ -315,6 +323,7 @@ namespace DAL.Models
     }
     public class Locations
     {
+        public int? DiscountID { get; set; } = 0;
         public int? SettingID { get; set; } = 0;
         public int LocationID { get; set; }
         public int? CityID { get; set; }
@@ -349,9 +358,11 @@ namespace DAL.Models
         public List<WorkingHour> WorkingHours { get; set; }
     }
     public class  WorkingHour   {
-        public string Name { get; set; }
-        public string Time{ get; set; }
-        public int? LocationID{ get; set; }
+        public string Name { get; set; } = "";
+        public string ArabicName { get; set; } = "";
+        public string Time{ get; set; } = "";
+        public string ArabicTime { get; set; } = "";
+        public int? LocationID{ get; set; } = 0;
     }
     public class Services
     {
@@ -726,6 +737,7 @@ namespace DAL.Models
         public List<LandmarkBLL> Landmarks { get; set; }
         public List<UsersList> Brands { get; set; }
         public List<CityList> Cities { get; set; }
+        public List<DiscountBLL> Discounts{ get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
         public string AppstoreVersion { get; set; }
@@ -779,6 +791,7 @@ namespace DAL.Models
         public string Description { get; set; }
         public Nullable<int> Year { get; set; }
         public string CheckLitre { get; set; }
+        public string RecommendedAmount { get; set; }
         public string EngineType { get; set; }
         public string RegistrationNo { get; set; }
         public string ImagePath { get; set; }
@@ -792,8 +805,37 @@ namespace DAL.Models
         public int? UserID { get; set; }
         public int? StatusID { get; set; }
         public bool? IsFavourite { get; set; }
+        public string LastVisit{ get; set; }
 
         public List<OrdersList> Orders = new List<OrdersList>();
+    }
+    public class CarsNFC
+    {
+        public int? CarID { get; set; }
+        public int CustomerID { get; set; }
+        public string VinNo { get; set; }
+        public string CustomerName{ get; set; }
+        public string CustomerContact { get; set; }
+        public Nullable<int> MakeID { get; set; }
+        public string MakeImage { get; set; }
+        public string MakeName { get; set; }
+        public Nullable<int> ModelID { get; set; }
+        public string ModelName { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> Year { get; set; }
+        public string CheckLitre { get; set; }
+
+        public string NextKM{ get; set; }
+        public string EngineType { get; set; }
+        public string RegistrationNo { get; set; }
+        public string ImagePath { get; set; }
+        public string CompanyLogo { get; set; }
+
+        public string RegistrationNoP1 { get; set; } = "";
+        public string RegistrationNoP2 { get; set; } = "";
+        public string RegistrationNoP3 { get; set; } = "";
+        public string RegistrationNoP4 { get; set; } = "";
     }
 
     public class CarSellList
@@ -939,6 +981,7 @@ namespace DAL.Models
         public double? CashAmount { get; set; }
         public double? CardAmount { get; set; }
         public float? NextKM { get; set; }
+        public float? CheckLiters { get; set; }
         public string CardType { get; set; }
         public string CustomerContact { get; set; }
         public string CustomerName { get; set; }
@@ -946,6 +989,8 @@ namespace DAL.Models
         public string Remarks{ get; set; }
         public int? CreditCustomerID { get; set; }
         public string ServiceType { get; set; }
+
+        public string ArabicServiceType { get; set; }
         public List<OItemsList> Items = new List<OItemsList>();
         public CreditCustomerA4 CreditCustomerInfo { get; set; }
 
@@ -985,6 +1030,8 @@ namespace DAL.Models
         public bool IsActive { get; set; }
         public int LocationID { get; set; }
         public Nullable<bool> IsA4Spacing { get; set; }
+        public string QRLink { get; set; }
+        public string QRTagline { get; set; }
 
     }
     public class OItemsList
@@ -1092,8 +1139,14 @@ namespace DAL.Models
         public int Status { get; set; }
         public string Description { get; set; }
     }
+    public class CarInfoNFCRsp:Rsp
 
-    public class AIChat
+    {
+        public CarsNFC CarInfo { get; set; }
+
+    }
+
+public class AIChat
     {
         public int? chatID { get; set; }
         public int? carID { get; set; }

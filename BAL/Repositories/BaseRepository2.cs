@@ -18,14 +18,14 @@ namespace BAL.Repositories
     {
 
         StreamWriter _sw;
-        public Garage_Entities DBContext2;
+        public Garage_UATEntities DBContext2;
 
         public BaseRepository2()
         {
-            DBContext2 = new Garage_Entities();
+            DBContext2 = new Garage_UATEntities();
         }
 
-        public BaseRepository2(Garage_Entities ContextDB2)
+        public BaseRepository2(Garage_UATEntities ContextDB2)
         {
             DBContext2 = ContextDB2;
         }

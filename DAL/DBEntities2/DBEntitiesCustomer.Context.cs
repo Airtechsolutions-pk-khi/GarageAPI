@@ -15,10 +15,10 @@ namespace DAL.DBEntities2
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class GarageCustomer_Entities : DbContext
+    public partial class GarageCustomer_UATEntities : DbContext
     {
-        public GarageCustomer_Entities()
-            : base("name=GarageCustomer_Entities")
+        public GarageCustomer_UATEntities()
+            : base("name=GarageCustomer_UATEntities")
         {
         }
     
@@ -27,8 +27,9 @@ namespace DAL.DBEntities2
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Amenity> Amenities { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
+        public virtual DbSet<BlogImages_Junc> BlogImages_Junc { get; set; }
         public virtual DbSet<BodyType> BodyTypes { get; set; }
         public virtual DbSet<CarFavourite> CarFavourites { get; set; }
         public virtual DbSet<CarSell> CarSells { get; set; }
@@ -39,14 +40,52 @@ namespace DAL.DBEntities2
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Landmark> Landmarks { get; set; }
         public virtual DbSet<LocationJunc> LocationJuncs { get; set; }
+        public virtual DbSet<LocationWorkingHour> LocationWorkingHours { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
-        public virtual DbSet<PackagesInfo> PackagesInfoes { get; set; }
         public virtual DbSet<PushToken> PushTokens { get; set; }
         public virtual DbSet<ReportReview> ReportReviews { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+    
+        public virtual ObjectResult<GetDashboard_CAdmin_Result> GetDashboard_CAdmin()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDashboard_CAdmin_Result>("GetDashboard_CAdmin");
+        }
+    
+        public virtual int sp_AddFeedback_CAPI(string about, string topic, string details, Nullable<int> statusID, Nullable<System.DateTime> date, Nullable<System.DateTime> createdDate, Nullable<int> customerID)
+        {
+            var aboutParameter = about != null ?
+                new ObjectParameter("About", about) :
+                new ObjectParameter("About", typeof(string));
+    
+            var topicParameter = topic != null ?
+                new ObjectParameter("Topic", topic) :
+                new ObjectParameter("Topic", typeof(string));
+    
+            var detailsParameter = details != null ?
+                new ObjectParameter("Details", details) :
+                new ObjectParameter("Details", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_AddFeedback_CAPI", aboutParameter, topicParameter, detailsParameter, statusIDParameter, dateParameter, createdDateParameter, customerIDParameter);
+        }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -107,6 +146,15 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
+        public virtual ObjectResult<sp_CustomerNotifications_CAPI_Result> sp_CustomerNotifications_CAPI(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_CustomerNotifications_CAPI_Result>("sp_CustomerNotifications_CAPI", customerIDParameter);
+        }
+    
         public virtual int sp_DeleteAmenities(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -116,6 +164,71 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteAmenities", idParameter);
         }
     
+        public virtual int sp_DeleteBlog_CADMIN(Nullable<int> id, Nullable<System.DateTime> lastUpdatedDate)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteBlog_CADMIN", idParameter, lastUpdatedDateParameter);
+        }
+    
+        public virtual int sp_DeleteBodyType_CAdmin(Nullable<int> bodyTypeID, Nullable<int> statusID, Nullable<System.DateTime> lastUpdatedDate)
+        {
+            var bodyTypeIDParameter = bodyTypeID.HasValue ?
+                new ObjectParameter("BodyTypeID", bodyTypeID) :
+                new ObjectParameter("BodyTypeID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteBodyType_CAdmin", bodyTypeIDParameter, statusIDParameter, lastUpdatedDateParameter);
+        }
+    
+        public virtual int sp_deleteCarsellImages_CAPI(Nullable<int> carSellID, string imageIDs)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var imageIDsParameter = imageIDs != null ?
+                new ObjectParameter("ImageIDs", imageIDs) :
+                new ObjectParameter("ImageIDs", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_deleteCarsellImages_CAPI", carSellIDParameter, imageIDsParameter);
+        }
+    
+        public virtual int sp_DeleteDiscount_CAdmin(Nullable<int> discountID)
+        {
+            var discountIDParameter = discountID.HasValue ?
+                new ObjectParameter("DiscountID", discountID) :
+                new ObjectParameter("DiscountID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteDiscount_CAdmin", discountIDParameter);
+        }
+    
+        public virtual int sp_deleteFeature_CAdmin(Nullable<int> featureID, Nullable<int> statusID)
+        {
+            var featureIDParameter = featureID.HasValue ?
+                new ObjectParameter("FeatureID", featureID) :
+                new ObjectParameter("FeatureID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_deleteFeature_CAdmin", featureIDParameter, statusIDParameter);
+        }
+    
         public virtual int sp_DeleteLandmark(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -123,6 +236,15 @@ namespace DAL.DBEntities2
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteLandmark", idParameter);
+        }
+    
+        public virtual int sp_deleteLocationTiming_CADMIN(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_deleteLocationTiming_CADMIN", idParameter);
         }
     
         public virtual int sp_DeleteService(Nullable<int> id)
@@ -156,156 +278,7 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<sp_GetAmenities_Result> sp_GetAmenities()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAmenities_Result>("sp_GetAmenities");
-        }
-    
-        public virtual ObjectResult<sp_GetAmenitiesByID_Result> sp_GetAmenitiesByID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAmenitiesByID_Result>("sp_GetAmenitiesByID", idParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetCarSell_CADMIN_Result> sp_GetCarSell_CADMIN(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
-        {
-            var fromdateParameter = fromdate.HasValue ?
-                new ObjectParameter("fromdate", fromdate) :
-                new ObjectParameter("fromdate", typeof(System.DateTime));
-    
-            var todateParameter = todate.HasValue ?
-                new ObjectParameter("todate", todate) :
-                new ObjectParameter("todate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSell_CADMIN_Result>("sp_GetCarSell_CADMIN", fromdateParameter, todateParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetCarSell_CAPI_Result> sp_GetCarSell_CAPI()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSell_CAPI_Result>("sp_GetCarSell_CAPI");
-        }
-    
-        public virtual ObjectResult<sp_GetCarSellById_CADMIN_Result> sp_GetCarSellById_CADMIN(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellById_CADMIN_Result>("sp_GetCarSellById_CADMIN", idParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetCarSellImages_CAdmin_Result> sp_GetCarSellImages_CAdmin(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellImages_CAdmin_Result>("sp_GetCarSellImages_CAdmin", idParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetLandmark_Result> sp_GetLandmark()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLandmark_Result>("sp_GetLandmark");
-        }
-    
-        public virtual ObjectResult<sp_GetLandmarkByID_Result> sp_GetLandmarkByID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLandmarkByID_Result>("sp_GetLandmarkByID", idParameter);
-        }
-    
-        public virtual int sp_GetLocationServices()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GetLocationServices");
-        }
-    
-        public virtual ObjectResult<sp_GetService_Result> sp_GetService()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetService_Result>("sp_GetService");
-        }
-    
-        public virtual ObjectResult<sp_GetServiceByID_Result> sp_GetServiceByID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetServiceByID_Result>("sp_GetServiceByID", idParameter);
-        }
-    
-        public virtual ObjectResult<sp_GetServices_Result> sp_GetServices()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetServices_Result>("sp_GetServices");
-        }
-    
-        public virtual ObjectResult<sp_GetSetting_Result> sp_GetSetting()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSetting_Result>("sp_GetSetting");
-        }
-    
-        public virtual ObjectResult<sp_GetSettingByID_Result> sp_GetSettingByID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSettingByID_Result>("sp_GetSettingByID", idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_InsertAmenities(string name, string image, Nullable<int> statusID, string arabicName)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var imageParameter = image != null ?
-                new ObjectParameter("Image", image) :
-                new ObjectParameter("Image", typeof(string));
-    
-            var statusIDParameter = statusID.HasValue ?
-                new ObjectParameter("StatusID", statusID) :
-                new ObjectParameter("StatusID", typeof(int));
-    
-            var arabicNameParameter = arabicName != null ?
-                new ObjectParameter("ArabicName", arabicName) :
-                new ObjectParameter("ArabicName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAmenities", nameParameter, imageParameter, statusIDParameter, arabicNameParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<decimal>> sp_InsertCarSell(string name, string description, string registrationNo, string bodyType, string fuelType, string engineType, string year, Nullable<int> customerID, Nullable<int> makeID, Nullable<int> modelID, string transmition, string kilometer, Nullable<double> price, Nullable<bool> isInspected, Nullable<int> cityID, string address, Nullable<int> carSellAddID, string bodyColor, string assembly, Nullable<int> statusID, Nullable<System.DateTime> createdDate, Nullable<int> createdBy)
+        public virtual ObjectResult<Nullable<int>> sp_EditCarSell(string name, string description, string registrationNo, string bodyType, string fuelType, string engineType, string year, Nullable<int> customerID, Nullable<int> makeID, Nullable<int> modelID, string transmition, string kilometer, Nullable<double> price, Nullable<bool> isInspected, Nullable<int> cityID, string countryCode, string address, Nullable<int> carSellAddID, string bodyColor, string assembly, Nullable<int> statusID, Nullable<System.DateTime> createdDate, Nullable<int> createdBy, string engineSize, Nullable<int> bodyTypeID, Nullable<int> carSellID)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
@@ -367,6 +340,10 @@ namespace DAL.DBEntities2
                 new ObjectParameter("CityID", cityID) :
                 new ObjectParameter("CityID", typeof(int));
     
+            var countryCodeParameter = countryCode != null ?
+                new ObjectParameter("CountryCode", countryCode) :
+                new ObjectParameter("CountryCode", typeof(string));
+    
             var addressParameter = address != null ?
                 new ObjectParameter("Address", address) :
                 new ObjectParameter("Address", typeof(string));
@@ -395,7 +372,631 @@ namespace DAL.DBEntities2
                 new ObjectParameter("CreatedBy", createdBy) :
                 new ObjectParameter("CreatedBy", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_InsertCarSell", nameParameter, descriptionParameter, registrationNoParameter, bodyTypeParameter, fuelTypeParameter, engineTypeParameter, yearParameter, customerIDParameter, makeIDParameter, modelIDParameter, transmitionParameter, kilometerParameter, priceParameter, isInspectedParameter, cityIDParameter, addressParameter, carSellAddIDParameter, bodyColorParameter, assemblyParameter, statusIDParameter, createdDateParameter, createdByParameter);
+            var engineSizeParameter = engineSize != null ?
+                new ObjectParameter("EngineSize", engineSize) :
+                new ObjectParameter("EngineSize", typeof(string));
+    
+            var bodyTypeIDParameter = bodyTypeID.HasValue ?
+                new ObjectParameter("BodyTypeID", bodyTypeID) :
+                new ObjectParameter("BodyTypeID", typeof(int));
+    
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_EditCarSell", nameParameter, descriptionParameter, registrationNoParameter, bodyTypeParameter, fuelTypeParameter, engineTypeParameter, yearParameter, customerIDParameter, makeIDParameter, modelIDParameter, transmitionParameter, kilometerParameter, priceParameter, isInspectedParameter, cityIDParameter, countryCodeParameter, addressParameter, carSellAddIDParameter, bodyColorParameter, assemblyParameter, statusIDParameter, createdDateParameter, createdByParameter, engineSizeParameter, bodyTypeIDParameter, carSellIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetAmenities_Result> sp_GetAmenities()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAmenities_Result>("sp_GetAmenities");
+        }
+    
+        public virtual ObjectResult<sp_GetAmenitiesByID_Result> sp_GetAmenitiesByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetAmenitiesByID_Result>("sp_GetAmenitiesByID", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetBlog_CADMIN_Result> sp_GetBlog_CADMIN(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("fromdate", fromdate) :
+                new ObjectParameter("fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBlog_CADMIN_Result>("sp_GetBlog_CADMIN", fromdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetBlogById_CADMIN_Result> sp_GetBlogById_CADMIN(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBlogById_CADMIN_Result>("sp_GetBlogById_CADMIN", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetBlogImages_CAdmin_Result> sp_GetBlogImages_CAdmin(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBlogImages_CAdmin_Result>("sp_GetBlogImages_CAdmin", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetBodyType_CAdmin_Result> sp_GetBodyType_CAdmin()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBodyType_CAdmin_Result>("sp_GetBodyType_CAdmin");
+        }
+    
+        public virtual ObjectResult<sp_GetBodyTypeByID_CAdmin_Result> sp_GetBodyTypeByID_CAdmin(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetBodyTypeByID_CAdmin_Result>("sp_GetBodyTypeByID_CAdmin", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarSell_CADMIN_Result> sp_GetCarSell_CADMIN()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSell_CADMIN_Result>("sp_GetCarSell_CADMIN");
+        }
+    
+        public virtual ObjectResult<sp_GetCarSell_CAPI_Result> sp_GetCarSell_CAPI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSell_CAPI_Result>("sp_GetCarSell_CAPI");
+        }
+    
+        public virtual ObjectResult<sp_GetCarSellAds_CAPI_Result> sp_GetCarSellAds_CAPI(Nullable<int> makeID, Nullable<int> modelID, Nullable<int> bodyTypeID)
+        {
+            var makeIDParameter = makeID.HasValue ?
+                new ObjectParameter("MakeID", makeID) :
+                new ObjectParameter("MakeID", typeof(int));
+    
+            var modelIDParameter = modelID.HasValue ?
+                new ObjectParameter("ModelID", modelID) :
+                new ObjectParameter("ModelID", typeof(int));
+    
+            var bodyTypeIDParameter = bodyTypeID.HasValue ?
+                new ObjectParameter("BodyTypeID", bodyTypeID) :
+                new ObjectParameter("BodyTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellAds_CAPI_Result>("sp_GetCarSellAds_CAPI", makeIDParameter, modelIDParameter, bodyTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarSellById_CADMIN_Result> sp_GetCarSellById_CADMIN(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellById_CADMIN_Result>("sp_GetCarSellById_CADMIN", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarsellbyID2_Admin_Result> sp_GetCarsellbyID2_Admin(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarsellbyID2_Admin_Result>("sp_GetCarsellbyID2_Admin", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarSellImages_CAdmin_Result> sp_GetCarSellImages_CAdmin(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellImages_CAdmin_Result>("sp_GetCarSellImages_CAdmin", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarSellV2_CAPI_Result> sp_GetCarSellV2_CAPI(Nullable<int> carSellID, Nullable<int> customerID)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellV2_CAPI_Result>("sp_GetCarSellV2_CAPI", carSellIDParameter, customerIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarSellV2_CAPI_V2_Result> sp_GetCarSellV2_CAPI_V2(Nullable<int> pageNumber, Nullable<int> pageSize, string paramTable1)
+        {
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var paramTable1Parameter = paramTable1 != null ?
+                new ObjectParameter("ParamTable1", paramTable1) :
+                new ObjectParameter("ParamTable1", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellV2_CAPI_V2_Result>("sp_GetCarSellV2_CAPI_V2", pageNumberParameter, pageSizeParameter, paramTable1Parameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCarSellV3_CAPI_Result> sp_GetCarSellV3_CAPI(Nullable<int> carSellID, Nullable<int> customerID, Nullable<int> carD)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var carDParameter = carD.HasValue ?
+                new ObjectParameter("CarD", carD) :
+                new ObjectParameter("CarD", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCarSellV3_CAPI_Result>("sp_GetCarSellV3_CAPI", carSellIDParameter, customerIDParameter, carDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCities_Result> sp_GetCities(string code)
+        {
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCities_Result>("sp_GetCities", codeParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCountries_Result> sp_GetCountries()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCountries_Result>("sp_GetCountries");
+        }
+    
+        public virtual ObjectResult<sp_GetCustomer_Result> sp_GetCustomer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCustomer_Result>("sp_GetCustomer");
+        }
+    
+        public virtual ObjectResult<sp_GetCustomerByPhone_CADMIN_Result> sp_GetCustomerByPhone_CADMIN(string mobile)
+        {
+            var mobileParameter = mobile != null ?
+                new ObjectParameter("Mobile", mobile) :
+                new ObjectParameter("Mobile", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCustomerByPhone_CADMIN_Result>("sp_GetCustomerByPhone_CADMIN", mobileParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetCustomerPhone_CADMIN_Result> sp_GetCustomerPhone_CADMIN(string customerID)
+        {
+            var customerIDParameter = customerID != null ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetCustomerPhone_CADMIN_Result>("sp_GetCustomerPhone_CADMIN", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetDiscount_Result> sp_GetDiscount()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetDiscount_Result>("sp_GetDiscount");
+        }
+    
+        public virtual ObjectResult<sp_GetDiscountByID_Result> sp_GetDiscountByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetDiscountByID_Result>("sp_GetDiscountByID", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetFeatureByID_CAdmin_Result> sp_GetFeatureByID_CAdmin(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetFeatureByID_CAdmin_Result>("sp_GetFeatureByID_CAdmin", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetFeatures_Result> sp_GetFeatures()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetFeatures_Result>("sp_GetFeatures");
+        }
+    
+        public virtual ObjectResult<sp_GetLandmark_Result> sp_GetLandmark()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLandmark_Result>("sp_GetLandmark");
+        }
+    
+        public virtual ObjectResult<sp_GetLandmarkByID_Result> sp_GetLandmarkByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLandmarkByID_Result>("sp_GetLandmarkByID", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_getLocation_CADMIN_Result> sp_getLocation_CADMIN()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getLocation_CADMIN_Result>("sp_getLocation_CADMIN");
+        }
+    
+        public virtual ObjectResult<sp_GetLocationsByID_CADMIN_Result> sp_GetLocationsByID_CADMIN(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLocationsByID_CADMIN_Result>("sp_GetLocationsByID_CADMIN", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetLocationServices_Result> sp_GetLocationServices()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetLocationServices_Result>("sp_GetLocationServices");
+        }
+    
+        public virtual ObjectResult<sp_GetMakes_Result> sp_GetMakes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetMakes_Result>("sp_GetMakes");
+        }
+    
+        public virtual ObjectResult<sp_GetModels_Result> sp_GetModels(Nullable<int> makeID)
+        {
+            var makeIDParameter = makeID.HasValue ?
+                new ObjectParameter("MakeID", makeID) :
+                new ObjectParameter("MakeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetModels_Result>("sp_GetModels", makeIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetReviews_CAdmin_Result> sp_GetReviews_CAdmin()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetReviews_CAdmin_Result>("sp_GetReviews_CAdmin");
+        }
+    
+        public virtual ObjectResult<sp_GetService_Result> sp_GetService()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetService_Result>("sp_GetService");
+        }
+    
+        public virtual ObjectResult<sp_GetServiceByID_Result> sp_GetServiceByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetServiceByID_Result>("sp_GetServiceByID", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetServices_Result> sp_GetServices()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetServices_Result>("sp_GetServices");
+        }
+    
+        public virtual ObjectResult<sp_GetSetting_Result> sp_GetSetting()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSetting_Result>("sp_GetSetting");
+        }
+    
+        public virtual ObjectResult<sp_GetSettingByID_Result> sp_GetSettingByID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSettingByID_Result>("sp_GetSettingByID", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetSettings_CAPI_Result> sp_GetSettings_CAPI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSettings_CAPI_Result>("sp_GetSettings_CAPI");
+        }
+    
+        public virtual ObjectResult<sp_GetTokensCApi_Result> sp_GetTokensCApi(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetTokensCApi_Result>("sp_GetTokensCApi", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_InsertAmenities(string name, string image, Nullable<int> statusID, string arabicName)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertAmenities", nameParameter, imageParameter, statusIDParameter, arabicNameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_InsertBlog_CAdmin(string title, string arabicTitle, string description, string arabicDescription, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string type, Nullable<bool> isFeatured, Nullable<int> city, string country, Nullable<int> statusID, Nullable<System.DateTime> createdDate, Nullable<int> createdBy)
+        {
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var arabicTitleParameter = arabicTitle != null ?
+                new ObjectParameter("ArabicTitle", arabicTitle) :
+                new ObjectParameter("ArabicTitle", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var arabicDescriptionParameter = arabicDescription != null ?
+                new ObjectParameter("ArabicDescription", arabicDescription) :
+                new ObjectParameter("ArabicDescription", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            var isFeaturedParameter = isFeatured.HasValue ?
+                new ObjectParameter("IsFeatured", isFeatured) :
+                new ObjectParameter("IsFeatured", typeof(bool));
+    
+            var cityParameter = city.HasValue ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(int));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_InsertBlog_CAdmin", titleParameter, arabicTitleParameter, descriptionParameter, arabicDescriptionParameter, startDateParameter, endDateParameter, typeParameter, isFeaturedParameter, cityParameter, countryParameter, statusIDParameter, createdDateParameter, createdByParameter);
+        }
+    
+        public virtual int sp_insertBlogImages_CAdmin(string images, Nullable<int> blogID, Nullable<System.DateTime> createdDate, Nullable<int> statusID)
+        {
+            var imagesParameter = images != null ?
+                new ObjectParameter("Images", images) :
+                new ObjectParameter("Images", typeof(string));
+    
+            var blogIDParameter = blogID.HasValue ?
+                new ObjectParameter("BlogID", blogID) :
+                new ObjectParameter("BlogID", typeof(int));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertBlogImages_CAdmin", imagesParameter, blogIDParameter, createdDateParameter, statusIDParameter);
+        }
+    
+        public virtual int sp_InsertBodyType_CAdmin(string name, string arabicName, string image, Nullable<int> statusID, Nullable<System.DateTime> lastUpdatedDate, string lastUpdatedBy, Nullable<int> displayOrder)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            var lastUpdatedByParameter = lastUpdatedBy != null ?
+                new ObjectParameter("LastUpdatedBy", lastUpdatedBy) :
+                new ObjectParameter("LastUpdatedBy", typeof(string));
+    
+            var displayOrderParameter = displayOrder.HasValue ?
+                new ObjectParameter("DisplayOrder", displayOrder) :
+                new ObjectParameter("DisplayOrder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertBodyType_CAdmin", nameParameter, arabicNameParameter, imageParameter, statusIDParameter, lastUpdatedDateParameter, lastUpdatedByParameter, displayOrderParameter);
+        }
+    
+        public virtual int sp_InsertCarFav_CAPI(Nullable<int> carSellID, Nullable<int> customerID, Nullable<int> statusID, string lastUpdatedBy, Nullable<System.DateTime> lastUpdatedDate)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var lastUpdatedByParameter = lastUpdatedBy != null ?
+                new ObjectParameter("LastUpdatedBy", lastUpdatedBy) :
+                new ObjectParameter("LastUpdatedBy", typeof(string));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertCarFav_CAPI", carSellIDParameter, customerIDParameter, statusIDParameter, lastUpdatedByParameter, lastUpdatedDateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_InsertCarSell(string name, string description, string registrationNo, string bodyType, string fuelType, string engineType, string year, Nullable<int> customerID, Nullable<int> makeID, Nullable<int> modelID, string transmition, string kilometer, Nullable<double> price, Nullable<bool> isInspected, Nullable<int> cityID, string countryCode, string address, Nullable<int> carSellAddID, string bodyColor, string assembly, Nullable<int> statusID, Nullable<System.DateTime> createdDate, Nullable<int> createdBy, string engineSize, Nullable<int> bodyTypeID)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var registrationNoParameter = registrationNo != null ?
+                new ObjectParameter("RegistrationNo", registrationNo) :
+                new ObjectParameter("RegistrationNo", typeof(string));
+    
+            var bodyTypeParameter = bodyType != null ?
+                new ObjectParameter("BodyType", bodyType) :
+                new ObjectParameter("BodyType", typeof(string));
+    
+            var fuelTypeParameter = fuelType != null ?
+                new ObjectParameter("FuelType", fuelType) :
+                new ObjectParameter("FuelType", typeof(string));
+    
+            var engineTypeParameter = engineType != null ?
+                new ObjectParameter("EngineType", engineType) :
+                new ObjectParameter("EngineType", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var makeIDParameter = makeID.HasValue ?
+                new ObjectParameter("MakeID", makeID) :
+                new ObjectParameter("MakeID", typeof(int));
+    
+            var modelIDParameter = modelID.HasValue ?
+                new ObjectParameter("ModelID", modelID) :
+                new ObjectParameter("ModelID", typeof(int));
+    
+            var transmitionParameter = transmition != null ?
+                new ObjectParameter("Transmition", transmition) :
+                new ObjectParameter("Transmition", typeof(string));
+    
+            var kilometerParameter = kilometer != null ?
+                new ObjectParameter("Kilometer", kilometer) :
+                new ObjectParameter("Kilometer", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("Price", price) :
+                new ObjectParameter("Price", typeof(double));
+    
+            var isInspectedParameter = isInspected.HasValue ?
+                new ObjectParameter("IsInspected", isInspected) :
+                new ObjectParameter("IsInspected", typeof(bool));
+    
+            var cityIDParameter = cityID.HasValue ?
+                new ObjectParameter("CityID", cityID) :
+                new ObjectParameter("CityID", typeof(int));
+    
+            var countryCodeParameter = countryCode != null ?
+                new ObjectParameter("CountryCode", countryCode) :
+                new ObjectParameter("CountryCode", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var carSellAddIDParameter = carSellAddID.HasValue ?
+                new ObjectParameter("CarSellAddID", carSellAddID) :
+                new ObjectParameter("CarSellAddID", typeof(int));
+    
+            var bodyColorParameter = bodyColor != null ?
+                new ObjectParameter("BodyColor", bodyColor) :
+                new ObjectParameter("BodyColor", typeof(string));
+    
+            var assemblyParameter = assembly != null ?
+                new ObjectParameter("Assembly", assembly) :
+                new ObjectParameter("Assembly", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var engineSizeParameter = engineSize != null ?
+                new ObjectParameter("EngineSize", engineSize) :
+                new ObjectParameter("EngineSize", typeof(string));
+    
+            var bodyTypeIDParameter = bodyTypeID.HasValue ?
+                new ObjectParameter("BodyTypeID", bodyTypeID) :
+                new ObjectParameter("BodyTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_InsertCarSell", nameParameter, descriptionParameter, registrationNoParameter, bodyTypeParameter, fuelTypeParameter, engineTypeParameter, yearParameter, customerIDParameter, makeIDParameter, modelIDParameter, transmitionParameter, kilometerParameter, priceParameter, isInspectedParameter, cityIDParameter, countryCodeParameter, addressParameter, carSellAddIDParameter, bodyColorParameter, assemblyParameter, statusIDParameter, createdDateParameter, createdByParameter, engineSizeParameter, bodyTypeIDParameter);
         }
     
         public virtual int sp_insertCarSellFeature_CAPI(Nullable<int> carSellID, string featureId)
@@ -411,13 +1012,167 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertCarSellFeature_CAPI", carSellIDParameter, featureIdParameter);
         }
     
-        public virtual int sp_insertCarSellImages_CAPI(string image)
+        public virtual int sp_insertCarSellFeatureV2_CAPI(Nullable<int> carSellID, string featureIds)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var featureIdsParameter = featureIds != null ?
+                new ObjectParameter("FeatureIds", featureIds) :
+                new ObjectParameter("FeatureIds", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertCarSellFeatureV2_CAPI", carSellIDParameter, featureIdsParameter);
+        }
+    
+        public virtual int sp_insertCarsellImages_CAdmin(string images, Nullable<int> carSellID, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
+        {
+            var imagesParameter = images != null ?
+                new ObjectParameter("Images", images) :
+                new ObjectParameter("Images", typeof(string));
+    
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var createdOnParameter = createdOn.HasValue ?
+                new ObjectParameter("CreatedOn", createdOn) :
+                new ObjectParameter("CreatedOn", typeof(System.DateTime));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertCarsellImages_CAdmin", imagesParameter, carSellIDParameter, createdOnParameter, updatedOnParameter);
+        }
+    
+        public virtual int sp_insertCarSellImages_CAPI(string image, Nullable<int> carSellID)
         {
             var imageParameter = image != null ?
                 new ObjectParameter("Image", image) :
                 new ObjectParameter("Image", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertCarSellImages_CAPI", imageParameter);
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertCarSellImages_CAPI", imageParameter, carSellIDParameter);
+        }
+    
+        public virtual int sp_insertDiscLocationJunc_CAdmin(string locations, Nullable<int> discountID, Nullable<System.DateTime> lastUpdatedDate)
+        {
+            var locationsParameter = locations != null ?
+                new ObjectParameter("Locations", locations) :
+                new ObjectParameter("Locations", typeof(string));
+    
+            var discountIDParameter = discountID.HasValue ?
+                new ObjectParameter("DiscountID", discountID) :
+                new ObjectParameter("DiscountID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertDiscLocationJunc_CAdmin", locationsParameter, discountIDParameter, lastUpdatedDateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_InsertDiscount(string name, string description, string arabicName, string arabicDescription, string image, string arabicImage, string fromDate, string toDate, string fromTime, string toTime, Nullable<int> statusID, string thumbnailImage, string backgroundColor, string fontColor)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            var arabicDescriptionParameter = arabicDescription != null ?
+                new ObjectParameter("ArabicDescription", arabicDescription) :
+                new ObjectParameter("ArabicDescription", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var arabicImageParameter = arabicImage != null ?
+                new ObjectParameter("ArabicImage", arabicImage) :
+                new ObjectParameter("ArabicImage", typeof(string));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var fromTimeParameter = fromTime != null ?
+                new ObjectParameter("FromTime", fromTime) :
+                new ObjectParameter("FromTime", typeof(string));
+    
+            var toTimeParameter = toTime != null ?
+                new ObjectParameter("ToTime", toTime) :
+                new ObjectParameter("ToTime", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var thumbnailImageParameter = thumbnailImage != null ?
+                new ObjectParameter("ThumbnailImage", thumbnailImage) :
+                new ObjectParameter("ThumbnailImage", typeof(string));
+    
+            var backgroundColorParameter = backgroundColor != null ?
+                new ObjectParameter("BackgroundColor", backgroundColor) :
+                new ObjectParameter("BackgroundColor", typeof(string));
+    
+            var fontColorParameter = fontColor != null ?
+                new ObjectParameter("FontColor", fontColor) :
+                new ObjectParameter("FontColor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_InsertDiscount", nameParameter, descriptionParameter, arabicNameParameter, arabicDescriptionParameter, imageParameter, arabicImageParameter, fromDateParameter, toDateParameter, fromTimeParameter, toTimeParameter, statusIDParameter, thumbnailImageParameter, backgroundColorParameter, fontColorParameter);
+        }
+    
+        public virtual int sp_InsertFeatures_CAdmin(string name, string arabicName, string image, Nullable<int> statusID, Nullable<int> displayOrder)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var displayOrderParameter = displayOrder.HasValue ?
+                new ObjectParameter("DisplayOrder", displayOrder) :
+                new ObjectParameter("DisplayOrder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertFeatures_CAdmin", nameParameter, arabicNameParameter, imageParameter, statusIDParameter, displayOrderParameter);
+        }
+    
+        public virtual int sp_insertICarsellFeatures_Admin(string features, Nullable<int> carsellID)
+        {
+            var featuresParameter = features != null ?
+                new ObjectParameter("Features", features) :
+                new ObjectParameter("Features", typeof(string));
+    
+            var carsellIDParameter = carsellID.HasValue ?
+                new ObjectParameter("CarsellID", carsellID) :
+                new ObjectParameter("CarsellID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertICarsellFeatures_Admin", featuresParameter, carsellIDParameter);
         }
     
         public virtual int sp_InsertLandmark(string name, string arabicName, string image, Nullable<int> statusID)
@@ -439,6 +1194,147 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertLandmark", nameParameter, arabicNameParameter, imageParameter, statusIDParameter);
+        }
+    
+        public virtual int sp_insertLocationJunc_CAdmin(string locations, Nullable<int> settingID, Nullable<System.DateTime> lastUpdatedDate)
+        {
+            var locationsParameter = locations != null ?
+                new ObjectParameter("Locations", locations) :
+                new ObjectParameter("Locations", typeof(string));
+    
+            var settingIDParameter = settingID.HasValue ?
+                new ObjectParameter("SettingID", settingID) :
+                new ObjectParameter("SettingID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertLocationJunc_CAdmin", locationsParameter, settingIDParameter, lastUpdatedDateParameter);
+        }
+    
+        public virtual int sp_InsertLocationTimings_CADMIN(string name, string time, Nullable<int> locationid)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var timeParameter = time != null ?
+                new ObjectParameter("Time", time) :
+                new ObjectParameter("Time", typeof(string));
+    
+            var locationidParameter = locationid.HasValue ?
+                new ObjectParameter("locationid", locationid) :
+                new ObjectParameter("locationid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertLocationTimings_CADMIN", nameParameter, timeParameter, locationidParameter);
+        }
+    
+        public virtual int sp_InsertNotifications(string title, string description, Nullable<int> statusID, string image, Nullable<System.DateTime> lastUpdateDate, Nullable<int> customerID)
+        {
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var lastUpdateDateParameter = lastUpdateDate.HasValue ?
+                new ObjectParameter("LastUpdateDate", lastUpdateDate) :
+                new ObjectParameter("LastUpdateDate", typeof(System.DateTime));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertNotifications", titleParameter, descriptionParameter, statusIDParameter, imageParameter, lastUpdateDateParameter, customerIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_InsertReportReview(Nullable<int> reviewID, Nullable<int> customerID, string reason, Nullable<int> likeStatus, Nullable<int> statusID, Nullable<System.DateTime> date, Nullable<int> reportReveiwID, Nullable<int> likeValue, Nullable<int> disLikeValue)
+        {
+            var reviewIDParameter = reviewID.HasValue ?
+                new ObjectParameter("ReviewID", reviewID) :
+                new ObjectParameter("ReviewID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var reasonParameter = reason != null ?
+                new ObjectParameter("Reason", reason) :
+                new ObjectParameter("Reason", typeof(string));
+    
+            var likeStatusParameter = likeStatus.HasValue ?
+                new ObjectParameter("LikeStatus", likeStatus) :
+                new ObjectParameter("LikeStatus", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var reportReveiwIDParameter = reportReveiwID.HasValue ?
+                new ObjectParameter("ReportReveiwID", reportReveiwID) :
+                new ObjectParameter("ReportReveiwID", typeof(int));
+    
+            var likeValueParameter = likeValue.HasValue ?
+                new ObjectParameter("LikeValue", likeValue) :
+                new ObjectParameter("LikeValue", typeof(int));
+    
+            var disLikeValueParameter = disLikeValue.HasValue ?
+                new ObjectParameter("DisLikeValue", disLikeValue) :
+                new ObjectParameter("DisLikeValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_InsertReportReview", reviewIDParameter, customerIDParameter, reasonParameter, likeStatusParameter, statusIDParameter, dateParameter, reportReveiwIDParameter, likeValueParameter, disLikeValueParameter);
+        }
+    
+        public virtual ObjectResult<sp_InsertReview_CAPI_Result> sp_InsertReview_CAPI(string name, string message, string rate, Nullable<int> statusID, Nullable<System.DateTime> lastUpdatedDate, Nullable<int> locationID, Nullable<System.DateTime> date, Nullable<int> customerID)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            var rateParameter = rate != null ?
+                new ObjectParameter("Rate", rate) :
+                new ObjectParameter("Rate", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_InsertReview_CAPI_Result>("sp_InsertReview_CAPI", nameParameter, messageParameter, rateParameter, statusIDParameter, lastUpdatedDateParameter, locationIDParameter, dateParameter, customerIDParameter);
         }
     
         public virtual int sp_InsertService(string serviceTitle, string serviceDescription, string image, Nullable<int> displayOrder, Nullable<int> statusID, string type, string arabicServiceTitle, string arabicServiceDescription)
@@ -523,6 +1419,27 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertSetting", titleParameter, descriptionParameter, imageParameter, alternateImageParameter, pageNameParameter, typeParameter, displayOrderParameter, statusIDParameter, arabicTitleParameter, arabicDescriptionParameter);
         }
     
+        public virtual int sp_InsertToken_CAPI(string token, Nullable<int> customerID, Nullable<int> statusID, Nullable<int> device)
+        {
+            var tokenParameter = token != null ?
+                new ObjectParameter("Token", token) :
+                new ObjectParameter("Token", typeof(string));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var deviceParameter = device.HasValue ?
+                new ObjectParameter("Device", device) :
+                new ObjectParameter("Device", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertToken_CAPI", tokenParameter, customerIDParameter, statusIDParameter, deviceParameter);
+        }
+    
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
         {
             var diagramnameParameter = diagramname != null ?
@@ -565,6 +1482,329 @@ namespace DAL.DBEntities2
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateAmenities_Admin", amenitiesIDParameter, nameParameter, imageParameter, statusIDParameter, arabicNameParameter);
         }
     
+        public virtual ObjectResult<Nullable<decimal>> sp_UpdateBlog_CAdmin(Nullable<int> blogID, string title, string arabicTitle, string description, string arabicDescription, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string type, Nullable<bool> isFeatured, Nullable<int> city, string country, Nullable<int> statusID, Nullable<System.DateTime> createdDate, Nullable<int> createdBy)
+        {
+            var blogIDParameter = blogID.HasValue ?
+                new ObjectParameter("BlogID", blogID) :
+                new ObjectParameter("BlogID", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var arabicTitleParameter = arabicTitle != null ?
+                new ObjectParameter("ArabicTitle", arabicTitle) :
+                new ObjectParameter("ArabicTitle", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var arabicDescriptionParameter = arabicDescription != null ?
+                new ObjectParameter("ArabicDescription", arabicDescription) :
+                new ObjectParameter("ArabicDescription", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            var isFeaturedParameter = isFeatured.HasValue ?
+                new ObjectParameter("IsFeatured", isFeatured) :
+                new ObjectParameter("IsFeatured", typeof(bool));
+    
+            var cityParameter = city.HasValue ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(int));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_UpdateBlog_CAdmin", blogIDParameter, titleParameter, arabicTitleParameter, descriptionParameter, arabicDescriptionParameter, startDateParameter, endDateParameter, typeParameter, isFeaturedParameter, cityParameter, countryParameter, statusIDParameter, createdDateParameter, createdByParameter);
+        }
+    
+        public virtual int sp_updateBodyType_CAdmin(Nullable<int> bodyTypeID, string name, string arabicName, string image, Nullable<int> statusID, Nullable<System.DateTime> lastUpdatedDate, string lastUpdatedBy, Nullable<int> displayOrder)
+        {
+            var bodyTypeIDParameter = bodyTypeID.HasValue ?
+                new ObjectParameter("BodyTypeID", bodyTypeID) :
+                new ObjectParameter("BodyTypeID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            var lastUpdatedByParameter = lastUpdatedBy != null ?
+                new ObjectParameter("LastUpdatedBy", lastUpdatedBy) :
+                new ObjectParameter("LastUpdatedBy", typeof(string));
+    
+            var displayOrderParameter = displayOrder.HasValue ?
+                new ObjectParameter("DisplayOrder", displayOrder) :
+                new ObjectParameter("DisplayOrder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateBodyType_CAdmin", bodyTypeIDParameter, nameParameter, arabicNameParameter, imageParameter, statusIDParameter, lastUpdatedDateParameter, lastUpdatedByParameter, displayOrderParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_UpdateCarSell(Nullable<int> carSellID, string name, string description, string registrationNo, Nullable<int> bodyTypeID, string fuelType, string engineType, string year, Nullable<int> customerID, Nullable<int> makeID, Nullable<int> modelID, string transmition, string kilometer, Nullable<double> price, Nullable<bool> isInspected, string countryCode, Nullable<int> cityID, string address, Nullable<int> carSellAddID, string bodyColor, string assembly, Nullable<System.DateTime> createdDate, Nullable<int> createdBy)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var registrationNoParameter = registrationNo != null ?
+                new ObjectParameter("RegistrationNo", registrationNo) :
+                new ObjectParameter("RegistrationNo", typeof(string));
+    
+            var bodyTypeIDParameter = bodyTypeID.HasValue ?
+                new ObjectParameter("BodyTypeID", bodyTypeID) :
+                new ObjectParameter("BodyTypeID", typeof(int));
+    
+            var fuelTypeParameter = fuelType != null ?
+                new ObjectParameter("FuelType", fuelType) :
+                new ObjectParameter("FuelType", typeof(string));
+    
+            var engineTypeParameter = engineType != null ?
+                new ObjectParameter("EngineType", engineType) :
+                new ObjectParameter("EngineType", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var makeIDParameter = makeID.HasValue ?
+                new ObjectParameter("MakeID", makeID) :
+                new ObjectParameter("MakeID", typeof(int));
+    
+            var modelIDParameter = modelID.HasValue ?
+                new ObjectParameter("ModelID", modelID) :
+                new ObjectParameter("ModelID", typeof(int));
+    
+            var transmitionParameter = transmition != null ?
+                new ObjectParameter("Transmition", transmition) :
+                new ObjectParameter("Transmition", typeof(string));
+    
+            var kilometerParameter = kilometer != null ?
+                new ObjectParameter("Kilometer", kilometer) :
+                new ObjectParameter("Kilometer", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("Price", price) :
+                new ObjectParameter("Price", typeof(double));
+    
+            var isInspectedParameter = isInspected.HasValue ?
+                new ObjectParameter("IsInspected", isInspected) :
+                new ObjectParameter("IsInspected", typeof(bool));
+    
+            var countryCodeParameter = countryCode != null ?
+                new ObjectParameter("CountryCode", countryCode) :
+                new ObjectParameter("CountryCode", typeof(string));
+    
+            var cityIDParameter = cityID.HasValue ?
+                new ObjectParameter("CityID", cityID) :
+                new ObjectParameter("CityID", typeof(int));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var carSellAddIDParameter = carSellAddID.HasValue ?
+                new ObjectParameter("CarSellAddID", carSellAddID) :
+                new ObjectParameter("CarSellAddID", typeof(int));
+    
+            var bodyColorParameter = bodyColor != null ?
+                new ObjectParameter("BodyColor", bodyColor) :
+                new ObjectParameter("BodyColor", typeof(string));
+    
+            var assemblyParameter = assembly != null ?
+                new ObjectParameter("Assembly", assembly) :
+                new ObjectParameter("Assembly", typeof(string));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_UpdateCarSell", carSellIDParameter, nameParameter, descriptionParameter, registrationNoParameter, bodyTypeIDParameter, fuelTypeParameter, engineTypeParameter, yearParameter, customerIDParameter, makeIDParameter, modelIDParameter, transmitionParameter, kilometerParameter, priceParameter, isInspectedParameter, countryCodeParameter, cityIDParameter, addressParameter, carSellAddIDParameter, bodyColorParameter, assemblyParameter, createdDateParameter, createdByParameter);
+        }
+    
+        public virtual int sp_UpdateCarSellStatus_Admin(Nullable<int> carSellID, Nullable<int> statusID, string reason)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var reasonParameter = reason != null ?
+                new ObjectParameter("Reason", reason) :
+                new ObjectParameter("Reason", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateCarSellStatus_Admin", carSellIDParameter, statusIDParameter, reasonParameter);
+        }
+    
+        public virtual int sp_UpdateDiscLocationJunc_CAdmin(string locations, Nullable<int> discountID, Nullable<System.DateTime> lastUpdatedDate)
+        {
+            var locationsParameter = locations != null ?
+                new ObjectParameter("Locations", locations) :
+                new ObjectParameter("Locations", typeof(string));
+    
+            var discountIDParameter = discountID.HasValue ?
+                new ObjectParameter("DiscountID", discountID) :
+                new ObjectParameter("DiscountID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateDiscLocationJunc_CAdmin", locationsParameter, discountIDParameter, lastUpdatedDateParameter);
+        }
+    
+        public virtual int sp_updateDiscount_Admin(string name, string description, string arabicName, string arabicDescription, string image, string arabicImage, string fromDate, string toDate, string fromTime, string toTime, Nullable<int> statusID, Nullable<int> discountID, string thumbnailImage, string backgroundColor, string fontColor)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            var arabicDescriptionParameter = arabicDescription != null ?
+                new ObjectParameter("ArabicDescription", arabicDescription) :
+                new ObjectParameter("ArabicDescription", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var arabicImageParameter = arabicImage != null ?
+                new ObjectParameter("ArabicImage", arabicImage) :
+                new ObjectParameter("ArabicImage", typeof(string));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var fromTimeParameter = fromTime != null ?
+                new ObjectParameter("FromTime", fromTime) :
+                new ObjectParameter("FromTime", typeof(string));
+    
+            var toTimeParameter = toTime != null ?
+                new ObjectParameter("ToTime", toTime) :
+                new ObjectParameter("ToTime", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var discountIDParameter = discountID.HasValue ?
+                new ObjectParameter("DiscountID", discountID) :
+                new ObjectParameter("DiscountID", typeof(int));
+    
+            var thumbnailImageParameter = thumbnailImage != null ?
+                new ObjectParameter("ThumbnailImage", thumbnailImage) :
+                new ObjectParameter("ThumbnailImage", typeof(string));
+    
+            var backgroundColorParameter = backgroundColor != null ?
+                new ObjectParameter("BackgroundColor", backgroundColor) :
+                new ObjectParameter("BackgroundColor", typeof(string));
+    
+            var fontColorParameter = fontColor != null ?
+                new ObjectParameter("FontColor", fontColor) :
+                new ObjectParameter("FontColor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateDiscount_Admin", nameParameter, descriptionParameter, arabicNameParameter, arabicDescriptionParameter, imageParameter, arabicImageParameter, fromDateParameter, toDateParameter, fromTimeParameter, toTimeParameter, statusIDParameter, discountIDParameter, thumbnailImageParameter, backgroundColorParameter, fontColorParameter);
+        }
+    
+        public virtual int sp_updateFeature_CAdmin(Nullable<int> featureID, string name, string arabicName, string image, Nullable<int> statusID, Nullable<int> displayOrder)
+        {
+            var featureIDParameter = featureID.HasValue ?
+                new ObjectParameter("FeatureID", featureID) :
+                new ObjectParameter("FeatureID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var arabicNameParameter = arabicName != null ?
+                new ObjectParameter("ArabicName", arabicName) :
+                new ObjectParameter("ArabicName", typeof(string));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var displayOrderParameter = displayOrder.HasValue ?
+                new ObjectParameter("DisplayOrder", displayOrder) :
+                new ObjectParameter("DisplayOrder", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateFeature_CAdmin", featureIDParameter, nameParameter, arabicNameParameter, imageParameter, statusIDParameter, displayOrderParameter);
+        }
+    
         public virtual int sp_updateLandmark_Admin(Nullable<int> landmarkID, string name, string arabicName, string image, Nullable<int> statusID)
         {
             var landmarkIDParameter = landmarkID.HasValue ?
@@ -588,6 +1828,94 @@ namespace DAL.DBEntities2
                 new ObjectParameter("StatusID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateLandmark_Admin", landmarkIDParameter, nameParameter, arabicNameParameter, imageParameter, statusIDParameter);
+        }
+    
+        public virtual int sp_UpdateNotification_CAPI(Nullable<bool> isRead, Nullable<int> notificationID)
+        {
+            var isReadParameter = isRead.HasValue ?
+                new ObjectParameter("IsRead", isRead) :
+                new ObjectParameter("IsRead", typeof(bool));
+    
+            var notificationIDParameter = notificationID.HasValue ?
+                new ObjectParameter("NotificationID", notificationID) :
+                new ObjectParameter("NotificationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateNotification_CAPI", isReadParameter, notificationIDParameter);
+        }
+    
+        public virtual int sp_UpdateOrderStatus_Admin(Nullable<int> carSellID, Nullable<int> statusID)
+        {
+            var carSellIDParameter = carSellID.HasValue ?
+                new ObjectParameter("CarSellID", carSellID) :
+                new ObjectParameter("CarSellID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateOrderStatus_Admin", carSellIDParameter, statusIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_UpdateReview_CAPI_Result> sp_UpdateReview_CAPI(string name, string message, string rate, Nullable<int> statusID, Nullable<System.DateTime> lastUpdatedDate, Nullable<int> locationID, Nullable<System.DateTime> date, Nullable<int> likeCount, Nullable<int> dislikeCount, string reportAbuse, Nullable<int> reviewID)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            var rateParameter = rate != null ?
+                new ObjectParameter("Rate", rate) :
+                new ObjectParameter("Rate", typeof(string));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var lastUpdatedDateParameter = lastUpdatedDate.HasValue ?
+                new ObjectParameter("LastUpdatedDate", lastUpdatedDate) :
+                new ObjectParameter("LastUpdatedDate", typeof(System.DateTime));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var likeCountParameter = likeCount.HasValue ?
+                new ObjectParameter("LikeCount", likeCount) :
+                new ObjectParameter("LikeCount", typeof(int));
+    
+            var dislikeCountParameter = dislikeCount.HasValue ?
+                new ObjectParameter("DislikeCount", dislikeCount) :
+                new ObjectParameter("DislikeCount", typeof(int));
+    
+            var reportAbuseParameter = reportAbuse != null ?
+                new ObjectParameter("ReportAbuse", reportAbuse) :
+                new ObjectParameter("ReportAbuse", typeof(string));
+    
+            var reviewIDParameter = reviewID.HasValue ?
+                new ObjectParameter("ReviewID", reviewID) :
+                new ObjectParameter("ReviewID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_UpdateReview_CAPI_Result>("sp_UpdateReview_CAPI", nameParameter, messageParameter, rateParameter, statusIDParameter, lastUpdatedDateParameter, locationIDParameter, dateParameter, likeCountParameter, dislikeCountParameter, reportAbuseParameter, reviewIDParameter);
+        }
+    
+        public virtual int sp_UpdateReviewsStatus(Nullable<int> reviewID, Nullable<int> statusID)
+        {
+            var reviewIDParameter = reviewID.HasValue ?
+                new ObjectParameter("ReviewID", reviewID) :
+                new ObjectParameter("ReviewID", typeof(int));
+    
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateReviewsStatus", reviewIDParameter, statusIDParameter);
         }
     
         public virtual int sp_updateService_Admin(Nullable<int> serviceID, string serviceTitle, string serviceDescription, string arabicServiceTitle, string arabicServiceDescription, Nullable<int> displayOrder, string image, Nullable<int> statusID, string type)
@@ -678,6 +2006,19 @@ namespace DAL.DBEntities2
                 new ObjectParameter("ArabicDescription", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_updateSetting_Admin", iDParameter, titleParameter, descriptionParameter, imageParameter, alternateImageParameter, pageNameParameter, typeParameter, statusIDParameter, displayOrderParameter, arabicTitleParameter, arabicDescriptionParameter);
+        }
+    
+        public virtual int sp_UpdateToken_CAPI(Nullable<int> statusID, Nullable<int> tokenID)
+        {
+            var statusIDParameter = statusID.HasValue ?
+                new ObjectParameter("StatusID", statusID) :
+                new ObjectParameter("StatusID", typeof(int));
+    
+            var tokenIDParameter = tokenID.HasValue ?
+                new ObjectParameter("TokenID", tokenID) :
+                new ObjectParameter("TokenID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateToken_CAPI", statusIDParameter, tokenIDParameter);
         }
     
         public virtual int sp_upgraddiagrams()

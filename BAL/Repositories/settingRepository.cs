@@ -26,10 +26,10 @@ namespace BAL.Repositories
         public settingRepository()
             : base()
         {
-            DBContext = new GarageCustomer_Entities();
+            DBContext = new GarageCustomer_UATEntities();
 
         }
-        public settingRepository(GarageCustomer_Entities contextDB)
+        public settingRepository(GarageCustomer_UATEntities contextDB)
             : base(contextDB)
         {
             DBContext = contextDB;
@@ -154,14 +154,14 @@ namespace BAL.Repositories
                 rsp.Settings = new List<SettingBLL>();
                 rsp.Amenities = new List<AmenitiesBLL>();
                 rsp.Landmarks = new List<LandmarkBLL>();
-                rsp.Services = new List<ServiceBLL>();  
+                rsp.Services = new List<ServiceBLL>();
                 foreach (var i in rsp.Location)
                 {
                     var opening = TimespanToDecimal(TimeSpan.Parse(i.OpenTime ?? "00:00:00"));
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime ?? "23:59:00"));
                     i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime ?? "00:00:00");
                     i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime ?? "23:59:00");
-                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+                    i.BrandImage = i.BrandImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.BrandImage;
 
                 }
 
@@ -204,7 +204,7 @@ namespace BAL.Repositories
                     var closing = TimespanToDecimal(TimeSpan.Parse(i.CloseTime ?? "23:59:00"));
                     i.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.OpenTime ?? "00:00:00");
                     i.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + i.CloseTime ?? "23:59:00");
-                    i.BrandImage = i.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + i.BrandImage;
+                    i.BrandImage = i.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + i.BrandImage;
                     i.Services = _dtServiceInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.LocationImages = _dtLocImageInfo.Where(x => x.LocationID == i.LocationID).ToList();
                     i.Amenities = _dtAmenitiesInfo.Where(x => x.LocationID == i.LocationID).ToList();
@@ -327,18 +327,21 @@ namespace BAL.Repositories
             try
             {
                 var ds = GetSettings_ADO();
-                rsp.AppstoreVersion = "1.0.10";
+                rsp.AppstoreVersion = "1.0.11";
                 rsp.Settings = ds.Tables[0] == null ? new List<SettingBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<SettingBLL>>().ToList();
                 rsp.Services = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 rsp.Amenities = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
                 rsp.Landmarks = ds.Tables[3] == null ? new List<LandmarkBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[3])).ToObject<List<LandmarkBLL>>().ToList();
                 rsp.Brands = ds.Tables[4] == null ? new List<UsersList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[4])).ToObject<List<UsersList>>().ToList();
                 rsp.Cities = ds.Tables[5] == null ? new List<CityList>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[5])).ToObject<List<CityList>>().ToList();
+                rsp.Discounts = ds.Tables[7] == null ? new List<DiscountBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[7])).ToObject<List<DiscountBLL>>().ToList();
+
                 var _dtSettingLocation = ds.Tables[6] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[6])).ToObject<List<Locations>>().ToList();
 
+                var _dtDiscountLocation = ds.Tables[8] == null ? new List<Locations>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[8])).ToObject<List<Locations>>().ToList();
                 foreach (var j in rsp.Brands)
                 {
-                    j.BrandImage = j.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.BrandImage;
+                    j.BrandImage = j.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.BrandImage;
                 }
                 foreach (var j in rsp.Settings)
                 {
@@ -381,6 +384,37 @@ namespace BAL.Repositories
                 {
                     j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
                 }
+                foreach (var j in rsp.Discounts)
+                {
+                    j.DiscountLocations = _dtDiscountLocation.Where(x => x.DiscountID == j.DiscountID).ToList();
+                    j.Image = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.Image;
+                    j.ArabicImage = j.ArabicImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.ArabicImage;
+                    j.ThumbnailImage = j.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.ThumbnailImage;
+                    foreach (var k in j.DiscountLocations)
+                    {
+                        var opening = TimespanToDecimal(TimeSpan.Parse(k.OpenTime));
+                        var closing = TimespanToDecimal(TimeSpan.Parse(k.CloseTime));
+                        k.OpenTime = DateParse(DateTime.UtcNow.AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.OpenTime);
+                        k.CloseTime = DateParse(DateTime.UtcNow.AddDays(opening > closing ? 1 : 0).AddMinutes(180).ToString("MM/dd/yyyy") + ' ' + k.CloseTime);
+                        k.BrandImage = k.BrandImage == null ? ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/assets/images/brand-defaultimage.png" : ConfigurationSettings.AppSettings["AdminURL"].ToString() + k.BrandImage;
+
+                        k.LocationImages = new List<LocationImages>();
+                        k.Services = new List<ServiceBLL>();
+                        k.Amenities = new List<AmenitiesBLL>();
+                        k.Discounts = new List<DiscountBLL>();
+                        k.Reviews = new List<ReviewsBLL>();
+                        foreach (var l in k.Discounts)
+                        {
+                            l.ArabicImage = l.ArabicImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ArabicImage;
+                            l.Image = l.Image == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.Image;
+                            l.FromDate = DateParse(l.FromDate);
+                            l.ToDate = DateParse(l.ToDate);
+                        }
+                        foreach (var l in k.LocationImages)
+                        { l.ImageURL = l.ImageURL == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + l.ImageURL; }
+
+                    }
+                }
                 rsp.Status = 1;
                 rsp.Description = "Success";
             }
@@ -397,7 +431,7 @@ namespace BAL.Repositories
             try
             {
                 var ds = GetSettings_ADOV1();
-                rsp.AppstoreVersion = "1.0.10";
+                rsp.AppstoreVersion = "1.0.11";
                 rsp.Settings = ds.Tables[0] == null ? new List<SettingBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<SettingBLL>>().ToList();
                 rsp.Services = ds.Tables[1] == null ? new List<ServiceBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[1])).ToObject<List<ServiceBLL>>().ToList();
                 rsp.Amenities = ds.Tables[2] == null ? new List<AmenitiesBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[2])).ToObject<List<AmenitiesBLL>>().ToList();
@@ -860,6 +894,7 @@ namespace BAL.Repositories
                 var dt = AddReviewADO(obj);
 
                 rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                rsp.Rating = dt == null ? "0" : dt.Rows[0]["Rating"].ToString();
                 if (dt == null)
                 {
                     rsp.Reviews = new List<ReviewsBLL>();
@@ -891,6 +926,7 @@ namespace BAL.Repositories
             {
                 var dt = UpdateReviewADO(obj);
                 rsp.Reviews = dt == null ? new List<ReviewsBLL>() : JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(dt)).ToObject<List<ReviewsBLL>>(); ;
+                rsp.Rating = dt == null ? "0" : dt.Rows[0]["Rating"].ToString();
                 if (dt == null)
                 {
                     rsp.Reviews = new List<ReviewsBLL>();
@@ -967,7 +1003,8 @@ namespace BAL.Repositories
 
                 foreach (var i in rsp.Notifications)
                 {
-                    i.Image = i.Image == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.Image;
+                    i.Date = DateParse(i.Date);
+                    i.Image = i.Image == null || i.Image == "" ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.Image;
 
                 }
                 rsp.Status = 1;

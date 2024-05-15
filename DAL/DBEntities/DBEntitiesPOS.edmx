@@ -46,6 +46,21 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CarDelete">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="RequestFrom" Type="nvarchar" MaxLength="50" />
+          <Property Name="RequestStatus" Type="int" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CarInspection">
           <Key>
             <PropertyRef Name="CarInspectionID" />
@@ -722,15 +737,6 @@
           <Property Name="LastUpdatedDate" Type="datetime" />
           <Property Name="StatusID" Type="int" />
         </EntityType>
-        <EntityType Name="LocationAmenitiesJunc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LocationID" Type="int" Nullable="false" />
-          <Property Name="AmenitiesID" Type="int" Nullable="false" />
-          <Property Name="LastUpdatedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="LocationImages">
           <Key>
             <PropertyRef Name="LocationImageID" />
@@ -783,15 +789,6 @@
           <Property Name="VATNO" Type="nvarchar" MaxLength="50" />
           <Property Name="Tax" Type="float" />
           <Property Name="AllowNegativeInventory" Type="bit" />
-        </EntityType>
-        <EntityType Name="LocationServiceJunc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LocationID" Type="int" />
-          <Property Name="ServiceID" Type="int" />
-          <Property Name="LastUpdatedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Make">
           <Key>
@@ -1564,6 +1561,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CarDelete_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="CarDelete" Type="Self.CarDelete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="CarDelete">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarDelete_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="CarDelete" Type="Self.CarDelete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CarDelete">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CarInspection_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="CarInspection" Type="Self.CarInspection" Multiplicity="*" />
@@ -2188,18 +2209,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LocationAmenitiesJunc_Locations">
-          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
-          <End Role="LocationAmenitiesJunc" Type="Self.LocationAmenitiesJunc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Locations">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="LocationAmenitiesJunc">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LocationImages_Locations">
           <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
           <End Role="LocationImages" Type="Self.LocationImages" Multiplicity="*" />
@@ -2281,18 +2290,6 @@
             </Principal>
             <Dependent Role="Locations">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LocationServiceJunc_Locations">
-          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
-          <End Role="LocationServiceJunc" Type="Self.LocationServiceJunc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Locations">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="LocationServiceJunc">
-              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3088,11 +3085,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <EntityContainer Name="Garage_UATModelStoreContainer">
           <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppSource" EntityType="Self.AppSource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bay" EntityType="Self.Bay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarDelete" EntityType="Self.CarDelete" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarInspection" EntityType="Self.CarInspection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarInspectionDetails" EntityType="Self.CarInspectionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarNotes" EntityType="Self.CarNotes" Schema="dbo" store:Type="Tables" />
@@ -3129,10 +3126,8 @@
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LocationAmenitiesJunc" EntityType="Self.LocationAmenitiesJunc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationImages" EntityType="Self.LocationImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LocationServiceJunc" EntityType="Self.LocationServiceJunc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Make" EntityType="Self.Make" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modifiers" EntityType="Self.Modifiers" Schema="dbo" store:Type="Tables" />
@@ -3195,6 +3190,14 @@
           <AssociationSet Name="FK_BillDetail_Items" Association="Self.FK_BillDetail_Items">
             <End Role="Items" EntitySet="Items" />
             <End Role="inv_BillDetail" EntitySet="inv_BillDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarDelete_Cars" Association="Self.FK_CarDelete_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarDelete" EntitySet="CarDelete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarDelete_Customers" Association="Self.FK_CarDelete_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CarDelete" EntitySet="CarDelete" />
           </AssociationSet>
           <AssociationSet Name="FK_CarInspection_Users" Association="Self.FK_CarInspection_Users">
             <End Role="Users" EntitySet="Users" />
@@ -3404,10 +3407,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Licenses" EntitySet="Licenses" />
           </AssociationSet>
-          <AssociationSet Name="FK_LocationAmenitiesJunc_Locations" Association="Self.FK_LocationAmenitiesJunc_Locations">
-            <End Role="Locations" EntitySet="Locations" />
-            <End Role="LocationAmenitiesJunc" EntitySet="LocationAmenitiesJunc" />
-          </AssociationSet>
           <AssociationSet Name="FK_LocationImages_Locations" Association="Self.FK_LocationImages_Locations">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="LocationImages" EntitySet="LocationImages" />
@@ -3435,10 +3434,6 @@
           <AssociationSet Name="FK_Locations_Users" Association="Self.FK_Locations_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Locations" EntitySet="Locations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LocationServiceJunc_Locations" Association="Self.FK_LocationServiceJunc_Locations">
-            <End Role="Locations" EntitySet="Locations" />
-            <End Role="LocationServiceJunc" EntitySet="LocationServiceJunc" />
           </AssociationSet>
           <AssociationSet Name="FK_Model_Make" Association="Self.FK_Model_Make">
             <End Role="Make" EntitySet="Make" />
@@ -3709,17 +3704,11 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Garage_UATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <ComplexType Name="Split_Result">
-          <Property Name="Item" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
-        </ComplexType>
-        <EntityContainer Name="Garage_Entities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="Split" IsComposable="true" ReturnType="Collection(Garage_UATModel.Split_Result)">
-            <Parameter Name="InputString" Mode="In" Type="String" />
-            <Parameter Name="Delimiter" Mode="In" Type="String" />
-          </FunctionImport>
+        <EntityContainer Name="Garage_UATEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activities" EntityType="Garage_UATModel.Activity" />
           <EntitySet Name="AppSources" EntityType="Garage_UATModel.AppSource" />
           <EntitySet Name="Bays" EntityType="Garage_UATModel.Bay" />
+          <EntitySet Name="CarDeletes" EntityType="Garage_UATModel.CarDelete" />
           <EntitySet Name="CarInspections" EntityType="Garage_UATModel.CarInspection" />
           <EntitySet Name="CarInspectionDetails" EntityType="Garage_UATModel.CarInspectionDetail" />
           <EntitySet Name="CarNotes" EntityType="Garage_UATModel.CarNote" />
@@ -3756,10 +3745,8 @@
           <EntitySet Name="Inventories" EntityType="Garage_UATModel.Inventory" />
           <EntitySet Name="Items" EntityType="Garage_UATModel.Item" />
           <EntitySet Name="Licenses" EntityType="Garage_UATModel.License" />
-          <EntitySet Name="LocationAmenitiesJuncs" EntityType="Garage_UATModel.LocationAmenitiesJunc" />
           <EntitySet Name="LocationImages" EntityType="Garage_UATModel.LocationImage" />
           <EntitySet Name="Locations" EntityType="Garage_UATModel.Location" />
-          <EntitySet Name="LocationServiceJuncs" EntityType="Garage_UATModel.LocationServiceJunc" />
           <EntitySet Name="Makes" EntityType="Garage_UATModel.Make" />
           <EntitySet Name="Models" EntityType="Garage_UATModel.Model" />
           <EntitySet Name="Modifiers" EntityType="Garage_UATModel.Modifier" />
@@ -3809,6 +3796,14 @@
           <AssociationSet Name="FK_Orders_Bay" Association="Garage_UATModel.FK_Orders_Bay">
             <End Role="Bay" EntitySet="Bays" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarDelete_Cars" Association="Garage_UATModel.FK_CarDelete_Cars">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="CarDelete" EntitySet="CarDeletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarDelete_Customers" Association="Garage_UATModel.FK_CarDelete_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CarDelete" EntitySet="CarDeletes" />
           </AssociationSet>
           <AssociationSet Name="FK_CarInspection_Users" Association="Garage_UATModel.FK_CarInspection_Users">
             <End Role="User" EntitySet="Users" />
@@ -4114,10 +4109,6 @@
             <End Role="License" EntitySet="Licenses" />
             <End Role="Location" EntitySet="Locations" />
           </AssociationSet>
-          <AssociationSet Name="FK_LocationAmenitiesJunc_Locations" Association="Garage_UATModel.FK_LocationAmenitiesJunc_Locations">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="LocationAmenitiesJunc" EntitySet="LocationAmenitiesJuncs" />
-          </AssociationSet>
           <AssociationSet Name="FK_LocationImages_Locations" Association="Garage_UATModel.FK_LocationImages_Locations">
             <End Role="Location" EntitySet="Locations" />
             <End Role="LocationImage" EntitySet="LocationImages" />
@@ -4137,10 +4128,6 @@
           <AssociationSet Name="FK_Locations_Users" Association="Garage_UATModel.FK_Locations_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Location" EntitySet="Locations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LocationServiceJunc_Locations" Association="Garage_UATModel.FK_LocationServiceJunc_Locations">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="LocationServiceJunc" EntitySet="LocationServiceJuncs" />
           </AssociationSet>
           <AssociationSet Name="FK_Modifiers_Locations" Association="Garage_UATModel.FK_Modifiers_Locations">
             <End Role="Location" EntitySet="Locations" />
@@ -4326,7 +4313,7 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="SubUser" EntitySet="SubUsers" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="ActivityID" />
@@ -4370,6 +4357,23 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Location" Relationship="Garage_UATModel.FK_Bay_Locations" FromRole="Bay" ToRole="Location" />
           <NavigationProperty Name="Orders" Relationship="Garage_UATModel.FK_Orders_Bay" FromRole="Bay" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="CarDelete">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="RequestFrom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequestStatus" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Car" Relationship="Garage_UATModel.FK_CarDelete_Cars" FromRole="CarDelete" ToRole="Car" />
+          <NavigationProperty Name="Customer" Relationship="Garage_UATModel.FK_CarDelete_Customers" FromRole="CarDelete" ToRole="Customer" />
         </EntityType>
         <EntityType Name="CarInspection">
           <Key>
@@ -4482,6 +4486,7 @@
           <Property Name="weight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="plateReturnIndex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsVerified" Type="Boolean" />
+          <NavigationProperty Name="CarDeletes" Relationship="Garage_UATModel.FK_CarDelete_Cars" FromRole="Car" ToRole="CarDelete" />
           <NavigationProperty Name="Customer" Relationship="Garage_UATModel.FK_Cars_Customers" FromRole="Car" ToRole="Customer" />
           <NavigationProperty Name="Make" Relationship="Garage_UATModel.FK_Cars_Make" FromRole="Car" ToRole="Make" />
           <NavigationProperty Name="Model" Relationship="Garage_UATModel.FK_Cars_Model" FromRole="Car" ToRole="Model" />
@@ -4742,6 +4747,7 @@
           <Property Name="IsSignUp" Type="Boolean" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarDeletes" Relationship="Garage_UATModel.FK_CarDelete_Customers" FromRole="Customer" ToRole="CarDelete" />
           <NavigationProperty Name="Cars" Relationship="Garage_UATModel.FK_Cars_Customers" FromRole="Customer" ToRole="Car" />
           <NavigationProperty Name="Orders" Relationship="Garage_UATModel.FK_Orders_Customers" FromRole="Customer" ToRole="Order" />
         </EntityType>
@@ -5146,16 +5152,6 @@
           <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_Licenses_Users" FromRole="License" ToRole="User" />
           <NavigationProperty Name="Locations" Relationship="Garage_UATModel.FK_Locations_Licenses" FromRole="License" ToRole="Location" />
         </EntityType>
-        <EntityType Name="LocationAmenitiesJunc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="AmenitiesID" Type="Int32" Nullable="false" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Location" Relationship="Garage_UATModel.FK_LocationAmenitiesJunc_Locations" FromRole="LocationAmenitiesJunc" ToRole="Location" />
-        </EntityType>
         <EntityType Name="LocationImage">
           <Key>
             <PropertyRef Name="LocationImageID" />
@@ -5220,14 +5216,12 @@
           <NavigationProperty Name="inv_StockRequest" Relationship="Garage_UATModel.FK_inv_StockRequest_Locations" FromRole="Location" ToRole="inv_StockRequest" />
           <NavigationProperty Name="Inventories" Relationship="Garage_UATModel.FK_Inventory_Locations" FromRole="Location" ToRole="Inventory" />
           <NavigationProperty Name="License" Relationship="Garage_UATModel.FK_Locations_Licenses" FromRole="Location" ToRole="License" />
-          <NavigationProperty Name="LocationAmenitiesJuncs" Relationship="Garage_UATModel.FK_LocationAmenitiesJunc_Locations" FromRole="Location" ToRole="LocationAmenitiesJunc" />
           <NavigationProperty Name="LocationImages" Relationship="Garage_UATModel.FK_LocationImages_Locations" FromRole="Location" ToRole="LocationImage" />
           <NavigationProperty Name="Locations1" Relationship="Garage_UATModel.FK_Locations_Locations" FromRole="Location" ToRole="Location1" />
           <NavigationProperty Name="Location1" Relationship="Garage_UATModel.FK_Locations_Locations" FromRole="Location1" ToRole="Location" />
           <NavigationProperty Name="Status" Relationship="Garage_UATModel.FK_Locations_Status" FromRole="Location" ToRole="Status" />
           <NavigationProperty Name="TimeZone" Relationship="Garage_UATModel.FK_Locations_TimeZone" FromRole="Location" ToRole="TimeZone" />
           <NavigationProperty Name="User" Relationship="Garage_UATModel.FK_Locations_Users" FromRole="Location" ToRole="User" />
-          <NavigationProperty Name="LocationServiceJuncs" Relationship="Garage_UATModel.FK_LocationServiceJunc_Locations" FromRole="Location" ToRole="LocationServiceJunc" />
           <NavigationProperty Name="Modifiers" Relationship="Garage_UATModel.FK_Modifiers_Locations" FromRole="Location" ToRole="Modifier" />
           <NavigationProperty Name="OrderCheckouts" Relationship="Garage_UATModel.FK_OrderCheckout_Locations" FromRole="Location" ToRole="OrderCheckout" />
           <NavigationProperty Name="Orders" Relationship="Garage_UATModel.FK_Orders_Locations" FromRole="Location" ToRole="Order" />
@@ -5239,16 +5233,6 @@
           <NavigationProperty Name="Stores" Relationship="Garage_UATModel.FK_Stores_Locations" FromRole="Location" ToRole="Store" />
           <NavigationProperty Name="SubUsers" Relationship="Garage_UATModel.FK_SubUsers_Locations" FromRole="Location" ToRole="SubUser" />
           <NavigationProperty Name="SubUsers1" Relationship="Garage_UATModel.SubUserLocations" FromRole="Location" ToRole="SubUser" />
-        </EntityType>
-        <EntityType Name="LocationServiceJunc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LocationID" Type="Int32" />
-          <Property Name="ServiceID" Type="Int32" />
-          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Location" Relationship="Garage_UATModel.FK_LocationServiceJunc_Locations" FromRole="LocationServiceJunc" ToRole="Location" />
         </EntityType>
         <EntityType Name="Make">
           <Key>
@@ -6103,6 +6087,30 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="BayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarDelete_Cars">
+          <End Type="Garage_UATModel.Car" Role="Car" Multiplicity="0..1" />
+          <End Type="Garage_UATModel.CarDelete" Role="CarDelete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="CarDelete">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarDelete_Customers">
+          <End Type="Garage_UATModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Garage_UATModel.CarDelete" Role="CarDelete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CarDelete">
+              <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7018,18 +7026,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LocationAmenitiesJunc_Locations">
-          <End Type="Garage_UATModel.Location" Role="Location" Multiplicity="1" />
-          <End Type="Garage_UATModel.LocationAmenitiesJunc" Role="LocationAmenitiesJunc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="LocationAmenitiesJunc">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LocationImages_Locations">
           <End Type="Garage_UATModel.Location" Role="Location" Multiplicity="0..1" />
           <End Type="Garage_UATModel.LocationImage" Role="LocationImage" Multiplicity="*" />
@@ -7087,18 +7083,6 @@
             </Principal>
             <Dependent Role="Location">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LocationServiceJunc_Locations">
-          <End Type="Garage_UATModel.Location" Role="Location" Multiplicity="0..1" />
-          <End Type="Garage_UATModel.LocationServiceJunc" Role="LocationServiceJunc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="LocationServiceJunc">
-              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7646,12 +7630,12 @@
           <End Type="Garage_UATModel.Location" Role="Location" Multiplicity="*" />
           <End Type="Garage_UATModel.SubUser" Role="SubUser" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Garage_UATModelStoreContainer" CdmEntityContainer="Garage_Entities">
+        <EntityContainerMapping StorageEntityContainer="Garage_UATModelStoreContainer" CdmEntityContainer="Garage_UATEntities">
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="Garage_UATModel.Activity">
               <MappingFragment StoreEntitySet="Activities">
@@ -7693,6 +7677,22 @@
                 <ScalarProperty Name="BayName" ColumnName="BayName" />
                 <ScalarProperty Name="RowID" ColumnName="RowID" />
                 <ScalarProperty Name="BayID" ColumnName="BayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarDeletes">
+            <EntityTypeMapping TypeName="Garage_UATModel.CarDelete">
+              <MappingFragment StoreEntitySet="CarDelete">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="RequestStatus" ColumnName="RequestStatus" />
+                <ScalarProperty Name="RequestFrom" ColumnName="RequestFrom" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8408,16 +8408,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LocationAmenitiesJuncs">
-            <EntityTypeMapping TypeName="Garage_UATModel.LocationAmenitiesJunc">
-              <MappingFragment StoreEntitySet="LocationAmenitiesJunc">
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="AmenitiesID" ColumnName="AmenitiesID" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LocationImages">
             <EntityTypeMapping TypeName="Garage_UATModel.LocationImage">
               <MappingFragment StoreEntitySet="LocationImages">
@@ -8470,16 +8460,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="RowID" ColumnName="RowID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LocationServiceJuncs">
-            <EntityTypeMapping TypeName="Garage_UATModel.LocationServiceJunc">
-              <MappingFragment StoreEntitySet="LocationServiceJunc">
-                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,6 +17,7 @@ namespace DAL.DBEntities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Car()
         {
+            this.CarDeletes = new HashSet<CarDelete>();
             this.Orders = new HashSet<Order>();
         }
     
@@ -58,6 +59,8 @@ namespace DAL.DBEntities
         public string plateReturnIndex { get; set; }
         public Nullable<bool> IsVerified { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarDelete> CarDeletes { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Make Make { get; set; }
         public virtual Model Model { get; set; }

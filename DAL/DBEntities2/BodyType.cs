@@ -18,6 +18,7 @@ namespace DAL.DBEntities2
         public string Name { get; set; }
         public string ArabicName { get; set; }
         public string Image { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
         public Nullable<int> StatusID { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public string LastUpdatedBy { get; set; }

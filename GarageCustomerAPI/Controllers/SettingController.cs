@@ -25,7 +25,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public SettingController()
         {
-            settingRepo = new settingRepository(new GarageCustomer_Entities());
+            settingRepo = new settingRepository(new GarageCustomer_UATEntities());
         }
 
         /// <summary>

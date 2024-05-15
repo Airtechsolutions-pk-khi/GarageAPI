@@ -12,13 +12,11 @@ namespace DAL.DBEntities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class Garage_Entities : DbContext
+    public partial class Garage_UATEntities : DbContext
     {
-        public Garage_Entities()
-            : base("name=Garage_Entities")
+        public Garage_UATEntities()
+            : base("name=Garage_UATEntities")
         {
         }
     
@@ -30,6 +28,7 @@ namespace DAL.DBEntities
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<AppSource> AppSources { get; set; }
         public virtual DbSet<Bay> Bays { get; set; }
+        public virtual DbSet<CarDelete> CarDeletes { get; set; }
         public virtual DbSet<CarInspection> CarInspections { get; set; }
         public virtual DbSet<CarInspectionDetail> CarInspectionDetails { get; set; }
         public virtual DbSet<CarNote> CarNotes { get; set; }
@@ -66,10 +65,8 @@ namespace DAL.DBEntities
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<License> Licenses { get; set; }
-        public virtual DbSet<LocationAmenitiesJunc> LocationAmenitiesJuncs { get; set; }
         public virtual DbSet<LocationImage> LocationImages { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<LocationServiceJunc> LocationServiceJuncs { get; set; }
         public virtual DbSet<Make> Makes { get; set; }
         public virtual DbSet<Model> Models { get; set; }
         public virtual DbSet<Modifier> Modifiers { get; set; }
@@ -108,19 +105,5 @@ namespace DAL.DBEntities
         public virtual DbSet<ZohoChartOfAccount> ZohoChartOfAccounts { get; set; }
         public virtual DbSet<ZohoCOAMapping> ZohoCOAMappings { get; set; }
         public virtual DbSet<ZohoSetting> ZohoSettings { get; set; }
-    
-        [DbFunction("Garage_Entities", "Split")]
-        public virtual IQueryable<Split_Result> Split(string inputString, string delimiter)
-        {
-            var inputStringParameter = inputString != null ?
-                new ObjectParameter("InputString", inputString) :
-                new ObjectParameter("InputString", typeof(string));
-    
-            var delimiterParameter = delimiter != null ?
-                new ObjectParameter("Delimiter", delimiter) :
-                new ObjectParameter("Delimiter", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Split_Result>("[Garage_Entities].[Split](@InputString, @Delimiter)", inputStringParameter, delimiterParameter);
-        }
     }
 }

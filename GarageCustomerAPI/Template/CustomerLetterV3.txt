@@ -6,8 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://api-live.garage.sa/Template/jquery.qrcode.min.js"></script>
     <script>
-        jQuery(function () {
+       jQuery(function () {
             jQuery('#qroutput').qrcode("#qrlink#");
+            jQuery('#qr2').qrcode("#qr2#");
         })
     </script>
     <style>
@@ -42,7 +43,10 @@
             width: 160px;
             height: 160px;
         }
-
+          #qr2 canvas {
+            width: 160px;
+            height:160px;
+        }
         .qr-code-generator {
             width: 500px;
             margin: 0 auto;
@@ -322,6 +326,10 @@
                 <h4>#locationaddress# </h4>
                 <h4>: <strong>رقم التواصل</strong></h4>
                 <h4>#locationcontact#</h4>
+                  <div style="display:#isqr2# !important">
+                 <h4><strong>#qr2text#</strong></h4>
+                 <div id="qr2"></div>
+                 </div>
             </div>
 
         </div>

@@ -10,14 +10,13 @@
 namespace DAL.DBEntities2
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class sp_GetTokensCApi_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int TokenID { get; set; }
+        public string Token { get; set; }
+        public Nullable<int> CustomerID { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<int> Device { get; set; }
     }
 }

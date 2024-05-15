@@ -1,7 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="GarageCustomer_UATModelStoreContainer" CdmEntityContainer="GarageCustomer_Entities">
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GarageCustomer_UATModel.Store.sp_alterdiagram" />
+  <EntityContainerMapping StorageEntityContainer="GarageCustomer_UATModelStoreContainer" CdmEntityContainer="GarageCustomer_UATEntities">
+    <FunctionImportMapping FunctionImportName="GetDashboard_CAdmin" FunctionName="GarageCustomer_UATModel.Store.GetDashboard_CAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.GetDashboard_CAdmin_Result">
+          <ScalarProperty Name="totalService" ColumnName="totalService" />
+          <ScalarProperty Name="totalFeature" ColumnName="totalFeature" />
+          <ScalarProperty Name="totalCarsell" ColumnName="totalCarsell" />
+          <ScalarProperty Name="totalLocation" ColumnName="totalLocation" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_AddFeedback_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_AddFeedback_CAPI" />
     <FunctionImportMapping FunctionImportName="sp_CheckCarSellNoPlate" FunctionName="GarageCustomer_UATModel.Store.sp_CheckCarSellNoPlate">
       <ResultMapping>
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_CheckCarSellNoPlate_Result">
@@ -10,6 +20,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
           <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
           <ScalarProperty Name="FuelType" ColumnName="FuelType" />
           <ScalarProperty Name="EngineType" ColumnName="EngineType" />
           <ScalarProperty Name="Year" ColumnName="Year" />
@@ -21,12 +32,15 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
-          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
           <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
           <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -34,17 +48,38 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GarageCustomer_UATModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_CustomerNotifications_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_CustomerNotifications_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_CustomerNotifications_CAPI_Result">
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_DeleteAmenities" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteAmenities" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteBlog_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteBlog_CADMIN" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteBodyType_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteBodyType_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_deleteCarsellImages_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_deleteCarsellImages_CAPI" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteDiscount_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteDiscount_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_deleteFeature_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_deleteFeature_CAdmin" />
     <FunctionImportMapping FunctionImportName="sp_DeleteLandmark" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteLandmark" />
+    <FunctionImportMapping FunctionImportName="sp_deleteLocationTiming_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_deleteLocationTiming_CADMIN" />
     <FunctionImportMapping FunctionImportName="sp_DeleteService" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteService" />
     <FunctionImportMapping FunctionImportName="sp_DeleteSetting" FunctionName="GarageCustomer_UATModel.Store.sp_DeleteSetting" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GarageCustomer_UATModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_EditCarSell" FunctionName="GarageCustomer_UATModel.Store.sp_EditCarSell" />
     <FunctionImportMapping FunctionImportName="sp_GetAmenities" FunctionName="GarageCustomer_UATModel.Store.sp_GetAmenities">
       <ResultMapping>
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetAmenities_Result">
           <ScalarProperty Name="AmenitiesID" ColumnName="AmenitiesID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="Image" ColumnName="Image" />
         </ComplexTypeMapping>
@@ -55,8 +90,93 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetAmenitiesByID_Result">
           <ScalarProperty Name="AmenitiesID" ColumnName="AmenitiesID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="Image" ColumnName="Image" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetBlog_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_GetBlog_CADMIN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetBlog_CADMIN_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetBlogById_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_GetBlogById_CADMIN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetBlogById_CADMIN_Result">
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="BlogImages_Junc" ColumnName="BlogImages_Junc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetBlogImages_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_GetBlogImages_CAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetBlogImages_CAdmin_Result">
+          <ScalarProperty Name="BlogImageID" ColumnName="BlogImageID" />
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetBodyType_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_GetBodyType_CAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetBodyType_CAdmin_Result">
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetBodyTypeByID_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_GetBodyTypeByID_CAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetBodyTypeByID_CAdmin_Result">
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -68,6 +188,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
           <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
           <ScalarProperty Name="FuelType" ColumnName="FuelType" />
           <ScalarProperty Name="EngineType" ColumnName="EngineType" />
           <ScalarProperty Name="Year" ColumnName="Year" />
@@ -79,18 +200,22 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
-          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
           <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
           <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="MakeName" ColumnName="MakeName" />
           <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="BodyName" ColumnName="BodyName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -102,6 +227,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
           <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
           <ScalarProperty Name="FuelType" ColumnName="FuelType" />
           <ScalarProperty Name="EngineType" ColumnName="EngineType" />
           <ScalarProperty Name="Year" ColumnName="Year" />
@@ -113,16 +239,59 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
-          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
           <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
           <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="MakeName" ColumnName="MakeName" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCarSellAds_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_GetCarSellAds_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCarSellAds_CAPI_Result">
+          <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Transmition" ColumnName="Transmition" />
+          <ScalarProperty Name="Kilometer" ColumnName="Kilometer" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
+          <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
+          <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
           <ScalarProperty Name="MakeName" ColumnName="MakeName" />
           <ScalarProperty Name="ModelName" ColumnName="ModelName" />
         </ComplexTypeMapping>
@@ -136,6 +305,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
           <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
           <ScalarProperty Name="FuelType" ColumnName="FuelType" />
           <ScalarProperty Name="EngineType" ColumnName="EngineType" />
           <ScalarProperty Name="Year" ColumnName="Year" />
@@ -147,19 +317,57 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
           <ScalarProperty Name="CityID" ColumnName="CityID" />
-          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
           <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
           <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="Features" ColumnName="Features" />
-          <ScalarProperty Name="MakeName" ColumnName="MakeName" />
-          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="Carsellimage" ColumnName="Carsellimage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCarsellbyID2_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_GetCarsellbyID2_Admin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCarsellbyID2_Admin_Result">
+          <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Transmition" ColumnName="Transmition" />
+          <ScalarProperty Name="Kilometer" ColumnName="Kilometer" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
+          <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
+          <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -171,6 +379,328 @@
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Createdon" ColumnName="Createdon" />
           <ScalarProperty Name="Updatedon" ColumnName="Updatedon" />
+          <ScalarProperty Name="UploadFrom" ColumnName="UploadFrom" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCarSellV2_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_GetCarSellV2_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCarSellV2_CAPI_Result">
+          <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Transmition" ColumnName="Transmition" />
+          <ScalarProperty Name="Kilometer" ColumnName="Kilometer" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
+          <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
+          <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="MakeName" ColumnName="MakeName" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCarSellV2_CAPI_V2" FunctionName="GarageCustomer_UATModel.Store.sp_GetCarSellV2_CAPI_V2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCarSellV2_CAPI_V2_Result">
+          <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Transmition" ColumnName="Transmition" />
+          <ScalarProperty Name="Kilometer" ColumnName="Kilometer" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
+          <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
+          <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="MakeName" ColumnName="MakeName" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCarSellV3_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_GetCarSellV3_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCarSellV3_CAPI_Result">
+          <ScalarProperty Name="CarSellID" ColumnName="CarSellID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+          <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+          <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+          <ScalarProperty Name="EngineType" ColumnName="EngineType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Transmition" ColumnName="Transmition" />
+          <ScalarProperty Name="Kilometer" ColumnName="Kilometer" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IsInspected" ColumnName="IsInspected" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CarSellAddID" ColumnName="CarSellAddID" />
+          <ScalarProperty Name="BodyColor" ColumnName="BodyColor" />
+          <ScalarProperty Name="Assembly" ColumnName="Assembly" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="MakeName" ColumnName="MakeName" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCities" FunctionName="GarageCustomer_UATModel.Store.sp_GetCities">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCities_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Population" ColumnName="Population" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCountries" FunctionName="GarageCustomer_UATModel.Store.sp_GetCountries">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCountries_Result">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Continent" ColumnName="Continent" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="SurfaceArea" ColumnName="SurfaceArea" />
+          <ScalarProperty Name="IndepYear" ColumnName="IndepYear" />
+          <ScalarProperty Name="Population" ColumnName="Population" />
+          <ScalarProperty Name="LifeExpectancy" ColumnName="LifeExpectancy" />
+          <ScalarProperty Name="GNP" ColumnName="GNP" />
+          <ScalarProperty Name="GNPOld" ColumnName="GNPOld" />
+          <ScalarProperty Name="LocalName" ColumnName="LocalName" />
+          <ScalarProperty Name="GovernmentForm" ColumnName="GovernmentForm" />
+          <ScalarProperty Name="HeadOfState" ColumnName="HeadOfState" />
+          <ScalarProperty Name="Capital" ColumnName="Capital" />
+          <ScalarProperty Name="Code2" ColumnName="Code2" />
+          <ScalarProperty Name="PhonePrefix" ColumnName="PhonePrefix" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="Curr_Code" ColumnName="Curr_Code" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCustomer" FunctionName="GarageCustomer_UATModel.Store.sp_GetCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCustomer_Result">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Redem" ColumnName="Redem" />
+          <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsSMS" ColumnName="IsSMS" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsSignUp" ColumnName="IsSignUp" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCustomerByPhone_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_GetCustomerByPhone_CADMIN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCustomerByPhone_CADMIN_Result">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Redem" ColumnName="Redem" />
+          <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsSMS" ColumnName="IsSMS" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsSignUp" ColumnName="IsSignUp" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetCustomerPhone_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_GetCustomerPhone_CADMIN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetCustomerPhone_CADMIN_Result">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Redem" ColumnName="Redem" />
+          <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsSMS" ColumnName="IsSMS" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsSignUp" ColumnName="IsSignUp" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetDiscount" FunctionName="GarageCustomer_UATModel.Store.sp_GetDiscount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetDiscount_Result">
+          <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+          <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ArabicImage" ColumnName="ArabicImage" />
+          <ScalarProperty Name="ThumbnailImage" ColumnName="ThumbnailImage" />
+          <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+          <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetDiscountByID" FunctionName="GarageCustomer_UATModel.Store.sp_GetDiscountByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetDiscountByID_Result">
+          <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+          <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ArabicImage" ColumnName="ArabicImage" />
+          <ScalarProperty Name="ThumbnailImage" ColumnName="ThumbnailImage" />
+          <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+          <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Locations" ColumnName="Locations" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetFeatureByID_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_GetFeatureByID_CAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetFeatureByID_CAdmin_Result">
+          <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetFeatures" FunctionName="GarageCustomer_UATModel.Store.sp_GetFeatures">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetFeatures_Result">
+          <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -179,6 +709,7 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetLandmark_Result">
           <ScalarProperty Name="LandmarkID" ColumnName="LandmarkID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
         </ComplexTypeMapping>
@@ -189,18 +720,189 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetLandmarkByID_Result">
           <ScalarProperty Name="LandmarkID" ColumnName="LandmarkID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_GetLocationServices" FunctionName="GarageCustomer_UATModel.Store.sp_GetLocationServices" />
+    <FunctionImportMapping FunctionImportName="sp_getLocation_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_getLocation_CADMIN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_getLocation_CADMIN_Result">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Descripiton" ColumnName="Descripiton" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ArabicAddress" ColumnName="ArabicAddress" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Open_Time" ColumnName="Open_Time" />
+          <ScalarProperty Name="Close_Time" ColumnName="Close_Time" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LicenseID" ColumnName="LicenseID" />
+          <ScalarProperty Name="DeliveryServices" ColumnName="DeliveryServices" />
+          <ScalarProperty Name="DeliveryCharges" ColumnName="DeliveryCharges" />
+          <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+          <ScalarProperty Name="MinOrderAmount" ColumnName="MinOrderAmount" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CustomerStatusID" ColumnName="CustomerStatusID" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="LandmarkID" ColumnName="LandmarkID" />
+          <ScalarProperty Name="Gmaplink" ColumnName="Gmaplink" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="VATNO" ColumnName="VATNO" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="AllowNegativeInventory" ColumnName="AllowNegativeInventory" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetLocationsByID_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_GetLocationsByID_CADMIN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetLocationsByID_CADMIN_Result">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Descripiton" ColumnName="Descripiton" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ArabicAddress" ColumnName="ArabicAddress" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Open_Time" ColumnName="Open_Time" />
+          <ScalarProperty Name="Close_Time" ColumnName="Close_Time" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LicenseID" ColumnName="LicenseID" />
+          <ScalarProperty Name="DeliveryServices" ColumnName="DeliveryServices" />
+          <ScalarProperty Name="DeliveryCharges" ColumnName="DeliveryCharges" />
+          <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+          <ScalarProperty Name="MinOrderAmount" ColumnName="MinOrderAmount" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CustomerStatusID" ColumnName="CustomerStatusID" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="LandmarkID" ColumnName="LandmarkID" />
+          <ScalarProperty Name="Gmaplink" ColumnName="Gmaplink" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="VATNO" ColumnName="VATNO" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="AllowNegativeInventory" ColumnName="AllowNegativeInventory" />
+          <ScalarProperty Name="Amenities" ColumnName="Amenities" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetLocationServices" FunctionName="GarageCustomer_UATModel.Store.sp_GetLocationServices">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetLocationServices_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Descripiton" ColumnName="Descripiton" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="MinOrderAmount" ColumnName="MinOrderAmount" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+          <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetMakes" FunctionName="GarageCustomer_UATModel.Store.sp_GetMakes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetMakes_Result">
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetModels" FunctionName="GarageCustomer_UATModel.Store.sp_GetModels">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetModels_Result">
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="EngineNo" ColumnName="EngineNo" />
+          <ScalarProperty Name="RecommendedLitres" ColumnName="RecommendedLitres" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetReviews_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_GetReviews_CAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetReviews_CAdmin_Result">
+          <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+          <ScalarProperty Name="DislikeCount" ColumnName="DislikeCount" />
+          <ScalarProperty Name="ReportAbuse" ColumnName="ReportAbuse" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_GetService" FunctionName="GarageCustomer_UATModel.Store.sp_GetService">
       <ResultMapping>
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetService_Result">
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+          <ScalarProperty Name="ArabicServiceTitle" ColumnName="ArabicServiceTitle" />
           <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+          <ScalarProperty Name="ArabicServiceDescription" ColumnName="ArabicServiceDescription" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="StatusId" ColumnName="StatusId" />
@@ -213,7 +915,9 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetServiceByID_Result">
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+          <ScalarProperty Name="ArabicServiceTitle" ColumnName="ArabicServiceTitle" />
           <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+          <ScalarProperty Name="ArabicServiceDescription" ColumnName="ArabicServiceDescription" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="StatusId" ColumnName="StatusId" />
@@ -226,7 +930,9 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetServices_Result">
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+          <ScalarProperty Name="ArabicServiceTitle" ColumnName="ArabicServiceTitle" />
           <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+          <ScalarProperty Name="ArabicServiceDescription" ColumnName="ArabicServiceDescription" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="StatusId" ColumnName="StatusId" />
@@ -239,8 +945,11 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetSetting_Result">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
           <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="AlternateImage" ColumnName="AlternateImage" />
           <ScalarProperty Name="PageName" ColumnName="PageName" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
@@ -253,8 +962,29 @@
         <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetSettingByID_Result">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
           <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="AlternateImage" ColumnName="AlternateImage" />
+          <ScalarProperty Name="PageName" ColumnName="PageName" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Locations" ColumnName="Locations" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetSettings_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_GetSettings_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetSettings_CAPI_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="AlternateImage" ColumnName="AlternateImage" />
           <ScalarProperty Name="PageName" ColumnName="PageName" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
@@ -262,49 +992,94 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GarageCustomer_UATModel.Store.sp_helpdiagramdefinition">
+    <FunctionImportMapping FunctionImportName="sp_GetTokensCApi" FunctionName="GarageCustomer_UATModel.Store.sp_GetTokensCApi">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GarageCustomer_UATModel.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_GetTokensCApi_Result">
+          <ScalarProperty Name="TokenID" ColumnName="TokenID" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Device" ColumnName="Device" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_InsertAmenities" FunctionName="GarageCustomer_UATModel.Store.sp_InsertAmenities" />
+    <FunctionImportMapping FunctionImportName="sp_InsertBlog_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_InsertBlog_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_insertBlogImages_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_insertBlogImages_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_InsertBodyType_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_InsertBodyType_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_InsertCarFav_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_InsertCarFav_CAPI" />
     <FunctionImportMapping FunctionImportName="sp_InsertCarSell" FunctionName="GarageCustomer_UATModel.Store.sp_InsertCarSell" />
     <FunctionImportMapping FunctionImportName="sp_insertCarSellFeature_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_insertCarSellFeature_CAPI" />
+    <FunctionImportMapping FunctionImportName="sp_insertCarSellFeatureV2_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_insertCarSellFeatureV2_CAPI" />
+    <FunctionImportMapping FunctionImportName="sp_insertCarsellImages_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_insertCarsellImages_CAdmin" />
     <FunctionImportMapping FunctionImportName="sp_insertCarSellImages_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_insertCarSellImages_CAPI" />
+    <FunctionImportMapping FunctionImportName="sp_insertDiscLocationJunc_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_insertDiscLocationJunc_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_InsertDiscount" FunctionName="GarageCustomer_UATModel.Store.sp_InsertDiscount" />
+    <FunctionImportMapping FunctionImportName="sp_InsertFeatures_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_InsertFeatures_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_insertICarsellFeatures_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_insertICarsellFeatures_Admin" />
     <FunctionImportMapping FunctionImportName="sp_InsertLandmark" FunctionName="GarageCustomer_UATModel.Store.sp_InsertLandmark" />
+    <FunctionImportMapping FunctionImportName="sp_insertLocationJunc_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_insertLocationJunc_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_InsertLocationTimings_CADMIN" FunctionName="GarageCustomer_UATModel.Store.sp_InsertLocationTimings_CADMIN" />
+    <FunctionImportMapping FunctionImportName="sp_InsertNotifications" FunctionName="GarageCustomer_UATModel.Store.sp_InsertNotifications" />
+    <FunctionImportMapping FunctionImportName="sp_InsertReportReview" FunctionName="GarageCustomer_UATModel.Store.sp_InsertReportReview" />
+    <FunctionImportMapping FunctionImportName="sp_InsertReview_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_InsertReview_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_InsertReview_CAPI_Result">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="RateVal" ColumnName="RateVal" />
+          <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+          <ScalarProperty Name="DislikeCount" ColumnName="DislikeCount" />
+          <ScalarProperty Name="ReportAbuse" ColumnName="ReportAbuse" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_InsertService" FunctionName="GarageCustomer_UATModel.Store.sp_InsertService" />
     <FunctionImportMapping FunctionImportName="sp_InsertSetting" FunctionName="GarageCustomer_UATModel.Store.sp_InsertSetting" />
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GarageCustomer_UATModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_InsertToken_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_InsertToken_CAPI" />
     <FunctionImportMapping FunctionImportName="sp_updateAmenities_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_updateAmenities_Admin" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateBlog_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateBlog_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_updateBodyType_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_updateBodyType_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateCarSell" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateCarSell" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateCarSellStatus_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateCarSellStatus_Admin" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateDiscLocationJunc_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateDiscLocationJunc_CAdmin" />
+    <FunctionImportMapping FunctionImportName="sp_updateDiscount_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_updateDiscount_Admin" />
+    <FunctionImportMapping FunctionImportName="sp_updateFeature_CAdmin" FunctionName="GarageCustomer_UATModel.Store.sp_updateFeature_CAdmin" />
     <FunctionImportMapping FunctionImportName="sp_updateLandmark_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_updateLandmark_Admin" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateNotification_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateNotification_CAPI" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateOrderStatus_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateOrderStatus_Admin" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateReview_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateReview_CAPI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GarageCustomer_UATModel.sp_UpdateReview_CAPI_Result">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="RateVal" ColumnName="RateVal" />
+          <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+          <ScalarProperty Name="DislikeCount" ColumnName="DislikeCount" />
+          <ScalarProperty Name="ReportAbuse" ColumnName="ReportAbuse" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateReviewsStatus" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateReviewsStatus" />
     <FunctionImportMapping FunctionImportName="sp_updateService_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_updateService_Admin" />
     <FunctionImportMapping FunctionImportName="sp_updateSetting_Admin" FunctionName="GarageCustomer_UATModel.Store.sp_updateSetting_Admin" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GarageCustomer_UATModel.Store.sp_upgraddiagrams" />
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="GarageCustomer_UATModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="definition" ColumnName="definition" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_UpdateToken_CAPI" FunctionName="GarageCustomer_UATModel.Store.sp_UpdateToken_CAPI" />
     <EntitySetMapping Name="Amenities">
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.Amenity">
         <MappingFragment StoreEntitySet="Amenities">
@@ -316,12 +1091,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Blogs">
+      <EntityTypeMapping TypeName="GarageCustomer_UATModel.Blog">
+        <MappingFragment StoreEntitySet="Blog">
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ArabicDescription" ColumnName="ArabicDescription" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ArabicTitle" ColumnName="ArabicTitle" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BlogImages_Junc">
+      <EntityTypeMapping TypeName="GarageCustomer_UATModel.BlogImages_Junc">
+        <MappingFragment StoreEntitySet="BlogImages_Junc">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+          <ScalarProperty Name="BlogImageID" ColumnName="BlogImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BodyTypes">
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.BodyType">
         <MappingFragment StoreEntitySet="BodyType">
           <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
           <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -348,6 +1157,7 @@
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EngineSize" ColumnName="EngineSize" />
           <ScalarProperty Name="Reason" ColumnName="Reason" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="Image" ColumnName="Image" />
@@ -379,6 +1189,7 @@
     <EntitySetMapping Name="CarSellImages">
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.CarSellImage">
         <MappingFragment StoreEntitySet="CarSellImage">
+          <ScalarProperty Name="UploadFrom" ColumnName="UploadFrom" />
           <ScalarProperty Name="Updatedon" ColumnName="Updatedon" />
           <ScalarProperty Name="Createdon" ColumnName="Createdon" />
           <ScalarProperty Name="Image" ColumnName="Image" />
@@ -401,6 +1212,9 @@
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.Discount">
         <MappingFragment StoreEntitySet="Discount">
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+          <ScalarProperty Name="BackgroundColor" ColumnName="BackgroundColor" />
+          <ScalarProperty Name="ThumbnailImage" ColumnName="ThumbnailImage" />
           <ScalarProperty Name="ArabicImage" ColumnName="ArabicImage" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="ToTime" ColumnName="ToTime" />
@@ -419,6 +1233,7 @@
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.Feature">
         <MappingFragment StoreEntitySet="Feature">
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -461,6 +1276,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LocationWorkingHours">
+      <EntityTypeMapping TypeName="GarageCustomer_UATModel.LocationWorkingHour">
+        <MappingFragment StoreEntitySet="LocationWorkingHours">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="ArabicTime" ColumnName="ArabicTime" />
+          <ScalarProperty Name="ArabicName" ColumnName="ArabicName" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Notifications">
       <EntityTypeMapping TypeName="GarageCustomer_UATModel.Notification">
         <MappingFragment StoreEntitySet="Notifications">
@@ -489,23 +1316,6 @@
           <ScalarProperty Name="TaxPercent" ColumnName="TaxPercent" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="OfferID" ColumnName="OfferID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PackagesInfoes">
-      <EntityTypeMapping TypeName="GarageCustomer_UATModel.PackagesInfo">
-        <MappingFragment StoreEntitySet="PackagesInfo">
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="IsGarageGo" ColumnName="IsGarageGo" />
-          <ScalarProperty Name="IsInventory" ColumnName="IsInventory" />
-          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-          <ScalarProperty Name="LocationsLimit" ColumnName="LocationsLimit" />
-          <ScalarProperty Name="DeviceCount" ColumnName="DeviceCount" />
-          <ScalarProperty Name="PackageDescription" ColumnName="PackageDescription" />
-          <ScalarProperty Name="PackagePrice" ColumnName="PackagePrice" />
-          <ScalarProperty Name="PackageName" ColumnName="PackageName" />
-          <ScalarProperty Name="PackageInfoID" ColumnName="PackageInfoID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

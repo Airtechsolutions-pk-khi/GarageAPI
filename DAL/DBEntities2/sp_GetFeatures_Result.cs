@@ -7,12 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.DBEntities
+namespace DAL.DBEntities2
 {
     using System;
     
-    public partial class Split_Result
+    public partial class sp_GetFeatures_Result
     {
-        public string Item { get; set; }
+        public int FeatureID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
+        public Nullable<int> StatusID { get; set; }
     }
 }

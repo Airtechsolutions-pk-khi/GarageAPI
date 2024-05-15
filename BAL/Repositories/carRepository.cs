@@ -24,10 +24,10 @@ namespace BAL.Repositories
         public carRepository()
             : base()
         {
-            DBContext2 = new Garage_Entities();
+            DBContext2 = new Garage_UATEntities();
 
         }
-        public carRepository(Garage_Entities contextDB2)
+        public carRepository(Garage_UATEntities contextDB2)
             : base(contextDB2)
         {
             DBContext2 = contextDB2;
@@ -137,7 +137,7 @@ namespace BAL.Repositories
             }
             return rsp;
         }
-        public  bool? IsBase64( string base64String)
+        public bool? IsBase64(string base64String)
         {
             // Credit: oybek https://stackoverflow.com/users/794764/oybek
             if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0
@@ -283,6 +283,7 @@ namespace BAL.Repositories
                 return null;
             }
         }
+
         public OrderLetterResponse OrderPrintLetter(string OrderID)
         {
             var rsp = new OrderLetterResponse();
@@ -506,9 +507,24 @@ namespace BAL.Repositories
                                 contentSM += "<span style='margin-right:14px'><img src='" + ConfigurationSettings.AppSettings["ApiURL"].ToString() + "/Template/email.png' width='35px' />  " + receipt.CompanyEmail + "</span>";
                             }
                             content = content.Replace("#socialmedia#", contentSM);
+                            
+                            if (receipt.QRTagline != null && receipt.QRTagline != "")
+                            {
+                                content = content.Replace("#qr2text#", receipt.QRTagline);
+                                content = content.Replace("#qr2#", receipt.QRLink);
+                                content = content.Replace("#isqr2#", "block");
+                            }
+                            else
+                            {
+                                content = content.Replace("#qr2text#", "");
+                                content = content.Replace("#qr2#", "");
+                                content = content.Replace("#isqr2#", "none");
+                            }
                         }
                         else
                         {
+                            content = content.Replace("#qr2text#", "");
+                            content = content.Replace("#qr2#", "");
                             content = content.Replace("#socialmedia#", "");
                         }
                     }
@@ -680,6 +696,7 @@ namespace BAL.Repositories
 
                     content = content.Replace("#logo#", logoHtml);
                     content = content.Replace("#qrlink#", qrlink);
+                    content = content.Replace("#isqr#", qrlink != "" ? "block" : "none");
                     content = content.Replace("#notes#", CarNotes != null ? CarNotes.NotesComment : "");
                     content = content.Replace("#signature#", CarNotes != null ? signatureNotes : "");
                     content = content.Replace("#carmake#", ordercheckout.MakerName);
@@ -703,6 +720,7 @@ namespace BAL.Repositories
                     content = content.Replace("#refundtotal#", refundAmountHTML);
                     content = content.Replace("#vatno#", companyinfo == null ? "" : companyinfo.VATNO);
                     content = content.Replace("#carimages#", carImagesHtml);
+                    content = content.Replace("#payment#", payment);
                     content = content.Replace("#footernotes#", receipt.Footer);
                     content = content.Replace("#showchecklist#", datatChecklist.Count > 0 ? "block" : "none");
                     content = content.Replace("#partialreceived#", ordercheckout.PartialAmountReceived.ToString());
@@ -723,6 +741,40 @@ namespace BAL.Repositories
             return rsp;
         }
 
+        public CarInfoNFCRsp GetCarInfoNFC(int? carid)
+        {
+            var rsp = new CarInfoNFCRsp();
+            try
+            {
+                var ds = GetCarInfoNFCADO(carid);
+
+                rsp.CarInfo= JArray.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0])).ToObject<List<CarsNFC>>().FirstOrDefault();
+                rsp.CarInfo.ImagePath = rsp.CarInfo.ImagePath == null ? "" : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + rsp.CarInfo.ImagePath;
+                
+                rsp.Status = 1;
+                rsp.Description = "Success";
+
+            }
+            catch (Exception ex)
+            {
+                rsp.Status = (int)eStatus.Exception;
+                rsp.Description = ex.Message;
+            }
+            return rsp;
+        }
+        public DataSet GetCarInfoNFCADO(int? carid)
+        {
+            try
+            {
+                SqlParameter[] p = new SqlParameter[1];
+                p[0] = new SqlParameter("@CarID", carid);
+                return (new DBHelperPOS().GetDatasetFromSP)("sp_GetCarInfoNFC_CAPI", p);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public DataSet GetOrderDetailADO(int id, string type, int LocationID)
         {
             try
@@ -789,6 +841,7 @@ namespace BAL.Repositories
 
                 foreach (var i in rsp.CarList)
                 {
+                    i.LastVisit = DateParse(i.LastVisit);
                     i.MakerImage = i.MakerImage == null ? null : ConfigurationSettings.AppSettings["CpAdminURL"].ToString() + i.MakerImage;
                     i.ImagePath = i.ImagePath == null ? null : ConfigurationSettings.AppSettings["ApiURL"].ToString() + i.ImagePath;
                     try { i.RegistrationNoP1 = i.RegistrationNo.Split('-')[0]; } catch { i.RegistrationNoP1 = ""; }
@@ -893,7 +946,7 @@ namespace BAL.Repositories
 
                 foreach (var j in _dsRecentOrders)
                 {
-                    j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["AdminURL"].ToString() + j.CompanyImage;
+                    j.CompanyImage = j.CompanyImage == null ? null : ConfigurationSettings.AppSettings["CAdminURL"].ToString() + j.CompanyImage;
 
                 }
                 rsp.RecentOrders = _dsRecentOrders;

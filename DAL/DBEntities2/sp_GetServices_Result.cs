@@ -15,7 +15,9 @@ namespace DAL.DBEntities2
     {
         public int ServiceID { get; set; }
         public string ServiceTitle { get; set; }
+        public string ArabicServiceTitle { get; set; }
         public string ServiceDescription { get; set; }
+        public string ArabicServiceDescription { get; set; }
         public string Image { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<int> StatusId { get; set; }

@@ -31,6 +31,9 @@ namespace DAL.DBEntities2
         public string ToTime { get; set; }
         public string Image { get; set; }
         public string ArabicImage { get; set; }
+        public string ThumbnailImage { get; set; }
+        public string BackgroundColor { get; set; }
+        public string FontColor { get; set; }
         public Nullable<int> StatusID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

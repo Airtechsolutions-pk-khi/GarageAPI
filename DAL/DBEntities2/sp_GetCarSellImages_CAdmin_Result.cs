@@ -18,5 +18,6 @@ namespace DAL.DBEntities2
         public string Image { get; set; }
         public Nullable<System.DateTime> Createdon { get; set; }
         public Nullable<System.DateTime> Updatedon { get; set; }
+        public Nullable<int> UploadFrom { get; set; }
     }
 }

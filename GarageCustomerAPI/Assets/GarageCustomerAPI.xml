@@ -676,6 +676,13 @@
             <remarks>Get Last 6 Orders</remarks>
             <returns></returns>
         </member>
+        <member name="M:GarageCustomerAPI.Controllers.CarController.CarInfoNFC(System.Nullable{System.Int32})">
+            <summary>
+            Get Carinfo NFC
+            </summary>
+            <param name="orderid">Mandatory</param>
+            <returns>A4 receipt</returns>
+        </member>
         <member name="F:GarageCustomerAPI.Controllers.SettingController.settingRepo">
             <summary>
             Settings

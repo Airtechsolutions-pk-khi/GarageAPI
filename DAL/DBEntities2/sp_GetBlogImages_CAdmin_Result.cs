@@ -7,18 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.DBEntities
+namespace DAL.DBEntities2
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class LocationAmenitiesJunc
+    public partial class sp_GetBlogImages_CAdmin_Result
     {
-        public int ID { get; set; }
-        public int LocationID { get; set; }
-        public int AmenitiesID { get; set; }
-        public Nullable<System.DateTime> LastUpdatedDate { get; set; }
-    
-        public virtual Location Location { get; set; }
+        public int BlogImageID { get; set; }
+        public Nullable<int> BlogID { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
     }
 }

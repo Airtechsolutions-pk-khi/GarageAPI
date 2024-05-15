@@ -28,10 +28,10 @@ namespace BAL.Repositories
         public carSellRepository()
             : base()
         {
-            DBContext2 = new Garage_Entities();
+            DBContext2 = new Garage_UATEntities();
 
         }
-        public carSellRepository(Garage_Entities contextDB2)
+        public carSellRepository(Garage_UATEntities contextDB2)
             : base(contextDB2)
         {
             DBContext2 = contextDB2;

@@ -27,7 +27,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public CarSellController()
         {
-            carSellRepo = new carSellRepository(new Garage_Entities());
+            carSellRepo = new carSellRepository(new Garage_UATEntities());
         }
 
         /// <summary>

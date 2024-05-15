@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.DBEntities
+namespace DAL.DBEntities2
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class LocationServiceJunc
+    public partial class sp_GetFeatureByID_CAdmin_Result
     {
-        public int ID { get; set; }
-        public Nullable<int> LocationID { get; set; }
-        public Nullable<int> ServiceID { get; set; }
-        public Nullable<System.DateTime> LastUpdatedDate { get; set; }
-    
-        public virtual Location Location { get; set; }
+        public int FeatureID { get; set; }
+        public string Name { get; set; }
+        public string ArabicName { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
+        public Nullable<int> StatusID { get; set; }
     }
 }

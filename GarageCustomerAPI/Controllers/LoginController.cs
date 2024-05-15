@@ -28,8 +28,8 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public LoginController()
         {
-            loginRepo = new loginRepository(new Garage_Entities());
-            settingRepo = new settingRepository(new GarageCustomer_Entities());
+            loginRepo = new loginRepository(new Garage_UATEntities());
+            settingRepo = new settingRepository(new GarageCustomer_UATEntities());
         }
 
         /// <summary>

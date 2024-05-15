@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace DAL.DBEntities
 {
-    public partial class Garage_Entities
+    public partial class Garage_UATEntities
     {
         public void Reload(object entityEntry)
         {

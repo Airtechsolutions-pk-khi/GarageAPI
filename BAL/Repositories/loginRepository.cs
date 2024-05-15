@@ -24,10 +24,10 @@ namespace BAL.Repositories
         public loginRepository()
             : base()
         {
-            DBContext2 = new Garage_Entities();
+            DBContext2 = new Garage_UATEntities();
 
         }
-        public loginRepository(Garage_Entities contextDB2)
+        public loginRepository(Garage_UATEntities contextDB2)
             : base(contextDB2)
         {
             DBContext2 = contextDB2;

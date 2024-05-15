@@ -15,6 +15,7 @@ namespace DAL.DBEntities2
     {
         public int AmenitiesID { get; set; }
         public string Name { get; set; }
+        public string ArabicName { get; set; }
         public Nullable<int> StatusID { get; set; }
         public string Image { get; set; }
     }

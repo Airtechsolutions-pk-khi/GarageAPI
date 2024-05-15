@@ -22,7 +22,7 @@ namespace GarageCustomerAPI.Controllers
         /// </summary>
         public CarController()
         {
-            carRepo = new carRepository(new Garage_Entities());
+            carRepo = new carRepository(new Garage_UATEntities());
         }
 
         
@@ -114,6 +114,18 @@ namespace GarageCustomerAPI.Controllers
         public RecentOrdersResponse GetRecentOrders(int? customerid)
         {
             return carRepo.GetRecentOrders(customerid);
+        }
+
+        /// <summary>
+        /// Get Carinfo NFC
+        /// </summary>
+        /// <param name="orderid">Mandatory</param>
+        /// <returns>A4 receipt</returns>
+        [HttpGet]
+        [Route("car/details/{carid}")]
+        public CarInfoNFCRsp CarInfoNFC(int? carid= 0)
+        {
+            return carRepo.GetCarInfoNFC(carid);
         }
 
     }
