@@ -317,11 +317,7 @@
             <div class="col-3 text-right">
                 <h4><strong>الرقم الضريبي</strong></h4>
                 <h4>VAT: #vatno#</h4>
-                <h4><strong>ملاحظة</strong></h4>
-                <h4>
-                    نتمني لكم قيادة امنة
-                </h4>
-
+              
                 <h4>: <strong>العنوان</strong></h4>
                 <h4>#locationaddress# </h4>
                 <h4>: <strong>رقم التواصل</strong></h4>
